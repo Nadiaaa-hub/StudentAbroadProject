@@ -1,0 +1,313 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./style.css" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="/">
+              <img src="./img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="#about-us-section"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="#uni-list-section"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="#program-list-section"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="#faq-section"
+                  data-en="FAQ"
+                  data-ua="ПИТАННЯ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button
+                data-lang="ua"
+                class="js-switch-button"
+                type="button"
+                >UA</button
+              >
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button"
+                ><strong>Eng</strong></button
+              >
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..."
+              />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+      <section class="hero-section">
+        <div class="container">
+          <div class="hero-section__text">
+            <h1 class="hero-section__title">
+              <span class="text-brand"
+                >STUDENT</span
+              >ABROAD
+            </h1>
+            <p
+              class="subtitle"
+              data-en="UKRAINE FOR YOU, WORLD FOR YOU"
+              data-ua="УКРАЇНА ДЛЯ ТЕБЕ, СВІТ ДЛЯ ТЕБЕ"
+            >
+              UKRAINE FOR YOU, WORLD FOR YOU
+            </p>
+          </div>
+
+          <div class="scroll-indicator" role="button" tabindex="0">
+            <img 
+              class="scroll-indicator__img"
+              src="./img/icon_arrow.svg"
+              alt="Scroll Down Icon"
+            />
+          </div>
+        </div>
+      </section>
+
+      <!-- Study Abroad Section -->
+      <section id="study-abroad-section" class="study-abroad-section">
+        <div class="container">
+          <div class="study-abroad__container">
+            <div class="study-abroad__content">
+              <h2
+                class="study-abroad__title"
+                data-en="Do you want to study abroad? Enter the university of your dreams 
+                and become an international student? Or are you a forced migrant and want 
+                to get an education in the country where you are staying?"
+                data-ua="Хочеш навчатися за кордоном? Вступити до університету своєї мрії 
+                та стати міжнародним студентом? Або ти вимушений(-а) мігрант(-ка) і прагнеш 
+                здобути освіту в країні, де зараз перебуваєш?"
+              >
+                Do you want to study abroad? Enter the university of your dreams and become
+                 an international student? Or are you a forced migrant and want to get an 
+                 education in the country where you are staying?
+              </h2>
+              <p
+                class="study-abroad__description"
+                data-en="Communicate with peers from different corners of the world, improving 
+                your English, gaining new knowledge from foreign teachers, and getting to know 
+                the culture of other countries more closely? Here you will find everything about 
+                mobility and recommendations for a Ukrainian student or graduate, information about 
+                the peculiarities of admission in different countries of the world, etc."
+                data-ua="Спілкуйся з однолітками з різних куточків світу, удосконалюй англійську, 
+                здобувай нові знання від іноземних викладачів і ближче знайомся з культурами інших
+                 країн. Тут ти знайдеш усе про мобільність і рекомендації для українського студента 
+                 або випускника, інформацію про особливості вступу в різні країни світу тощо."
+              >
+                Communicate with peers from different corners of the world, improving your English, 
+                gaining new knowledge from foreign teachers, and getting to know the culture of other 
+                countries more closely? Here you will find everything about mobility and recommendations 
+                for a Ukrainian student or graduate, information about the peculiarities of admission 
+                in different countries of the world, etc.
+              </p>
+              <button data-en="Read more" data-ua="Читати більше" class="read-more-btn" type="button">Read more</button>
+            </div>
+
+            <div class="social-icons">
+              <a href="/" class="social-icon-link">
+                <img src="./img/mail.svg" alt="Email" />
+              </a>
+              <a
+                href="https://www.instagram.com/studentabroad.ua?igsh=N2JuNWpqbWxtbGlm"
+                class="social-icon-link"
+              >
+                <img src="./img/inst.svg" alt="Instagram" />
+              </a>
+              <a href="https://t.me/studentabroadua" class="social-icon-link">
+                <img src="./img/tg.svg" alt="Telegram" />
+              </a>
+              <a
+                href="https://www.tiktok.com/@studentabroad.ua?_t=ZM-8xJBPrTpbXR&_r=1"
+                class="social-icon-link"
+              >
+                <img src="./img/tiktok.svg" alt="TikTok" />
+              </a>
+              <a href="/" class="social-icon-link">
+                <img src="./img/facebook.svg" alt="Facebook" />
+              </a>
+            </div>
+          </div>
+        </div>
+      </section>
+
+    <!-- About Us Section -->
+     <section class="about-us-section" id="about-us-section">
+    <div class="container">
+        <div class="about-us-section__container">
+            <div class="about-us-section__text">
+                <div class="about-us__section-heading">
+                    <span class="about-us__text-outline" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</span>
+                    <h2 class="about-us__text-fill" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</h2>
+                </div>
+                <div class="about-us__content">
+                    <h3 class="about-us__title" data-en="DO YOU WANT TO BECOME AN INTERNATIONAL STUDENT?" data-ua="ХОЧЕШ СТАТИ МІЖНАРОДНИМ СТУДЕНТОМ?">
+                        DO YOU WANT TO BECOME AN INTERNATIONAL STUDENT?
+                    </h3>
+                    <p class="about-us__subtitles" 
+                       data-en="You want to study abroad, but you don’t know where to start... Or you might think that it’s 
+                                too competitive and there is no chance you’re going to get it... Maybe, you are a displaced 
+                                person and want to study in the country of your stay..."
+                       data-ua="Ти хочеш навчатися за кордоном, але не знаєш, з чого почати... Або ти думаєш, що там 
+                                занадто великий конкурс і у тебе немає шансів його отримати... А може, ти переселенець 
+                                і хочеш навчатися в країні свого перебування...">
+                        You want to study abroad, but you don’t know where to start... Or you might think that it’s 
+                        too competitive and there is no chance you’re going to get it... Maybe, you are a displaced 
+                        person and want to study in the country of your stay...
+                    </p>
+                    <p class="about-us__subtitles" 
+                       data-en="Don’t worry now – we’ve got you covered! With our help you will find the program of your dreams
+                                and let it come true. You can get the honest reviews from former and current international students,
+                                information about the admission requirements and all the tips and tricks you might need on your way to the dream!" 
+                       data-ua=" Не хвилюйся - ми про тебе подбаємо! З нашою допомогою ти знайдеш програму своєї мрії
+                                і здійсниш її. Ви можете отримати чесні відгуки від колишніх та нинішніх іноземних студентів,
+                                інформацію про вимоги до вступу та всі поради та підказки, які можуть знадобитися на шляху до мрії!">
+                        Don’t worry now – we’ve got you covered! With our help you will find the program of your dreams
+                        and let it come true. You can get the honest reviews from former and current international students,
+                        information about the admission requirements and all the tips and tricks you might need on your way to the dream!
+                    </p>
+                    <p class="about-us__subtitles" 
+                       data-en="We cover not only university mobilities, but programs you can apply for if you’re currently not enrolled in any
+                                educational institution. All information we’ve got is from official university sources and from the students’
+                                experiences as well – only trustworthy sources!" 
+                       data-ua="Ми висвітлюємо не лише університетські мобільності, але й програми, на які ви можете подати заявку, якщо ви ще не навчаєтесь у жодному
+                                навчальному закладі. Вся інформація, яку ми отримали, взята з офіційних джерел університетів, а також з досвіду студентів
+                                - тільки надійні джерела!">
+                        We cover not only university mobilities, but programs you can apply for if you’re currently not enrolled in any
+                        educational institution. All information we’ve got is from official university sources and from the students’
+                        experiences as well – only trustworthy sources!
+                    </p>
+                </div>
+            </div>
+            <div class="about-us__map-image">
+                <img class="about-us__image" src="./img/SAB_MAP.svg" alt="Map of Europe with Ukraine highlighted" />
+            </div>
+        </div>
+    </div>
+</section>
+
+       <!-- About List Section -->
+<section>
+  <div class="about-us__info-columns">
+      <div class="about-us__info-block">
+        <h4 class="about-us__h4" data-en="ABOUT UNI LIST" 
+        data-ua="СПИСОК УНІВЕРСИТЕТІВ">ABOUT UNI LIST</h4>
+        <p class="about-us__p" data-en=" Here you will find a list of Ukrainian and foreign universities. You can find the 
+          educational institution of your interest and get information about its international 
+          connections and cooperation. We will help you choose the right exchange programs!
+
+          StudentAbroad will help you find the best universities for your education and the start 
+          of your career. Please note that our site is not the official site of any university, 
+          we only provide links to information. If you have any questions about our site or exchange
+           programs, please use the contact form." 
+           data-ua="Т Тут ви знайдете перелік українських та закордонних університетів. Ви можете знайти 
+ навчальний заклад, який вас цікавить, та отримати інформацію про його міжнародні 
+ зв'язки та співпрацю. Ми допоможемо підібрати відповідні програми обміну!
+
+          StudentAbroad допоможе вам знайти найкращі університети для навчання та початку 
+ вашої кар'єри. Зверніть увагу, що наш сайт не є офіційним сайтом жодного університету, 
+ ми лише надаємо посилання на інформацію. Якщо у вас виникли питання про наш сайт або програми обміну
+, будь ласка, скористайтеся контактною формою.">
+          Here you will find a list of Ukrainian and foreign universities. You can find the 
+          educational institution of your interest and get information about its international 
+          connections and cooperation. We will help you choose the right exchange programs!
+
+          StudentAbroad will help you find the best universities for your education and the start 
+          of your career. Please note that our site is not the official site of any university, 
+          we only provide links to information. If you have any questions about our site or exchange
+           programs, please use the contact form.
+        </p>
+      </div>
+
+      <div class="about-us__info-block">
+        <h4 data-en="ABOUT PROGRAM LIST" 
+        data-ua="СПИСОК ПРОГРАМ">ABOUT PROGRAM LIST</h4>
+        <p data-en=" By using filters, you can specify your criteria and get a list of programs that meet all
+           your requirements. You can find both the most famous student exchange programs and less
+            popular (thus less competitive) ones offered by educational institutions. You can first
+             get to know the official information about the program, and then read about the student 
+             experience.
+
+          Have you already studied abroad and have something to tell? Tell us everything!" 
+          data-ua=" За допомогою фільтрів ви можете вказати свої критерії та отримати список програм, які відповідають усім
+вашим вимогам. Ви можете знайти як найвідоміші програми обміну студентами, так і менш
+ популярні (а отже, менш конкурентні), що пропонуються навчальними закладами. Ви можете спочатку
+ ознайомитися з офіційною інформацією про програму, а потім почитати про студентський 
+ досвід.
+
+          Ви вже навчалися за кордоном і маєте що розповісти? Розкажіть нам все!">
+          By using filters, you can specify your criteria and get a list of programs that meet all
+           your requirements. You can find both the most famous student exchange programs and less
+            popular (thus less competitive) ones offered by educational institutions. You can first
+             get to know the official information about the program, and then read about the student 
+             experience.
+
+          Have you already studied abroad and have something to tell? Tell us everything!
+</section>
+    
+        </p>
+      </div>
+    </div>
+  </div>
+</section>
+
+    </main>
+
+    <!-- Footer -->
+    <footer></footer>
+
+    <script src="./index.js">
+    </script>
+  </body>
+</html>
