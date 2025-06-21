@@ -1,0 +1,113 @@
+body {
+    font-family: Rubik;
+}
+
+nav {
+    display: flex;
+    flex-direction: row;
+    justify-content: center;
+    gap: 20px;
+    background-color: #142643;
+    padding: 10px;
+    align-items: center;
+
+    img {
+        max-width: 50px;
+        max-width: 50px;
+        width: auto;
+        height: auto;
+    }
+
+    a {
+        color: white;
+        text-decoration: none;
+        padding: 8px 12px;
+        border-radius: 4px;
+        display: flex;
+    }
+
+    #logo {
+        color: yellow;
+        font-size: 16px;
+    }
+}
+
+.checkbox-group {
+    display: grid;
+    grid-template-columns: repeat(4, auto);
+    gap: 10px;
+}
+
+.university-list {
+    padding: 20px;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+}
+
+.university-card {
+    display: flex;
+    align-items: center;
+    border: 2px solid #142643;
+    border-radius: 10px;
+    padding: 10px;
+}
+
+.university-card img {
+    width: 150px;
+    height: 100px;
+    object-fit: cover;
+    margin-right: 20px;
+    border-radius: 5px;
+}
+
+.university-info {
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    width: 100%;
+}
+
+.university-info h3 {
+    margin: 0;
+    color: #1a2a44;
+}
+
+.university-info p {
+    margin: 5px 0;
+    color: #333;
+}
+
+.university-info button {
+    align-self: flex-end;
+    margin-top: auto;
+    background-color: blue;
+    color: #fff;
+    border: none;
+    padding: 10px 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+.university-info button:hover {
+    background-color: #2e4066;
+}
+
+input[type="text"] {
+    padding: 5px 10px;
+    border: 2px solid #ffd700;
+    border-radius: 20px;
+    background-color: #1a2a44;
+    color: #fff;
+    outline: none;
+}
+
+input[type="text"]::placeholder {
+    color: #fff;
+    opacity: 1;
+}
+
+header,
+footer {
+    background-color: #142643;
+}
