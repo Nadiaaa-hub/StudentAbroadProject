@@ -2,30 +2,55 @@
 <html>
 
 <head>
-    <link rel="stylesheet" href="style2.css">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Rubik:ital,wght@0,300..900;1,300..900&display=swap"
-        rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@400;500;700&display=swap" rel="stylesheet">
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./style.css" />
 </head>
 
 <body>
-    <header>
-        <nav>
-            <img src="images/logo_01.png">
-            <div id="logo">
-                <div>STUDENT</div>
-                <div style="font-family: 'Quicksand', sans-serif; margin: 0; padding: 0;">ABROAD</div>
+    <script src="index.js"></script>
+    <header class="site-header" id="header-footer-color">
+        <div class="container">
+            <div class="header__container">
+                <div class="logo">
+                    <a href="/">
+                        <img src="./img/logo.svg" alt="StudentAbroad logo" />
+                    </a>
+                </div>
+
+                <nav class="header__nav">
+                    <ul class="header__menu">
+                        <li>
+                            <a class="link" href="#about-us-section" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+                        </li>
+                        <li>
+                            <a class="link" href="#uni-list-section" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI
+                                LIST</a>
+                        </li>
+                        <li>
+                            <a class="link" href="#program-list-section" data-en="PROGRAM LIST"
+                                data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+                        </li>
+                        <li>
+                            <a class="link" href="#faq-section" data-en="FAQ" data-ua="ПИТАННЯ">FAQ</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="lang-search">
+                    <span class="language-switch">
+                        <button data-lang="ua" class="js-switch-button" type="button">UA</button>
+                        <button data-lang="en" class="js-switch-button active"
+                            type="button"><strong>EN</strong></button>
+                    </span>
+                    <div class="search-box">
+                        <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
+                            placeholder="Search..." />
+                    </div>
+                </div>
             </div>
-            <a href="">ABOUT US</a>
-            <a href="">UNI LIST</a>
-            <a href="">PROGRAM LIST</a>
-            <a href="">FAQ</a>
-            <a href="">UA</a>
-            <a href="">ENG</a>
-            <input type="text" placeholder="Search">
-        </nav>
+        </div>
     </header>
     <h1>COUNTRY</h1>
     <div class="checkbox-group">
@@ -50,7 +75,8 @@
                 <h3>Borys Hrinchenko Kyiv University</h3>
                 <p>CONTACT: testtest@gmail.com <span>✉</span></p>
                 <p>URL: test.com <span>🌐</span></p>
-                <button>Read more</button>
+                <button data-en="Read more" data-ua="Читати більше" class="read-more-btn" type="button">Read
+                    more</button>
             </div>
         </div>
         <div class="university-card">
@@ -59,7 +85,8 @@
                 <h3>Bremen University</h3>
                 <p>CONTACT: testtest@gmail.com <span>✉</span></p>
                 <p>URL: test.com <span>🌐</span></p>
-                <button>Read more</button>
+                <button data-en="Read more" data-ua="Читати більше" class="read-more-btn" type="button">Read
+                    more</button>
             </div>
         </div>
         <div class="university-card">
@@ -68,7 +95,8 @@
                 <h3>Vienna University of Economics and Business</h3>
                 <p>CONTACT: testtest@gmail.com <span>✉</span></p>
                 <p>URL: testcom <span>🌐</span></p>
-                <button>Read more</button>
+                <button data-en="Read more" data-ua="Читати більше" class="read-more-btn" type="button">Read
+                    more</button>
             </div>
         </div>
         <div class="university-card">
@@ -77,11 +105,12 @@
                 <h3>Kyiv National Economic University named after Vadym Hetman</h3>
                 <p>CONTACT: testtest@gmail.com <span>✉</span></p>
                 <p>URL: test.com <span>🌐</span></p>
-                <button>Read more</button>
+                <button data-en="Read more" data-ua="Читати більше" class="read-more-btn" type="button">Read
+                    more</button>
             </div>
         </div>
     </section>
-    <footer>
+    <footer id="header-footer-color">
         <nav>
             <div id="logo">STUDENTABROAD</div>
             <a href="">ABOUT US</a>
@@ -89,8 +118,7 @@
             <a href="">PROGRAM LIST</a>
             <a href="">FAQ</a>
             <a href="">UA</a>
-            <a href="">ENG</a>
-            <input type="text" placeholder="Search">
+            <a href="">EN</a>
         </nav>
     </footer>
 </body>
