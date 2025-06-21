@@ -7,7 +7,9 @@
   --color-blue-dark: #152644;
 }
 
-*, *::before, *::after {
+*,
+*::before,
+*::after {
   box-sizing: border-box;
 }
 
@@ -31,8 +33,9 @@ body {
   margin: 0 auto;
   padding: 0 24px;
 }
+
 section {
-    padding: 50px 0;
+  padding: 50px 0;
 }
 
 h1,
@@ -103,8 +106,9 @@ header {
   width: 24px;
   height: 24px;
   padding: 0;
-  fill:var(--color-main-white);
+  fill: var(--color-main-white);
 }
+
 .lang-search {
   display: flex;
   align-items: center;
@@ -163,7 +167,7 @@ header {
 
 /* Hero Section */
 .hero-section {
-   padding: 252px 0 383px 0;
+  padding: 252px 0 383px 0;
   height: 130vh;
   display: flex;
   justify-content: center;
@@ -172,13 +176,13 @@ header {
   overflow: hidden;
   background-image: url("./img/bg.png");
   background-repeat: no-repeat;
-  background-position:center ;
+  background-position: center;
   background-size: cover;
   text-align: center;
 }
 
 .hero-section__title {
- font-size: 82px;
+  font-size: 82px;
   line-height: 1;
   font-weight: 300;
   margin-bottom: 0;
@@ -192,6 +196,7 @@ header {
   line-height: 1;
   font-weight: 500;
 }
+
 .hero-section_text {
   display: flex;
   justify-content: center;
@@ -200,13 +205,21 @@ header {
   text-align: center;
 }
 
-.text-brand{
+.text-brand {
   font-weight: 700;
   display: inline-block;
 }
+
 @keyframes bounce {
-    0%, 100% { transform: translateY(0); }
-    50% { transform: translateY(-10px); }
+
+  0%,
+  100% {
+    transform: translateY(0);
+  }
+
+  50% {
+    transform: translateY(-10px);
+  }
 }
 
 .scroll-indicator {
@@ -228,67 +241,69 @@ header {
 
 .js-switch-button {
   color: var(--color-main-white);
-  min-width: 40px; 
+  min-width: 40px;
   display: inline-block;
   text-align: center;
   background: transparent;
   border: none;
   font-size: 14px;
-  font-weight: 300; 
+  font-weight: 300;
   cursor: pointer;
   padding: 0 5px;
-transition: text-shadow 0.3s ease;
+  transition: text-shadow 0.3s ease;
   text-decoration: none;
   color: var(--color-main-white);
   margin-left: 15px;
 }
+
 .js-switch-button:hover {
   text-shadow: 0 0 2px var(--color-main-white);
 }
 
 .js-switch-button.active {
-  font-weight: bold; 
+  font-weight: bold;
 }
 
 
 /* Study Abroad Section */
 .study-abroad-section {
-  background-color: var(--color-main-white); 
-  color: var(--color-main-black); 
+  background-color: var(--color-main-white);
+  color: var(--color-main-black);
   display: flex;
   padding-top: 100px;
 
 }
 
-.study-abroad__container{
+.study-abroad__container {
   display: flex;
   align-items: flex-start;
   justify-content: center;
   gap: 40px;
 }
+
 .study-abroad__content {
-  
+
   display: flex;
-  align-items: center; 
+  align-items: center;
   flex-wrap: wrap;
-  min-width: 300px; 
-  max-width: 570px; 
+  min-width: 300px;
+  max-width: 570px;
 }
 
 
 .study-abroad__title {
-  
-  font-size: 20px; 
-  line-height: 1.2; 
-  margin-bottom: 45px; 
+
+  font-size: 20px;
+  line-height: 1.2;
+  margin-bottom: 45px;
 }
 
 .study-abroad__description {
-  font-weight: 400; 
-  font-size: 20px; 
-  line-height: 1.4; 
-  letter-spacing: 0.04em; 
-  margin-bottom: 40px; 
+  font-weight: 400;
+  font-size: 20px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
+  margin-bottom: 40px;
 }
 
 .read-more-btn {
@@ -296,39 +311,40 @@ transition: text-shadow 0.3s ease;
   font-weight: 400;
   background-color: var(--color-main-blue);
   color: var(--color-main-white);
-  border-radius: 10px; 
+  border-radius: 10px;
   border: 2px solid var(--color-main-blue);
   cursor: pointer;
-  padding: 25px 58px; 
+  padding: 25px 58px;
   transition: background-color 0.3s ease;
 }
-.read-more-btn:hover{
+
+.read-more-btn:hover {
   color: var(--color-blue-dark);
-   background-color: transparent;
-   border-color: var(--color-main-blue);
+  background-color: transparent;
+  border-color: var(--color-main-blue);
 }
 
 .social-icons {
   display: flex;
-  flex-direction: column; 
-  gap: 26px; 
-  align-items: center; 
+  flex-direction: column;
+  gap: 26px;
+  align-items: center;
   justify-content: center;
   margin-left: 136px;
 }
 
 .social-icon-link {
-  width: 60px; 
-  height: 60px; 
-  border-radius: 50%; 
+  width: 60px;
+  height: 60px;
+  border-radius: 50%;
 }
 
 
 /* About Us Section */
 .about-us-section__container {
   display: flex;
-  align-items: flex-start; 
-  justify-content: space-between; 
+  align-items: flex-start;
+  justify-content: space-between;
 
 }
 
@@ -344,12 +360,12 @@ transition: text-shadow 0.3s ease;
   margin-bottom: 30px;
 }
 
-.about-us__text-outline{
+.about-us__text-outline {
   position: absolute;
   font-size: 45px;
   font-weight: 700;
   color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1); 
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
   z-index: 0;
   pointer-events: none;
   top: 0;
@@ -358,14 +374,15 @@ transition: text-shadow 0.3s ease;
   white-space: nowrap;
 }
 
-.about-us__text-fill  {
+.about-us__text-fill {
   position: relative;
   font-size: 45px;
   font-weight: 700;
-  color: var(--color-blue-dark); 
+  color: var(--color-blue-dark);
   z-index: 1;
   margin: 0;
 }
+
 .about-us__title {
   font-size: 25px;
   font-weight: 700;
@@ -373,16 +390,16 @@ transition: text-shadow 0.3s ease;
   color: var(--color-blue-dark);
 }
 
- .about-us__content {
+.about-us__content {
   max-width: 100%;
   width: 777px;
   z-index: 1;
 }
 
-.about-us__subtitles{
+.about-us__subtitles {
   font-size: 20px;
-  line-height: 1.2;     
-  letter-spacing: 0;   
+  line-height: 1.2;
+  letter-spacing: 0;
   margin-bottom: 20px;
   color: var(--color-blue-dark);
 }
@@ -390,19 +407,19 @@ transition: text-shadow 0.3s ease;
 .about-us__map-image {
   z-index: 0;
   text-align: center;
-  max-width: 515px; 
+  max-width: 515px;
   margin-left: 30px;
   margin-bottom: 0;
   margin-top: 88px;
 }
 
 .about-us__image {
-  height: auto; 
-  max-width: 515px; 
+  height: auto;
+  max-width: 515px;
   display: block;
   object-fit: contain;
 }
- 
+
 
 /* 
 .about-us__info-columns {
@@ -431,3 +448,75 @@ transition: text-shadow 0.3s ease;
   line-height: 1.6;
   color: #444;
 } */
+
+/* New css */
+.checkbox-group {
+  display: grid;
+  grid-template-columns: repeat(4, auto);
+  gap: 10px;
+}
+
+.university-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.university-card {
+  display: flex;
+  align-items: center;
+  border: 2px solid #142643;
+  border-radius: 10px;
+  padding: 10px;
+}
+
+.university-card img {
+  width: 150px;
+  height: 100px;
+  object-fit: cover;
+  margin-right: 20px;
+  border-radius: 5px;
+}
+
+.university-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.university-info h3 {
+  margin: 0;
+  color: var(--color-main-black);
+}
+
+.university-info p {
+  margin: 5px 0;
+  color: var(--color-main-black);
+}
+
+.university-info button {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: var(--color-main-blue);
+  color: var(--color-main-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.university-info button:hover {
+  background-color: #2e4066;
+}
+
+#header-footer-color {
+  background-color: var(--color-blue-dark);
+  /* Kelm */
+}
+
+label {
+  color: var(--color-main-black);
+  /* Kelm */
+}
