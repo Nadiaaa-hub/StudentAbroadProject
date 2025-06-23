@@ -449,11 +449,17 @@ header {
   color: #444;
 } */
 
-/* New css */
+/* Uni-list CSS */
 .checkbox-group {
   display: grid;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 100;
+  font-size: 17px;
   grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  align-items: center;
   gap: 10px;
+  column-gap: 15%;
 }
 
 .university-list {
@@ -464,18 +470,20 @@ header {
 }
 
 .university-card {
+  font-family: 'Rubik', sans-serif;
   display: flex;
   align-items: center;
-  border: 2px solid #142643;
-  border-radius: 10px;
-  padding: 10px;
+  border: 2px solid var(--color-main-blue);
+  border-radius: 20px;
+  padding: 5px;
+  margin: 0px 150px 70px 150px;
+  color: var(--color-main-black);
 }
 
 .university-card img {
-  width: 150px;
-  height: 100px;
+  width: 300px;
   object-fit: cover;
-  margin-right: 20px;
+  margin: 5px 65px 5px 65px;
   border-radius: 5px;
 }
 
@@ -486,8 +494,8 @@ header {
   width: 100%;
 }
 
-.university-info h3 {
-  margin: 0;
+.university-info h2 {
+  font-weight: 550;
   color: var(--color-main-black);
 }
 
@@ -513,10 +521,59 @@ header {
 
 #header-footer-color {
   background-color: var(--color-blue-dark);
-  /* Kelm */
 }
 
 label {
   color: var(--color-main-black);
-  /* Kelm */
+}
+
+.text-effect {
+  font-family: 'Rubik', sans-serif;
+  position: relative;
+  display: inline-block;
+  padding-top: 100px;
+  padding-left: 175px;
+  font-size: 40px;
+  font-weight: bold;
+  color: #0E1B35;
+}
+
+.text-effect::before {
+  content: "COUNTRY";
+  position: absolute;
+  padding-top: 100px;
+  top: 10px;
+  left: 185px;
+  color: transparent;
+  -webkit-text-stroke: 1px #E5E7EB;
+  z-index: -1;
+}
+
+#switch-country-button {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 50px;
+  color: #0E1B35;
+}
+
+footer {
+  width: 100%;
+  top: 0;
+  left: 0;
+  z-index: 1000;
+}
+
+#footer-img {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  margin-top: 15px;
+  margin-bottom: 5px;
 }
