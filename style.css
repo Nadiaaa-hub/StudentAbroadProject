@@ -561,19 +561,67 @@ label {
   color: #0E1B35;
 }
 
-footer {
-  width: 100%;
-  top: 0;
-  left: 0;
-  z-index: 1000;
+.site-footer {
+  background-color: var(--color-blue-dark);
+  padding: 40px 0;
+  color: var(--color-main-white);
+  text-align: center;
+  margin-top: 100px;
+  position: relative;
 }
 
-#footer-img {
-  position: relative;
-  display: inline-block;
+.footer-top-line {
+  height: 2px;
+  background-color: var(--color-main-white);
+  width: 100%;
+  position: absolute;
+  top: 0;
+  left: 0;
+}
+
+.footer-container {
+  max-width: 1288px;
+  margin: 0 auto;
+  padding: 0 24px;
   display: flex;
+  flex-direction: column;
   align-items: center;
-  justify-content: center;
-  margin-top: 15px;
-  margin-bottom: 5px;
+  gap: 20px;
+}
+
+.footer-logo img {
+  height: auto;
+  object-fit: contain;
+}
+
+.footer-nav {
+  margin-top: 10px;
+}
+
+.footer-menu {
+  display: flex;
+  gap: 30px;
+  padding: 0;
+  margin: 0;
+  list-style: none;
+}
+
+.footer-menu a {
+  color: var(--color-main-white);
+  text-decoration: none;
+  font-weight: 400;
+  transition: text-shadow 0.3s ease;
+}
+
+.footer-menu a:hover {
+  text-shadow: 0 0 2px var(--color-main-white);
+}
+
+.footer-bottom-line {
+  height: 2px;
+  width: 250px;
+  background-color: var(--color-main-white);
+  margin: 40px auto 0 auto;
+  border-radius: 10px;
+  opacity: 0.6;
 }
