@@ -117,22 +117,36 @@
         </div>
     </section>
      <footer class="site-footer">
-        <div class="footer-top-line"></div>
 
         <div class="footer-container">
             <div class="footer-logo">
                 <img src="./img/brand-name.svg" alt="Footer Logo" />
             </div>
 
-            <nav class="footer-nav">
-                <ul class="footer-menu">
-                    <li><a href="#about-us-section">ABOUT US</a></li>
-                    <li><a href="#uni-list-section">UNI LIST</a></li>
-                    <li><a href="#program-list-section">PROGRAMS</a></li>
-                    <li><a href="#faq-section">FAQ</a></li>
-                </ul>
-            </nav>
+            <div class="footer-nav-lang-wrapper">
+                <nav class="footer-nav">
+                    <ul class="footer-menu">
+                        <li><a href="#about-us-section">ABOUT US</a></li>
+                        <li><a href="#uni-list-section">UNI LIST</a></li>
+                        <li><a href="#program-list-section">PROGRAMS</a></li>
+                        <li><a href="#faq-section">FAQ</a></li>
+                    </ul>
+                </nav>
+
+                <div class="footer-lang-search">
+                    <span class="language-switch">
+                        <button data-lang="ua" class="js-switch-button" type="button">UA</button>
+                        <button data-lang="en" class="js-switch-button active"
+                            type="button"><strong>EN</strong></button>
+                    </span>
+                    <div class="search-box">
+                        <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
+                            placeholder="Search..." />
+                    </div>
+                </div>
+            </div>
         </div>
+
         <div class="footer-bottom-line"></div>
     </footer>
 </body>
