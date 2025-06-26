@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
     <link rel="stylesheet" href="./style.css" />
+    <link rel="website icon" type="png" href="././img/logo_01.png" />
 </head>
 
 <body>
@@ -52,9 +53,14 @@
             </div>
         </div>
     </header>
-    <section>
+
+  <main>
+    <section class="country-section">
+      
         <div class="text-effect">COUNTRY</div>
-    </section>
+  
+      
+
     <div class="checkbox-group">
         <label><input type="checkbox"> Ukraine</label>
         <label><input type="checkbox"> Spain</label>
@@ -115,40 +121,88 @@
                     more</button>
             </div>
         </div>
-    </section>
-     <footer class="site-footer">
+              </section>
+         
+          </section>
+        </main>
 
-        <div class="footer-container">
-            <div class="footer-logo">
-                <img src="./img/brand-name.svg" alt="Footer Logo" />
-            </div>
 
-            <div class="footer-nav-lang-wrapper">
-                <nav class="footer-nav">
-                    <ul class="footer-menu">
-                        <li><a href="#about-us-section">ABOUT US</a></li>
-                        <li><a href="#uni-list-section">UNI LIST</a></li>
-                        <li><a href="#program-list-section">PROGRAMS</a></li>
-                        <li><a href="#faq-section">FAQ</a></li>
-                    </ul>
-                </nav>
+     <!-- Footer -->
+ <footer class="footer">
+  <div class="container">
+    <div class="footer__container">
 
-                <div class="footer-lang-search">
-                    <span class="language-switch">
-                        <button data-lang="ua" class="js-switch-button" type="button">UA</button>
-                        <button data-lang="en" class="js-switch-button active"
-                            type="button"><strong>EN</strong></button>
-                    </span>
-                    <div class="search-box">
-                        <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
-                            placeholder="Search..." />
-                    </div>
-                </div>
-            </div>
+      <div class="footer__logo">
+        <img class="footer__img " src="./img/name_no-background_01.svg" alt="StudentAbroad logo" />
+      </div>
+
+      <div class="footer__bottom-row">
+        <nav class="footer__nav">
+          <ul class="footer__menu">
+            <li>
+              <a
+                class="footer__link" href="#about-us-section"
+                data-en="ABOUT US"
+                data-ua="ПРО НАС"
+              >ABOUT US</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer__link" href="uni-list.html"
+                data-en="UNI LIST"
+                data-ua="СПИСОК ВНЗ"
+              >UNI LIST</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer__link" href="#program-list-section"
+                data-en="PROGRAM LIST"
+                data-ua="ПРОГРАМИ"
+              >PROGRAM LIST</a
+              >
+            </li>
+            <li>
+              <a
+                class="footer__link" href="#faq-section"
+                data-en="FAQ"
+                data-ua="ПИТАННЯ"
+              >FAQ</a
+              >
+            </li>
+          </ul>
+        </nav>
+
+        <div class="lang-search">
+          <span class="language-switch">
+            <button
+              data-lang="ua"
+              class="js-switch-button"
+              type="button"
+            >UA</button
+            >
+            <button
+              data-lang="en"
+              class="js-switch-button active"
+              type="button"
+            >EN</button
+            >
+          </span>
+          <div class="search-box">
+            <input
+              type="text"
+              class="search-box__input"
+              data-en="Search..."
+              data-ua="Шукати..."
+              placeholder="Search..."
+            />
+          </div>
         </div>
-
-        <div class="footer-bottom-line"></div>
-    </footer>
+      </div>
+       <div class="footer__line "></div>
+    </div>
+  </div>
+</footer>
 </body>
-
 </html>
