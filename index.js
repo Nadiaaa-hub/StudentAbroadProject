@@ -14,7 +14,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (searchInput) {
-      searchInput.placeholder = searchInput.getAttribute(`data-${lang}`);
+     searchInput.placeholder = searchInput.getAttribute(`data-${lang}`);
     }
    
     localStorage.setItem("lang", lang);
@@ -42,3 +42,4 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#about-us-section").scrollIntoView({ behavior: "smooth" });
   });
 });
+
