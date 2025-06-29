@@ -899,17 +899,7 @@ label {
 }
 
 .read-more-right {
-  width: 215px;
-  height: 57px;
-  font-size: 20px;
-  cursor: pointer;
-  position: absolute;
-  top: 155px;
-  left: 400px;
-}
-
-.read-more-right:hover {
-  color: var(--color-blue-dark);
-  background-color: transparent;
-  border-color: var(--color-main-blue);
+  position: relative;
+  right: 75px;
+  top: 60px;
 }
