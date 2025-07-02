@@ -42,4 +42,3 @@ document.addEventListener("DOMContentLoaded", function () {
     document.querySelector("#about-us-section").scrollIntoView({ behavior: "smooth" });
   });
 });
-
