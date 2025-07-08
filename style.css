@@ -711,118 +711,6 @@ header {
 .footer__link:hover {
   text-shadow: 0 0 2px var(--color-main-white);
 }
-/* Uni-list CSS */
-.checkbox-group {
-  display: grid;
-  font-family: "Rubik", sans-serif;
-  font-weight: 100;
-  font-size: 17px;
-  grid-template-columns: repeat(4, auto);
-  justify-content: center;
-  align-items: center;
-  gap: 10px;
-  column-gap: 15%;
-}
-
-.university-list {
-  padding: 20px;
-  display: flex;
-  flex-direction: column;
-  gap: 20px;
-}
-
-.university-card {
-  font-family: "Rubik", sans-serif;
-  display: flex;
-  align-items: center;
-  border: 2px solid var(--color-main-blue);
-  border-radius: 20px;
-  padding: 5px;
-  margin: 0px 150px 70px 150px;
-  color: var(--color-main-black);
-}
-
-.university-card img {
-  width: 300px;
-  object-fit: cover;
-  margin: 5px 65px 5px 65px;
-  border-radius: 5px;
-}
-
-.university-info {
-  display: flex;
-  flex-direction: column;
-  justify-content: space-between;
-  width: 100%;
-}
-
-.university-info h2 {
-  font-weight: 550;
-  color: var(--color-main-black);
-}
-
-.university-info p {
-  margin: 5px 0;
-  color: var(--color-main-black);
-}
-
-.university-info button {
-  align-self: flex-end;
-  margin-top: auto;
-  background-color: var(--color-main-blue);
-  color: var(--color-main-white);
-  border: none;
-  padding: 10px 20px;
-  border-radius: 5px;
-  cursor: pointer;
-}
-
-.university-info button:hover {
-  background-color: var(--color-main-blue);
-}
-#header-footer-color {
-  background-color: var(--color-blue-dark);
-  padding-bottom: 25px;
-}
-
-label {
-  color: var(--color-main-black);
-}
-
-.text-effect {
-  font-family: "Rubik", sans-serif;
-  /* position: relative; */
-  display: inline-block;
-  /* padding-top: 100px;
-    padding-left: 175px; */
-  font-size: 40px;
-  font-weight: bold;
-  color: #0e1b35;
-}
-
-.text-effect::before {
-  content: "COUNTRY";
-  position: absolute;
-  padding-top: 100px;
-  top: 10px;
-  left: 185px;
-  color: transparent;
-  -webkit-text-stroke: 1px #e5e7eb;
-  z-index: -1;
-}
-
-#switch-country-button {
-  position: relative;
-  display: inline-block;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  font-weight: 700;
-  font-size: 25px;
-  margin-bottom: 50px;
-  color: var(--color-blue-dark);
-}
-
 /* Share My Program Section*/
 
 .go-back {
@@ -1178,12 +1066,9 @@ select {
   transform: translateY(-50%) rotate(180deg);
 }
 
-/* dhdggddgyjh */
-
 .custom-select-wrapper {
   position: relative;
 }
-
 
 .custom-select-dropdown {
   position: absolute;
@@ -1223,4 +1108,244 @@ select {
 }
 .custom-select-input.active + .select-arrow {
   transform: translateY(-50%) rotate(180deg);
+}
+
+
+/* Uni-list CSS */
+.checkbox-group {
+  display: grid;
+  font-family: 'Rubik', sans-serif;
+  font-weight: 100;
+  font-size: 17px;
+  grid-template-columns: repeat(4, auto);
+  justify-content: center;
+  align-items: center;
+  gap: 10px;
+  column-gap: 15%;
+}
+
+.university-list {
+  padding: 20px;
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.university-card {
+  font-family: 'Rubik', sans-serif;
+  display: flex;
+  align-items: center;
+  border: 2px solid var(--color-main-blue);
+  border-radius: 20px;
+  padding: 5px;
+  margin: 0px 150px 70px 150px;
+  color: var(--color-main-black);
+}
+
+.university-card img {
+  width: 300px;
+  object-fit: cover;
+  margin: 5px 65px 5px 65px;
+  border-radius: 5px;
+}
+
+.university-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: space-between;
+  width: 100%;
+}
+
+.university-info h2 {
+  font-weight: 550;
+  color: var(--color-main-black);
+}
+
+.university-info p {
+  margin: 5px 0;
+  color: var(--color-main-black);
+}
+
+.university-info button {
+  align-self: flex-end;
+  margin-top: auto;
+  background-color: var(--color-main-blue);
+  color: var(--color-main-white);
+  border: none;
+  padding: 10px 20px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.university-info button:hover {
+  background-color: var(--color-main-blue);
+}
+
+#header-footer-color {
+  background-color: var(--color-blue-dark);
+  padding-bottom: 25px;
+}
+
+label {
+  color: var(--color-main-black);
+}
+.country-section__heading{
+  position: relative;
+  display: inline-block;
+  padding-top: 20px;
+}
+.country-section__text-outline {
+  position: absolute;
+  font-size: 45px;
+  font-weight: 700;
+  padding-top: 20px;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0px;
+  transform: translate(29px, 10px);
+  white-space: nowrap;
+  padding-left: 190px;
+}
+
+.country-section__text-fill {
+  position: relative;
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0;
+  padding-left: 190px;
+  color: var(--color-blue-dark);
+
+}
+
+#switch-country-button {
+  position: relative;
+  display: inline-block;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: 700;
+  font-size: 25px;
+  margin-bottom: 50px;
+  color: var(--color-blue-dark);
+}
+
+.container-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 18px;
+  user-select: none;
+  gap: 10px;
+  position: relative;
+}
+
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+.checkmark {
+  width: 20px;
+  height: 20px;
+  border: 1px solid blue;
+  border-radius: 4px;
+  background-color: white;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  box-sizing: border-box;
+  flex-shrink: 0;
+  position: relative;
+}
+
+.checkmark::after {
+  content: "";
+  width: 5px;
+  height: 10px;
+  border: solid white;
+  border-width: 0 2px 2px 0;
+  transform: rotate(45deg);
+  display: none;
+}
+
+.container-checkbox input:checked+.checkmark {
+  background-color: blue;
+  border-color: blue;
+}
+
+.container-checkbox input:checked+.checkmark::after {
+  display: block;
+}
+
+#icon-img {
+  width: 20px;
+  vertical-align: middle;
+  margin-left: auto;
+  display: inline;
+}
+
+.read-more-right {
+  position: relative;
+  right: 75px;
+  top: 60px;
+}
+
+/* === COUNTRY Search Box Styles === */
+.country-search-box {
+  display: flex;
+  justify-content: flex-end;
+  width: 100%;
+  margin-top: -50px;
+  margin-bottom: 75px;
+}
+
+.search-input-wrapper {
+  position: relative;
+  width: 200px;
+}
+
+.country-search-box__input {
+  width: 100%;
+  border: none;
+  outline: none;
+  font-size: 14px;
+  padding: 6px 0;
+  background-color: transparent;
+  color: #555;
+  font-weight: 600;
+  text-align: left;
+}
+
+.country-search-box__input::placeholder {
+  color: #999;
+  font-weight: bold;
+}
+
+.country-search-box__line {
+  width: 150px;
+  height: 2px;
+  background-color: #999;
+  position: absolute;
+  bottom: 0;
+  left: -90px;
+}
+
+.fade-in {
+  animation: fadeIn 0.3s ease;
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+    transform: translateY(10px);
+  }
+
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
 }
