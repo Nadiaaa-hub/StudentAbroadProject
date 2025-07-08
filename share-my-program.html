@@ -1,0 +1,385 @@
+
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./fjfj.css" />
+    <link rel="website icon" type="png" href="./img/logo_01.png" />
+  </head>
+  <body>
+    <!-- Header -->
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="/">
+              <img
+                src="./img/logo.svg"
+                alt="StudentAbroad logo"
+                loading="lazy" />
+            </a>
+          </div>
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="#about-us-section"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="#program-list-section"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="#faq-section"
+                  data-en="FAQ"
+                  data-ua="ПИТАННЯ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <!-- Hero Section -->
+    <main>
+      <section class="share-my-program-section">
+        <div class="container">
+          <div class="share-my-program__header">
+            <a href="javascript:history.back()" class="go-back">
+              <svg
+                class="icon"
+                width="16.68"
+                height="8"
+                viewBox="0 0 15 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+                  fill="currentColor" />
+              </svg>
+              <span class="go-back__label">Go back</span>
+            </a>
+            <img
+              class="share-my-program__img"
+              src="./img/logo+share my programm.svg"
+              alt="" />
+          </div>
+
+          <!-- Form Section -->
+
+          <div class="form-section">
+            <h2 class="form-section__title">Add program</h2>
+            <form>
+              <!-- Name -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Name:" />
+                </div>
+                <label class="form-section__description"
+                  >Full program name, please.</label
+                >
+              </div>
+
+<!-- Slug -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Slug:" />
+                </div>
+                <label class="form-section__description"
+                  >It’s a short name for URL. Don’t use symbols and upper
+                  case.</label
+                >
+              </div>
+
+              <!-- Inviting uni -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <select>
+                    <option disabled selected>Inviting uni:</option>
+                    <option>Harvard University</option>
+                    <option>Stanford University</option>
+                    <option>Oxford University</option>
+                    <option>MIT</option>
+                  </select>
+                  <img
+                    src="./img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                  <button type="button" class="form-section__add-button">
+                    <img src="./img/+.svg" alt="+" />
+                  </button>
+                </div>
+                <label class="form-section__description"
+                  >Choose a foreign university from the list. Add a new one, if
+                  you can’t find it.</label
+                >
+              </div>
+
+              <!-- Home uni -->
+              <div class="form-field-and-description">
+                <div
+                  class="input-with-optional-button custom-select-wrapper"
+                  id="home-uni-wrapper">
+                  <input
+                    type="text"
+                    placeholder="Home uni:"
+                    class="custom-select-input"
+                    readonly />
+                  <div class="custom-select-dropdown">
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                    <div class="custom-select-option">
+                      Kyiv National Economic University named after Vad...
+                    </div>
+                  </div>
+                  <img
+                    src="./img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                  <button
+                    type="button"
+                    class="form-section__add-button custom-select-add-button">
+                    <img src="./img/+.svg" alt="+" />
+                  </button>
+                </div>
+
+<label class="form-section__description">
+                  Choose Ukrainian university from the list. Add a new one, if
+                  you can’t find it.
+                </label>
+              </div>
+
+              <!-- Faculty -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Faculty:" />
+                </div>
+                <label class="form-section__description"
+                  >Please, provide the faculty of inviting uni for this
+                  program.</label
+                >
+              </div>
+
+              <!-- Level -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <select>
+                    <option disabled selected>Level:</option>
+                    <option>2</option>
+                    <option>3</option>
+                    <option>4</option>
+                    <option>5</option>
+                  </select>
+                  <img
+                    src="./img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                  <button type="button" class="form-section__add-button">
+                    <img src="./img/+.svg" alt="+" />
+                  </button>
+                </div>
+                <label class="form-section__description"
+                  >Choose the level of this program from the list. Add a new
+                  one, if you can’t find it.</label
+                >
+              </div>
+
+              <!-- Short description -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Short description:" />
+                </div>
+                <label class="form-section__description"
+                  >A brief, meaningful description of the program with links to
+                  additional information, etc.</label
+                >
+              </div>
+
+              <!-- Feedback -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Your feedback:" />
+                </div>
+                <label class="form-section__description"
+                  >Your experience, a "quote" that you can use to describe this
+                  program from your point of view.</label
+                >
+              </div>
+
+              <!-- Name -->
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" placeholder="Your name:" />
+                </div>
+                <label class="form-section__description"
+                  >If you wish, you can leave your name and contact details,
+                  which will be displayed on the site.</label
+                >
+              </div>
+            </form>
+          </div>
+
+          <div class="submit-button">
+            <button class="btn" type="submit">Submit</button>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+<div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="#about-us-section"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="#program-list-section"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="#faq-section"
+                    data-en="FAQ"
+                    data-ua="ПИТАННЯ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+    <script src="./index.js"></script>
+  </body>
+</html>
