@@ -2,7 +2,6 @@ document.addEventListener("DOMContentLoaded", function () {
   const switchButtons = document.querySelectorAll(".js-switch-button");
   const elementsToTranslate = document.querySelectorAll("[data-en][data-ua]");
   const searchInput = document.querySelector(".search-box__input");
-  const inputs = document.querySelectorAll(".input-with-optional-button");
 
   function switchLanguage(lang) {
     elementsToTranslate.forEach((el) => {
@@ -54,88 +53,106 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  inputs.forEach((wrapper) => {
-    const select = wrapper.querySelector("select");
-    const arrow = wrapper.querySelector(".select-arrow");
-
-    if (select && arrow) {
-      select.addEventListener("focus", () => {
-        wrapper.classList.add("select-open");
-      });
-
-      select.addEventListener("blur", () => {
-        wrapper.classList.remove("select-open");
-      });
-
-      select.addEventListener("mousedown", () => {
-        wrapper.classList.add("select-open");
-      });
-    }
-  });
-
-  // CUSTOM SELECT DROPDOWN //
-  const customSelectWrappers = document.querySelectorAll(".custom-select-wrapper");
-
-  customSelectWrappers.forEach((wrapper) => {
+  // CUSTOM SEARCHABLE SELECT DROPDOWNS //
+  document.querySelectorAll(".custom-select-wrapper").forEach((wrapper) => {
     const input = wrapper.querySelector(".custom-select-input");
     const dropdown = wrapper.querySelector(".custom-select-dropdown");
-    const addButton = wrapper.querySelector(".custom-select-add-button");
+    const optionsContainer = dropdown;
+    let options = Array.from(
+      optionsContainer.querySelectorAll(".custom-select-option")
+    );
     const arrow = wrapper.querySelector(".select-arrow");
-    const options = dropdown.querySelectorAll(".custom-select-option");
-
-    wrapper.style.position = 'relative';
+    const addButton = wrapper.querySelector(".custom-select-add-button");
 
     const positionDropdown = () => {
       const inputRect = input.getBoundingClientRect();
-      const wrapperRect = wrapper.getBoundingClientRect(); 
+      const wrapperRect = wrapper.getBoundingClientRect();
 
-      dropdown.style.top = `${input.offsetHeight + 10}px`;
+      dropdown.style.top = `${inputRect.height + 5}px`;
+      dropdown.style.left = `0`;
+      dropdown.style.width = `${input.offsetWidth}px`;
 
-      dropdown.style.left = `200px`;
-
-      dropdown.style.width = `450px`;
-
-      const dropdownRightEdge = wrapperRect.left + 200 + 450; 
-      if (dropdownRightEdge > window.innerWidth) {
-       
-        dropdown.style.left = `${window.innerWidth - wrapperRect.left - 450 - 20}px`; 
+      const dropdownRightEdge = wrapperRect.left + dropdown.offsetWidth;
+      if (dropdownRightEdge > window.innerWidth - 20) {
+        dropdown.style.left = `${inputRect.width - dropdown.offsetWidth}px`;
       }
     };
 
-    const toggleDropdown = () => {
-      dropdown.classList.toggle("active");
-      input.classList.toggle("active");
-      arrow.classList.toggle("active");
+    const filterOptions = () => {
+      const searchTerm = input.value.toLowerCase();
+      console.log("Пошуковий термін (searchTerm):", searchTerm);
+      let hasVisibleOptions = false;
+      options.forEach((option) => {
+        const text = option.textContent.toLowerCase();
+        console.log(
+          "Опція:",
+          text,
+          "Включає термін?",
+          text.includes(searchTerm)
+        );
+        if (text.includes(searchTerm)) {
+          option.style.display = "block";
+          hasVisibleOptions = true;
+        } else {
+          option.style.display = "none";
+        }
+      });
 
-      if (dropdown.classList.contains("active")) {
+      if (!hasVisibleOptions && input.value !== "") {
+        console.log(
+          "Приховую дропдаун: немає видимих опцій або поле не порожнє"
+        );
+        dropdown.classList.remove("active");
+        wrapper.classList.remove("active");
+      } else {
+        console.log("Показую дропдаун");
+        dropdown.classList.add("active");
+        wrapper.classList.add("active");
         positionDropdown();
       }
     };
+    const closeDropdown = () => {
+      dropdown.classList.remove("active");
+      wrapper.classList.remove("active");
+      options.forEach((opt) => (opt.style.display = "block"));
+    };
 
-    input.addEventListener("click", (event) => {
+    // OPEN/CLOSE LOGIC //
+    input.addEventListener("mousedown", (event) => {
+      if (wrapper.classList.contains("active")) {
+        closeDropdown();
+      } else {
+        input.focus();
+        filterOptions();
+      }
       event.stopPropagation();
-      toggleDropdown();
     });
 
-    addButton.addEventListener("click", (event) => {
-      event.stopPropagation();
-      toggleDropdown();
+    input.addEventListener("focus", () => {
+      if (!wrapper.classList.contains("active") && input.value === "") {
+        filterOptions();
+      }
     });
+
+    input.addEventListener("input", filterOptions);
 
     options.forEach((option) => {
-      option.addEventListener("click", () => {
+      option.addEventListener("click", (event) => {
+        event.stopPropagation();
         input.value = option.textContent.trim();
-        dropdown.classList.remove("active"); 
-        input.classList.remove("active");
-        arrow.classList.remove("active");
+        closeDropdown();
       });
     });
 
+    if (addButton) {
+      addButton.addEventListener("click", (event) => {
+        event.stopPropagation();
+      });
+    }
+
     document.addEventListener("click", (event) => {
-      if (!wrapper.contains(event.target) && !dropdown.contains(event.target)) {
-        dropdown.classList.remove("active");
-        input.classList.remove("active");
-        arrow.classList.remove("active");
+      if (!wrapper.contains(event.target)) {
+        closeDropdown();
       }
     });
 
@@ -149,7 +166,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }, 100);
     });
 
-  
+    let scrollTimer;
     window.addEventListener("scroll", () => {
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
@@ -161,10 +178,328 @@ document.addEventListener("DOMContentLoaded", function () {
 
     input.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
-        dropdown.classList.remove("active");
-        input.classList.remove("active");
-        arrow.classList.remove("active");
+        closeDropdown();
       }
     });
   });
+
+  // COUNTRY SEARCH AND CHECKBOX FILTER //
+  const countrySearchInput = document.querySelector(
+    ".country-search-box__input"
+  );
+  const checkboxes = document.querySelectorAll(
+    ".checkbox-group .container-checkbox"
+  );
+
+  if (countrySearchInput) {
+    countrySearchInput.addEventListener("input", () => {
+      const query = countrySearchInput.value.trim().toLowerCase();
+
+      checkboxes.forEach((checkbox) => {
+        const labelEl = checkbox.querySelector(".country-label");
+        const en = labelEl
+          ? labelEl.getAttribute("data-en")?.toLowerCase() || ""
+          : "";
+        const ua = labelEl
+          ? labelEl.getAttribute("data-ua")?.toLowerCase() || ""
+          : "";
+
+        if (en.includes(query) || ua.includes(query)) {
+          checkbox.style.display = "inline-flex";
+          applyFadeIn(checkbox);
+        } else {
+          checkbox.style.display = "none";
+        }
+      });
+    });
+  }
+
+  function applyFadeIn(el) {
+    el.classList.remove("fade-in");
+    void el.offsetWidth;
+    el.classList.add("fade-in");
+  }
+
+  const addInvitingUniButton = document.getElementById(
+    "add-inviting-uni-button"
+  );
+  const newInvitingUniFields = document.getElementById(
+    "new-inviting-uni-fields"
+  );
+
+  if (addInvitingUniButton && newInvitingUniFields) {
+    addInvitingUniButton.addEventListener("click", () => {
+      newInvitingUniFields.style.display =
+        newInvitingUniFields.style.display === "none" ? "block" : "none";
+
+      if (newInvitingUniFields.style.display === "block") {
+        newInvitingUniFields
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+        const newRegionFields = document.getElementById("new-region-fields");
+        if (newRegionFields) newRegionFields.style.display = "none";
+      }
+    });
+  }
+
+  const addHomeUniButton = document.getElementById("add-home-uni-button");
+  const newHomeUniFields = document.getElementById("new-home-uni-fields");
+
+  if (addHomeUniButton && newHomeUniFields) {
+    addHomeUniButton.addEventListener("click", () => {
+      newHomeUniFields.style.display =
+        newHomeUniFields.style.display === "none" ? "block" : "none";
+      if (newHomeUniFields.style.display === "block") {
+        newHomeUniFields
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+        const newHomeUniRegionFields = document.getElementById(
+          "new-home-uni-region-fields"
+        );
+        if (newHomeUniRegionFields)
+          newHomeUniRegionFields.style.display = "none";
+      }
+    });
+  }
+  const addRegionButton = document.getElementById("add-region-button");
+  const newRegionFields = document.getElementById("new-region-fields");
+
+  if (addRegionButton && newRegionFields) {
+    addRegionButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      newRegionFields.style.display =
+        newRegionFields.style.display === "none" ? "block" : "none";
+      if (newRegionFields.style.display === "block") {
+        newRegionFields
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+      }
+    });
+  }
+
+  const addHomeUniRegionButton = document.getElementById(
+    "add-home-uni-region-button"
+  );
+  const newHomeUniRegionFields = document.getElementById(
+    "new-home-uni-region-fields"
+  );
+
+  if (addHomeUniRegionButton && newHomeUniRegionFields) {
+    addHomeUniRegionButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      newHomeUniRegionFields.style.display =
+        newHomeUniRegionFields.style.display === "none" ? "block" : "none";
+      if (newHomeUniRegionFields.style.display === "block") {
+        newHomeUniRegionFields
+          .querySelectorAll("input")
+          .forEach((input) => (input.value = ""));
+      }
+    });
+  }
+
+  const addCountryButton = document.getElementById("add-country-button");
+  if (addCountryButton) {
+    addCountryButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      console.log(
+        'Кнопка "Додати країну" для нового регіону запрошуючого університету натиснута'
+      );
+    });
+  }
+
+  const addHomeUniCountryButton = document.getElementById(
+    "add-home-uni-country-button"
+  );
+  if (addHomeUniCountryButton) {
+    addHomeUniCountryButton.addEventListener("click", (event) => {
+      event.stopPropagation();
+      console.log(
+        'Кнопка "Додати країну" для нового регіону домашнього університету натиснута!'
+      );
+    });
+  }
+
+  // --- SUBMIT LOGIC FOR "ADD A NEW UNI" BUTTONS ---
+
+  // Для "Add a new uni" (Inviting Uni)
+  const addNewInvitingUniSubmitButton =
+    document.getElementById("add-new-uni-button");
+  if (addNewInvitingUniSubmitButton) {
+    addNewInvitingUniSubmitButton.addEventListener("click", () => {
+      const newUniNameInput = newInvitingUniFields.querySelector(
+        'input[placeholder="Name:"]'
+      );
+      const newUniShortNameInput = newInvitingUniFields.querySelector(
+        'input[placeholder="Short Name:"]'
+      );
+      const newUniSlugInput = newInvitingUniFields.querySelector(
+        'input[placeholder="Slug:"]'
+      );
+      const newUniRegionInput = newInvitingUniFields.querySelector(
+        'input[placeholder="Region:"]'
+      );
+      const newUniCountryInput = newInvitingUniFields.querySelector(
+        '#new-region-fields input[placeholder="Country:"]'
+      );
+      const newUniUrlInput = newInvitingUniFields.querySelector(
+        'input[placeholder="URL:"]'
+      );
+      const newUniContactInput = newInvitingUniFields.querySelector(
+        'input[placeholder="Contact:"]'
+      );
+
+      if (!newUniNameInput.value.trim() || !newUniSlugInput.value.trim()) {
+        alert(
+          'Будь ласка, заповніть поля "Name" та "Slug" для нового запрошуючого університету.'
+        );
+        return;
+      }
+
+      const newUniData = {
+        name: newUniNameInput.value.trim(),
+        shortName: newUniShortNameInput.value.trim(),
+        slug: newUniSlugInput.value.trim(),
+        region: newUniRegionInput.value.trim(),
+        country: newUniCountryInput ? newUniCountryInput.value.trim() : "",
+        url: newUniUrlInput.value.trim(),
+        contact: newUniContactInput.value.trim(),
+      };
+
+      console.log("Відправка нового запрошуючого університету:", newUniData);
+
+      alert("Дані збережено.");
+      newInvitingUniFields
+        .querySelectorAll("input")
+        .forEach((input) => (input.value = ""));
+      newInvitingUniFields.style.display = "none";
+      const newRegionFieldsForInviting =
+        document.getElementById("new-region-fields");
+      if (newRegionFieldsForInviting)
+        newRegionFieldsForInviting.style.display = "none";
+    });
+  }
+
+  // Для "Add a new home uni"
+  const addNewHomeUniSubmitButton = document.getElementById(
+    "add-new-home-uni-button"
+  );
+  if (addNewHomeUniSubmitButton) {
+    addNewHomeUniSubmitButton.addEventListener("click", () => {
+      const newHomeUniNameInput = newHomeUniFields.querySelector(
+        'input[placeholder="Name:"]'
+      );
+      const newHomeUniShortNameInput = newHomeUniFields.querySelector(
+        'input[placeholder="Short Name:"]'
+      );
+      const newHomeUniSlugInput = newHomeUniFields.querySelector(
+        'input[placeholder="Slug:"]'
+      );
+      const newHomeUniRegionInput = newHomeUniFields.querySelector(
+        'input[placeholder="Region:"]'
+      );
+      const newHomeUniCountryInput = newHomeUniFields.querySelector(
+        '#new-home-uni-region-fields input[placeholder="Country:"]'
+      );
+      const newHomeUniUrlInput = newHomeUniFields.querySelector(
+        'input[placeholder="URL:"]'
+      );
+      const newHomeUniContactInput = newHomeUniFields.querySelector(
+        'input[placeholder="Contact:"]'
+      );
+
+      if (
+        !newHomeUniNameInput.value.trim() ||
+        !newHomeUniSlugInput.value.trim()
+      ) {
+        alert(
+          'Будь ласка, заповніть поля "Name" та "Slug" для нового домашнього університету.'
+        );
+        return;
+      }
+
+      const newHomeUniData = {
+        name: newHomeUniNameInput.value.trim(),
+        shortName: newHomeUniShortNameInput.value.trim(),
+        slug: newHomeUniSlugInput.value.trim(),
+        region: newHomeUniRegionInput.value.trim(),
+        country: newHomeUniCountryInput
+          ? newHomeUniCountryInput.value.trim()
+          : "",
+        url: newHomeUniUrlInput.value.trim(),
+        contact: newHomeUniContactInput.value.trim(),
+      };
+
+      console.log("Відправка нового домашнього університету:", newHomeUniData);
+
+      alert("Дані збережено.");
+      newHomeUniFields
+        .querySelectorAll("input")
+        .forEach((input) => (input.value = ""));
+      newHomeUniFields.style.display = "none";
+      const newHomeUniRegionFieldsForHome = document.getElementById(
+        "new-home-uni-region-fields"
+      );
+      if (newHomeUniRegionFieldsForHome)
+        newHomeUniRegionFieldsForHome.style.display = "none";
+    });
+  }
+
+  document
+    .querySelectorAll(".form-field-and-description .form-section__add-button")
+    .forEach((button) => {
+      if (
+        button.id === "add-region-button" ||
+        button.id === "add-country-button" ||
+        button.id === "add-home-uni-region-button" ||
+        button.id === "add-home-uni-country-button"
+      ) {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      }
+    });
+
+  document
+    .querySelectorAll(".custom-select-wrapper .form-section__add-button")
+    .forEach((button) => {
+      const parentWrapper = button.closest(".custom-select-wrapper");
+
+      if (
+        parentWrapper &&
+        button.id &&
+        (button.id.includes("add-region-button") ||
+          button.id.includes("add-country-button"))
+      ) {
+        button.addEventListener("click", (event) => {
+          event.stopPropagation();
+        });
+      }
+    });
 });
+
+const filterOptions = () => {
+  const searchTerm = input.value.toLowerCase();
+  console.log("Пошуковий термін:", searchTerm); // Додайте це
+  let hasVisibleOptions = false;
+  options.forEach((option) => {
+    const text = option.textContent.toLowerCase();
+    console.log("Опція:", text, "Включає термін?", text.includes(searchTerm)); // Додайте це
+    if (text.includes(searchTerm)) {
+      option.style.display = "block";
+      hasVisibleOptions = true;
+    } else {
+      option.style.display = "none";
+    }
+  });
+  console.log("Є видимі опції:", hasVisibleOptions); // Додайте це
+  if (!hasVisibleOptions && input.value !== "") {
+    console.log("Приховую дропдаун: немає видимих опцій або поле не порожнє");
+    dropdown.classList.remove("active");
+    wrapper.classList.remove("active");
+  } else {
+    console.log("Показую дропдаун");
+    dropdown.classList.add("active");
+    wrapper.classList.add("active");
+    positionDropdown();
+  }
+};
