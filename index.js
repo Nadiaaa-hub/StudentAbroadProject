@@ -157,7 +157,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let resizeTimer;
-    window.addEventListener("resize", () => {
+    addEventListener("resize", () => {
       clearTimeout(resizeTimer);
       resizeTimer = setTimeout(() => {
         if (dropdown.classList.contains("active")) {
@@ -167,7 +167,7 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     let scrollTimer;
-    window.addEventListener("scroll", () => {
+    addEventListener("scroll", () => {
       clearTimeout(scrollTimer);
       scrollTimer = setTimeout(() => {
         if (dropdown.classList.contains("active")) {
@@ -349,7 +349,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
       if (!newUniNameInput.value.trim() || !newUniSlugInput.value.trim()) {
         alert(
-          'Будь ласка, заповніть поля "Name" та "Slug" для нового запрошуючого університету.'
+          'Будь ласка, заповніть поля "Name" та "Slug" для нового університету.'
         );
         return;
       }
@@ -364,7 +364,7 @@ document.addEventListener("DOMContentLoaded", function () {
         contact: newUniContactInput.value.trim(),
       };
 
-      console.log("Відправка нового запрошуючого університету:", newUniData);
+      console.log("Відправка нового університету:", newUniData);
 
       alert("Дані збережено.");
       newInvitingUniFields
@@ -410,7 +410,7 @@ document.addEventListener("DOMContentLoaded", function () {
         !newHomeUniSlugInput.value.trim()
       ) {
         alert(
-          'Будь ласка, заповніть поля "Name" та "Slug" для нового домашнього університету.'
+          'Будь ласка, заповніть поля "Name" та "Slug" для нового університету.'
         );
         return;
       }
@@ -427,7 +427,7 @@ document.addEventListener("DOMContentLoaded", function () {
         contact: newHomeUniContactInput.value.trim(),
       };
 
-      console.log("Відправка нового домашнього університету:", newHomeUniData);
+      console.log("Відправка нового університету:", newHomeUniData);
 
       alert("Дані збережено.");
       newHomeUniFields
@@ -441,4 +441,48 @@ document.addEventListener("DOMContentLoaded", function () {
         newHomeUniRegionFieldsForInviting.style.display = "none";
     });
   }
+});
+
+document.addEventListener("DOMContentLoaded", () => {
+  const faqQuestions = document.querySelectorAll(".faq__toggle-question");
+
+  faqQuestions.forEach((question) => {
+    question.addEventListener("click", () => {
+      // Знаходимо батьківську картку FAQ
+      const faqCard = question.closest(".faq__card");
+      // Знаходимо елемент відповіді всередині цієї картки
+      const answer = faqCard.querySelector(".faq__answer");
+
+      // Перевіряємо, чи відповідь вже активна
+      const isActive = answer.classList.contains("active");
+
+      // Закриваємо всі відкриті відповіді в інших картках
+      document.querySelectorAll(".faq__answer.active").forEach((openAnswer) => {
+        openAnswer.classList.remove("active");
+        // Оновлюємо aria-expanded та вигляд кнопки
+        openAnswer.previousElementSibling.previousElementSibling.setAttribute(
+          "aria-expanded",
+          "false"
+        );
+        openAnswer.previousElementSibling.previousElementSibling.classList.remove(
+          "active"
+        );
+      });
+
+      // Якщо відповідь, на яку клікнули, була неактивна, відкриваємо її
+      if (!isActive) {
+        answer.classList.add("active");
+        question.setAttribute("aria-expanded", "true");
+        question.classList.add("active"); // Додаємо клас для зміни іконки
+      }
+    });
+
+    // Обробка натискань клавіатури для доступності
+    question.addEventListener("keydown", (event) => {
+      if (event.key === "Enter" || event.key === " ") {
+        event.preventDefault(); // Запобігаємо прокрутці сторінки при натисканні пробілу
+        question.click(); // Імітуємо клік
+      }
+    });
+  });
 });

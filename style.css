@@ -503,12 +503,11 @@ header {
 }
 
 /* FAQ */
-.faq-section {
-  padding-top: 80px;
-}
 .faq__heading {
   position: relative;
-  display: inline-block;
+  width: 100%;
+  max-width: 760px;
+  text-align: left;
   margin-bottom: 30px;
 }
 
@@ -555,7 +554,27 @@ header {
   margin-bottom: 90px;
   color: var(--color-blue-dark);
 }
+.faq__paragraph {
+  font-style: italic;
+  color: var(--color-grey);
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+.faq__paragraph:last-child {
+  padding-bottom: 0;
+}
+.faq__date {
+  display: flex;
+  align-items: center; /* Vertically align the image and text */
+  gap: 5px; /* Space between the clock image and the date text */
+  white-space: nowrap; /* Prevent date from wrapping */
+}
 
+.faq__date img {
+  height: 16px; /* Adjust icon size if needed */
+  width: auto;
+}
 /*Contact Details Section*/
 
 .contact-details-section {
@@ -948,9 +967,6 @@ select {
 .custom-select-option:hover {
   background-color: #f0f0f0;
 }
-/* .custom-select-input.active + .select-arrow {
-    transform: translateY(-50%) rotate(180deg); 
-} */
 
 .custom-select-wrapper.active .select-arrow {
   transform: translateY(-50%) rotate(180deg);
@@ -1004,20 +1020,124 @@ select {
 }
 
 /* FAQ page */
+.faq-section {
+  padding-top: 70px;
+  padding-bottom: 70px;
+}
 
 .faq-section__container {
   display: flex;
   flex-direction: column;
   align-items: center;
-  justify-content: center;
 }
 
+.faq__card {
+  width: 100%;
+  max-width: 766px;
+  position: relative;
+  padding-top: 45px;
+  overflow: hidden;
+}
+.faq__card:first-child {
+  padding-top: 20px;
+}
 .faq__programs {
   display: flex;
   gap: 10px;
 }
 .faq__text {
-  border-color: var(--color-main-yellow);
+  border: 1px solid var(--color-main-yellow);
+  background-color: var(--color-main-yellow);
+  height: 28px;
+  border-radius: 30px;
+  padding: 4px 25px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 14px;
+  color: var(--color-main-white);
+  font-weight: 600;
+  white-space: nowrap;
+}
+.faq__meta {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  margin-bottom: 15px;
+}
+
+.faq__h2 {
+  font-size: 25px;
+  margin-bottom: 15px;
+  cursor: pointer;
+  transition: color 0.2s ease;
+  position: relative;
+  padding-right: 30px;
+}
+.faq__h2::after {
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-50%);
+  font-size: 20px;
+  line-height: 1;
+  transition: transform 0.2s ease;
+}
+
+.faq__date {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  position: absolute;
+  right: 0;
+  top: 50%;
+  transform: translateY(-100%);
+}
+.faq__date img {
+  height: 16px;
+  width: auto;
+}
+.faq__answer {
+  padding: 0 20px;
+  margin-top: 15px;
+  border-radius: 30px;
+  overflow: hidden;
+  max-height: 0;
+  opacity: 0;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
+    padding 0.4s ease-out;
+  box-sizing: border-box;
+}
+
+.faq__answer p {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.faq__answer p:last-child {
+  margin-bottom: 0;
+}
+
+.faq__answer.active {
+  max-height: 767px;
+  opacity: 1;
+  padding: 30px;
+  border-radius: 30px;
+  border: 1px solid var(--color-main-blue);
+}
+.faq__answer.active + .faq__line-wrapper {
+  margin-top: 20px;
+}
+.faq__line-wrapper {
+  position: relative;
+  height: 1px;
+}
+.faq__line {
+  border-top: 1px solid var(--color-grey);
+  width: 100%;
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
 }
 /* Uni-list CSS */
 .checkbox-group {
@@ -1239,32 +1359,31 @@ select {
   }
 }
 
-/* eufhjkfjjfke */
 .modal {
-  display: none; /* Hidden by default */
-  position: fixed; /* Stay in place */
-  z-index: 1000; /* Sit on top */
+  display: none;
+  position: fixed;
+  z-index: 1000;
   left: 0;
   top: 0;
-  width: 100%; /* Full width */
-  height: 100%; /* Full height */
-  overflow: auto; /* Enable scroll if needed */
-  background-color: rgba(0, 0, 0, 0.6); /* Black w/ opacity */
-  justify-content: center; /* Center horizontally */
-  align-items: center; /* Center vertically */
+  width: 100%;
+  height: 100%;
+  overflow: auto;
+  background-color: rgba(0, 0, 0, 0.6);
+  justify-content: center;
+  align-items: center;
 }
 
 .modal-content {
   background-color: #fefefe;
-  margin: auto; /* Center the modal vertically and horizontally */
+  margin: auto;
   padding: 30px;
   border: 1px solid #888;
-  width: 80%; /* Could be responsive */
-  max-width: 500px; /* Max width for larger screens */
+  width: 80%;
+  max-width: 500px;
   border-radius: 10px;
   box-shadow: 0 4px 8px 0 rgba(0, 0, 0, 0.2), 0 6px 20px 0 rgba(0, 0, 0, 0.19);
   text-align: center;
-  position: relative; /* Needed for close button positioning */
+  position: relative;
 }
 
 .modal-content h2 {
@@ -1300,7 +1419,7 @@ select {
 .modal-buttons {
   display: flex;
   justify-content: center;
-  gap: 15px; /* Space between buttons */
+  gap: 15px;
 }
 
 .modal-buttons .btn {
