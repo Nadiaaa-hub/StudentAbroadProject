@@ -1,9 +1,7 @@
-// index.js
 document.addEventListener("DOMContentLoaded", function () {
-  // Логіка для перемикання мов
   const switchButtons = document.querySelectorAll(".js-switch-button");
   const elementsToTranslate = document.querySelectorAll("[data-en][data-ua]");
-  const searchInput = document.querySelector(".search-box__input"); // Отримуємо searchInput тут
+  const searchInput = document.querySelector(".search-box__input");
 
   function switchLanguage(lang) {
     elementsToTranslate.forEach((el) => {
@@ -45,7 +43,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   });
 
-  // Логіка для скролінгу
   const scrollIndicator = document.querySelector(".scroll-indicator");
   if (scrollIndicator) {
     scrollIndicator.addEventListener("click", function () {
@@ -56,14 +53,10 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Отримуємо всі секції, в яких будемо шукати (для підсвічування)
   const searchableSections = document.querySelectorAll(
     ".study-abroad-section, .about-us-section, .about-section__info-columns, .faq-section, .contact-details-section"
   );
 
-  // *** Виклик функції ініціалізації підсвічування з highlight.js ***
-  // Перевіряємо, чи функція `initHighlighting` існує, перш ніж викликати її.
-  // Це забезпечує, що highlight.js вже завантажився.
   if (typeof initHighlighting === "function") {
     initHighlighting(searchInput, searchableSections);
   } else {
@@ -72,7 +65,6 @@ document.addEventListener("DOMContentLoaded", function () {
     );
   }
 
-  // CUSTOM SEARCHABLE SELECT DROPDOWNS //
   document.querySelectorAll(".custom-select-wrapper").forEach((wrapper) => {
     const input = wrapper.querySelector(".custom-select-input");
     const dropdown = wrapper.querySelector(".custom-select-dropdown");
@@ -85,13 +77,11 @@ document.addEventListener("DOMContentLoaded", function () {
 
     const positionDropdown = () => {
       const inputRect = input.getBoundingClientRect();
-      const wrapperRect = wrapper.getBoundingClientRect();
-
       dropdown.style.top = `${inputRect.height + 5}px`;
       dropdown.style.left = `0`;
       dropdown.style.width = `${input.offsetWidth}px`;
 
-      const dropdownRightEdge = wrapperRect.left + dropdown.offsetWidth;
+      const dropdownRightEdge = inputRect.left + dropdown.offsetWidth;
       if (dropdownRightEdge > window.innerWidth - 20) {
         dropdown.style.left = `${inputRect.width - dropdown.offsetWidth}px`;
       }
@@ -100,6 +90,7 @@ document.addEventListener("DOMContentLoaded", function () {
     const filterOptions = () => {
       const searchTerm = input.value.toLowerCase();
       let hasVisibleOptions = false;
+
       options.forEach((option) => {
         const text = option.textContent.toLowerCase();
         if (text.includes(searchTerm)) {
@@ -119,6 +110,7 @@ document.addEventListener("DOMContentLoaded", function () {
         positionDropdown();
       }
     };
+
     const closeDropdown = () => {
       dropdown.classList.remove("active");
       wrapper.classList.remove("active");
@@ -201,8 +193,7 @@ document.addEventListener("DOMContentLoaded", function () {
 
   if (countrySearchInput) {
     countrySearchInput.addEventListener("input", () => {
-      const query = countrySearchInput.value.trim().toLowerCase(); // Виправлено country.SearchInput на countrySearchInput
-
+      const query = countrySearchInput.value.trim().toLowerCase();
       checkboxes.forEach((checkbox) => {
         const labelEl = checkbox.querySelector(".country-label");
         const en = labelEl
@@ -228,6 +219,7 @@ document.addEventListener("DOMContentLoaded", function () {
     el.classList.add("fade-in");
   }
 
+  // --- ADD UNI LOGIC ---
   const addInvitingUniButton = document.getElementById(
     "add-inviting-uni-button"
   );
@@ -269,6 +261,7 @@ document.addEventListener("DOMContentLoaded", function () {
       }
     });
   }
+
   const addRegionButton = document.getElementById("add-region-button");
   const newRegionFields = document.getElementById("new-region-fields");
 
@@ -328,8 +321,6 @@ document.addEventListener("DOMContentLoaded", function () {
   }
 
   // --- SUBMIT LOGIC FOR "ADD A NEW UNI" BUTTONS ---
-
-  // Для "Add a new uni" (Inviting Uni)
   const addNewInvitingUniSubmitButton =
     document.getElementById("add-new-uni-button");
   if (addNewInvitingUniSubmitButton) {
@@ -387,7 +378,6 @@ document.addEventListener("DOMContentLoaded", function () {
     });
   }
 
-  // Для "Add a new home uni"
   const addNewHomeUniSubmitButton = document.getElementById(
     "add-new-home-uni-button"
   );
@@ -444,101 +434,11 @@ document.addEventListener("DOMContentLoaded", function () {
         .querySelectorAll("input")
         .forEach((input) => (input.value = ""));
       newHomeUniFields.style.display = "none";
-      const newHomeUniRegionFieldsForHome = document.getElementById(
+      const newHomeUniRegionFieldsForInviting = document.getElementById(
         "new-home-uni-region-fields"
       );
-      if (newHomeUniRegionFieldsForHome)
-        newHomeUniRegionFieldsForHome.style.display = "none";
-    });
-  }
-
-  document
-    .querySelectorAll(".form-field-and-description .form-section__add-button")
-    .forEach((button) => {
-      if (
-        button.id === "add-region-button" ||
-        button.id === "add-country-button" ||
-        button.id === "add-home-uni-region-button" ||
-        button.id === "add-home-uni-country-button"
-      ) {
-        button.addEventListener("click", (event) => {
-          event.stopPropagation();
-        });
-      }
-    });
-  document
-    .querySelectorAll(".custom-select-wrapper .form-section__add-button")
-    .forEach((button) => {
-      const parentWrapper = button.closest(".custom-select-wrapper");
-
-      if (
-        parentWrapper &&
-        button.id &&
-        (button.id.includes("add-region-button") ||
-          button.id.includes("add-country-button"))
-      ) {
-        button.addEventListener("click", (event) => {
-          event.stopPropagation();
-        });
-      }
-    });
-
-  // --- ЛОГІКА ВІДПРАВКИ ОСНОВНОЇ ФОРМИ "ADD PROGRAM" ---
-  const addProgramForm = document.getElementById("addProgramForm");
-
-  if (addProgramForm) {
-    addProgramForm.addEventListener("submit", function (event) {
-      event.preventDefault(); // Запобігаємо стандартній відправці форми
-
-      // Перевіряємо валідність форми за допомогою вбудованої HTML5 валідації
-      if (!this.checkValidity()) {
-        console.log("Form is not valid. Please fill in all required fields.");
-        return; // Зупиняємо виконання, якщо форма невалідна
-      }
-
-      // Збір даних форми (якщо ви плануєте їх відправляти на сервер)
-      const formData = new FormData(this);
-      const data = {};
-      formData.forEach((value, key) => {
-        data[key] = value;
-      });
-      console.log("Form data collected:", data); // Для перевірки в консолі
-
-      // Тут має бути ваш реальний AJAX-запит для відправки даних на сервер.
-      // Приклад (закоментований, розкоментуйте та налаштуйте для реального бекенду):
-      // fetch('/api/add-program', { // Замініть на реальний URL вашого API
-      //     method: 'POST',
-      //     body: JSON.stringify(data), // Або formData без JSON.stringify, якщо API очікує multipart/form-data
-      //     headers: {
-      //         'Content-Type': 'application/json' // Змініть, якщо відправляєте formData
-      //     }
-      // })
-      // .then(response => {
-      //     if (!response.ok) {
-      //         throw new Error('Network response was not ok ' + response.statusText);
-      //     }
-      //     return response.json(); // Або response.text()
-      // })
-      // .then(result => {
-      //     console.log('Server response:', result);
-      //     // Після успішної відповіді від сервера:
-      //     window.location.href = 'confirmation.html'; // Перенаправлення на сторінку підтвердження
-      // })
-      // .catch(error => {
-      //     console.error('Error submitting form:', error);
-      //     alert('An error occurred during submission. Please try again.');
-      // });
-
-      // ДЛЯ ДЕМОНСТРАЦІЇ (без реального бекенду), одразу перенаправляємо після затримки:
-      setTimeout(() => {
-        window.location.href = "confirmation.html"; // Перенаправлення на сторінку підтвердження
-      }, 500); // Невелика затримка для імітації мережевого запиту
+      if (newHomeUniRegionFieldsForInviting)
+        newHomeUniRegionFieldsForInviting.style.display = "none";
     });
   }
 });
-
-// !!! ВАЖЛИВО: Переконайтеся, що всі input у вашій формі мають атрибут 'name'
-// щоб FormData правильно збирав їх значення. Наприклад:
-// <input type="text" placeholder="Name:" required name="programName" />
-// <input type="text" placeholder="Slug:" required name="programSlug" />
-// і так далі для ВСІХ полів, які ви хочете відправити.

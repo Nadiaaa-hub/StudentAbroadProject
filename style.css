@@ -19,12 +19,15 @@
 
 html {
   scroll-behavior: smooth;
+
   height: 100%;
   margin: 0;
   padding: 0;
 }
 
 body {
+  margin: 0;
+
   font-family: "Rubik", serif;
   font-size: 16px;
   font-weight: 300;
@@ -110,6 +113,7 @@ header {
 }
 
 .header__menu {
+  display: none;
   justify-content: flex-end;
   display: flex;
   gap: 30px;
@@ -177,6 +181,7 @@ header {
   background-color: yellow;
   font-weight: bold;
 }
+
 .link {
   transition: text-shadow 0.3s ease;
   font-weight: 500;
@@ -632,6 +637,7 @@ header {
   text-decoration: none;
   font-size: 20px;
   font-weight: 400;
+  font-weight: 400px;
   color: var(--color-main-black);
 }
 
@@ -942,6 +948,10 @@ select {
 .custom-select-option:hover {
   background-color: #f0f0f0;
 }
+/* .custom-select-input.active + .select-arrow {
+    transform: translateY(-50%) rotate(180deg); 
+} */
+
 .custom-select-wrapper.active .select-arrow {
   transform: translateY(-50%) rotate(180deg);
 }
@@ -1001,8 +1011,7 @@ select {
   align-items: center;
   justify-content: center;
 }
-.faq__card {
-}
+
 .faq__programs {
   display: flex;
   gap: 10px;
