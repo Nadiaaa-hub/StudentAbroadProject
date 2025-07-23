@@ -1,251 +1,414 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./style.css" />
+    <link rel="website icon" type="png" href="./img/logo_01.png" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StudentAbroad</title>
-  <link rel="stylesheet" href="./style.css" />
-  <link rel="website icon" type="png" href="./img/logo_01.png" />
-</head>
-
-<body>
-  <script src="index.js"></script>
-  <header class="site-header" id="header-footer-color">
-    <div class="container">
-      <div class="header__container">
-        <div class="logo">
-          <a href="index.html">
-            <img src="./img/logo.svg" alt="StudentAbroad logo" />
-          </a>
-        </div>
-
-        <nav class="header__nav">
-          <ul class="header__menu">
-            <li>
-              <a class="link" href="#about-us-section" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
-            </li>
-            <li>
-              <a class="link" href="#uni-list-section" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI
-                LIST</a>
-            </li>
-            <li>
-              <a class="link" href="#program-list-section" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-            </li>
-            <li>
-              <a class="link" href="#faq-section" data-en="FAQ" data-ua="ПИТАННЯ">FAQ</a>
-            </li>
-          </ul>
-        </nav>
-
-        <div class="lang-search">
-          <span class="language-switch">
-            <button data-lang="ua" class="js-switch-button" type="button">UA</button>
-            <button data-lang="en" class="js-switch-button active" type="button"><strong>EN</strong></button>
-          </span>
-          <div class="search-box">
-            <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
-              placeholder="Search..." />
-          </div>
-        </div>
-      </div>
-    </div>
-  </header>
-
-  <main>
-    <section class="country-section">
+  <body>
+    <script src="index.js"></script>
+    <header class="site-header" id="header-footer-color">
       <div class="container">
-      <div class="country-section__heading">
-        <span class="country-section__text-outline" data-en="COUNTRY" data-ua="КРАЇНА">COUNTRY 
-        </span>
-        <h2 class="country-section__text-fill" data-en="COUNTRY" data-ua="КРАЇНА">COUNTRY   
-        </h2>
-      </div>
-
-      <div class="country-search-box">
-        <div class="search-input-wrapper">
-          <input type="text" class="country-search-box__input" placeholder="Search..." data-en="Search..."
-            data-ua="Шукати..." />
-          <div class="country-search-box__line"></div>
-        </div>
-      </div>
-
-
-
-      <div class="checkbox-group">
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Ukraine" data-ua="Україна">Ukraine</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Spain" data-ua="Іспанія">Spain</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Germany" data-ua="Німеччина">Germany</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Austria" data-ua="Австрія">Austria</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Belgium" data-ua="Бельгія">Belgium</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Netherlands" data-ua="Нідерланди">Netherlands</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Finland" data-ua="Фінляндія">Finland</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Poland" data-ua="Польща">Poland</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Sweden" data-ua="Швеція">Sweden</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Cyprus" data-ua="Кіпр">Cyprus</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Czech Republic" data-ua="Чеська Республіка">Czech Republic</span>
-        </label>
-
-        <label class="container-checkbox">
-          <input type="checkbox">
-          <span class="checkmark"></span>
-          <span class="country-label" data-en="Hungary" data-ua="Угорщина">Hungary</span>
-        </label>
-      </div>
-
-      <div id="switch-country-button">&lt— —&gt</div>
-      <section class="university-list">
-        
-        <div class="university-card">
-          <img class="university-card__img" src="img/uni1.svg" alt="Borys Hrinchenko Kyiv University">
-          <div class="university-info">
-           
-            <h2 data-en="Borys Hrinchenko Kyiv University" data-ua="Київський університет імені Бориса Грінченка">Borys
-              Hrinchenko Kyiv
-              University</h2>
-            <p>CONTACT: testtest@gmail.com <img class="icon-img" src="img/mail-icon.svg"></p>
-            <p>URL: test.com <img class="icon-img" src="img/icon1.svg"></p>
-            <button data-en="Read more" data-ua="Читати більш" class="btn read-more-btn" type="button">Read</button>
-          
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./img/logo.svg" alt="StudentAbroad logo" />
+            </a>
           </div>
-        </div>
-        <div class="university-card">
-          <img class="university-card__img" src="img/uni2.svg" alt="Bremen University">
-          <div class="university-info">
-      
-            <h2 data-en="Bremen University" data-ua="Бременський університет">Bremen University</h2>
-            <p>CONTACT: testtest@gmail.com <img class="icon-img" src="img/mail-icon.svg"></p>
-            <p>URL: test.com <img class="icon-img" src="img/icon1.svg"></p>
-            <button data-en="Read more" data-ua="Читати більше" class="btn read-more-btn" type="button">Read</button>
-            
-          </div>
-        </div>
-        <div class="university-card">
-          <img class="university-card__img" src="img/uni3.svg" alt="Vienna University of Economics and Business">
-          <div class="university-info">
-           
-            <h2 data-en="Vienna University of Economics and Business" data-ua="Віденський економічний університет">
-              Vienna University of Economics and Business</h2>
-            <p>CONTACT: testtest@gmail.com <img class="icon-img" src="img/mail-icon.svg"></p>
-            <p>URL: testcom <img class="icon-img" src="img/icon1.svg"></p>
-            <button data-en="Read more" data-ua="Читати більше" class="btn read-more-btn" type="button">Read</button>
-          
-          </div>
-        </div>
-        <div class="university-card">
-          <img class="university-card__img" src="img/uni4.svg" alt="Kyiv National Economic University named after Vadym Hetman">
-          <div class="university-info">
-           <h2 data-en="Kyiv National Economic University named after Vadym Hetman"
-              data-ua="КНЕУ імені Вадима Гетьмана"><span>Kyiv National Economic University named after Vadym Hetman </span></h2>
-            <p>CONTACT: testtest@gmail.com <img class="icon-img" src="img/mail-icon.svg"></p>
-            <p>URL: test.com <img class="icon-img" src="img/icon1.svg"></p>
-            <button data-en="Read more" data-ua="Читати більше" class="btn read-more-btn" type="button">Read</button>
-            
-          </div>
-        </div>
 
-      </section>
-      </div>
-    </section>
-  </main>
-
-
-  <!-- Footer -->
-  <footer class="footer">
-    <div class="container">
-      <div class="footer__container">
-
-        <div class="footer__logo">
-          <img class="footer__img " src="./img/name_no-background_01.svg" alt="StudentAbroad logo" />
-        </div>
-
-        <div class="footer__bottom-row">
-          <nav class="footer__nav">
-            <ul class="footer__menu">
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li></li>
               <li>
-                <a class="footer__link" href="#about-us-section" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+                <a
+                  class="link"
+                  href="#about-us-section"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
               </li>
               <li>
-                <a class="footer__link" href="uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+                <a
+                  class="link"
+                  href="#uni-list-section"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
               </li>
               <li>
-                <a class="footer__link" href="#program-list-section" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM
-                  LIST</a>
+                <a
+                  class="link"
+                  href="#program-list-section"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
               </li>
               <li>
-                <a class="footer__link" href="#faq-section" data-en="FAQ" data-ua="ПИТАННЯ">FAQ</a>
+                <a class="link" href="faq.html" data-en="FAQ" data-ua="ПИТАННЯ"
+                  >FAQ</a
+                >
               </li>
             </ul>
           </nav>
 
           <div class="lang-search">
             <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">UA</button>
-              <button data-lang="en" class="js-switch-button active" type="button">EN</button>
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                <strong>EN</strong>
+              </button>
             </span>
             <div class="search-box">
-              <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
                 placeholder="Search..." />
             </div>
           </div>
         </div>
-        <div class="footer__line "></div>
       </div>
-    </div>
-  </footer>
-</body>
+    </header>
 
+    <main>
+      <section class="country-section">
+        <div class="container">
+          <div class="country-section__heading">
+            <span
+              class="country-section__text-outline"
+              data-en="COUNTRY"
+              data-ua="КРАЇНА"
+              >COUNTRY
+            </span>
+            <h2
+              class="country-section__text-fill"
+              data-en="COUNTRY"
+              data-ua="КРАЇНА">
+              COUNTRY
+            </h2>
+          </div>
+
+          <div class="country-search-box">
+            <div class="search-input-wrapper">
+              <input
+                type="text"
+                class="country-search-box__input"
+                placeholder="Search..."
+                data-en="Search..."
+                data-ua="Шукати..." />
+              <div class="country-search-box__line"></div>
+            </div>
+          </div>
+
+          <div class="checkbox-group">
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Ukraine" data-ua="Україна"
+                >Ukraine</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Spain" data-ua="Іспанія"
+                >Spain</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Germany" data-ua="Німеччина"
+                >Germany</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Austria" data-ua="Австрія"
+                >Austria</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Belgium" data-ua="Бельгія"
+                >Belgium</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span
+                class="country-label"
+                data-en="Netherlands"
+                data-ua="Нідерланди"
+                >Netherlands</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Finland" data-ua="Фінляндія"
+                >Finland</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Poland" data-ua="Польща"
+                >Poland</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Sweden" data-ua="Швеція"
+                >Sweden</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Cyprus" data-ua="Кіпр"
+                >Cyprus</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span
+                class="country-label"
+                data-en="Czech Republic"
+                data-ua="Чеська Республіка"
+                >Czech Republic</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Hungary" data-ua="Угорщина"
+                >Hungary</span
+              >
+            </label>
+          </div>
+
+          <div id="switch-country-button">&lt— —&gt</div>
+          <section class="university-list">
+            <div class="university-card">
+              <img
+                class="university-card__img"
+                src="img/uni1.svg"
+                alt="Borys Hrinchenko Kyiv University" />
+              <div class="university-info">
+                <h2
+                  data-en="Borys Hrinchenko Kyiv University"
+                  data-ua="Київський університет імені Бориса Грінченка">
+                  Borys Hrinchenko Kyiv University
+                </h2>
+                <p>
+                  CONTACT: testtest@gmail.com
+                  <img class="icon-img" src="img/mail-icon.svg" />
+                </p>
+                <p>
+                  URL: test.com <img class="icon-img" src="img/icon1.svg" />
+                </p>
+                <button
+                  data-en="Read more"
+                  data-ua="Читати більш"
+                  class="btn read-more-btn"
+                  type="button">
+                  Read
+                </button>
+              </div>
+            </div>
+            <div class="university-card">
+              <img
+                class="university-card__img"
+                src="img/uni2.svg"
+                alt="Bremen University" />
+              <div class="university-info">
+                <h2
+                  data-en="Bremen University"
+                  data-ua="Бременський університет">
+                  Bremen University
+                </h2>
+                <p>
+                  CONTACT: testtest@gmail.com
+                  <img class="icon-img" src="img/mail-icon.svg" />
+                </p>
+                <p>
+                  URL: test.com <img class="icon-img" src="img/icon1.svg" />
+                </p>
+                <button
+                  data-en="Read more"
+                  data-ua="Читати більше"
+                  class="btn read-more-btn"
+                  type="button">
+                  Read
+                </button>
+              </div>
+            </div>
+            <div class="university-card">
+              <img
+                class="university-card__img"
+                src="img/uni3.svg"
+                alt="Vienna University of Economics and Business" />
+              <div class="university-info">
+                <h2
+                  data-en="Vienna University of Economics and Business"
+                  data-ua="Віденський економічний університет">
+                  Vienna University of Economics and Business
+                </h2>
+                <p>
+                  CONTACT: testtest@gmail.com
+                  <img class="icon-img" src="img/mail-icon.svg" />
+                </p>
+                <p>URL: testcom <img class="icon-img" src="img/icon1.svg" /></p>
+                <button
+                  data-en="Read more"
+                  data-ua="Читати більше"
+                  class="btn read-more-btn"
+                  type="button">
+                  Read
+                </button>
+              </div>
+            </div>
+            <div class="university-card">
+              <img
+                class="university-card__img"
+                src="img/uni4.svg"
+                alt="Kyiv National Economic University named after Vadym Hetman" />
+              <div class="university-info">
+                <h2
+                  data-en="Kyiv National Economic University named after Vadym Hetman"
+                  data-ua="КНЕУ імені Вадима Гетьмана">
+                  <span
+                    >Kyiv National Economic University named after Vadym Hetman
+                  </span>
+                </h2>
+                <p>
+                  CONTACT: testtest@gmail.com
+                  <img class="icon-img" src="img/mail-icon.svg" />
+                </p>
+                <p>
+                  URL: test.com <img class="icon-img" src="img/icon1.svg" />
+                </p>
+                <button
+                  data-en="Read more"
+                  data-ua="Читати більше"
+                  class="btn read-more-btn"
+                  type="button">
+                  Read
+                </button>
+              </div>
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="link"
+                    href="#about-us-section"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="#program-list-section"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="#faq-section"
+                    data-en="FAQ"
+                    data-ua="ПИТАННЯ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+  </body>
 </html>

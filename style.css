@@ -566,14 +566,34 @@ header {
 }
 .faq__date {
   display: flex;
-  align-items: center; /* Vertically align the image and text */
-  gap: 5px; /* Space between the clock image and the date text */
-  white-space: nowrap; /* Prevent date from wrapping */
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
 }
 
-.faq__date img {
-  height: 16px; /* Adjust icon size if needed */
-  width: auto;
+.faq__footer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: flex-end;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
+    padding 0.4s ease-out;
+  padding-bottom: 0;
+}
+
+.faq__answer.active + .faq__footer-info {
+  max-height: 200px; /* Достатньо велике значення для розкриття */
+  opacity: 1;
+  padding-bottom: 45px; /* Бажаний відступ */
+  margin-top: 20px; /* Додайте відступ між faq__answer та faq__footer-info */
+}
+
+/* Коли faq__answer активний, показуємо faq__meta всередині faq__footer-info */
+.faq__answer.active + .faq__footer-info .faq__meta {
+  display: block; /* Або display: flex, залежно від внутрішнього розташування тексту автора */
 }
 /*Contact Details Section*/
 
@@ -1044,6 +1064,7 @@ select {
 .faq__programs {
   display: flex;
   gap: 10px;
+  margin-bottom: 15px;
 }
 .faq__text {
   border: 1px solid var(--color-main-yellow);
@@ -1060,10 +1081,28 @@ select {
   white-space: nowrap;
 }
 .faq__meta {
-  display: flex;
+  display: flex; /* щоб його вміст вирівнювався, якщо потрібно */
+  justify-content: space-between; /* Якщо є щось збоку від тексту */
+  align-items: flex-end; /* Щоб текст був внизу */
+  margin-top: 10px; /* Початковий відступ після заголовка */
+  margin-bottom: 20px; /* Відступ перед faq__answer */
+  transition: margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
+}
+.faq__meta--top {
+  display: flex; /* Початково видимий */
   justify-content: space-between;
   align-items: flex-end;
-  margin-bottom: 15px;
+  margin-top: 10px;
+  margin-bottom: 20px;
+  transition: opacity 0.4s ease-out, max-height 0.4s ease-out,
+    margin-bottom 0.4s ease-out;
+  overflow: hidden; /* Щоб приховувати плавно */
+  max-height: 100px; /* Достатньо для вмісту */
+  opacity: 1;
+  pointer-events: auto; /* Можна клікати */
+}
+.faq__answer.active .faq__meta {
+  padding-bottom: 45px;
 }
 
 .faq__h2 {
@@ -1097,18 +1136,60 @@ select {
   height: 16px;
   width: auto;
 }
-.faq__answer {
-  padding: 0 20px;
-  margin-top: 15px;
-  border-radius: 30px;
-  overflow: hidden;
+.faq__answer.active + .faq__bottom-row-info + .faq__meta--top,
+.faq__answer.active ~ .faq__meta--top {
+  /* Варіант 1: Якщо faq__meta--top йде одразу за faq__answer.active + faq__bottom-row-info */
+  /* Варіант 2: Загальніший селектор для будь-якого faq__meta--top після активного faq__answer */
   max-height: 0;
   opacity: 0;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
-    padding 0.4s ease-out;
-  box-sizing: border-box;
+  margin-bottom: 0;
+  pointer-events: none; /* Щоб не реагував на кліки, коли прихований */
+}
+.faq__bottom-row-info {
+  display: flex; /* Робимо його Flex-контейнером */
+  justify-content: space-between; /* Розносить faq__meta--bottom та faq__line-wrapper по краях */
+  align-items: flex-end; /* Вирівнює їх по нижньому краю */
+  width: 100%;
+  margin-top: 0; /* Початковий відступ 0 */
+  padding-bottom: 0; /* Початковий відступ знизу */
+  transition: margin-top 0.4s ease-out, padding-bottom 0.4s ease-out;
+  /* Приховуємо весь нижній блок за замовчуванням */
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  pointer-events: none; /* Щоб не було взаємодії, коли прихований */
 }
 
+/* Показуємо нижній блок, коли faq__answer активний */
+.faq__answer.active + .faq__bottom-row-info {
+  margin-top: 20px; /* Відступ від розкритого faq__answer */
+  padding-bottom: 45px; /* Відступ знизу для всього блоку */
+  max-height: 200px; /* Достатньо велике значення для вмісту */
+  opacity: 1;
+  pointer-events: auto; /* Можна клікати */
+}
+.faq__answer {
+  max-height: 0; /* Приховано за замовчуванням */
+  opacity: 0;
+  visibility: hidden;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
+    visibility 0.4s ease-out, padding 0.4s ease-out;
+  box-sizing: border-box;
+  padding: 0 20px; /* Початковий відступ 0, бо max-height: 0 */
+  border: 1px solid transparent; /* Для плавного переходу */
+  border-radius: 30px;
+}
+.faq__meta--bottom {
+  display: block; /* Початково прихований через батьківський faq__bottom-row-info */
+  margin-top: 0;
+  margin-bottom: 0;
+}
+
+.faq__meta .faq__paragraph {
+  font-size: 16px; /* Розмір шрифту для параграфів у meta */
+  line-height: 1.4;
+  margin-bottom: 5px; /* Невеликий відступ між рядками автора/редактора */
+}
 .faq__answer p {
   margin-bottom: 10px;
   font-size: 18px;
@@ -1121,12 +1202,14 @@ select {
 .faq__answer.active {
   max-height: 767px;
   opacity: 1;
+  visibility: visible;
   padding: 30px;
   border-radius: 30px;
   border: 1px solid var(--color-main-blue);
 }
 .faq__answer.active + .faq__line-wrapper {
   margin-top: 20px;
+  padding-bottom: 45px;
 }
 .faq__line-wrapper {
   position: relative;
@@ -1139,6 +1222,7 @@ select {
   top: 50%;
   transform: translateY(-50%);
 }
+
 /* Uni-list CSS */
 .checkbox-group {
   display: grid;
