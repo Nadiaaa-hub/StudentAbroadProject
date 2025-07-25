@@ -1051,6 +1051,33 @@ select {
   align-items: center;
 }
 
+.faq__heading {
+  position: relative;
+  display: inline-block;
+}
+
+.faq__text-outline {
+  position: absolute;
+  font-size: 45px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0px;
+  transform: translate(29px, 10px);
+  white-space: nowrap;
+}
+
+.faq__text-fill {
+  position: relative;
+  font-size: 45px;
+  font-weight: 700;
+  margin: 0;
+  color: var(--color-blue-dark);
+}
+
 .faq__card {
   width: 100%;
   max-width: 766px;
@@ -1058,14 +1085,17 @@ select {
   padding-top: 45px;
   overflow: hidden;
 }
+
 .faq__card:first-child {
   padding-top: 20px;
 }
+
 .faq__programs {
   display: flex;
   gap: 10px;
   margin-bottom: 15px;
 }
+
 .faq__text {
   border: 1px solid var(--color-main-yellow);
   background-color: var(--color-main-yellow);
@@ -1080,29 +1110,99 @@ select {
   font-weight: 600;
   white-space: nowrap;
 }
+
 .faq__meta {
-  display: flex; /* щоб його вміст вирівнювався, якщо потрібно */
-  justify-content: space-between; /* Якщо є щось збоку від тексту */
-  align-items: flex-end; /* Щоб текст був внизу */
-  margin-top: 10px; /* Початковий відступ після заголовка */
-  margin-bottom: 20px; /* Відступ перед faq__answer */
-  transition: margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
+  display: flex;
+  flex-direction: column;
+  width: 100%;
+  overflow: hidden;
+  transition: opacity 0.4s ease-out, max-height 0.4s ease-out,
+    margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
 }
-.faq__meta--top {
-  display: flex; /* Початково видимий */
+
+.faq__meta-row {
+  display: flex;
   justify-content: space-between;
   align-items: flex-end;
+
+  width: 100%;
+}
+
+.faq__meta-info {
+  flex-shrink: 0;
+  padding-bottom: 15px;
+}
+
+.faq__date {
+  display: flex;
+  align-items: center;
+  white-space: nowrap;
+  gap: 5px;
+}
+
+.faq__date img {
+  height: 16px;
+  width: auto;
+}
+
+.faq__meta .faq__paragraph {
+  font-size: 16px;
+  line-height: 1.4;
+  margin-bottom: 5px;
+}
+
+.faq__meta .faq__paragraph:last-child {
+  margin-bottom: 0;
+}
+
+.faq__line {
+  border-top: 1px solid var(--color-grey);
+  width: 100%;
+}
+
+.faq__meta--top {
   margin-top: 10px;
   margin-bottom: 20px;
-  transition: opacity 0.4s ease-out, max-height 0.4s ease-out,
-    margin-bottom 0.4s ease-out;
-  overflow: hidden; /* Щоб приховувати плавно */
-  max-height: 100px; /* Достатньо для вмісту */
+  max-height: 100px;
   opacity: 1;
-  pointer-events: auto; /* Можна клікати */
+  pointer-events: auto;
 }
-.faq__answer.active .faq__meta {
-  padding-bottom: 45px;
+
+.faq__meta--top:not(.active) {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+.faq__meta--bottom {
+  margin-top: 0;
+  margin-bottom: 0;
+  max-height: 0;
+  opacity: 0;
+  pointer-events: none;
+}
+.faq__meta--bottom.active {
+  margin-top: 20px; 
+  margin-bottom: 45px; 
+  max-height: 200px; 
+  opacity: 1;
+  pointer-events: auto;
+}
+.faq__answer.active ~ .faq__meta--top {
+  max-height: 0;
+  opacity: 0;
+  margin-top: 0;
+  margin-bottom: 0;
+  pointer-events: none;
+}
+
+.faq__answer.active + .faq__meta--bottom {
+  margin-top: 20px;
+  margin-bottom: 45px;
+  max-height: 200px;
+  opacity: 1;
+  pointer-events: auto;
 }
 
 .faq__h2 {
@@ -1111,8 +1211,8 @@ select {
   cursor: pointer;
   transition: color 0.2s ease;
   position: relative;
-  padding-right: 30px;
 }
+
 .faq__h2::after {
   position: absolute;
   right: 0;
@@ -1120,83 +1220,17 @@ select {
   transform: translateY(-50%);
   font-size: 20px;
   line-height: 1;
-  transition: transform 0.2s ease;
-}
-
-.faq__date {
-  display: flex;
-  align-items: center;
-  white-space: nowrap;
-  position: absolute;
-  right: 0;
-  top: 50%;
-  transform: translateY(-100%);
-}
-.faq__date img {
-  height: 16px;
-  width: auto;
-}
-.faq__answer.active + .faq__bottom-row-info + .faq__meta--top,
-.faq__answer.active ~ .faq__meta--top {
-  /* Варіант 1: Якщо faq__meta--top йде одразу за faq__answer.active + faq__bottom-row-info */
-  /* Варіант 2: Загальніший селектор для будь-якого faq__meta--top після активного faq__answer */
-  max-height: 0;
-  opacity: 0;
-  margin-bottom: 0;
-  pointer-events: none; /* Щоб не реагував на кліки, коли прихований */
-}
-.faq__bottom-row-info {
-  display: flex; /* Робимо його Flex-контейнером */
-  justify-content: space-between; /* Розносить faq__meta--bottom та faq__line-wrapper по краях */
-  align-items: flex-end; /* Вирівнює їх по нижньому краю */
-  width: 100%;
-  margin-top: 0; /* Початковий відступ 0 */
-  padding-bottom: 0; /* Початковий відступ знизу */
-  transition: margin-top 0.4s ease-out, padding-bottom 0.4s ease-out;
-  /* Приховуємо весь нижній блок за замовчуванням */
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  pointer-events: none; /* Щоб не було взаємодії, коли прихований */
-}
-
-/* Показуємо нижній блок, коли faq__answer активний */
-.faq__answer.active + .faq__bottom-row-info {
-  margin-top: 20px; /* Відступ від розкритого faq__answer */
-  padding-bottom: 45px; /* Відступ знизу для всього блоку */
-  max-height: 200px; /* Достатньо велике значення для вмісту */
-  opacity: 1;
-  pointer-events: auto; /* Можна клікати */
+  transition: transform 0.2s ease, content 0.2s ease;
 }
 .faq__answer {
-  max-height: 0; /* Приховано за замовчуванням */
+  max-height: 0;
   opacity: 0;
   visibility: hidden;
   transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
-    visibility 0.4s ease-out, padding 0.4s ease-out;
-  box-sizing: border-box;
-  padding: 0 20px; /* Початковий відступ 0, бо max-height: 0 */
-  border: 1px solid transparent; /* Для плавного переходу */
+    visibility 0.4s ease-out, padding 0.4s ease-out, border 0.4s ease-out;
+  padding: 0 20px;
+  border: 1px solid transparent;
   border-radius: 30px;
-}
-.faq__meta--bottom {
-  display: block; /* Початково прихований через батьківський faq__bottom-row-info */
-  margin-top: 0;
-  margin-bottom: 0;
-}
-
-.faq__meta .faq__paragraph {
-  font-size: 16px; /* Розмір шрифту для параграфів у meta */
-  line-height: 1.4;
-  margin-bottom: 5px; /* Невеликий відступ між рядками автора/редактора */
-}
-.faq__answer p {
-  margin-bottom: 10px;
-  font-size: 18px;
-  line-height: 1.6;
-}
-.faq__answer p:last-child {
-  margin-bottom: 0;
 }
 
 .faq__answer.active {
@@ -1207,21 +1241,17 @@ select {
   border-radius: 30px;
   border: 1px solid var(--color-main-blue);
 }
-.faq__answer.active + .faq__line-wrapper {
-  margin-top: 20px;
-  padding-bottom: 45px;
+
+.faq__answer p {
+  margin-bottom: 10px;
+  font-size: 18px;
+  line-height: 1.6;
 }
-.faq__line-wrapper {
-  position: relative;
-  height: 1px;
+
+.faq__answer p:last-child {
+  margin-bottom: 0;
 }
-.faq__line {
-  border-top: 1px solid var(--color-grey);
-  width: 100%;
-  position: absolute;
-  top: 50%;
-  transform: translateY(-50%);
-}
+
 
 /* Uni-list CSS */
 .checkbox-group {
@@ -1541,4 +1571,253 @@ select {
 
 #successModal .greetings__title {
   color: #2e8b57;
+}
+
+/* Program-list CSS */
+
+.program-list {
+  display: flex;
+  flex-direction: column;
+  gap: 40px;
+}
+
+.program-card {
+  border: 1px solid var(--color-main-blue);
+  border-radius: 20px;
+  padding: 30px 40px 0px 100px;
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 240px;
+}
+
+.program-card h2 {
+  font-size: 22px;
+  font-weight: 600;
+  margin-bottom: 15px;
+  color: var(--color-main-black);
+  line-height: 1.4;
+}
+
+.program-card p {
+  font-size: 20px;
+  font-style: italic;
+  color: #3e5060;
+  margin: 5px 0;
+  line-height: 1.6;
+}
+
+.program-card img.icon-img {
+  width: 20px;
+  height: 20px;
+  margin-right: 8px;
+  vertical-align: middle;
+}
+
+.read-more-btn2 {
+  position: relative;
+  right: 96px;
+  top: 25px;
+  transform: translateY(5%);
+  align-self: flex-end;
+  margin-top: auto;
+  padding: 25px 58px;
+}
+
+.quote-block {
+  display: flex;
+  gap: 10px;
+  align-items: flex-start;
+  margin: 10px 0 20px 0;
+}
+
+.program-card img.icon-img {
+  display: block;
+  width: 24px;
+  height: 24px;
+  margin: 10px 0;
+}
+
+.checkbox-grid-2x3 {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  grid-auto-rows: auto;
+  gap: 20px 60px;
+  font-weight: 300;
+  font-size: 17px;
+  max-width: 600px;
+}
+
+.container-checkbox {
+  display: inline-flex;
+  align-items: center;
+  cursor: pointer;
+  font-size: 20px;
+  user-select: none;
+  gap: 10px;
+  position: relative;
+}
+
+.container-checkbox input {
+  position: absolute;
+  opacity: 0;
+  cursor: pointer;
+}
+
+#level {
+  font-weight: 700;
+}
+
+.level-checkbox-group {
+  display: flex;
+  gap: 20px;
+  align-items: center;
+  margin-top: 10px;
+}
+
+.level-checkbox-group .container-checkbox {
+  display: flex;
+  align-items: center;
+}
+
+/* uni-read-more */
+
+#bg {
+  position: relative;
+  overflow: hidden;
+}
+
+.bg-overlay {
+  position: absolute;
+  inset: 0;
+  background-image: url("img/bg-Kyiv-uni.svg");
+  background-size: cover;
+  background-position: center;
+  background-repeat: no-repeat;
+  filter: brightness(0.4);
+  z-index: 0;
+}
+
+/* УВАГА: контент поверх фону */
+#bg>*:not(.bg-overlay) {
+  position: relative;
+  z-index: 1;
+}
+
+.uni-name {
+  text-align: center;
+  width: 60%;
+  max-width: 1000px;
+  margin: 0 auto 15px auto;
+  padding: 0 24px;
+}
+
+
+.uni-name h1 {
+  font-size: 40px;
+  font-weight: bold;
+  color: var(--color-white-line);
+  line-height: 1.4;
+}
+
+.page-content {
+  display: flex;
+  justify-content: center;
+  padding: 0 1rem;
+}
+
+.info-box {
+  max-width: 1000px;
+  padding: 4rem 13rem;
+  background-color: #fff;
+  border-radius: 20px;
+  box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
+  min-height: 500px;
+
+  display: flex;
+  align-items: center;
+}
+
+.uni-info {
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  width: 100%;
+}
+
+.location-contact {
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+  gap: 2rem;
+}
+
+.description {
+  font-size: 20px;
+  font-weight: 400;
+  margin-bottom: 0.8rem;
+}
+
+.read-more-link {
+  font-size: 17px;
+  color: var(--color-main-blue);
+  text-decoration: underline;
+  display: inline-block;
+}
+
+.university-mobility h3 {
+  font-size: 20px;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.university-mobility a {
+  font-size: 17px;
+  font-weight: 300;
+}
+
+.mobility-links {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.5rem 1rem;
+}
+
+.mobility-links a {
+  font-size: 14px;
+  color: var(--color-main-blue);
+  text-decoration: none;
+}
+
+.info-block {
+  text-align: left;
+}
+
+.info-line {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  margin-bottom: 10px;
+  font-size: 20px;
+  font-weight: 700;
+}
+
+.info-line img {
+  width: 28px;
+  height: 28px;
+}
+
+.back-button {
+  color: var(--color-white-line);
+  margin-left: 40px;
+}
+
+.chill_line {
+  width: 596px;
+  height: 1.5px;
+  background-color: var(--color-input-border);
+  margin: 20px auto 30px auto;
+}
+
+.thin-text {
+  font-weight: 300;
 }
