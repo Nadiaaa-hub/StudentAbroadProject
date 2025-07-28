@@ -84,7 +84,10 @@ ul {
 }
 
 /* Header */
-
+.header__menu a.active,
+.footer__menu a.active {
+  font-weight: bold;
+}
 .homepage-header-style header {
   position: absolute;
   width: 100%;
