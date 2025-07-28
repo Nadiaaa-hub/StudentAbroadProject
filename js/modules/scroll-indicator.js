@@ -8,4 +8,18 @@ export function initScrollIndicator() {
       }
     });
   }
+
+  //підсвічування в навігації певної сторінки
+  const currentPage = window.location.pathname.split("/").pop();
+  const menuLinks = document.querySelectorAll(
+    ".header__menu a, .footer__menu a"
+  );
+
+  menuLinks.forEach((link) => {
+    const linkPage = link.getAttribute("href").split("/").pop();
+
+    if (linkPage === currentPage) {
+      link.classList.add("active");
+    }
+  });
 }
