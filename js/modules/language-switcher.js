@@ -1,4 +1,4 @@
-document.addEventListener("DOMContentLoaded", function () {
+export function initLanguageSwitcher() {
   const switchButtons = document.querySelectorAll(".js-switch-button");
   const elementsToTranslate = document.querySelectorAll("[data-en][data-ua]");
   const searchInput = document.querySelector(".search-box__input");
@@ -6,7 +6,13 @@ document.addEventListener("DOMContentLoaded", function () {
   function switchLanguage(lang) {
     elementsToTranslate.forEach((el) => {
       const translation = el.getAttribute(`data-${lang}`);
-      if (el.tagName === 'H2' || el.tagName === 'P' || el.classList.contains('about-us__title')) {
+      if (!translation) return;
+
+      if (
+        el.tagName === "H2" ||
+        el.tagName === "P" ||
+        el.classList.contains("about-us__title")
+      ) {
         el.innerHTML = translation;
       } else {
         el.textContent = translation;
@@ -14,22 +20,21 @@ document.addEventListener("DOMContentLoaded", function () {
     });
 
     if (searchInput) {
-     searchInput.placeholder = searchInput.getAttribute(`data-${lang}`);
+      const placeholderText = searchInput.getAttribute(`data-${lang}`);
+      if (placeholderText) {
+        searchInput.placeholder = placeholderText;
+      }
     }
-   
+
     localStorage.setItem("lang", lang);
 
     switchButtons.forEach((btn) => {
-      if (btn.getAttribute("data-lang") === lang) {
-        btn.classList.add("active"); 
-      } else {
-        btn.classList.remove("active"); 
-      }
+      btn.classList.toggle("active", btn.getAttribute("data-lang") === lang);
     });
   }
 
   const savedLang = localStorage.getItem("lang") || "en";
-  switchLanguage(savedLang); 
+  switchLanguage(savedLang);
 
   switchButtons.forEach((button) => {
     button.addEventListener("click", function () {
@@ -37,9 +42,4 @@ document.addEventListener("DOMContentLoaded", function () {
       switchLanguage(selectedLang);
     });
   });
-
-  document.querySelector(".scroll-indicator").addEventListener("click", function () {
-    document.querySelector("#about-us-section").scrollIntoView({ behavior: "smooth" });
-  });
-});
-
+}
