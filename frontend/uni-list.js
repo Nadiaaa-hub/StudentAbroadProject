@@ -1,5 +1,5 @@
 document.addEventListener("DOMContentLoaded", function () {
-    // Додаємо стилі динамічно (ваш оригінальний CSS без змін)
+    // Додаємо стилі динамічно
     const style = document.createElement('style');
     style.textContent = `
         /* Uni-list CSS */
@@ -28,16 +28,30 @@ document.addEventListener("DOMContentLoaded", function () {
             align-items: center;
             border: 2px solid var(--color-main-blue);
             border-radius: 20px;
-            padding: 5px;
+            padding: 20px;
             margin: 0px 150px 70px 150px;
             color: var(--color-main-black);
+            min-height: 250px;
+        }
+
+        .university-img-container {
+            width: 300px;
+            height: 200px;
+            margin: 0 65px;
+            border-radius: 10px;
+            overflow: hidden;
+            flex-shrink: 0;
+            background-color: #f5f5f5;
+            display: flex;
+            align-items: center;
+            justify-content: center;
         }
 
         .university-card img {
-            width: 300px;
+            width: 100%;
+            height: 100%;
             object-fit: cover;
-            margin: 5px 65px 5px 65px;
-            border-radius: 5px;
+            border-radius: 10px;
         }
 
         .university-info {
@@ -45,11 +59,13 @@ document.addEventListener("DOMContentLoaded", function () {
             flex-direction: column;
             justify-content: space-between;
             width: 100%;
+            height: 100%;
         }
 
         .university-info h2 {
             font-weight: 550;
             color: var(--color-main-black);
+            margin-top: 0;
         }
 
         .university-info p {
@@ -58,28 +74,56 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         .university-info button {
-            align-self: flex-end;
-            margin-top: auto;
+            align-self: flex-end; /* Вирівнюємо праворуч */
+            margin-top: auto; /* Притискаємо до низу */
             background-color: var(--color-main-blue);
             color: var(--color-main-white);
             border: none;
-            padding: 10px 20px;
+            padding: 10px 25px;
             border-radius: 5px;
             cursor: pointer;
+            font-size: 16px;
+            margin-bottom: 15px;
+            margin-right: 15px;
+            position: relative;
+            overflow: hidden;
+            transition: all 0.4s ease;
+        }
+
+        /* Анімація підсвітки тексту */
+        .university-info button::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: -100%;
+            width: 100%;
+            height: 100%;
+            background: rgba(255, 255, 255, 0.1);
+            transition: all 0.4s ease;
+        }
+
+        .university-info button:hover::before {
+            left: 100%;
         }
 
         .university-info button:hover {
-            background-color: var(--color-main-blue);
+            background-color: #0a4a9b; /* Темно-синій при наведенні */
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.2);
         }
 
-        #header-footer-color {
-            background-color: var(--color-blue-dark);
-            padding-bottom: 25px;
+        .university-info button:active {
+            transform: scale(0.98);
+            background-color: #083872; /* Ще темніший при натисканні */
         }
 
-        label {
-            color: var(--color-main-black);
-        }
+            #header-footer-color {
+                background-color: var(--color-blue-dark);
+                padding-bottom: 25px;
+            }
+
+            label {
+                color: var(--color-main-black);
+            }
 
         .text-effect {
             font-family: 'Rubik', sans-serif;
@@ -174,8 +218,8 @@ document.addEventListener("DOMContentLoaded", function () {
 
         .read-more-right {
             position: relative;
-            right: 75px;
-            top: 60px;
+            right: 0;
+            top: 0;
         }
 
         /* Додаткові стилі для функціоналу */
@@ -248,15 +292,16 @@ document.addEventListener("DOMContentLoaded", function () {
         'HU': { en: 'Hungary', ua: 'Угорщина' }
     };
 
-    let allUniversities = []; // Зберігаємо всі університети для фільтрації
+    let allUniversities = [];
+    let currentLang = localStorage.getItem("lang") || "en";
 
     async function loadUniversities() {
         try {
             showLoading();
             const response = await fetch(API_URL);
             if (!response.ok) throw new Error('Failed to load universities');
-            allUniversities = await response.json(); // Зберігаємо всі університети
-            filterAndRenderUniversities(); // Відображаємо після завантаження
+            allUniversities = await response.json();
+            filterAndRenderUniversities();
         } catch (error) {
             console.error('Error loading universities:', error);
             showError();
@@ -269,7 +314,6 @@ document.addEventListener("DOMContentLoaded", function () {
             document.querySelectorAll('#countryFilter input[type="checkbox"]:checked')
         ).map(checkbox => checkbox.value);
 
-        // Фільтруємо університети
         const filtered = allUniversities.filter(uni => {
             const matchesSearch = searchTerm === '' || 
                 uni.name.toLowerCase().includes(searchTerm) ||
@@ -298,22 +342,24 @@ document.addEventListener("DOMContentLoaded", function () {
         }
 
         universityContainer.innerHTML = '';
-        const currentLang = localStorage.getItem("lang") || "en";
 
         universities.forEach(university => {
             const card = document.createElement('div');
             card.className = 'university-card';
             
-            const logoPath = university.logo ? 
-                (university.logo.startsWith('http') ? university.logo : `./img/universities/${university.logo}`) : 
-                'https://via.placeholder.com/300x200?text=No+Image';
-
+            const logoPath = university.logo_url ? 
+                university.logo_url : 
+                '';
             const websiteUrl = university.website_url ? 
                 university.website_url.replace(/^https?:\/\//, '').split('/')[0] : '';
 
             card.innerHTML = `
-                <img src="${logoPath}" alt="${university.name}" 
-                     onerror="this.onerror=null;this.src='https://via.placeholder.com/300x200?text=No+Image'">
+                <div class="university-img-container">
+                    ${logoPath ? `
+                        <img src="${logoPath}" alt="${university.name}" 
+                             onerror="this.parentElement.style.display='none'">
+                    ` : ''}
+                </div>
                 <div class="university-info">
                     <h2>${university.name}</h2>
                     ${university.contact_email ? `

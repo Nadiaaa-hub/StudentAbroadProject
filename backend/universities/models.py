@@ -24,9 +24,8 @@ class University(models.Model):
         return self.name
 
     def save(self, *args, **kwargs):
-        # Додаткова обробка перед збереженням
         if self.logo:
-            # Можна додати логіку для обробки зображення
+            
             pass
         super().save(*args, **kwargs)
 
