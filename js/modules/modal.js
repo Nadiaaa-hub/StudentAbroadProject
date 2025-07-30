@@ -3,6 +3,8 @@ export function modalBtnClose() {
   const menuBtnOpen = document.querySelector(".menu-btn-open");
   const menuBtnClose = document.querySelector(".menu-btn-close");
 
+  if (!mobileMenu || !menuBtnOpen || !menuBtnClose) return;
+
   const toggleMenu = () => mobileMenu.classList.toggle("is-open");
   const disableScroll = () =>
     document.body.classList.toggle("is-scroll-disabled");
