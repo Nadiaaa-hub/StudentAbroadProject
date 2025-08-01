@@ -1,21 +1,24 @@
-<!DOCTYPE html>
+!DOCTYPE html>
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./style.css" />
-    <link rel="website icon" type="png" href="./img/logo_01.png" />
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
   </head>
   <body class="homepage-header-style">
     <!-- Header -->
-    <header class="site-header">
+    <header class="header">
       <div class="container">
         <div class="header__container">
           <div class="logo">
             <a href="/">
               <img
-                src="./img/logo.svg"
+                src="./project/img/logo.svg"
                 alt="StudentAbroad logo"
                 loading="lazy" />
             </a>
@@ -78,6 +81,59 @@
                 placeholder="Search..." />
             </div>
           </div>
+
+          <button class="header__burger menu-btn-open" type="button">
+            <svg width="24" height="24">
+              <use href="./project/img/burger-menu.svg"></use>
+            </svg>
+          </button>
+          <div class="mobile-menu">
+            <button class="mobile-menu__btn-close menu-btn-close" type="button">
+              <svg width="24" height="24">
+                <use href="./project/img/icon-close-burger.svg"></use>
+              </svg>
+            </button>
+            <a class="mobile-menu__logo" href="/">
+              <img
+                src="./project/img/logo.svg"
+                alt="StudentAbroad logo"
+                loading="lazy" />
+            </a>
+            <ul class="mobile-menu__list">
+              <li>
+                <a
+                  class="link"
+                  href="#about-us-section"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </div>
         </div>
       </div>
     </header>
@@ -89,7 +145,7 @@
           <a href="">
             <img
               class="hero-section__img"
-              src="./img/name+slogan.svg"
+              src="./project/img/name+slogan.svg"
               alt="StudentAbroad" />
           </a>
         </div>
@@ -97,7 +153,7 @@
         <div class="scroll-indicator" role="button" tabindex="0">
           <img
             class="scroll-indicator__img"
-            src="./img/icon_arrow.svg"
+            src="./project/img/icon_arrow.svg"
             alt="Scroll Down Icon" />
         </div>
       </section>
@@ -139,34 +195,35 @@
                 about the peculiarities of admission in different countries of
                 the world, etc.
               </p>
-              <button
+              <a
+                href="#about-uni-list"
                 data-en="Read more"
                 data-ua="Читати більше"
                 class="btn"
                 type="button">
                 Read more
-              </button>
+              </a>
             </div>
 
             <div class="social-icons">
               <a href="/" class="social-icon-link">
-                <img src="./img/mail.svg" alt="Email" />
+                <img src="./project/img/mail.svg" alt="Email" />
               </a>
               <a
                 href="https://www.instagram.com/studentabroad.ua?igsh=N2JuNWpqbWxtbGlm"
                 class="social-icon-link">
-                <img src="./img/inst.svg" alt="Instagram" />
+                <img src="./project/img/inst.svg" alt="Instagram" />
               </a>
               <a href="https://t.me/studentabroadua" class="social-icon-link">
-                <img src="./img/tg.svg" alt="Telegram" />
+                <img src="./project/img/tg.svg" alt="Telegram" />
               </a>
               <a
                 href="https://www.tiktok.com/@studentabroad.ua?_t=ZM-8xJBPrTpbXR&_r=1"
                 class="social-icon-link">
-                <img src="./img/tiktok.svg" alt="TikTok" />
+                <img src="./project/img/tiktok.svg" alt="TikTok" />
               </a>
               <a href="/" class="social-icon-link">
-                <img src="./img/facebook.svg" alt="Facebook" />
+                <img src="./project/img/facebook.svg" alt="Facebook" />
               </a>
             </div>
           </div>
@@ -242,7 +299,7 @@
             <div class="about-us__map-image">
               <img
                 class="about-us__image"
-                src="./img/SAB_MAP.svg"
+                src="./project/img/SAB_MAP.svg"
                 alt="Map of Europe with Ukraine highlighted" />
             </div>
           </div>
@@ -257,6 +314,7 @@
             <div class="about-section__info-block">
               <h2
                 class="about-section__title"
+                id="about-uni-list"
                 data-en="ABOUT UNI LIST"
                 data-ua="ПРО СПИСОК УНІВЕРСИТЕТІВ">
                 ABOUT UNI LIST
@@ -343,11 +401,11 @@
               <p
                 class="faq__subtitles"
                 data-en=" If your question is not on the list - inform us! If you had another question 
-                during your application process - sharing the form below is waiting for you! All contact details can be found below. "
+                during your application process - sharing the form below is waiting for you! All contact details can be found below. "
                 data-ua="Якщо твоє питання не знайшлося у списку – дай нам знати!
                 Усі контактні дані ти знайдеш нижче.">
                 Якщо твоє питання не знайшлося у списку – дай нам знати! Усі
-                контактні дані ти знайдеш нижче. 
+                контактні дані ти знайдеш нижче. 
               </p>
             </div>
             <div class="about-us__line"></div>
@@ -377,15 +435,15 @@
               <div class="contact-details__text-content">
                 <p
                   class="contact-details__subtitles"
-                  data-en=" Anastasiia Baieva, IT Assistant at Research Centre for East European Studies at the University of Bremen "
+                  data-en=" Anastasiia Baieva, IT Assistant at Research Centre for East European Studies at the University of Bremen "
                   data-ua="Анастасія Баєва, IT-асистентка Центру досліджень Східної Європи при Університеті Бремена.">
                   Anastasiia Baieva, IT Assistant at Research Centre for East
-                  European Studies at the University of Bremen 
+                  European Studies at the University of Bremen 
                 </p>
                 <ul class="contact-details__list">
                   <li>
                     <a class="icon-link" href="mailto:hghjghjg@gmail.com">
-                      <img src="./img/mail.svg" alt="Email icon" />
+                      <img src="./project/img/mail.svg" alt="Email icon" />
                       hghjghjg@gmail.com
                     </a>
                   </li>
@@ -394,7 +452,7 @@
                       class="icon-link"
                       href="https://www.instagram.com/studentabroad.ua?igsh=N2JuNWpqbWxtbGlm"
                       target="_blank">
-                      <img src="./img/inst.svg" alt="Instagram icon" />
+                      <img src="./project/img/inst.svg" alt="Instagram icon" />
                       studentabroad.ua
                     </a>
                   </li>
@@ -403,7 +461,7 @@
                       class="icon-link"
                       href="https://t.me/studentabroadua"
                       target="_blank">
-                      <img src="./img/tg.svg" alt="Telegram icon" />
+                      <img src="./project/img/tg.svg" alt="Telegram icon" />
                       t.me/studentabroadua
                     </a>
                   </li>
@@ -412,7 +470,7 @@
                       class="icon-link"
                       href="https://www.tiktok.com/@studentabroad.ua?_t=ZM-8xJBPrTpbXR&_r=1"
                       target="_blank">
-                      <img src="./img/tiktok.svg" alt="TikTok icon" />
+                      <img src="./project/img/tiktok.svg" alt="TikTok icon" />
                       www.tiktok.com/@studentabroad.ua
                     </a>
                   </li>
@@ -421,26 +479,28 @@
                       class="icon-link"
                       href="https://facebook.com/fdfdfdfd"
                       target="_blank">
-                      <img src="./img/facebook.svg" alt="Facebook icon" />
+                      <img
+                        src="./project/img/facebook.svg"
+                        alt="Facebook icon" />
                       @fdfdfdfd
                     </a>
                   </li>
                 </ul>
                 <p
                   class="contact-details__text"
-                  data-en=" With the support of Research Centre for East European Studies at the University of Bremen "
+                  data-en=" With the support of Research Centre for East European Studies at the University of Bremen "
                   data-ua="За підтримки Центру досліджень Східної Європи при Університеті Бремена.">
                   With the support of Research Centre for East European Studies
                   at the University of Bremen
                 </p>
                 <div>
-                  <img src="./img/contact-details-img.svg" alt="" />
+                  <img src="./project/img/contact-details-img.svg" alt="" />
                 </div>
               </div>
               <div class="contact-details__image-wrapper">
                 <img
                   class="contact-details__image"
-                  src="./img/Motherland-Monument-img.png"
+                  src="./project/img/Motherland-Monument-img.png"
                   alt="Motherland Monument img" />
               </div>
             </div>
@@ -456,7 +516,7 @@
           <div class="footer__logo">
             <img
               class="footer__img"
-              src="./img/name_no-background_01.svg"
+              src="./project/img/name_no-background_01.svg"
               alt="StudentAbroad logo" />
           </div>
 
@@ -528,6 +588,6 @@
         </div>
       </div>
     </footer>
-     <script type="module" src="./js/main.js"></script>
+    <script type="module" src="./js/main.js"></script>
   </body>
 </html>
