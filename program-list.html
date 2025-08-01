@@ -1,27 +1,28 @@
 <!DOCTYPE html>
 <html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+    <link rel="website icon" type="png" href="./img/logo_01.png" />
+  </head>
 
-<head>
-  <meta charset="UTF-8" />
-  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>StudentAbroad</title>
-  <link rel="stylesheet" href="./project/css/style.css" />
-  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
-  <link rel="website icon" type="png" href="./img/logo_01.png" />
-</head>
+  <body>
+    <script src="index.js"></script>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
 
-<body>
-  <script src="index.js"></script>
-  <header class="site-header" id="header-footer-color">
-    <div class="container">
-      <div class="header__container">
-        <div class="logo">
-          <a href="index.html">
-            <img src="./img/logo.svg" alt="StudentAbroad logo" />
-          </a>
-        </div>
-
-        <nav class="header__nav">
+          <nav class="header__nav">
             <ul class="header__menu">
               <li>
                 <a
@@ -79,162 +80,227 @@
                 placeholder="Search..." />
             </div>
           </div>
+        </div>
       </div>
-    </div>
-  </header>
+    </header>
 
-  <main>
-    <section class="country-section">
-      <div class="container">
-        <div class="country-section__heading">
-          <span class="country-section__text-outline" data-en="HOME UNI" data-ua="Університет відправлення">HOME UNI
-          </span>
-          <h2 class="country-section__text-fill" data-en="HOME UNI" data-ua="Університет відправлення">HOME UNI
-          </h2>
-        </div>
-
-        <div class="country-search-box">
-          <div class="search-input-wrapper">
-            <input type="text" class="country-search-box__input" placeholder="Search..." data-en="Search..."
-              data-ua="Шукати..." />
-            <div class="country-search-box__line"></div>
+    <main>
+      <section class="country-section">
+        <div class="container">
+          <div class="country-section__heading">
+            <span
+              class="country-section__text-outline"
+              data-en="HOME UNI"
+              data-ua="Університет відправлення"
+              >HOME UNI
+            </span>
+            <h2
+              class="country-section__text-fill"
+              data-en="HOME UNI"
+              data-ua="Університет відправлення">
+              HOME UNI
+            </h2>
           </div>
-        </div>
 
-        <div class="checkbox-group">
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="KNEU" data-ua="КНЕУ">KNEU</span>
-          </label>
+          <div class="country-search-box">
+            <div class="search-input-wrapper">
+              <input
+                type="text"
+                class="country-search-box__input"
+                placeholder="Search..."
+                data-en="Search..."
+                data-ua="Шукати..." />
+              <div class="country-search-box__line"></div>
+            </div>
+          </div>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="KNU" data-ua="КНУ">KNU</span>
-          </label>
+          <div class="checkbox-group">
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="KNEU" data-ua="КНЕУ"
+                >KNEU</span
+              >
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="Kyiv Polytechnic Institute"
-              data-ua="Київський політехнічний інс...">Kyiv Polytechnic Institute</span>
-          </label>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="KNU" data-ua="КНУ">KNU</span>
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="Borys Hrinchenko Kyiv Uni…" data-ua="Університет Грінченка">Borys
-              Hrinchenko Kyiv Uni…</span>
-          </label>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span
+                class="country-label"
+                data-en="Kyiv Polytechnic Institute"
+                data-ua="Київський політехнічний інс..."
+                >Kyiv Polytechnic Institute</span
+              >
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="KNTEU" data-ua="КНТЕУ">KNTEU</span>
-          </label>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span
+                class="country-label"
+                data-en="Borys Hrinchenko Kyiv Uni…"
+                data-ua="Університет Грінченка"
+                >Borys Hrinchenko Kyiv Uni…</span
+              >
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="Kharkiv Polytechnic Instit…" data-ua="ХПІ">Kharkiv Polytechnic
-              Instit…</span>
-          </label>
-        </div>
-        <div id="switch-country-button">&lt— — —&gt</div>
-        <h1 data-en="Level" data-ua="Ступінь" id="level">Level</h1>
-        <div class="level-checkbox-group">
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="Bachelor" data-ua="Бакалавр">Bachelor</span>
-          </label>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="KNTEU" data-ua="КНТЕУ"
+                >KNTEU</span
+              >
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="Master" data-ua="Магістр">Master</span>
-          </label>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span
+                class="country-label"
+                data-en="Kharkiv Polytechnic Instit…"
+                data-ua="ХПІ"
+                >Kharkiv Polytechnic Instit…</span
+              >
+            </label>
+          </div>
+          <div id="switch-country-button">&lt— — —&gt</div>
+          <h1 data-en="Level" data-ua="Ступінь" id="level">Level</h1>
+          <div class="level-checkbox-group">
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Bachelor" data-ua="Бакалавр"
+                >Bachelor</span
+              >
+            </label>
 
-          <label class="container-checkbox">
-            <input type="checkbox">
-            <span class="checkmark"></span>
-            <span class="country-label" data-en="PhD" data-ua="Доктор">PhD</span>
-          </label>
-        </div>
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Master" data-ua="Магістр"
+                >Master</span
+              >
+            </label>
 
-        <section class="program-list">
-          <div class="program-card">
-            <h2 data-en="Academic mobility (NLU - UCLan Cyprus)" data-ua="Академічна мобільність (НЛУ - UCLan Cyprus)">
-              Academic mobility (NLU - UCLan Cyprus)</h2>
-            <img class="icon-img" src="img/quotation.svg">
-            <p data-en="It was a wonderful experience if we consider work which was
+            <label class="container-checkbox">
+              <input type="checkbox" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="PhD" data-ua="Доктор"
+                >PhD</span
+              >
+            </label>
+          </div>
+
+          <section class="program-list">
+            <div class="program-card">
+              <h2
+                data-en="Academic mobility (NLU - UCLan Cyprus)"
+                data-ua="Академічна мобільність (НЛУ - UCLan Cyprus)">
+                Academic mobility (NLU - UCLan Cyprus)
+              </h2>
+              <img class="icon-img" src="./project/img/quotation.svg" />
+              <p
+                data-en="It was a wonderful experience if we consider work which was
               done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
               enjoyed and
-              even switched now to Finnish university ..." data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br>
+              even switched now to Finnish university ..."
+                data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br>
                університет, програму, персонал і всю інформацію було бездоганною, я <br> 
                дійсно насолоджувався і навіть перейшов зараз до фінського університету ...">
-              It was a wonderful experience if we consider work which was
+                It was a wonderful experience if we consider work which was done
+                by <br />
+                hosting university, the program the staff and all the info was
+                immaculate, <br />
+                i truly enjoyed and even switched now to Finnish university ...
+              </p>
+              <a
+                href="programs-read-more.html"
+                class="btn read-more-btn2"
+                data-en="Read more"
+                data-ua="Читати більше"
+                >Read more</a
+              >
+            </div>
+
+            <div class="program-card">
+              <h2
+                data-en="Erasmus + (Hochschule Schmalkalden)"
+                data-ua="Erasmus + (Hochschule Schmalkalden)">
+                Erasmus + (Hochschule Schmalkalden)
+              </h2>
+              <img class="icon-img" src="./project/img/quotation.svg" />
+              <p
+                data-en="It was a wonderful experience if we consider work which was
               done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
               enjoyed and
-              even switched now to Finnish university ...
-            </p>
-            <a href="programs-read-more.html" class="btn read-more-btn2" data-en="Read more"
-              data-ua="Читати більше">Read more</a>
-          </div>
-
-
-          <div class="program-card">
-            <h2 data-en="Erasmus + (Hochschule Schmalkalden)" data-ua="Erasmus + (Hochschule Schmalkalden)">
-              Erasmus + (Hochschule Schmalkalden)</h2>
-            <img class="icon-img" src="img/quotation.svg">
-            <p data-en="It was a wonderful experience if we consider work which was
-              done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
-              enjoyed and
-              even switched now to Finnish university ..." data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> 
+              even switched now to Finnish university ..."
+                data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> 
               університет, програму, персонал і всю інформацію було бездоганною, я <br>
               дійсно насолоджувався і навіть перейшов зараз до фінського університету ...">
-              It was a wonderful experience if we consider work which was
-              done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
-              enjoyed and
-              even switched now to Finnish university ...
-            </p>
-            <a href="programs-read-more.html" class="btn read-more-btn2" data-en="Read more"
-              data-ua="Читати більше">Read more</a>
-          </div>
+                It was a wonderful experience if we consider work which was done
+                by <br />
+                hosting university, the program the staff and all the info was
+                immaculate, <br />
+                i truly enjoyed and even switched now to Finnish university ...
+              </p>
+              <a
+                href="programs-read-more.html"
+                class="btn read-more-btn2"
+                data-en="Read more"
+                data-ua="Читати більше"
+                >Read more</a
+              >
+            </div>
 
-          <div class="program-card">
-            <h2 data-en="WU (KNEU - Vienna University)" data-ua="WU (КНЕУ - Віденський Університет)">
-              WU (KNEU - Vienna University)</h2>
-            <img class="icon-img" src="img/quotation.svg">
-            <p data-en="It was a wonderful experience if we consider work which was
+            <div class="program-card">
+              <h2
+                data-en="WU (KNEU - Vienna University)"
+                data-ua="WU (КНЕУ - Віденський Університет)">
+                WU (KNEU - Vienna University)
+              </h2>
+              <img class="icon-img" src="./project/img/quotation.svg" />
+              <p
+                data-en="It was a wonderful experience if we consider work which was
               done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
               enjoyed and
-              even switched now to Finnish university ..." data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> 
+              even switched now to Finnish university ..."
+                data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> 
               університет, програму, персонал і всю інформацію було бездоганною, я <br> 
               дійсно насолоджувався і навіть перейшов зараз до фінського університету ...">
-              It was a wonderful experience if we consider work which was
-              done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly
-              enjoyed and
-              even switched now to Finnish university ...
-            </p>
-            <a href="programs-read-more.html" class="btn read-more-btn2" data-en="Read more"
-              data-ua="Читати більше">Read more</a>
-          </div>
-        </section>
-      </div>
-    </section>
-  </main>
+                It was a wonderful experience if we consider work which was done
+                by <br />
+                hosting university, the program the staff and all the info was
+                immaculate, <br />
+                i truly enjoyed and even switched now to Finnish university ...
+              </p>
+              <a
+                href="programs-read-more.html"
+                class="btn read-more-btn2"
+                data-en="Read more"
+                data-ua="Читати більше"
+                >Read more</a
+              >
+            </div>
+          </section>
+        </div>
+      </section>
+    </main>
 
-
-  <!-- Footer -->
+    <!-- Footer -->
     <footer class="footer">
       <div class="container">
         <div class="footer__container">
           <div class="footer__logo">
             <img
               class="footer__img"
-              src="./img/name_no-background_01.svg"
+              src="./project/img/name_no-background_01.svg"
               alt="StudentAbroad logo" />
           </div>
 
@@ -306,7 +372,6 @@
         </div>
       </div>
     </footer>
-          <script type="module" src="./js/main.js"></script>
-</body>
-
+    <script type="module" src="./js/main.js"></script>
+  </body>
 </html>
