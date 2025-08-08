@@ -6,6 +6,7 @@ import { initAddUniversity } from "./modules/add-university.js";
 import { initSearchInput } from "./modules/search.js";
 import { initFAQ } from "./modules/faq.js";
 import { modalBtnClose } from "./modules/modal.js";
+import { burgerMenu } from "./modules/_burger-menu.js";
 
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageSwitcher();
@@ -20,5 +21,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initAddUniversity();
   initSearchInput();
   modalBtnClose();
+  burgerMenu();
   initFAQ();
 });

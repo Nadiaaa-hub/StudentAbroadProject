@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="stylesheet" href="./project/css/s.css" />
     <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -87,18 +87,16 @@
               <use href="./project/img/burger-menu.svg"></use>
             </svg>
           </button>
+
+          <div class="overlay"></div>
+
           <div class="mobile-menu">
             <button class="mobile-menu__btn-close menu-btn-close" type="button">
               <svg width="24" height="24">
                 <use href="./project/img/icon-close-burger.svg"></use>
               </svg>
             </button>
-            <a class="mobile-menu__logo" href="/">
-              <img
-                src="./project/img/logo.svg"
-                alt="StudentAbroad logo"
-                loading="lazy" />
-            </a>
+
             <ul class="mobile-menu__list">
               <li>
                 <a
@@ -133,6 +131,27 @@
                 >
               </li>
             </ul>
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
           </div>
         </div>
       </div>
@@ -222,9 +241,6 @@
                 class="social-icon-link">
                 <img src="./project/img/tiktok.svg" alt="TikTok" />
               </a>
-              <a href="/" class="social-icon-link">
-                <img src="./project/img/facebook.svg" alt="Facebook" />
-              </a>
             </div>
           </div>
         </div>
@@ -296,14 +312,17 @@
                 </p>
               </div>
             </div>
-            <div class="about-us__map-image">
-              <img
-                class="about-us__image"
-                src="./project/img/SAB_MAP.svg"
-                alt="Map of Europe with Ukraine highlighted" />
+
+            <div class="content-grid-container">
+              <div class="about-us__map-image">
+                <img
+                  class="about-us__image"
+                  src="./project/img/SAB_MAP.svg"
+                  alt="Map of Europe with Ukraine highlighted" />
+              </div>
             </div>
+            <div class="about-us__line"></div>
           </div>
-          <div class="about-us__line"></div>
         </div>
       </section>
 
@@ -311,61 +330,63 @@
       <section class="about-section__info-columns">
         <div class="container">
           <div class="about-section__container">
-            <div class="about-section__info-block">
-              <h2
-                class="about-section__title"
-                id="about-uni-list"
-                data-en="ABOUT UNI LIST"
-                data-ua="ПРО СПИСОК УНІВЕРСИТЕТІВ">
-                ABOUT UNI LIST
-              </h2>
-              <p
-                class="about-section__text"
-                data-en="Here you will find a list of Ukrainian and foreign universities. You can find the
+            <div class="content-grid-container">
+              <div class="about-section__info-block uni-list-block">
+                <h2
+                  class="about-section__title"
+                  id="about-uni-list"
+                  data-en="ABOUT UNI LIST"
+                  data-ua="ПРО СПИСОК УНІВЕРСИТЕТІВ">
+                  ABOUT UNI LIST
+                </h2>
+                <p
+                  class="about-section__text"
+                  data-en="Here you will find a list of Ukrainian and foreign universities. You can find the
         educational institution of your interest and get information about its international 
         connections and cooperation. We will help you choose the right exchange programs! "
-                data-ua="Тут ти знайдеш список українських та іноземних університетів. Ти можеш обрати навчальний заклад, який тебе цікавить, та отримати інформацію про його міжнародні зв’язки та співпрацю. Ми допоможемо тобі обрати правильну програму обміну!">
-                Here you will find a list of Ukrainian and foreign
-                universities...
-              </p>
-              <p
-                class="about-section__text"
-                data-en="StudentAbroad will help you find the best universities for your education and the start of your career.
+                  data-ua="Тут ти знайдеш список українських та іноземних університетів. Ти можеш обрати навчальний заклад, який тебе цікавить, та отримати інформацію про його міжнародні зв’язки та співпрацю. Ми допоможемо тобі обрати правильну програму обміну!">
+                  Here you will find a list of Ukrainian and foreign
+                  universities...
+                </p>
+                <p
+                  class="about-section__text"
+                  data-en="StudentAbroad will help you find the best universities for your education and the start of your career.
     Please note that our site is not the official site of any university, we only provide links to information. If 
     you have any questions about our site or exchange programs, please use the contact form."
-                data-ua="StudentAbroad допоможе знайти найкращі університети для навчання та початку кар’єри. Зверни увагу, що наш сайт не є офіційним сайтом для жодного університету – ми лише надаємо посилання на інформацію. Якщо у тебе є запитання щодо нашого сайту чи програм обміну, скористайся контактною формою.
+                  data-ua="StudentAbroad допоможе знайти найкращі університети для навчання та початку кар’єри. Зверни увагу, що наш сайт не є офіційним сайтом для жодного університету – ми лише надаємо посилання на інформацію. Якщо у тебе є запитання щодо нашого сайту чи програм обміну, скористайся контактною формою.
 ">
-                StudentAbroad will help you find the best universities for your
-                education and the start of your career. Please note that our
-                site is not the official site of any university, we only provide
-                links to information. If you have any questions about our site
-                or exchange programs, please use the contact form.
-              </p>
-            </div>
+                  StudentAbroad will help you find the best universities for
+                  your education and the start of your career. Please note that
+                  our site is not the official site of any university, we only
+                  provide links to information. If you have any questions about
+                  our site or exchange programs, please use the contact form.
+                </p>
+              </div>
 
-            <div class="about-section__info-block">
-              <h2
-                class="about-section__title"
-                data-en="ABOUT PROGRAM LIST"
-                data-ua="ПРО СПИСОК ПРОГРАМ">
-                ABOUT PROGRAM LIST
-              </h2>
-              <p
-                class="about-section__text"
-                data-en="By using filters, you can specify your criteria and get a list of programs that meet all 
+              <div class="about-section__info-block program-list-block">
+                <h2
+                  class="about-section__title"
+                  data-en="ABOUT PROGRAM LIST"
+                  data-ua="ПРО СПИСОК ПРОГРАМ">
+                  ABOUT PROGRAM LIST
+                </h2>
+                <p
+                  class="about-section__text"
+                  data-en="By using filters, you can specify your criteria and get a list of programs that meet all 
        your requirements. You can find both the most famous student exchange programs and less popular 
        (thus less competitive) ones offered by educational institutions. You can first get to know the official 
        information about the program, and then read about the student experience."
-                data-ua="За допомогою фільтрів ти можеш задати свої критерії та отримати список програм, які відповідають усім твоїм вимогам. Тут ти знайдеш як найвідоміші програми студентського обміну, так і менш популярні (а отже, менш конкурентні), які пропонують навчальні заклади. Спершу ти можеш ознайомитися з офіційною інформацією про програму, а потім дізнатися про досвід студентів.">
-                By using filters, you can specify your criteria...
-              </p>
-              <p
-                class="about-section__text"
-                data-en="Have you already studied abroad and have something to tell? Tell us everything!"
-                data-ua="Ти вже навчався за кордоном і маєш чим поділитися? Розкажи нам усе!">
-                Have you already studied abroad and have something to tell? Tell
-                us everything!
-              </p>
+                  data-ua="За допомогою фільтрів ти можеш задати свої критерії та отримати список програм, які відповідають усім твоїм вимогам. Тут ти знайдеш як найвідоміші програми студентського обміну, так і менш популярні (а отже, менш конкурентні), які пропонують навчальні заклади. Спершу ти можеш ознайомитися з офіційною інформацією про програму, а потім дізнатися про досвід студентів.">
+                  By using filters, you can specify your criteria...
+                </p>
+                <p
+                  class="about-section__text"
+                  data-en="Have you already studied abroad and have something to tell? Tell us everything!"
+                  data-ua="Ти вже навчався за кордоном і маєш чим поділитися? Розкажи нам усе!">
+                  Have you already studied abroad and have something to tell?
+                  Tell us everything!
+                </p>
+              </div>
             </div>
           </div>
         </div>
@@ -444,7 +465,7 @@
                   <li>
                     <a class="icon-link" href="mailto:hghjghjg@gmail.com">
                       <img src="./project/img/mail.svg" alt="Email icon" />
-                      hghjghjg@gmail.com
+                      studentabroad.info@gmail.com
                     </a>
                   </li>
                   <li>
@@ -453,7 +474,7 @@
                       href="https://www.instagram.com/studentabroad.ua?igsh=N2JuNWpqbWxtbGlm"
                       target="_blank">
                       <img src="./project/img/inst.svg" alt="Instagram icon" />
-                      studentabroad.ua
+                      @studentabroad.ua
                     </a>
                   </li>
                   <li>
@@ -471,18 +492,7 @@
                       href="https://www.tiktok.com/@studentabroad.ua?_t=ZM-8xJBPrTpbXR&_r=1"
                       target="_blank">
                       <img src="./project/img/tiktok.svg" alt="TikTok icon" />
-                      www.tiktok.com/@studentabroad.ua
-                    </a>
-                  </li>
-                  <li>
-                    <a
-                      class="icon-link"
-                      href="https://facebook.com/fdfdfdfd"
-                      target="_blank">
-                      <img
-                        src="./project/img/facebook.svg"
-                        alt="Facebook icon" />
-                      @fdfdfdfd
+                      @studentabroad.ua
                     </a>
                   </li>
                 </ul>

@@ -7,5 +7,5 @@
     }
   ],
   "liveSassCompile.settings.generateMap": true,
-  "liveSassCompile.settings.excludeList": ["**/main.scss"]
+  "liveSassCompile.settings.excludeList": []
 }
