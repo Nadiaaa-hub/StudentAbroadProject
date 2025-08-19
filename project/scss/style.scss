@@ -1722,11 +1722,10 @@ select {
   .bg-overlay {
     position: absolute;
     inset: 0;
-    background-image: url("/img/bg-Kyiv-uni.svg");
+    background-image: url("bg-uni/bg-kneu.png");
     background-size: cover;
     background-position: center;
     background-repeat: no-repeat;
-    filter: brightness(0.4);
     z-index: 0;
   }
 
