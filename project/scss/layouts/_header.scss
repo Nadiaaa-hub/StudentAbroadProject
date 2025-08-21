@@ -1,6 +1,20 @@
 @import "../utils/variables";
 
 // Загальні стилі для хедера
+
+@import "/project/scss/utils/variables";
+
+.homepage-header-style {
+  .header {
+    position: absolute;
+    width: 100%;
+    top: 0;
+    left: 0;
+    z-index: 1;
+    background-color: transparent;
+  }
+}
+
 .header {
   background-color: var(--color-blue-dark);
   padding: 25px 0;
@@ -49,7 +63,7 @@
   }
 
   &__burger {
-    display: block;
+    display: none;
     background-color: transparent;
     border: none;
     width: 24px;
@@ -57,7 +71,7 @@
     padding: 0;
     fill: var(--color-main-white);
 
-    @media screen and (min-width: 1280px) {
+    @media screen and (min-width: $bp-desktop) {
       display: none;
     }
   }
