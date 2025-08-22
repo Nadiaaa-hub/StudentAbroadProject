@@ -579,9 +579,9 @@ header {
 }
 
 .btn {
-  width: 157px;
-  height: 47px;
-  font-size: 14px;
+  width: 191px;
+  height: 57px;
+  font-size: 16px;
   text-align: center;
   border-radius: 10px;
   border: 2px solid var(--color-main-blue);
@@ -591,11 +591,12 @@ header {
   margin: 5px auto;
   justify-content: center;
   align-items: center;
+  color: var(--color-main-white);
+  margin-bottom: 70px;
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 1024px) {
   .btn {
-    margin: 5px 0 0 0;
     width: 225px;
     height: 67px;
     font-size: 20px;
@@ -659,6 +660,17 @@ header {
     height: 60px;
     border-radius: 50%;
   }
+}
+
+.about-us__line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 999px;
+  height: 1px;
+  background-color: var(--color-white-line);
+  margin-top: 70px;
 }
 
 /* About Us Section */
@@ -843,6 +855,24 @@ header {
   margin: 0 auto;
 }
 
+.about-section__line {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 100%;
+  max-width: 999px;
+  height: 1px;
+  background-color: var(--color-white-line);
+  margin: 0px auto;
+
+}
+
+@media screen and (min-width: 1024px) {
+  .about-section__line {
+    display: none;
+  }
+}
+
 /* About Uni/Proggram List Section */
 /* About Uni/Proggram List Section */
 .about-section__info-columns {
@@ -946,7 +976,7 @@ header {
   font-size: 20px;
   line-height: 1.2;
   letter-spacing: 0;
-  margin-bottom: 90px;
+  margin-bottom: 70px;
   color: var(--color-blue-dark);
 }
 
@@ -1028,20 +1058,26 @@ header {
   display: inline-block;
 }
 
-@media screen and (min-width: 780px) {
+.contact-details__main-content {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  gap: 21px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+@media screen and (min-width: 960px) {
   .contact-details__main-content {
-    display: -webkit-box;
-    display: -ms-flexbox;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-wrap: wrap;
     flex-wrap: wrap;
-    gap: 21px;
+
   }
 }
 
@@ -1194,32 +1230,6 @@ header {
   /* Або display: flex, залежно від внутрішнього розташування тексту автора */
 }
 
-/*Contact Details Section*/
-.contact-details-section {
-  padding: 20px 0 70px;
-}
-
-.contact-details__heading {
-  position: relative;
-  display: inline-block;
-}
-
-@media screen and (min-width: 780px) {
-  .contact-details__main-content {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -webkit-box-pack: justify;
-    -ms-flex-pack: justify;
-    justify-content: space-between;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
-    gap: 21px;
-  }
-}
 
 .contact-details__text-outline {
   position: absolute;
@@ -1259,10 +1269,10 @@ header {
   padding: 0;
 }
 
-.contact-details__subtitles {
+/* .contact-details__subtitles {
   display: flex;
   flex-wrap: wrap;
-}
+} */
 
 @media screen and (min-width: 780px) {
   .contact-details__subtitles {
@@ -1325,19 +1335,25 @@ header {
 
 .contact-details__image-wrapper {
   flex-shrink: 0;
-  max-width: 570px;
+  max-width: 442px;
+  height: 375px;
   border-radius: 30px;
   margin-top: 77px;
   overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+@media screen and (min-width: 1131px) {
+  .contact-details__image-wrapper {
+    max-width: 570px;
+    height: 484px;
+  }
 }
 
 .contact-details__image {
-  width: 100%;
-  height: auto;
+  height: 100%;
+
   display: block;
-  -o-object-fit: cover;
-  object-fit: cover;
+
 }
 
 /* Footer */
@@ -1345,8 +1361,7 @@ header {
 /* Базовий стиль — мобільна версія */
 .footer {
   background-color: var(--color-blue-dark);
-  padding: 20px 0;
-  margin-top: auto;
+  padding: 40px 0;
 }
 
 .footer__container {
@@ -1382,7 +1397,7 @@ header {
 }
 
 /* Планшети 760px і вище */
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 960px) {
   .footer {
     padding: 55px 0 48px 0;
   }
@@ -1545,7 +1560,7 @@ form select:focus {
 
 select {
   -webkit-appearance: none;
-  -moz-appearance: none;
+
   appearance: none;
   padding: 16px 40px 16px 20px;
   background-color: var(--color-main-white);
@@ -1804,8 +1819,15 @@ select {
 
 /* FAQ page */
 .faq-section {
-  padding-top: 70px;
+  padding-top: 0px;
   padding-bottom: 70px;
+}
+
+@media screen and (min-width: 1024px) {
+  .study-abroad-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
 }
 
 .faq-section__container {
@@ -2074,7 +2096,7 @@ select {
   align-items: center;
   gap: 10px;
   -webkit-column-gap: 160px;
-  -moz-column-gap: 160px;
+
   column-gap: 160px;
 }
 
@@ -2197,7 +2219,7 @@ select {
   cursor: pointer;
   font-size: 20px;
   -webkit-user-select: none;
-  -moz-user-select: none;
+
   -ms-user-select: none;
   user-select: none;
   gap: 10px;
@@ -2567,7 +2589,7 @@ select {
   cursor: pointer;
   font-size: 20px;
   -webkit-user-select: none;
-  -moz-user-select: none;
+
   -ms-user-select: none;
   user-select: none;
   gap: 10px;
@@ -3297,10 +3319,7 @@ a.blue-links:hover {
     max-width: 400px;
   }
 
-  .contact-details__image-wrapper {
-    max-width: 450px;
-    height: auto;
-  }
+
 
   /* Share My Program Section */
   .form-field-and-description {
@@ -3427,6 +3446,8 @@ a.blue-links:hover {
 }
 
 .mobile-menu a {
+  width: 177px;
+
   font-size: 25px;
   color: var(--color-main-white);
   text-decoration: none;
@@ -3471,16 +3492,6 @@ a.blue-links:hover {
   }
 }
 
-.about-us__line {
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  width: 100%;
-  max-width: 999px;
-  height: 1px;
-  background-color: var(--color-white-line);
-  margin: 0 auto;
-}
 
 /* About Uni/Proggram List Section */
 /* About Uni/Proggram List Section */

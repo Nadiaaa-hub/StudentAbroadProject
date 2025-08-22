@@ -5,13 +5,16 @@ export function burgerMenu() {
   const closeBtn = document.querySelector(".menu-btn-close");
   const overlay = document.querySelector(".overlay");
 
-  if (burgerBtn && mobileMenu && closeBtn && overlay) {
+  if (burgerBtn && mobileMenu && closeBtn && overlay && burgerIcon) {
     burgerBtn.addEventListener("click", () => {
       mobileMenu.classList.add("open");
       overlay.classList.add("active");
 
-      // Анімація зміни іконки на "close"
-      burgerIcon.setAttribute("href", "./project/img/icon-close-burger.svg");
+      // Заміна іконки на "close"
+      burgerIcon.setAttribute(
+        "xlink:href",
+        "./project/img/icon-close-burger.svg#icon"
+      );
       burgerBtn.style.transform = "rotate(90deg)";
       setTimeout(() => (burgerBtn.style.transform = "rotate(0deg)"), 300);
     });
@@ -20,10 +23,13 @@ export function burgerMenu() {
       mobileMenu.classList.remove("open");
       overlay.classList.remove("active");
 
-      // Анімація зміни іконки на "burger"
+      // Заміна іконки на "burger"
       burgerBtn.style.transform = "rotate(-90deg)";
       setTimeout(() => {
-        burgerIcon.setAttribute("href", "./project/img/burger-menu.svg");
+        burgerIcon.setAttribute(
+          "xlink:href",
+          "./project/img/burger-menu.svg#icon"
+        );
         burgerBtn.style.transform = "rotate(0deg)";
       }, 300);
     };
