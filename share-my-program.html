@@ -11,8 +11,6 @@
       rel="stylesheet" />
   </head>
   <body>
-    <!-- Header -->
-
     <header class="site-header" id="header-footer-color">
       <div class="container">
         <div class="header__container">
@@ -87,8 +85,6 @@
       </div>
     </header>
 
-    <!-- Hero Section -->
-
     <main>
       <section class="share-my-program-section">
         <div class="container">
@@ -113,8 +109,6 @@
               alt="" />
           </div>
 
-          <!-- Form Section -->
-
           <div class="form-section">
             <h2 class="form-section__title">Add program</h2>
             <form>
@@ -127,17 +121,7 @@
                 >
               </div>
 
-              <div class="form-field-and-description">
-                <div class="input-with-optional-button">
-                  <input type="text" placeholder="Slug:" required />
-                </div>
-                <label class="form-section__description"
-                  >It’s a short name for URL. Don’t use symbols and upper
-                  case.</label
-                >
-              </div>
-
-              <div class="form-field-and-description">
+<div class="form-field-and-description">
                 <div
                   class="input-with-optional-button custom-select-wrapper"
                   id="inviting-uni-wrapper">
@@ -147,12 +131,7 @@
                     placeholder="Inviting uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
-                  <div class="custom-select-dropdown">
-                    <div class="custom-select-option">Harvard University</div>
-                    <div class="custom-select-option">Stanford University</div>
-                    <div class="custom-select-option">Oxford University</div>
-                    <div class="custom-select-option">MIT</div>
-                  </div>
+                  <div class="custom-select-dropdown"></div>
                   <img
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
@@ -164,124 +143,24 @@
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
                 </div>
+
+                <div class="new-item-form" id="new-inviting-uni-form">
+                  <div class="new-item-header">
+                    <p>
+                      Leave the details of the university that invited you. Our
+                      administrator will enter them into our database.
+                    </p>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Enter details here..."
+                    class="new-item-input" />
+                </div>
+
                 <label class="form-section__description">
                   Choose a foreign university from the list. Add new one, if you
                   can’t find it.
                 </label>
-              </div>
-
-              <div id="new-inviting-uni-fields" style="display: none">
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Name:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the full name of the new university.</label
-                  >
-                </div>
-
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Short Name:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter a short name for the new university.</label
-                  >
-                </div>
-
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Slug:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter a slug for the new university (no symbols, no
-                    uppercase).</label
-                  >
-                </div>
-
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Region:" />
-
-                    <button
-                      type="button"
-                      class="form-section__add-button custom-select-add-button"
-                      id="add-region-button">
-                      <img src="./project/img/+.svg" alt="+" />
-                    </button>
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the region of the new university.</label
-                  >
-                </div>
-
-                <div id="new-region-fields" style="display: none">
-                  <div class="form-field-and-description">
-                    <div class="input-with-optional-button">
-                      <input type="text" placeholder="Region Name:" />
-                    </div>
-                    <label class="form-section__description"
-                      >Enter the name for the new region.</label
-                    >
-                  </div>
-                  <div class="form-field-and-description">
-                    <div class="input-with-optional-button">
-                      <input type="text" placeholder="Country:" />
-                      <button
-                        type="button"
-                        class="form-section__add-button custom-select-add-button"
-                        id="add-country-button">
-                        <img src="./project/img/+.svg" alt="+" />
-                      </button>
-                    </div>
-                    <label class="form-section__description"
-                      >Enter the country for the new region.</label
-                    >
-                  </div>
-                </div>
-
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="URL:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the official website URL of the new
-                    university.</label
-                  >
-                </div>
-
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Contact:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter contact information for the new university.</label
-                  >
-                </div>
-
-                <div class="submit-button">
-                  <button class="btn" type="button" id="add-new-uni-button">
-                    Add a new uni
-                  </button>
-                </div>
               </div>
 
               <div class="form-field-and-description">
@@ -293,30 +172,7 @@
                     placeholder="Home uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
-                  <div class="custom-select-dropdown">
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                    <div class="custom-select-option">
-                      Kyiv National Economic University named after Vad...
-                    </div>
-                  </div>
+                  <div class="custom-select-dropdown"></div>
                   <img
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
@@ -328,125 +184,25 @@
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
                 </div>
+                <div class="new-item-form" id="new-home-uni-form">
+                  <div class="new-item-header">
+                    <p>
+                      Leave the details of the university that invited you. Our
+                      administrator will enter them into our database.
+                    </p>
+                  </div>
+                  <input
+                    type="text"
+                    placeholder="Enter details here..."
+                    class="new-item-input" />
+                </div>
                 <label class="form-section__description">
                   Choose Ukrainian university from the list. Add a new one, if
                   you can’t find it.
                 </label>
               </div>
 
-              <div id="new-home-uni-fields" style="display: none">
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Name:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the full name of the new home university.</label
-                  >
-                </div>
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Short Name:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter a short name for the new home university.</label
-                  >
-                </div>
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Slug:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter a slug for the new home university (no symbols, no
-                    uppercase).</label
-                  >
-                </div>
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Region:" />
-
-                    <button
-                      type="button"
-                      class="form-section__add-button custom-select-add-button"
-                      id="add-home-uni-region-button">
-                      <img src="./project/img/+.svg" alt="+" />
-                    </button>
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the region of the new home university.</label
-                  >
-                </div>
-                <div id="new-home-uni-region-fields" style="display: none">
-                  <div class="form-field-and-description">
-                    <div class="input-with-optional-button">
-                      <input type="text" placeholder="Region Name:" />
-                    </div>
-                    <label class="form-section__description"
-                      >Enter the name for the new home university region.</label
-                    >
-                  </div>
-                  <div class="form-field-and-description">
-                    <div class="input-with-optional-button">
-                      <input type="text" placeholder="Country:" />
-                      <button
-                        type="button"
-                        class="form-section__add-button custom-select-add-button"
-                        id="add-home-uni-country-button">
-                        <img src="./project/img/+.svg" alt="+" />
-                      </button>
-                    </div>
-                    <label class="form-section__description"
-                      >Enter the country for the new home university
-                      region.</label
-                    >
-                  </div>
-                </div>
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="URL:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter the official website URL of the new home
-                    university.</label
-                  >
-                </div>
-                <div class="form-field-and-description">
-                  <div class="input-with-optional-button">
-                    <input
-                      class="addition-info"
-                      type="text"
-                      placeholder="Contact:" />
-                  </div>
-                  <label class="form-section__description"
-                    >Enter contact information for the new home
-                    university.</label
-                  >
-                </div>
-                <div class="submit-button">
-                  <button
-                    class="btn"
-                    type="button"
-                    id="add-new-home-uni-button">
-                    Add a new home uni
-                  </button>
-                </div>
-              </div>
-
-              <div class="form-field-and-description">
+<div class="form-field-and-description">
                 <div
                   class="input-with-optional-button custom-select-wrapper"
                   id="faculty-wrapper">
@@ -539,8 +295,7 @@
       </section>
     </main>
 
-    <!-- Footer -->
-    <footer class="footer">
+<footer class="footer">
       <div class="container">
         <div class="footer__container">
           <div class="footer__logo">
@@ -620,4 +375,4 @@
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>
-</html>
+  </html>

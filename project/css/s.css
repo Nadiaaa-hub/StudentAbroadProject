@@ -314,7 +314,6 @@ header {
 
 /* Hero Section */
 .hero-section {
-  padding: 252px 0 383px 0;
   height: 517px;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -334,26 +333,19 @@ header {
   text-align: center;
 }
 
-@media screen and (min-width: 768px) {
+
+@media screen and (min-width: 1280px) {
   .hero-section {
-    padding: 212px 0;
-    height: 80vh;
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    position: relative;
-    overflow: hidden;
-    background-image: url("../img/bg.png");
-    background-repeat: no-repeat;
-    background-position: center;
-    background-size: cover;
-    text-align: center;
+    height: 770px;
+    padding: 260px 0;
+  }
+}
+
+@media screen and (min-width:1024px) {
+  .hero-section {
+    padding: 220px 0;
+
+
   }
 }
 
@@ -437,12 +429,19 @@ header {
 }
 
 .scroll-indicator__img {
-  width: 100%;
-  height: 100%;
-  -o-object-fit: contain;
-  object-fit: contain;
-  -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
-  filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+  width: 40px;
+  height: 40px;
+}
+
+@media screen and (min-width:1024px) {
+  .scroll-indicator__img {
+    width: 100%;
+    height: 100%;
+    -o-object-fit: contain;
+    object-fit: contain;
+    -webkit-filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+    filter: drop-shadow(0px 0px 5px rgba(0, 0, 0, 0.5));
+  }
 }
 
 .language-switch {
@@ -511,6 +510,13 @@ header {
   }
 }
 
+@media screen and (min-width: 1024px) {
+  .study-abroad-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
+
 .study-abroad__container {
   display: flex;
   align-items: flex-start;
@@ -528,7 +534,7 @@ header {
     -ms-flex-align: start;
     -webkit-box-pack: center;
     -ms-flex-pack: center;
-    /* justify-content: center; */
+
     gap: 40px;
 
     flex-direction: row;
@@ -744,20 +750,6 @@ header {
   margin-bottom: 30px;
 }
 
-.about-us__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
 
 .about-us__text-fill {
   position: relative;
@@ -804,45 +796,47 @@ header {
   position: static;
   transform: none;
   width: 100%;
-  max-width: 400px;
+  max-width: 100%;
   margin-top: 20px;
+  margin-left: 0;
 }
 
 @media screen and (min-width: 768px) {
   .about-us__map-image {
-    display: flex;
-    justify-content: flex-start;
-    align-items: flex-start;
     position: absolute;
     left: 0;
     top: 50%;
     transform: translateY(56%);
     width: 45%;
     max-width: 515px;
-    height: auto;
-    right: auto;
+    margin-top: 0;
     z-index: -1;
   }
 }
 
+@media screen and (min-width: 1280px) {
+  .about-us__map-image {
+    transform: translateY(-50%);
+    left: 60%;
+    top: 67%;
+  }
+}
+
+@media screen and (max-width: 767px) {
+
+  .about-section__title,
+  .about-us__map-image {
+    margin-left: 10px;
+    margin-right: 10px;
+  }
+}
 
 .about-us__image {
   width: 100%;
   height: auto;
 }
 
-@media screen and (min-width: 1280px) {
-  .about-us__map-image {
-    position: absolute;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 45%;
-    max-width: 515px;
-    height: auto;
-    left: 732px;
-    top: 67%;
-  }
-}
+
 
 .about-us__line {
   display: flex;
@@ -894,13 +888,12 @@ header {
 }
 
 
-
-
 .about-section__title {
   font-size: 25px;
   font-weight: 700;
   margin-bottom: 30px;
   color: var(--color-blue-dark);
+  margin-left: 0;
 }
 
 .about-section__text {
@@ -935,9 +928,9 @@ header {
   margin-bottom: 30px;
 }
 
-.faq__text-outline {
+.text-outline-style {
   position: absolute;
-  font-size: 45px;
+  font-size: 30;
   font-weight: 700;
   color: transparent;
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
@@ -950,14 +943,14 @@ header {
   white-space: nowrap;
 }
 
-.faq__text-fill {
-  position: relative;
-  font-size: 45px;
-  font-weight: 700;
-  color: var(--color-blue-dark);
-  z-index: 1;
-  margin: 0;
+@media screen and (min-width: 480px) {
+  .text-outline-style {
+    -webkit-transform: translate(15px, 5px);
+    transform: translate(15px, 5px);
+    font-size: 45px;
+  }
 }
+
 
 .faq__title {
   font-size: 25px;
@@ -1032,20 +1025,19 @@ header {
 
 .faq__answer.active+.faq__footer-info {
   max-height: 200px;
-  /* Достатньо велике значення для розкриття */
+
   opacity: 1;
   padding-bottom: 45px;
-  /* Бажаний відступ */
+
   margin-top: 20px;
   -webkit-transform: translateY(0);
   transform: translateY(0);
-  /* Додайте відступ між faq__answer та faq__footer-info */
+
 }
 
-/* Коли faq__answer активний, показуємо faq__meta всередині faq__footer-info */
 .faq__answer.active+.faq__footer-info .faq__meta {
   display: block;
-  /* Або display: flex, залежно від внутрішнього розташування тексту автора */
+
 }
 
 /*Contact Details Section*/
@@ -1081,20 +1073,7 @@ header {
   }
 }
 
-.contact-details__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
+
 
 .contact-details__text-fill {
   position: relative;
@@ -1117,20 +1096,7 @@ header {
   margin-bottom: 30px;
 }
 
-.faq__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
+
 
 .faq__text-fill {
   position: relative;
@@ -1214,37 +1180,22 @@ header {
 
 .faq__answer.active+.faq__footer-info {
   max-height: 200px;
-  /* Достатньо велике значення для розкриття */
+
   opacity: 1;
   padding-bottom: 45px;
-  /* Бажаний відступ */
+
   margin-top: 20px;
   -webkit-transform: translateY(0);
   transform: translateY(0);
-  /* Додайте відступ між faq__answer та faq__footer-info */
+
 }
 
-/* Коли faq__answer активний, показуємо faq__meta всередині faq__footer-info */
 .faq__answer.active+.faq__footer-info .faq__meta {
   display: block;
-  /* Або display: flex, залежно від внутрішнього розташування тексту автора */
+
 }
 
 
-.contact-details__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
 
 .contact-details__text-fill {
   position: relative;
@@ -1355,6 +1306,8 @@ header {
   display: block;
 
 }
+
+
 
 /* Footer */
 /* Десктоп і планшети (від 760px) */
@@ -1823,12 +1776,7 @@ select {
   padding-bottom: 70px;
 }
 
-@media screen and (min-width: 1024px) {
-  .study-abroad-section {
-    padding-top: 70px;
-    padding-bottom: 70px;
-  }
-}
+
 
 .faq-section__container {
   display: -webkit-box;
@@ -1848,28 +1796,8 @@ select {
   display: inline-block;
 }
 
-.faq__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
 
-.faq__text-fill {
-  position: relative;
-  font-size: 45px;
-  font-weight: 700;
-  margin: 0;
-  color: var(--color-blue-dark);
-}
+
 
 .faq__card {
   width: 100%;
@@ -2167,21 +2095,7 @@ select {
   padding-top: 20px;
 }
 
-.country-section__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  padding-top: 20px;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  -webkit-transform: translate(29px, 10px);
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
+
 
 .country-section__text-fill {
   position: relative;
@@ -2989,23 +2903,12 @@ a.blue-links:hover {
     margin-bottom: 50px;
   }
 
-  .about-us__text-outline {
-    -webkit-transform: translate(15px, 5px);
-    transform: translate(15px, 5px);
-  }
 
   .about-us__subtitles {
     font-size: 16px;
   }
 
-  .about-us__map-image {
-    position: static;
-    -webkit-transform: none;
-    transform: none;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 30px;
-  }
+
 
   /* About Uni/Program List Section */
   .about-section__container {
@@ -3029,15 +2932,9 @@ a.blue-links:hover {
     margin-bottom: 20px;
   }
 
-  .faq__text-outline,
-  .faq__text-fill {
-    font-size: 25px;
-  }
 
-  .faq__text-outline {
-    -webkit-transform: translate(15px, 5px);
-    transform: translate(15px, 5px);
-  }
+
+
 
   .faq__subtitles {
     font-size: 16px;
@@ -3050,15 +2947,6 @@ a.blue-links:hover {
 
   /* Contact Details Section */
 
-  .contact-details__text-outline,
-  .contact-details__text-fill {
-    font-size: 25px;
-  }
-
-  .contact-details__text-outline {
-    -webkit-transform: translate(15px, 5px);
-    transform: translate(15px, 5px);
-  }
 
   .contact-details__subtitles,
   .contact-details__text {
@@ -3169,10 +3057,6 @@ a.blue-links:hover {
     gap: 20px;
   }
 
-  /* Hero Section */
-  .hero-section {
-    padding: 393px 0;
-  }
 
   .hero-section__title {
     font-size: 50px;
@@ -3198,14 +3082,7 @@ a.blue-links:hover {
     margin-bottom: 100px;
   }
 
-  .about-us__map-image {
-    position: static;
-    -webkit-transform: none;
-    transform: none;
-    width: 100%;
-    max-width: 100%;
-    margin-top: 50px;
-  }
+
 
   /* About Uni/Program List Section */
   .about-section__container {
@@ -3275,11 +3152,6 @@ a.blue-links:hover {
     margin-bottom: 100px;
   }
 
-  .about-us__text-outline {
-    -webkit-transform: translate(25px, 8px);
-    transform: translate(25px, 8px);
-    font-size: 40px;
-  }
 
   .about-us__text-fill {
     font-size: 40px;
@@ -3292,23 +3164,27 @@ a.blue-links:hover {
     grid-template-columns: 1fr 1fr;
   }
 
-  /* FAQ */
-  .faq__text-outline {
-    -webkit-transform: translate(25px, 8px);
-    transform: translate(25px, 8px);
-    font-size: 40px;
+  .mobile-menu {
+    display: block;
+    /* показуємо */
   }
+
+  /* великі екрани */
+  @media (min-width: 1024px) {
+    .mobile-menu {
+      display: none;
+      /* ховаємо на десктопі */
+    }
+  }
+
+  /* FAQ */
 
   .faq__text-fill {
     font-size: 40px;
   }
 
   /* Contact Details Section */
-  .contact-details__text-outline {
-    -webkit-transform: translate(25px, 8px);
-    transform: translate(25px, 8px);
-    font-size: 40px;
-  }
+
 
   .contact-details__text-fill {
     font-size: 40px;
@@ -3341,10 +3217,7 @@ a.blue-links:hover {
 @media screen and (min-width: 1280px) {
   /* Header */
 
-  /* Hero Section */
-  .hero-section {
-    height: 100vh;
-  }
+
 
   .hero-section__title {
     font-size: 82px;
@@ -3363,13 +3236,7 @@ a.blue-links:hover {
     align-items: flex-start;
   }
 
-  .about-us__map-image {
-    position: absolute;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    top: 67%;
-    left: 732px;
-  }
+
 
   /* About Uni/Program List Section */
   .about-section__container {
@@ -3401,8 +3268,25 @@ a.blue-links:hover {
 
 /* мобільне меню */
 .mobile-menu {
-  display: none;
+  position: fixed;
+  /* або absolute, залежно від дизайну */
+  top: 0;
+  right: 0;
+  width: 300px;
+  /* ширина меню */
+  height: 100%;
+  background-color: #fff;
+  transform: translateX(100%);
+  /* ховаємо праворуч */
+  transition: transform 0.3s ease;
+  z-index: 1000;
 }
+
+.mobile-menu.open {
+  transform: translateX(0);
+  /* показуємо меню */
+}
+
 
 @media screen and (min-width: 760px) {
   .mobile-menu {
@@ -3434,7 +3318,7 @@ a.blue-links:hover {
   align-self: flex-end;
   padding: 0;
   cursor: pointer;
-  background-image: url("../img/icon-close-burger");
+  background-image: url("/project/img/icon-close-burger.svg");
 }
 
 .mobile-menu__list {
@@ -3447,7 +3331,6 @@ a.blue-links:hover {
 
 .mobile-menu a {
   width: 177px;
-
   font-size: 25px;
   color: var(--color-main-white);
   text-decoration: none;
@@ -3479,18 +3362,7 @@ a.blue-links:hover {
   height: auto;
 }
 
-@media screen and (min-width: 1280px) {
-  .about-us__map-image {
-    position: absolute;
-    -webkit-transform: translateY(-50%);
-    transform: translateY(-50%);
-    width: 45%;
-    max-width: 515px;
-    height: auto;
-    left: 732px;
-    top: 67%;
-  }
-}
+
 
 
 /* About Uni/Proggram List Section */

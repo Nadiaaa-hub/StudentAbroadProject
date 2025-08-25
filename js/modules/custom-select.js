@@ -1,19 +1,60 @@
 export function initCustomSelects() {
   document.querySelectorAll(".custom-select-wrapper").forEach((wrapper) => {
-    const input = wrapper.querySelector(".custom-select-input");
+    const mainInput = wrapper.querySelector(".custom-select-input");
     const dropdown = wrapper.querySelector(".custom-select-dropdown");
-    const optionsContainer = dropdown;
-    let options = Array.from(
-      optionsContainer.querySelectorAll(".custom-select-option")
-    );
     const arrow = wrapper.querySelector(".select-arrow");
     const addButton = wrapper.querySelector(".custom-select-add-button");
 
+    if (!dropdown) {
+      console.warn(
+        "Custom select wrapper does not contain a dropdown:",
+        wrapper
+      );
+      return;
+    }
+
+    let optionsContainer = dropdown.querySelector(
+      ".custom-select-options-list"
+    );
+    if (!optionsContainer) {
+      optionsContainer = dropdown;
+    }
+
+    let searchInput = dropdown.querySelector(".custom-select-search-input");
+    if (!searchInput) {
+      const searchDiv = document.createElement("div");
+      searchDiv.classList.add("custom-select-search");
+
+      searchInput = document.createElement("input");
+      searchInput.setAttribute("type", "text");
+      searchInput.setAttribute("placeholder", "Search...");
+      searchInput.classList.add("custom-select-search-input");
+      searchDiv.appendChild(searchInput);
+
+      const searchIcon = document.createElement("img");
+      searchIcon.setAttribute("src", "./project/img/search.svg");
+      searchIcon.setAttribute("alt", "Search");
+      searchDiv.appendChild(searchIcon);
+
+      dropdown.prepend(searchDiv);
+    }
+
+    let options = Array.from(
+      optionsContainer.querySelectorAll(".custom-select-option")
+    );
+
+    let newForm = wrapper.nextElementSibling;
+    let newFormInput;
+    if (newForm && newForm.classList.contains("new-item-form")) {
+      newFormInput =
+        newForm.querySelector("input") || newForm.querySelector("textarea");
+    }
+
     const positionDropdown = () => {
-      const inputRect = input.getBoundingClientRect();
+      const inputRect = mainInput.getBoundingClientRect();
       dropdown.style.top = `${inputRect.height + 5}px`;
       dropdown.style.left = `0`;
-      dropdown.style.width = `${input.offsetWidth}px`;
+      dropdown.style.width = `${mainInput.offsetWidth}px`;
 
       const dropdownRightEdge = inputRect.left + dropdown.offsetWidth;
       if (dropdownRightEdge > window.innerWidth - 20) {
@@ -21,8 +62,8 @@ export function initCustomSelects() {
       }
     };
 
-    const filterOptions = () => {
-      const searchTerm = input.value.toLowerCase();
+    const filterOptions = (term = "") => {
+      const searchTerm = term.toLowerCase();
       let hasVisibleOptions = false;
 
       options.forEach((option) => {
@@ -35,7 +76,7 @@ export function initCustomSelects() {
         }
       });
 
-      if (!hasVisibleOptions && input.value !== "") {
+      if (!hasVisibleOptions && searchTerm !== "") {
         dropdown.classList.remove("active");
         wrapper.classList.remove("active");
       } else {
@@ -48,45 +89,93 @@ export function initCustomSelects() {
     const closeDropdown = () => {
       dropdown.classList.remove("active");
       wrapper.classList.remove("active");
+      searchInput.value = "";
       options.forEach((opt) => (opt.style.display = "block"));
     };
 
-    // OPEN/CLOSE LOGIC //
-    input.addEventListener("mousedown", (event) => {
-      if (wrapper.classList.contains("active")) {
+    const toggleNewForm = (show) => {
+      if (newForm) {
+        if (show) {
+          newForm.classList.add("active");
+          if (newFormInput) {
+            newFormInput.focus();
+          }
+        } else {
+          newForm.classList.remove("active");
+        }
+      }
+    };
+
+    // OPEN/CLOSE LOGIC
+    mainInput.addEventListener("click", (event) => {
+      event.stopPropagation();
+      const isActive = wrapper.classList.contains("active");
+      if (isActive) {
         closeDropdown();
       } else {
-        input.focus();
-        filterOptions();
-      }
-      event.stopPropagation();
-    });
-
-    input.addEventListener("focus", () => {
-      if (!wrapper.classList.contains("active") && input.value === "") {
-        filterOptions();
+        dropdown.classList.add("active");
+        wrapper.classList.add("active");
+        positionDropdown();
+        searchInput.focus();
       }
     });
 
-    input.addEventListener("input", filterOptions);
+    mainInput.addEventListener("input", () => {
+      filterOptions(mainInput.value);
+    });
 
-    options.forEach((option) => {
-      option.addEventListener("click", (event) => {
+    searchInput.addEventListener("input", () => {
+      filterOptions(searchInput.value);
+    });
+
+    // Add event listener to the arrow as well
+    if (arrow) {
+      arrow.addEventListener("click", (event) => {
         event.stopPropagation();
-        input.value = option.textContent.trim();
-        closeDropdown();
+        mainInput.click();
       });
+    }
+
+    optionsContainer.addEventListener("click", (event) => {
+      const selectedOption = event.target.closest(".custom-select-option");
+      if (selectedOption) {
+        mainInput.value = selectedOption.textContent.trim();
+        closeDropdown();
+      }
     });
 
     if (addButton) {
       addButton.addEventListener("click", (event) => {
+        event.preventDefault();
         event.stopPropagation();
+        closeDropdown();
+        toggleNewForm(true);
+      });
+    }
+
+    if (newFormInput) {
+      newFormInput.addEventListener("keydown", (event) => {
+        if (event.key === "Enter") {
+          event.preventDefault();
+          const savedValue = newFormInput.value.trim();
+          if (savedValue) {
+            console.log(`Saved value for ${wrapper.id}: ${savedValue}`);
+            mainInput.value = savedValue;
+            toggleNewForm(false);
+            newFormInput.value = "";
+          }
+        }
       });
     }
 
     document.addEventListener("click", (event) => {
-      if (!wrapper.contains(event.target)) {
+      if (
+        !wrapper.contains(event.target) &&
+        newForm &&
+        !newForm.contains(event.target)
+      ) {
         closeDropdown();
+        toggleNewForm(false);
       }
     });
 
@@ -110,10 +199,14 @@ export function initCustomSelects() {
       }, 50);
     });
 
-    input.addEventListener("keydown", (event) => {
+    mainInput.addEventListener("keydown", (event) => {
       if (event.key === "Escape") {
         closeDropdown();
       }
     });
+
+    searchInput.addEventListener("click", (event) => {
+      event.stopPropagation();
+    });
   });
-}
+  }

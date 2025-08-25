@@ -1,5 +1,3 @@
-<<<<<<< HEAD
-=======
 // export function initFormSubmit() {
 //   const form = document.querySelector("form");
 //   if (!form) return;
@@ -26,7 +24,6 @@
 //     }
 //   });
 // }
->>>>>>> 5609c3a52f5688c2d10159f1e19eaa9d04398a21
 export function initFormSubmit() {
   form.addEventListener("submit", function (event) {
     event.preventDefault();
