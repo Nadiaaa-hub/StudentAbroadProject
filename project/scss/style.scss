@@ -1353,6 +1353,7 @@ select {
   font-weight: 300;
   font-size: 13px;
   grid-template-columns: repeat(4, auto);
+  grid-template-rows: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
   gap: 10px;
@@ -1364,6 +1365,7 @@ select {
     font-weight: 300;
     font-size: 5px;
     grid-template-columns: repeat(4, auto);
+    grid-template-rows: repeat(3, auto);
     justify-content: space-between;
     align-items: center;
     gap: 10px;
@@ -1758,7 +1760,7 @@ select {
   font-weight: 700;
   font-size: 25px;
   margin-top: 15px;
-  margin-bottom: 75px;
+  margin-bottom: 55px;
 
   @include respond(tablet) {
     margin-bottom: 0;
@@ -1851,10 +1853,15 @@ select {
   font-weight: 300;
   font-size: 13px;
   grid-template-columns: repeat(2, auto);
+  grid-template-rows: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
   gap: 10px;
   column-gap: 50px;
+}
+
+.checkbox-group-wrapper {
+  position: relative;
 }
 
 .country-section-s {
@@ -1866,7 +1873,7 @@ select {
 
   &__text-outline-s {
     position: absolute;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 700;
     padding-bottom: 5px;
     color: transparent;
@@ -1875,13 +1882,13 @@ select {
     pointer-events: none;
     top: 0;
     left: 0px;
-    transform: translate(29px, 10px);
+    transform: translate(15px, 10px);
     white-space: nowrap;
   }
 
   &__text-fill-s {
     position: relative;
-    font-size: 45px;
+    font-size: 40px;
     font-weight: 700;
     margin: 0;
     color: var(--color-blue-dark);
@@ -2164,4 +2171,3 @@ select {
       text-decoration: underline;
     }
   }
-}
