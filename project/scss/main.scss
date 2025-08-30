@@ -1,0 +1,57 @@
+<<<<<<< HEAD
+@use "utils/variables" as *;
+@use "base" as *;
+
+// 2. Імпорт компонентів
+@use "components/buttons" as *;
+@use "components/custom-select" as *;
+@use "components/inputs" as *;
+@use "components/language" as *;
+@use "components/links-icons" as *;
+@use "components/search-box" as *;
+
+// 3. Імпорт лайаутів
+@use "layouts/about-list" as *;
+@use "layouts/about-us-section" as *;
+@use "layouts/confirmation-page" as *;
+@use "layouts/contact-details-section" as *;
+@use "layouts/country-search-box" as *;
+@use "layouts/faq-section" as *;
+@use "layouts/footer" as *;
+@use "layouts/form-section" as *;
+@use "layouts/header" as *;
+@use "layouts/hero-section" as *;
+@use "layouts/home-faq" as *;
+@use "layouts/programm-list" as *;
+@use "layouts/share-program-section" as *;
+@use "layouts/study-abroad-section" as *;
+@use "layouts/uni-list" as *;
+@use "layouts/uni-read-more" as *;
+=======
+@import "./components/buttons";
+@import "./components/custom-select";
+@import "./components/inputs";
+@import "./components/language";
+@import "./components/links&icons";
+@import "./components/search-box";
+
+@import "./layouts/about-list";
+@import "./layouts/about-us-section";
+@import "./layouts/confirmation-page";
+@import "./layouts/contact-details-section";
+@import "./layouts/country-search-box";
+@import "./layouts/faq-section";
+@import "./layouts/footer";
+@import "./layouts/form-section";
+@import "./layouts/header";
+@import "./layouts/hero-section";
+@import "./layouts/home-faq";
+@import "./layouts/programm-list";
+@import "./layouts/share-program-section";
+@import "./layouts/study-abroad-section";
+@import "./layouts/uni-list";
+@import "./layouts/uni-read-more";
+
+@import "./utils/variables";
+@import "./base";
+>>>>>>> 5609c3a52f5688c2d10159f1e19eaa9d04398a21
