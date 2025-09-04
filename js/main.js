@@ -6,6 +6,7 @@ import { initAddUniversity } from "./modules/add-university.js";
 import { initSearchInput } from "./modules/search.js";
 import { initFAQ } from "./modules/faq.js";
 import { modalBtnClose } from "./modules/modal.js";
+// import { initMobileMenu } from "./modules/mobile-menu.js";
 import { burgerMenu } from "./modules/burger-menu.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -21,6 +22,7 @@ document.addEventListener("DOMContentLoaded", () => {
   initAddUniversity();
   initSearchInput();
   modalBtnClose();
+  // initMobileMenu();
   burgerMenu();
   initFAQ();
 });

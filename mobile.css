@@ -1,0 +1,106 @@
+/* Мобільне меню */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    width: 100%;
+    max-width: 320px;
+    /* Згідно з вашим описом */
+    height: 100vh;
+    background-color: rgba(0, 0, 0, 0.75);
+    /* Трохи менша прозорість для контрасту */
+    transform: translateX(100%);
+    transition: transform 0.3s ease-in-out;
+    z-index: 1000;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Вирівнювання по правому краю */
+    padding: 20px;
+    box-sizing: border-box;
+}
+
+/* Відкриття меню */
+.mobile-menu.active {
+    transform: translateX(0);
+}
+
+/* Кнопка закриття */
+.mobile-menu__btn-close {
+    background: none;
+    border: none;
+    cursor: pointer;
+    padding: 10px;
+    margin-bottom: 20px;
+    /* Відступ, як ви просили */
+}
+
+/* Список посилань */
+.mobile-menu__list {
+    list-style: none;
+    padding: 0;
+    margin: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-end;
+    /* Вирівнювання тексту праворуч */
+    gap: 20px;
+}
+
+/* Посилання в меню */
+.mobile-menu__list li a {
+    font-family: 'Rubik', sans-serif;
+    font-weight: 400;
+    font-size: 25px;
+    line-height: 100%;
+    color: #fff;
+    text-decoration: none;
+    word-break: keep-all;
+}
+
+/* Оверлей (напівпрозорий шар) */
+.overlay {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background-color: #000000bf;
+    /* Колір, як ви вказали */
+    backdrop-filter: blur(6.8px);
+    /* Ефект розмиття */
+    opacity: 0;
+    visibility: hidden;
+    /* Ховаємо, щоб не блокував кліки */
+    transition: opacity 0.3s ease-in-out, visibility 0.3s ease-in-out;
+    z-index: 900;
+}
+
+/* Показати оверлей */
+.overlay.active {
+    opacity: 1;
+    visibility: visible;
+}
+
+/* Приховування десктопної навігації на мобільних екранах */
+@media (max-width: 1023px) {
+
+    .header__nav,
+    .lang-search {
+        display: none;
+    }
+
+    .header__burger {
+        display: block;
+    }
+}
+
+/* Приховування мобільної навігації на десктопах */
+@media (min-width: 1024px) {
+
+    .mobile-menu,
+    .overlay,
+    .header__burger {
+        display: none;
+    }
+}
