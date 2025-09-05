@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./project/css/s.css" />
+    <link rel="stylesheet" href="./aaa.css" />
     <link rel="website icon" type="png" href="./project/img/logo_01.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -21,6 +21,7 @@
             </a>
           </div>
 
+          <!-- Десктопна навігація -->
           <nav class="header__nav">
             <ul class="header__menu">
               <li>
@@ -74,98 +75,67 @@
               <input
                 type="text"
                 class="search-box__input"
-                data-en="Search..."
-                data-ua="Шукати..."
                 placeholder="Search..." />
-
-              <button class="header__burger menu-btn-open" type="button">
-                <img src="./project/img/burger-menu.svg" alt="Menu" />
-              </button>
-
-              <div class="overlay"></div>
-
-              <div class="mobile-menu">
-                <button
-                  class="mobile-menu__btn-close menu-btn-close"
-                  type="button">
-                  <svg width="24" height="24">
-                    <use href="./project/img/icon-close-burger.svg"></use>
-                  </svg>
-                </button>
-
-                <ul class="mobile-menu__list">
-                  <li>
-                    <a
-                      class="link"
-                      href="#about-us-section"
-                      data-en="ABOUT US"
-                      data-ua="ПРО НАС"
-                      >ABOUT US</a
-                    >
-                  </li>
-
-                  <li>
-                    <a
-                      class="link"
-                      href="uni-list.html"
-                      data-en="UNI LIST"
-                      data-ua="СПИСОК ВНЗ"
-                      >UNI LIST</a
-                    >
-                  </li>
-
-                  <li>
-                    <a
-                      class="link"
-                      href="program-list.html"
-                      data-en="PROGRAM LIST"
-                      data-ua="ПРОГРАМИ"
-                      >PROGRAM LIST</a
-                    >
-                  </li>
-
-                  <li>
-                    <a
-                      class="link"
-                      href="./faq.html"
-                      data-en="FAQ"
-                      data-ua="FAQ"
-                      >FAQ</a
-                    >
-                  </li>
-                </ul>
-
-                <div class="lang-search">
-                  <span class="language-switch">
-                    <button
-                      data-lang="ua"
-                      class="js-switch-button"
-                      type="button">
-                      UA
-                    </button>
-
-                    <button
-                      data-lang="en"
-                      class="js-switch-button active"
-                      type="button">
-                      EN
-                    </button>
-                  </span>
-
-                  <div class="search-box">
-                    <input
-                      type="text"
-                      class="search-box__input"
-                      data-en="Search..."
-                      data-ua="Шукати..."
-                      placeholder="Search..." />
-                  </div>
-                </div>
-              </div>
             </div>
           </div>
+
+          <!-- Бургер для мобільного меню -->
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle" class="burger">
+            <span></span>
+          </label>
         </div>
       </div>
+      <!-- Мобільне меню -->
+      <ul class="mobile-menu">
+        <li class="abt_us">
+          <a class="link" href="index.html" data-en="ABOUT US" data-ua="ПРО НАС"
+            >ABOUT US</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="uni-list.html"
+            data-en="UNI LIST"
+            data-ua="СПИСОК ВНЗ"
+            >UNI LIST</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="program-list.html"
+            data-en="PROGRAM LIST"
+            data-ua="ПРОГРАМИ"
+            >PROGRAM LIST</a
+          >
+        </li>
+        <li>
+          <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+        </li>
+        <li>
+          <span class="mobile-language-switch" aria-hidden="true">
+            <button
+              type="button"
+              class="js-switch-button"
+              data-lang="ua"
+              aria-label="Українська">
+              UA
+            </button>
+            <button
+              type="button"
+              class="js-switch-button active"
+              data-lang="en"
+              aria-label="English">
+              EN
+            </button>
+          </span>
+        </li>
+      </ul>
+
+      <!-- Overlay -->
+      <div class="overlay"></div>
     </header>
 
     <main>

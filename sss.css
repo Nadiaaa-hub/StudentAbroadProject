@@ -171,12 +171,7 @@ header {
 }
 
 .header__burger {
-    /* display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-image: url("../img/burger-menu.svg"); */
+
     display: block;
     background: none;
     border: none;
@@ -4200,58 +4195,13 @@ a.blue-links:hover {
     padding: 0 24px;
 }
 
-/* Ліва секція — 70% */
-.left-section {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 60%;
-    flex: 0 0 60%;
-    max-width: 70%;
-    border: 1px solid var(--color-main-blue);
-    border-radius: 20px;
-    padding: 20px 60px;
-}
 
-.left-section .description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-main-black);
-}
 
 .user-greetings {
     font-style: italic;
     font-size: 14px;
     color: var(--color-grey);
     text-align: right;
-}
-
-/* Права секція — 30% */
-.right-section {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 30%;
-    flex: 0 0 30%;
-    max-width: 30%;
-}
-
-.right-section h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.right-section p,
-.right-section a {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--color-main-black);
-}
-
-.right-section a.blue-links {
-    color: var(--color-main-blue);
-    text-decoration: none;
-}
-
-.right-section a.blue-links:hover {
-    text-decoration: underline;
 }
 
 /* Адаптація для мобільних пристроїв (до 479px) */
@@ -4823,7 +4773,7 @@ ul {
     list-style: none;
     display: flex;
     gap: 30px;
-    justify-content: flex-end;
+    justify-content: center;
 }
 
 .header__menu a {
@@ -4880,5 +4830,3 @@ ul {
     transform: rotate(45deg);
     bottom: 12px;
 }
-
-/* Мобільне меню */

@@ -14,6 +14,7 @@
     --bp-mobile: 480px;
     --bp-tablet: 768px;
     --bp-desktop: 1280px;
+    --dark-75: rgba(0, 0, 0, 0.75);
 }
 
 *,
@@ -99,12 +100,34 @@ a {
     color: var(--color-main-white);
 }
 
+.mobile-menu ul {
+    display: none;
+}
+
+@media screen and (min-width: 959px) {
+    .mobile-menu ul {
+        position: fixed;
+        left: 0;
+        top: -100%;
+        width: 100%;
+        padding-top: 80px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 20px;
+        transition: top 0.5s;
+        z-index: 1000;
+        list-style-type: none;
+        font-size: 25px;
+    }
+}
+
+
 ul {
     margin: 0;
     padding: 0;
     list-style-type: none;
 }
-
 
 /* Header */
 .header__menu a.active,
@@ -134,6 +157,7 @@ header {
     gap: 40px;
 }
 
+
 .header__nav {
     display: none;
 }
@@ -151,11 +175,7 @@ header {
         flex-grow: 1;
         gap: 40px;
     }
-}
 
-
-
-@media screen and (min-width: 960px) {
     .header__menu {
         display: -webkit-box;
         display: -ms-flexbox;
@@ -168,37 +188,6 @@ header {
         -ms-flex-positive: 1;
         flex-grow: 1;
     }
-}
-
-.header__burger {
-    /* display: block;
-  background: none;
-  border: none;
-  cursor: pointer;
-  background-repeat: no-repeat;
-  background-image: url("../img/burger-menu.svg"); */
-    display: block;
-    background: none;
-    border: none;
-    cursor: pointer;
-    z-index: 1100;
-}
-
-@media screen and (min-width: 960px) {
-    .header__burger {
-        display: none;
-        background: none;
-        border: none;
-        cursor: pointer;
-    }
-
-}
-
-.menu-btn-open img {
-    width: 24px;
-    height: 24px;
-    display: block;
-    /* або inline-block */
 }
 
 .lang-search {
@@ -473,75 +462,74 @@ header {
     font-weight: bold;
 }
 
-/* Study Abroad Section */
+/* Study Abroad Section*/
+
 .study-abroad-section {
     background-color: var(--color-main-white);
     color: var(--color-main-black);
     display: -webkit-box;
     display: -ms-flexbox;
     display: flex;
-}
+    padding-top: 45px;
+    padding-bottom: 45px;
 
-@media screen and (min-width: 760px) {
-    .study-abroad-section {
-        background-color: var(--color-main-white);
-        color: var(--color-main-black);
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        padding-top: 100px;
-    }
 }
 
 @media screen and (min-width: 1024px) {
     .study-abroad-section {
-        padding-top: 70px;
-        padding-bottom: 70px;
+        display: -webkit-box;
+        display: -ms-flexbox;
+        display: flex;
+        padding-top: 100px;
+        align-items: center;
+        justify-content: center;
     }
 }
 
 .study-abroad__container {
-    display: flex;
-    align-items: flex-start;
-    justify-content: space-between;
-    gap: 40px;
     flex-direction: column;
+    align-items: center;
+    gap: 40px;
+    padding: 0 16px;
+
 }
 
 @media screen and (min-width: 760px) {
     .study-abroad__container {
-        display: -webkit-box;
-        display: -ms-flexbox;
         display: flex;
-        -webkit-box-align: start;
-        -ms-flex-align: start;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-
-        gap: 40px;
-
         flex-direction: row;
-        align-items: flex-start;
-        justify-content: flex-start;
+        align-items: center;
+        justify-content: center;
+        width: 100%;
+        max-width: 1100px;
+        gap: 100px;
     }
 }
 
 .study-abroad__content {
-    display: -webkit-box;
-    display: -ms-flexbox;
+    width: 100%;
     display: flex;
-    -webkit-box-align: center;
-    -ms-flex-align: center;
-    align-items: center;
-    -ms-flex-wrap: wrap;
-    flex-wrap: wrap;
+    flex-direction: column;
+    align-items: flex-start;
     min-width: 300px;
     max-width: 570px;
+
+
+}
+
+@media screen and (min-width: 760px) {
+    .study-abroad__content {
+        max-width: 700px;
+        text-align: center;
+        align-items: center;
+
+    }
 }
 
 .study-abroad__title {
     font-size: 18px;
     margin-bottom: 35px;
+
 }
 
 @media screen and (min-width: 460px) {
@@ -549,8 +537,15 @@ header {
         font-size: 20px;
         line-height: 1.2;
         margin-bottom: 45px;
+
     }
 }
+
+.study-abroad__title,
+.study-abroad__description {
+    text-align: left;
+}
+
 
 .study-abroad__description {
     font-weight: 400;
@@ -565,6 +560,17 @@ header {
         letter-spacing: 0.04em;
         margin-bottom: 40px;
     }
+}
+
+.about-us__line {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    max-width: 999px;
+    height: 1px;
+    background-color: var(--color-white-line);
+    margin-top: 70px;
 }
 
 .btn {
@@ -611,55 +617,36 @@ header {
 
 .social-icons {
     display: flex;
+    flex-direction: column;
     gap: 26px;
-    -ms-flex-direction: row;
-    flex-direction: row;
-    width: 100%;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
+    align-items: center;
     justify-content: center;
+
+    flex-shrink: 0;
+
 }
 
 .social-icon-link {
-    width: 40px;
-    height: 40px;
+    width: 60px;
+    height: 60px;
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    border-radius: 50%;
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (max-width: 759px) {
     .social-icons {
-        display: -webkit-box;
-        display: -ms-flexbox;
-        display: flex;
-        -webkit-box-orient: vertical;
-        -webkit-box-direction: normal;
-        -ms-flex-direction: column;
-        flex-direction: column;
-        gap: 26px;
-        -webkit-box-align: center;
-        -ms-flex-align: center;
-        align-items: center;
-        -webkit-box-pack: center;
-        -ms-flex-pack: center;
-        justify-content: center;
-        margin-left: 136px;
+        flex-direction: row;
+        /* можна залишити рядком на мобільних */
+        gap: 16px;
+        margin-top: 8px;
     }
 
     .social-icon-link {
-        width: 60px;
-        height: 60px;
-        border-radius: 50%;
+        width: 40px;
+        height: 40px;
     }
-}
-
-.about-us__line {
-    display: flex;
-    align-items: center;
-    justify-content: center;
-    width: 100%;
-    max-width: 999px;
-    height: 1px;
-    background-color: var(--color-white-line);
-    margin-top: 70px;
 }
 
 /* About Us Section */
@@ -686,6 +673,10 @@ header {
     .program-list-block {
         grid-area: program-list;
     }
+}
+
+.abt_us {
+    margin-top: 40px;
 }
 
 .about-us-section__container {
@@ -4200,58 +4191,13 @@ a.blue-links:hover {
     padding: 0 24px;
 }
 
-/* Ліва секція — 70% */
-.left-section {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 60%;
-    flex: 0 0 60%;
-    max-width: 70%;
-    border: 1px solid var(--color-main-blue);
-    border-radius: 20px;
-    padding: 20px 60px;
-}
 
-.left-section .description {
-    font-size: 16px;
-    line-height: 1.6;
-    color: var(--color-main-black);
-}
 
 .user-greetings {
     font-style: italic;
     font-size: 14px;
     color: var(--color-grey);
     text-align: right;
-}
-
-/* Права секція — 30% */
-.right-section {
-    -webkit-box-flex: 0;
-    -ms-flex: 0 0 30%;
-    flex: 0 0 30%;
-    max-width: 30%;
-}
-
-.right-section h3 {
-    font-size: 18px;
-    font-weight: bold;
-    margin-bottom: 8px;
-}
-
-.right-section p,
-.right-section a {
-    font-size: 15px;
-    line-height: 1.5;
-    color: var(--color-main-black);
-}
-
-.right-section a.blue-links {
-    color: var(--color-main-blue);
-    text-decoration: none;
-}
-
-.right-section a.blue-links:hover {
-    text-decoration: underline;
 }
 
 /* Адаптація для мобільних пристроїв (до 479px) */
@@ -4463,14 +4409,6 @@ a.blue-links:hover {
 /* Адаптація для планшетів (480px - 767px) */
 @media screen and (min-width: 480px) and (max-width: 767px) {
 
-    /* Header */
-    header {
-        padding: 20px 0;
-    }
-
-    .header__container {
-        gap: 20px;
-    }
 
 
     .hero-section__title {
@@ -4542,10 +4480,7 @@ a.blue-links:hover {
 /* Адаптація для десктопів (768px - 1279px) */
 @media screen and (min-width: 768px) and (max-width: 1279px) {
 
-    /* Header */
-    .header__container {
-        gap: 20px;
-    }
+
 
     /* Hero Section */
 
@@ -4558,9 +4493,7 @@ a.blue-links:hover {
     }
 
     /* Study Abroad Section */
-    .study-abroad__container {
-        gap: 20px;
-    }
+
 
     /* About Us Section */
     .about-us-section__container {
@@ -4619,7 +4552,6 @@ a.blue-links:hover {
 
 /* Адаптація для великих екранів (від 1280px) */
 @media screen and (min-width: 1280px) {
-    /* Header */
 
 
 
@@ -4671,162 +4603,8 @@ a.blue-links:hover {
 }
 
 /* Мобільне меню */
-/* label {
-    position: relative;
-    display: block;
-    height: 25px;
-    width: 30px;
-}
-
-label span {
-    top: 11px
-}
-
-label::after,
-label::before,
-label span {
-    position: absolute;
-    height: 3px;
-    width: 100%;
-    background-color: rgba(0, 0, 0, 0.7);
-    backdrop-filter: blur(5px);
-    transition: .3s;
-}
-
-label::before {
-    content: '';
-    top: 0;
-
-}
-
-label::after {
-    content: '';
-    bottom: 0;
-
-}
-
-ul {
-    position: fixed;
-    left: 0;
-    right: 0;
-    background-color: rgba(0, 0, 0, 0.7);
-    padding-top: 100px;
-    z-index: -1;
-    flex-direction: column;
-    text-align: right;
-    top: -100vh;
-    bottom: 100vh;
-    transition: .5s;
-
-}
-
 #burger-toggle {
     display: none;
-}
-
-#burger-toggle:checked~label::after {
-    transform: rotate(45deg);
-    bottom: 10px;
-}
-
-#burger-toggle:checked~label::before {
-    transform: rotate(-45deg);
-    top: 12px;
-}
-
-#burger-toggle:checked~label span {
-    transform: rotate(-45deg);
-    top: 12px;
-}
-
-#burger-toggle:checked~ul {
-    top: 0;
-    bottom: 0;
-}
-
-@media (max-width: 784px) {
-    label {
-        display: block;
-    }
-} */
-
-/* About Uni/Proggram List Section */
-.about-section__info-columns {
-    padding-top: 20px;
-    color: var(--color-main-black);
-}
-
-.about-section__container {
-    display: grid;
-    grid-template-columns: 1fr;
-    gap: 20px;
-    color: var(--color-main-black);
-}
-
-@media (min-width: 768px) {
-    .about-section__container {
-        grid-template-columns: 1fr 1fr;
-    }
-}
-
-@media screen and (min-width: 1280px) {
-    .about-section__info-block {
-        max-width: 570px;
-    }
-}
-
-.about-section__title {
-    font-size: 25px;
-    font-weight: 700;
-    margin-bottom: 30px;
-    color: var(--color-blue-dark);
-}
-
-.about-section__text {
-    font-size: 20px;
-    font-weight: 400;
-    line-height: 1.2;
-    letter-spacing: 0;
-    margin-bottom: 20px;
-    color: var(--color-blue-dark);
-}
-
-.about-section__text:last-child {
-    margin-bottom: 0;
-}
-
-.program-btn-wrapper {
-    display: -webkit-box;
-    display: -ms-flexbox;
-    display: flex;
-    -webkit-box-pack: center;
-    -ms-flex-pack: center;
-    justify-content: center;
-    margin-top: 77px;
-}
-
-
-
-@media (max-width: 1023px) {
-
-    .header__nav,
-    .lang-search {
-        display: none;
-    }
-
-}
-
-/* BURGER */
-.burger {
-    display: none;
-    /* ховаємо на десктопі */
-    position: absolute;
-    top: 20px;
-    right: 20px;
-    width: 30px;
-    height: 25px;
-    cursor: pointer;
-    z-index: 200;
 }
 
 .burger span,
@@ -4835,14 +4613,13 @@ ul {
     content: "";
     position: absolute;
     width: 100%;
-    height: 3px;
-    background-color: rgba(0, 0, 0, 0.7);
-    transition: all 0.3s ease;
-    left: 0;
+    height: 2px;
+    background: var(--color-main-white);
+    transition: 0.3s;
 }
 
 .burger span {
-    top: 11px;
+    top: 12px;
 }
 
 .burger::before {
@@ -4853,6 +4630,13 @@ ul {
     bottom: 0;
 }
 
+
+/* Відкриваємо мобільне меню при чекнутому бургері */
+#burger-toggle:checked~.mobile-menu {
+    top: 0;
+}
+
+/* Анімація бургеру */
 #burger-toggle:checked+.burger span {
     transform: rotate(-45deg);
     top: 12px;
@@ -4868,57 +4652,105 @@ ul {
     bottom: 12px;
 }
 
-/* MOBILE MENU */
-.mobile-menu {
-    position: fixed;
-    top: -100%;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    background-color: rgba(0, 0, 0, 0.8);
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: flex-start;
-    padding-top: 80px;
-    gap: 20px;
-    transition: top 0.3s ease;
-    z-index: 100;
-}
-
-#burger-toggle:checked~.mobile-menu {
-    top: 0;
-}
-
-.mobile-menu__list {
-    list-style: none;
-    padding: 0;
-    margin: 0;
-    display: flex;
-    flex-direction: column;
-    gap: 20px;
-    align-items: center;
-}
-
-.mobile-menu__link {
-    color: #fff;
-    font-size: 25px;
-    text-decoration: none;
-}
-
-@media (max-width: 1023px) {
-    .burger {
-        display: block;
-    }
-
-    .header__nav,
-    .lang-search {
+/* Приховуємо десктопне меню на мобільних */
+@media (max-width: 959px) {
+    .header__nav {
         display: none;
     }
+
+    .burger {
+        display: block;
+        z-index: 11000;
+    }
 }
 
-@media (min-width: 1024px) {
+
+
+/* Бургер */
+.burger {
+    display: none;
+    cursor: pointer;
+    position: relative;
+    width: 30px;
+    height: 27px;
+}
+
+/* Десктоп ≥960px */
+@media (min-width: 960px) {
     .mobile-menu {
         display: none;
     }
+
+    .overlay {
+        display: none;
+    }
+}
+
+/* Мобільні екрани <960px */
+@media (max-width: 959px) {
+    .header__nav {
+        display: none;
+    }
+
+    .burger {
+        display: block;
+    }
+}
+
+
+/* --------- MOBILE MENU (висувається справа) --------- */
+.mobile-menu {
+    position: fixed;
+    top: 0;
+    right: 0;
+    height: 100vh;
+    max-width: 85vw;
+    transform: translateX(100%);
+    transition: transform .35s cubic-bezier(.2, .9, .2, 1);
+    z-index: 1200;
+    display: flex;
+    flex-direction: column;
+    gap: 20px;
+    padding: 50px 30px;
+    box-sizing: border-box;
+    overflow-y: auto;
+    font-size: 25px;
+    text-align: right;
+}
+
+.overlay {
+    position: fixed;
+    inset: 0;
+    background: var(--dark-75);
+    z-index: 1000;
+    display: none;
+    backdrop-filter: blur(6px);
+    -webkit-backdrop-filter: blur(6px);
+}
+
+/* показуємо overlay коли має клас .open */
+.overlay.open {
+    display: block;
+}
+
+.burger-btn.open .burger-line:nth-child(1) {
+    transform: rotate(45deg);
+}
+
+
+.burger-btn.open .burger-line:nth-child(3) {
+    transform: rotate(-45deg);
+}
+
+
+/* Mobile/tablet: hide desktop nav, show burger */
+@media(max-width:959px) {
+    .burger-btn {
+        display: flex;
+    }
+}
+
+.mobile-menu.open,
+#burger-toggle:checked~.mobile-menu {
+    transform: translateX(0);
 }
