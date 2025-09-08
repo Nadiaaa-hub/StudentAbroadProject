@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./aaa.css" />
+    <link rel="stylesheet" href="./project/css/s.css" />
     <link rel="website icon" type="png" href="./project/img/logo_01.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -197,19 +197,17 @@
                     id="add-inviting-uni-button">
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
-                </div>
 
-                <div class="new-item-form" id="new-inviting-uni-form">
-                  <div class="new-item-header">
-                    <p>
-                      Leave the details of the university that invited you. Our
-                      administrator will enter them into our database.
-                    </p>
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-inviting-uni-form">
+                    <div class="new-item-header">
+                      <p>
+                        Leave the details of the university that invited you.
+                        Our administrator will enter them into our database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Enter details here..."
-                    class="new-item-input" />
                 </div>
 
                 <label class="form-section__description">
@@ -238,19 +236,19 @@
                     id="add-home-uni-button">
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
-                </div>
-                <div class="new-item-form" id="new-home-uni-form">
-                  <div class="new-item-header">
-                    <p>
-                      Leave the details of the university that invited you. Our
-                      administrator will enter them into our database.
-                    </p>
+
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-home-uni-form">
+                    <div class="new-item-header">
+                      <p>
+                        Leave the details of your home university. Our
+                        administrator will enter them into our database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Enter details here..."
-                    class="new-item-input" />
                 </div>
+
                 <label class="form-section__description">
                   Choose Ukrainian university from the list. Add a new one, if
                   you can’t find it.
@@ -279,9 +277,8 @@
                     class="select-arrow" />
                 </div>
                 <label class="form-section__description">
-                  Please, provide the faculty of inviting uni for this
-                  program.</label
-                >
+                  Please, provide the faculty of inviting uni for this program.
+                </label>
               </div>
 
               <div class="form-field-and-description">
@@ -301,7 +298,6 @@
                     <div class="custom-select-option">4</div>
                     <div class="custom-select-option">5</div>
                   </div>
-
                   <img
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
@@ -309,24 +305,26 @@
                   <button
                     type="button"
                     class="form-section__add-button custom-select-add-button"
-                    id="add-inviting-uni-button">
+                    id="add-level-button">
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
+
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-level-form">
+                    <div class="new-item-header">
+                      <p>
+                        Enter the details of the level. Our administrator will
+                        add it to the database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
+                  </div>
                 </div>
+
                 <label class="form-section__description">
                   Choose the level of this program from the list. Add a new one,
                   if you can’t find it.
                 </label>
-              </div>
-
-              <div class="form-field-and-description">
-                <div class="input-with-optional-button">
-                  <input type="text" placeholder="Short description:" />
-                </div>
-                <label class="form-section__description"
-                  >A brief, meaningful description of the program with links to
-                  additional information, etc.</label
-                >
               </div>
 
               <div class="form-field-and-description">
@@ -373,12 +371,13 @@
                 <li>
                   <a
                     class="footer__link"
-                    href="index.html"
+                    href="#about-us-section"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
                     >ABOUT US</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -388,6 +387,7 @@
                     >UNI LIST</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -397,6 +397,7 @@
                     >PROGRAM LIST</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -409,11 +410,12 @@
               </ul>
             </nav>
 
-            <div class="lang-search">
-              <span class="language-switch">
+            <div class="footer__lang-search">
+              <span class="footer__language-switch">
                 <button data-lang="ua" class="js-switch-button" type="button">
                   UA
                 </button>
+
                 <button
                   data-lang="en"
                   class="js-switch-button active"
@@ -421,7 +423,8 @@
                   EN
                 </button>
               </span>
-              <div class="search-box">
+
+              <div class="footer__search-box">
                 <input
                   type="text"
                   class="search-box__input"
@@ -431,6 +434,7 @@
               </div>
             </div>
           </div>
+
           <div class="footer__line"></div>
         </div>
       </div>
