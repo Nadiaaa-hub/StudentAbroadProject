@@ -6,7 +6,10 @@ import { initAddUniversity } from "./modules/add-university.js";
 import { initSearchInput } from "./modules/search.js";
 import { initFAQ } from "./modules/faq.js";
 import { modalBtnClose } from "./modules/modal.js";
+<<<<<<< HEAD
 // import { initMobileMenu } from "./modules/mobile-menu.js";
+=======
+>>>>>>> 7777fe4e0fbfc0c7394f862552dd8e247cdfc6aa
 import { burgerMenu } from "./modules/burger-menu.js";
 
 document.addEventListener("DOMContentLoaded", () => {
@@ -22,7 +25,10 @@ document.addEventListener("DOMContentLoaded", () => {
   initAddUniversity();
   initSearchInput();
   modalBtnClose();
+<<<<<<< HEAD
   // initMobileMenu();
+=======
+>>>>>>> 7777fe4e0fbfc0c7394f862552dd8e247cdfc6aa
   burgerMenu();
   initFAQ();
 });

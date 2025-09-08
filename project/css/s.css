@@ -157,7 +157,6 @@ header {
   gap: 40px;
 }
 
-
 .header__nav {
   display: none;
 }
@@ -522,7 +521,6 @@ header {
 .study-abroad__title {
   font-size: 18px;
   margin-bottom: 35px;
-
 }
 
 @media screen and (min-width: 460px) {
@@ -843,7 +841,6 @@ header {
 }
 
 /* About Uni/Proggram List Section */
-
 .about-section__info-columns {
   padding-top: 20px;
   color: var(--color-main-black);
@@ -917,7 +914,6 @@ header {
   transform: translate(29px, 10px);
   white-space: nowrap;
 }
-
 
 @media screen and (min-width: 480px) {
   .text-outline-style {
@@ -3281,7 +3277,6 @@ a.blue-links:hover {
 }
 
 
-
 .user-greetings {
   font-style: italic;
   font-size: 14px;
@@ -3412,7 +3407,6 @@ a.blue-links:hover {
   }
 
   /* Share My Program Section */
-
 
   .form-section__title {
     font-size: 20px;
@@ -3558,12 +3552,10 @@ a.blue-links:hover {
     width: 100%;
   }
 
-
 }
 
 /* Адаптація для десктопів (768px - 1279px) */
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-
 
 
   /* Hero Section */
@@ -3577,7 +3569,6 @@ a.blue-links:hover {
   }
 
   /* Study Abroad Section */
-
 
   /* About Us Section */
   .about-us-section__container {
@@ -3595,7 +3586,6 @@ a.blue-links:hover {
   .about-section__container {
     grid-template-columns: 1fr 1fr;
   }
-
 
 
   /* FAQ */
