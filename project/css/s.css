@@ -97,8 +97,11 @@ p {
   }
 }
 
-.logo {
+.logo,
+.logo * {
+  -webkit-tap-highlight-color: transparent;
   outline: none;
+  -webkit-user-select: none;
 }
 
 .logo:focus {
@@ -465,12 +468,14 @@ header {
 
 .scroll-indicator {
   position: absolute;
-  bottom: 42px;
+
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   -webkit-animation: bounce 2s infinite ease-in-out;
   animation: bounce 2s infinite ease-in-out;
   cursor: pointer;
+  bottom: 20px;
+
 }
 
 .scroll-indicator__img {
@@ -697,6 +702,23 @@ header {
   transform: scale(1.05);
 }
 
+button,
+.btn,
+[role="button"],
+a {
+  outline: none;
+  -webkit-tap-highlight-color: transparent;
+
+}
+
+button:focus,
+.btn:focus,
+[role="button"]:focus,
+a:focus {
+  outline: none;
+  box-shadow: none;
+
+}
 
 .social-icons {
   display: flex;
@@ -3226,9 +3248,6 @@ a.blue-links:hover {
     font-size: 24px;
   }
 
-  .scroll-indicator {
-    bottom: 20px;
-  }
 
   /* Study Abroad Section */
 
