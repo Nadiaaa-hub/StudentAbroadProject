@@ -67,9 +67,6 @@ main {
   padding: 0 30px;
 }
 
-
-
-
 section {
   padding: 45px 0px;
 }
@@ -98,6 +95,14 @@ p {
   p {
     font-size: 20px;
   }
+}
+
+.logo {
+  outline: none;
+}
+
+.logo:focus {
+  outline: 0;
 }
 
 img {
@@ -256,6 +261,49 @@ header {
   cursor: pointer;
 }
 
+.footer__search-box:focus-within {
+  background-color: var(--color-main-yellow);
+}
+
+
+.footer__search-box__input {
+  -webkit-tap-highlight-color: transparent;
+}
+
+.footer__search-box__input:focus {
+  outline: 0;
+  color: var(--color-main-black);
+}
+
+.footer__search-box__input::placeholder {
+  color: var(--color-main-white);
+  opacity: 1;
+}
+
+.footer__search-box__input:focus::placeholder {
+  color: var(--color-main-black);
+}
+
+.footer__scroll-indicator {
+  display: block;
+  border: none;
+  background: none;
+}
+
+@media screen and (min-width: 960px) {
+  .footer__scroll-indicator {
+    display: none;
+    border: none;
+    background: none;
+  }
+}
+
+.footer__scroll-indicator-img {
+  width: 16px;
+  height: 16px;
+  transform: rotate(180deg);
+}
+
 
 .search-box:focus-within {
   background-color: var(--color-main-yellow);
@@ -271,10 +319,16 @@ header {
   -webkit-box-flex: 1;
   -ms-flex-positive: 1;
   flex-grow: 1;
-  width: 59px;
+  width: 120px;
+  cursor: pointer;
+}
+
+.search-box__input {
+  -webkit-tap-highlight-color: transparent;
 }
 
 .search-box__input:focus {
+  outline: 0;
   color: var(--color-main-black);
 }
 
@@ -656,10 +710,9 @@ header {
   border-radius: 50%;
 }
 
-@media screen and (max-width: 759px) {
+@media screen and (max-width: 760px) {
   .social-icons {
     flex-direction: row;
-    /* можна залишити рядком на мобільних */
     gap: 16px;
     margin-top: 8px;
   }
@@ -947,7 +1000,6 @@ header {
   pointer-events: none;
   top: 0;
   left: 0px;
-
   transform: translate(29px, 10px);
   white-space: nowrap;
 }
@@ -974,11 +1026,18 @@ header {
 }
 
 .faq__subtitles {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0;
-  margin-bottom: 70px;
+  margin-bottom: 40px;
   color: var(--color-blue-dark);
+}
+
+@media screen and (min-width: 760px) {
+  .faq__subtitles {
+    font-size: 20px;
+    margin-bottom: 70px;
+  }
 }
 
 .faq__paragraph {
@@ -1025,10 +1084,8 @@ header {
 
 .faq__answer.active+.faq__footer-info {
   max-height: 200px;
-
   opacity: 1;
   padding-bottom: 45px;
-
   margin-top: 20px;
   -webkit-transform: translateY(0);
   transform: translateY(0);
@@ -1046,142 +1103,47 @@ header {
 }
 
 .contact-details__heading {
+  font-size: 30px;
   position: relative;
   display: inline-block;
 }
 
-.contact-details__main-content {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  gap: 21px;
-  display: flex;
-  flex-wrap: wrap;
-}
-
-@media screen and (min-width: 960px) {
-  .contact-details__main-content {
-    display: flex;
-    flex-wrap: wrap;
-
-  }
-}
-
-.contact-details__text-fill {
-  position: relative;
-  font-size: 20px;
-  font-weight: 700;
-  margin: 0;
-  color: var(--color-blue-dark);
-}
-
-@media screen and (min-width: 960px) {
-  .contact-details__text-fill {
+@media screen and (min-width: 480px) {
+  .contact-details__heading {
     font-size: 45px;
   }
 }
 
-.program-card {
-  border: 1px solid var(--color-main-blue);
-}
-
-/* FAQ */
-
-
-.faq__title {
-  font-size: 25px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: var(--color-blue-dark);
-}
-
-.faq__content {
-  max-width: 100%;
-  width: 1160px;
-  z-index: 1;
-}
-
-.faq__subtitles {
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: 0;
-  margin-bottom: 90px;
-  color: var(--color-blue-dark);
-}
-
-.faq__paragraph {
-  font-style: italic;
-  color: var(--color-grey);
-  padding-bottom: 10px;
-  margin-bottom: 0;
-  line-height: 1.4;
-}
-
-.faq__paragraph:last-child {
-  padding-bottom: 0;
-}
-
-.faq__date {
-  display: -webkit-box;
-  display: -ms-flexbox;
+.contact-details__main-content {
   display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
+  flex-direction: column;
+  align-items: flex-start;
+  flex-wrap: wrap;
+  gap: 21px;
 }
 
-.faq__footer-info {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: justify;
-  -ms-flex-pack: justify;
-  justify-content: space-between;
-  -webkit-box-align: end;
-  -ms-flex-align: end;
-  align-items: flex-end;
-  width: 100%;
-  max-height: 0;
-  overflow: hidden;
-  opacity: 0;
-  transition: transform 0.3s ease-out;
-  transform: translateY(-10px);
-  padding-bottom: 0;
+@media screen and (min-width: 760px) {
+  .contact-details__main-content {
+    flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start;
+
+  }
 }
-
-.faq__answer.active+.faq__footer-info {
-  max-height: 200px;
-
-  opacity: 1;
-  padding-bottom: 45px;
-
-  margin-top: 20px;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
-
-}
-
-.faq__answer.active+.faq__footer-info .faq__meta {
-  display: block;
-
-}
-
 
 
 .contact-details__text-fill {
   position: relative;
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 700;
   margin: 0;
   color: var(--color-blue-dark);
+}
+
+@media screen and (min-width: 760px) {
+  .contact-details__text-fill {
+    font-size: 45px;
+  }
 }
 
 .contact-details__title {
@@ -1192,25 +1154,16 @@ header {
 }
 
 .contact-details__subtitles {
-  font-size: 20px;
+  font-size: 16px;
   max-width: 100%;
   width: 570px;
   margin: 0;
   padding: 0;
 }
 
-/* .contact-details__subtitles {
-  display: flex;
-  flex-wrap: wrap;
-} */
-
-@media screen and (min-width: 780px) {
+@media screen and (min-width: 760px) {
   .contact-details__subtitles {
     font-size: 20px;
-    max-width: 100%;
-    width: 570px;
-    margin: 0;
-    padding: 0;
   }
 }
 
@@ -1218,8 +1171,15 @@ header {
   font-weight: 300;
   font-style: italic;
   font-size: 17px;
-  max-width: 570px;
+  max-width: 333px;
   margin: 0 0 30px;
+
+}
+
+@media screen and (min-width: 760px) {
+  .contact-details__text {
+    max-width: 570px;
+  }
 }
 
 .contact-details__list {
@@ -1242,8 +1202,10 @@ header {
 }
 
 .icon-link {
-  width: 60px;
-  height: 60px;
+  width: 40px;
+  height: 40px;
+  font-size: 16px;
+  font-weight: 400;
   border-radius: 50%;
   display: -webkit-box;
   display: -ms-flexbox;
@@ -1253,45 +1215,161 @@ header {
   align-items: center;
   gap: 30px;
   text-decoration: none;
-  font-size: 20px;
-  font-weight: 400;
-  font-weight: 400px;
   color: var(--color-main-black);
   white-space: normal;
 
+}
 
+@media screen and (min-width: 480px) {
+  .icon-link {
+    width: 60px;
+    height: 60px;
+    font-size: 20px;
+  }
 }
 
 .contact-details__text-content {
   margin: 30px 0;
+  width: 100%;
+  font-size: 16px;
+  max-width: 570px;
+}
+
+.contact-details__img {
+  display: block;
+  max-width: 333px;
+  height: 65px;
+}
+
+@media screen and (min-width: 760px) {
+  .contact-details__img {
+    max-width: 478px;
+    height: 93px;
+  }
 }
 
 .contact-details__image-wrapper {
   flex-shrink: 0;
-  max-width: 442px;
-  height: 375px;
+  max-width: 333px;
+  height: 283px;
   border-radius: 30px;
-  margin-top: 77px;
   overflow: hidden;
+  order: 2;
 }
 
-@media screen and (min-width: 1131px) {
+@media screen and (min-width: 960px) {
+  .contact-details__image-wrapper {
+    max-width: 442px;
+    height: 375px;
+    margin-bottom: 0;
+    margin-left: 21px;
+  }
+}
+
+/* @media screen and (min-width: 1130px) {
   .contact-details__image-wrapper {
     max-width: 570px;
     height: 484px;
   }
+} */
+
+.contact-details__text-support {
+  width: 100%;
+  max-width: 570px;
+  order: 3;
 }
 
-.contact-details__image {
-  height: 100%;
+.contact-details__text-outline {
+  position: absolute;
+  font-size: 45px;
+  font-weight: 700;
+  color: transparent;
+  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
+  z-index: 0;
+  pointer-events: none;
+  top: 0;
+  left: 0px;
+  transform: translate(29px, 10px);
+  white-space: nowrap;
+}
 
+.program-card {
+  border: 1px solid var(--color-main-blue);
+}
+
+/* FAQ */
+.faq__title {
+  font-size: 25px;
+  font-weight: 700;
+  margin-bottom: 30px;
+  color: var(--color-blue-dark);
+}
+
+.faq__content {
+  max-width: 100%;
+  width: 1160px;
+  z-index: 1;
+}
+
+
+.faq__paragraph {
+  font-style: italic;
+  color: var(--color-grey);
+  padding-bottom: 10px;
+  margin-bottom: 0;
+  line-height: 1.4;
+}
+
+.faq__paragraph:last-child {
+  padding-bottom: 0;
+}
+
+.faq__date {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
+  align-items: center;
+  gap: 5px;
+  white-space: nowrap;
+}
+
+.faq__footer-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
+  justify-content: space-between;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
+  align-items: flex-end;
+  width: 100%;
+  max-height: 0;
+  overflow: hidden;
+  opacity: 0;
+  transition: transform 0.3s ease-out;
+  transform: translateY(-10px);
+  padding-bottom: 0;
+}
+
+.faq__answer.active+.faq__footer-info {
+  max-height: 200px;
+
+  opacity: 1;
+  padding-bottom: 45px;
+
+  margin-top: 20px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+
+}
+
+.faq__answer.active+.faq__footer-info .faq__meta {
   display: block;
 
 }
-
-
-/* FAQ */
-
 
 .faq__text-outline {
   position: absolute;
@@ -1306,9 +1384,6 @@ header {
   transform: translate(29px, 10px);
   white-space: nowrap;
 }
-
-
-
 
 .faq__text-fill {
   position: relative;
@@ -1332,13 +1407,6 @@ header {
   z-index: 1;
 }
 
-.faq__subtitles {
-  font-size: 20px;
-  line-height: 1.2;
-  letter-spacing: 0;
-  margin-bottom: 90px;
-  color: var(--color-blue-dark);
-}
 
 .faq__paragraph {
   font-style: italic;
@@ -1374,129 +1442,17 @@ header {
 
 .faq__answer.active+.faq__footer-info {
   max-height: 200px;
-  /* Достатньо велике значення для розкриття */
   opacity: 1;
   padding-bottom: 45px;
-  /* Бажаний відступ */
+
   margin-top: 20px;
   transform: translateY(0);
-  /* Додайте відступ між faq__answer та faq__footer-info */
+
 }
 
-/* Коли faq__answer активний, показуємо faq__meta всередині faq__footer-info */
 .faq__answer.active+.faq__footer-info .faq__meta {
   display: block;
-  /* Або display: flex, залежно від внутрішнього розташування тексту автора */
-}
 
-/*Contact Details Section*/
-.contact-details-section {
-  padding: 20px 0 70px;
-}
-
-.contact-details__heading {
-  position: relative;
-  display: inline-block;
-}
-
-.contact-details__main-content {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  /* додала space-between для кращого вигляду на великих екранах */
-  flex-wrap: wrap;
-  gap: 21px;
-}
-
-.contact-details__text-outline {
-  position: absolute;
-  font-size: 45px;
-  font-weight: 700;
-  color: transparent;
-  -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
-  z-index: 0;
-  pointer-events: none;
-  top: 0;
-  left: 0px;
-  transform: translate(29px, 10px);
-  white-space: nowrap;
-}
-
-.contact-details__text-fill {
-  position: relative;
-  font-size: 45px;
-  font-weight: 700;
-  margin: 0;
-  color: var(--color-blue-dark);
-}
-
-.contact-details__title {
-  font-size: 25px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: var(--color-blue-dark);
-}
-
-.contact-details__subtitles {
-  font-size: 20px;
-  max-width: 100%;
-  width: 570px;
-  margin: 0;
-  padding: 0;
-}
-
-.contact-details__text {
-  font-weight: 300;
-  font-style: italic;
-  font-size: 17px;
-  max-width: 570px;
-  margin: 0 0 30px;
-}
-
-.contact-details__list {
-  display: flex;
-  flex-direction: column;
-  gap: 26px;
-  padding: 0;
-  margin: 30px 0;
-  align-items: flex-start;
-  justify-content: center;
-}
-
-.icon-link {
-  width: 60px;
-  height: 60px;
-  border-radius: 50%;
-  display: flex;
-  align-items: center;
-  gap: 30px;
-  text-decoration: none;
-  font-size: 20px;
-  font-weight: 400;
-  font-weight: 400px;
-  color: var(--color-main-black);
-}
-
-.contact-details__text-content {
-  margin: 30px 0;
-}
-
-.contact-details__image-wrapper {
-  flex-shrink: 0;
-  max-width: 570px;
-  height: 484px;
-  border-radius: 30px;
-  margin-top: 77px;
-  overflow: hidden;
-  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-}
-
-.contact-details__image {
-  width: 100%;
-  height: auto;
-  display: block;
-  -o-object-fit: cover;
-  object-fit: cover;
 }
 
 /* Footer */
@@ -1517,6 +1473,11 @@ header {
   text-align: center;
   padding-bottom: 20px;
   display: block;
+  outline: none;
+}
+
+.footer__logo:focus {
+  outline: 0;
 }
 
 .footer__img {
@@ -3338,31 +3299,8 @@ a.blue-links:hover {
 
 
 
-
-
-  .faq__subtitles {
-    font-size: 16px;
-    margin-bottom: 40px;
-  }
-
   .faq__h2 {
     font-size: 20px;
-  }
-
-  /* Contact Details Section */
-
-
-  .contact-details__subtitles,
-  .contact-details__text {
-    font-size: 16px;
-    max-width: 100%;
-  }
-
-  .contact-details__image-wrapper {
-    width: 100%;
-    height: auto;
-    margin-top: 30px;
-    border-radius: 15px;
   }
 
   /* Share My Program Section */
@@ -3448,9 +3386,6 @@ a.blue-links:hover {
 
 /* Адаптація для планшетів (480px - 767px) */
 @media screen and (min-width: 480px) and (max-width: 767px) {
-
-
-
   .hero-section__title {
     font-size: 50px;
   }
@@ -3460,13 +3395,12 @@ a.blue-links:hover {
   }
 
   /* Study Abroad Section */
-
   .study-abroad__content {
     max-width: 100%;
   }
 
-  /* About Us Section */
 
+  /* About Us Section */
   .about-us-section__container {
     -webkit-box-orient: vertical;
     -webkit-box-direction: normal;
@@ -3474,7 +3408,6 @@ a.blue-links:hover {
     flex-direction: column;
     margin-bottom: 100px;
   }
-
 
 
   /* About Uni/Program List Section */
@@ -3485,14 +3418,6 @@ a.blue-links:hover {
   /* FAQ */
   .faq__heading {
     width: 100%;
-  }
-
-  /* Contact Details Section */
-
-
-  .contact-details__image-wrapper {
-    margin-top: 40px;
-    max-width: 100%;
   }
 
   /* Share My Program Section */
@@ -3516,9 +3441,7 @@ a.blue-links:hover {
 /* Адаптація для десктопів (768px - 1279px) */
 @media screen and (min-width: 768px) and (max-width: 1279px) {
 
-
   /* Hero Section */
-
   .hero-section__title {
     font-size: 60px;
   }
@@ -3534,15 +3457,10 @@ a.blue-links:hover {
     margin-bottom: 100px;
   }
 
-
-
-
-
   /* About Uni/Program List Section */
   .about-section__container {
     grid-template-columns: 1fr 1fr;
   }
-
 
   /* FAQ */
 
@@ -3552,15 +3470,6 @@ a.blue-links:hover {
 
   /* Contact Details Section */
 
-
-  .contact-details__text-fill {
-    font-size: 40px;
-  }
-
-  .contact-details__subtitles,
-  .contact-details__text {
-    max-width: 400px;
-  }
 
 
 
@@ -3614,9 +3523,6 @@ a.blue-links:hover {
     max-width: 766px;
   }
 
-  .contact-details__image-wrapper {
-    margin-top: 0;
-  }
 
   /* Share My Program Section */
   .form-field-and-description {
@@ -3693,8 +3599,6 @@ a.blue-links:hover {
     z-index: 11000;
   }
 }
-
-
 
 /* Бургер */
 .burger {
@@ -3786,10 +3690,6 @@ a.blue-links:hover {
   }
 }
 
-
-
-
-
 @media (max-width: 759px) {
   .form-field-and-description {
     padding-bottom: 18px;
@@ -3875,15 +3775,6 @@ a.blue-links:hover {
   white-space: nowrap;
 }
 
-.icon-link {
-  display: flex;
-  align-items: center;
-  gap: 12px;
-  white-space: normal;
-
-
-}
-
 /* Картинки — ніколи не перевищують контейнер */
 img,
 svg,
@@ -3895,7 +3786,6 @@ video,
   display: block;
 }
 
-/* Модалки/форми — центровані і не виходять за межі */
 .new-item-form {
   width: 100%;
   max-width: 469px;
@@ -3903,7 +3793,7 @@ video,
   transform: translateX(-50%);
   box-sizing: border-box;
   position: absolute;
-  /* залишити або змінити на relative залежно від контексту */
+
 }
 
 /* Страховка: якщо десь є style="width:100vw", замінимо його через більш безпечну width:100% */
