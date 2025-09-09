@@ -11,7 +11,7 @@ export function initCustomSelects() {
       dropdown.querySelectorAll(".custom-select-option")
     );
 
-    // --- NEW ITEM FORM (шукаємо всередині wrapper) ---
+    // --- NEW ITEM FORM  ---
     const newForm = wrapper.querySelector(".new-item-form");
     const newFormInput = newForm?.querySelector("input, textarea");
 

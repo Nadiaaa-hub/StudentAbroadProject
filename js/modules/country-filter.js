@@ -79,7 +79,6 @@ export function initCountryFilter() {
               showSearchResults(group, visibleItems, 0, state.itemsPerPage);
               updateNavigationButtons(navContainer, 0, state.searchTotalPages);
             } else {
-              // Якщо немає результатів - ховаємо всі елементи
               checkboxes.forEach((checkbox) => {
                 checkbox.style.display = "none";
               });
@@ -89,7 +88,6 @@ export function initCountryFilter() {
       });
     });
 
-    // Додаємо обробник для події очищення поля пошуку
     countrySearchInput.addEventListener("search", () => {
       if (countrySearchInput.value === "") {
         checkboxGroups.forEach((group) => {
