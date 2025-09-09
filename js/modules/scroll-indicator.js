@@ -8,37 +8,30 @@ export function initScrollIndicator() {
         aboutSection.scrollIntoView({ behavior: "smooth", block: "start" });
       }
     };
-
     scrollIndicator.addEventListener("click", scrollToAbout);
-    scrollIndicator.addEventListener("touchstart", scrollToAbout);
   }
 
   const currentPage = window.location.pathname.split("/").pop();
   const menuLinks = document.querySelectorAll(
     ".header__menu a, .footer__menu a"
   );
-
   menuLinks.forEach((link) => {
     const linkPage = link.getAttribute("href").split("/").pop();
-    if (linkPage === currentPage) {
-      link.classList.add("active");
-    }
+    if (linkPage === currentPage) link.classList.add("active");
   });
+
+  // Smooth scroll тільки на click
   document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
-    const smoothScroll = (e) => {
+    anchor.addEventListener("click", (e) => {
       e.preventDefault();
       const target = document.querySelector(anchor.getAttribute("href"));
       if (target) {
-        target.scrollIntoView({
-          behavior: "smooth",
-          block: "start",
-        });
+        target.scrollIntoView({ behavior: "smooth", block: "start" });
       }
-    };
-    anchor.addEventListener("click", smoothScroll);
-    anchor.addEventListener("touchstart", smoothScroll);
+    });
   });
 
+  // Hover ефект для кнопок на touch
   document.querySelectorAll(".btn").forEach((btn) => {
     btn.addEventListener("touchstart", () => btn.classList.add("hover"));
     btn.addEventListener("touchend", () => btn.classList.remove("hover"));
