@@ -172,7 +172,6 @@ header {
   left: 0;
   width: 100%;
   z-index: 10000;
-  ;
 }
 
 .header__container {
@@ -186,6 +185,7 @@ header {
 .header__nav {
   display: none;
 }
+
 
 @media screen and (min-width: 960px) {
   .header__nav {
@@ -358,7 +358,7 @@ header {
 
 /* Hero Section */
 .hero-section {
-  height: 517px;
+  height: 520px;
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -467,7 +467,6 @@ header {
 .scroll-indicator {
   position: absolute;
   bottom: 42px;
-  left: 50%;
   -webkit-transform: translateX(-50%);
   transform: translateX(-50%);
   -webkit-animation: bounce 2s infinite ease-in-out;
@@ -670,7 +669,7 @@ header {
   display: flex;
   justify-content: center;
   align-items: center;
-  transition: 0.3s;
+  transition: all 0.3s ease;
   margin-bottom: 30px;
 }
 
@@ -689,7 +688,16 @@ header {
   color: var(--color-blue-dark);
   background-color: transparent;
   border-color: var(--color-main-blue);
+  transform: scale(1.05);
 }
+
+.btn.hover {
+  color: var(--color-blue-dark);
+  background-color: transparent;
+  border-color: var(--color-main-blue);
+  transform: scale(1.05);
+}
+
 
 .social-icons {
   display: flex;
@@ -844,11 +852,18 @@ header {
 }
 
 .about-us__subtitles {
-  font-size: 20px;
+  font-size: 16px;
   line-height: 1.2;
   letter-spacing: 0;
   margin-bottom: 20px;
   color: var(--color-blue-dark);
+}
+
+@media screen and (min-width: 760px) {
+  .about-us__subtitles {
+    font-size: 20px;
+
+  }
 }
 
 .about-us__subtitles:last-child {
@@ -951,20 +966,32 @@ header {
 
 
 .about-section__title {
-  font-size: 25px;
+  font-size: 30px;
   font-weight: 700;
   margin-bottom: 30px;
   color: var(--color-blue-dark);
   margin-left: 0;
 }
 
+@media screen and (min-width: 1280px) {
+  .about-section__title {
+    font-size: 45px;
+  }
+}
+
 .about-section__text {
-  font-size: 20px;
+  font-size: 16px;
   font-weight: 400;
   line-height: 1.2;
   letter-spacing: 0;
   margin-bottom: 20px;
   color: var(--color-blue-dark);
+}
+
+@media screen and (min-width: 1280px) {
+  .about-section__text {
+    font-size: 20px;
+  }
 }
 
 .about-section__text:last-child {
@@ -988,6 +1015,7 @@ header {
   max-width: 760px;
   text-align: left;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .text-outline-style {
@@ -1011,7 +1039,6 @@ header {
   }
 }
 
-
 .faq__title {
   font-size: 25px;
   font-weight: 700;
@@ -1023,6 +1050,15 @@ header {
   max-width: 100%;
   width: 1160px;
   z-index: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+}
+
+@media screen and (min-width: 1280px) {
+  .faq__content {
+    max-width: 766px;
+  }
 }
 
 .faq__subtitles {
@@ -1052,16 +1088,6 @@ header {
   padding-bottom: 0;
 }
 
-.faq__date {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-}
 
 .faq__footer-info {
   display: -webkit-box;
@@ -1126,7 +1152,7 @@ header {
   .contact-details__main-content {
     flex-direction: row;
     justify-content: space-between;
-    align-items: flex-start;
+    align-items: center;
 
   }
 }
@@ -1257,7 +1283,7 @@ header {
   order: 2;
 }
 
-@media screen and (min-width: 960px) {
+@media screen and (min-width: 1024px) {
   .contact-details__image-wrapper {
     max-width: 442px;
     height: 375px;
@@ -1305,11 +1331,6 @@ header {
   color: var(--color-blue-dark);
 }
 
-.faq__content {
-  max-width: 100%;
-  width: 1160px;
-  z-index: 1;
-}
 
 
 .faq__paragraph {
@@ -1324,16 +1345,7 @@ header {
   padding-bottom: 0;
 }
 
-.faq__date {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
-}
+
 
 .faq__footer-info {
   display: -webkit-box;
@@ -1354,26 +1366,13 @@ header {
   padding-bottom: 0;
 }
 
-.faq__answer.active+.faq__footer-info {
-  max-height: 200px;
 
-  opacity: 1;
-  padding-bottom: 45px;
 
-  margin-top: 20px;
-  -webkit-transform: translateY(0);
-  transform: translateY(0);
 
-}
-
-.faq__answer.active+.faq__footer-info .faq__meta {
-  display: block;
-
-}
 
 .faq__text-outline {
   position: absolute;
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 700;
   color: transparent;
   -webkit-text-stroke: 1px rgba(0, 0, 0, 0.1);
@@ -1385,27 +1384,27 @@ header {
   white-space: nowrap;
 }
 
+@media screen and (min-width: 760px) {
+  .faq__text-outline {
+    font-size: 45px;
+  }
+}
+
 .faq__text-fill {
   position: relative;
-  font-size: 45px;
+  font-size: 30px;
   font-weight: 700;
   color: var(--color-blue-dark);
   z-index: 1;
   margin: 0;
 }
 
-.faq__title {
-  font-size: 25px;
-  font-weight: 700;
-  margin-bottom: 30px;
-  color: var(--color-blue-dark);
+@media screen and (min-width: 760px) {
+  .faq__text-fill {
+    font-size: 45px;
+  }
 }
 
-.faq__content {
-  max-width: 100%;
-  width: 1160px;
-  z-index: 1;
-}
 
 
 .faq__paragraph {
@@ -1418,13 +1417,6 @@ header {
 
 .faq__paragraph:last-child {
   padding-bottom: 0;
-}
-
-.faq__date {
-  display: flex;
-  align-items: center;
-  gap: 5px;
-  white-space: nowrap;
 }
 
 .faq__footer-info {
@@ -1450,10 +1442,6 @@ header {
 
 }
 
-.faq__answer.active+.faq__footer-info .faq__meta {
-  display: block;
-
-}
 
 /* Footer */
 /* Десктоп і планшети (від 760px) */
@@ -2065,7 +2053,6 @@ select {
   color: #555555;
 }
 
-
 .addition-info {
   border-color: var(--color-main-blue);
 }
@@ -2100,8 +2087,6 @@ select {
   flex-basis: auto;
 }
 
-
-
 .select-arrow {
   display: inline-block;
   fill: var(--color-grey);
@@ -2123,8 +2108,6 @@ select {
 .custom-select-wrapper.active .select-arrow {
   transform: translateY(-50%) rotate(180deg);
 }
-
-
 
 /* Confitmation page */
 .greetings__container {
@@ -2199,11 +2182,18 @@ select {
 }
 
 /* FAQ page */
+
 .faq-section {
-  padding-top: 0px;
-  padding-bottom: 70px;
+  padding-top: 40px;
+  padding-bottom: 40px;
 }
 
+@media screen and (min-width: 760px) {
+  .faq-section {
+    padding-top: 70px;
+    padding-bottom: 70px;
+  }
+}
 
 
 .faq-section__container {
@@ -2219,16 +2209,10 @@ select {
   align-items: center;
 }
 
-
-
-
-
-
 .faq__card {
   width: 100%;
   max-width: 766px;
   position: relative;
-  padding-top: 45px;
   overflow: hidden;
 }
 
@@ -2267,9 +2251,9 @@ select {
 
 .faq__meta {
   display: flex;
-  /* старі префікси зазвичай можна опустити, якщо не потрібна підтримка IE10- */
   flex-direction: column;
   width: 100%;
+  gap: 5px;
   overflow: hidden;
   transition: opacity 0.4s ease-out, max-height 0.4s ease-out,
     margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
@@ -2286,6 +2270,8 @@ select {
   -ms-flex-align: end;
   align-items: flex-end;
   width: 100%;
+  flex-wrap: wrap;
+
 }
 
 .faq__meta-info {
@@ -2303,6 +2289,7 @@ select {
   align-items: center;
   white-space: nowrap;
   gap: 5px;
+  flex-shrink: 0;
 }
 
 .faq__date img {
@@ -2374,12 +2361,17 @@ select {
 }
 
 .faq__h2 {
-  font-size: 25px;
+  font-size: 20px;
   margin-bottom: 15px;
   cursor: pointer;
-
   transition: color 0.2s ease;
   position: relative;
+}
+
+@media screen and (min-width: 760px) {
+  .faq__h2 {
+    font-size: 25px;
+  }
 }
 
 .faq__h2::after {
@@ -2401,10 +2393,12 @@ select {
   padding: 0 20px;
   border: 1px solid transparent;
   border-radius: 30px;
+  overflow: hidden;
+  padding: 0 0;
 }
 
 .faq__answer.active {
-  max-height: 767px;
+  max-height: 100%;
   opacity: 1;
   visibility: visible;
   padding: 30px;
@@ -2506,8 +2500,6 @@ select {
   display: inline-block;
   padding-top: 20px;
 }
-
-
 
 .country-section__text-fill {
   position: relative;
@@ -3268,20 +3260,13 @@ a.blue-links:hover {
     margin-bottom: 50px;
   }
 
-
   .about-us__subtitles {
     font-size: 16px;
   }
 
-
-
   /* About Uni/Program List Section */
   .about-section__container {
     grid-template-columns: 1fr;
-  }
-
-  .about-section__title {
-    font-size: 20px;
   }
 
   .about-section__text {
@@ -3292,16 +3277,6 @@ a.blue-links:hover {
     margin-top: 30px;
   }
 
-  /* FAQ */
-  .faq__heading {
-    margin-bottom: 20px;
-  }
-
-
-
-  .faq__h2 {
-    font-size: 20px;
-  }
 
   /* Share My Program Section */
 
@@ -3378,10 +3353,7 @@ a.blue-links:hover {
   }
 
   /* FAQ page */
-  .faq-section {
-    padding-top: 40px;
-    padding-bottom: 40px;
-  }
+
 }
 
 /* Адаптація для планшетів (480px - 767px) */
@@ -3415,10 +3387,7 @@ a.blue-links:hover {
     grid-template-columns: 1fr;
   }
 
-  /* FAQ */
-  .faq__heading {
-    width: 100%;
-  }
+
 
   /* Share My Program Section */
   .form-field-and-description {
@@ -3461,16 +3430,6 @@ a.blue-links:hover {
   .about-section__container {
     grid-template-columns: 1fr 1fr;
   }
-
-  /* FAQ */
-
-  .faq__text-fill {
-    font-size: 40px;
-  }
-
-  /* Contact Details Section */
-
-
 
 
   /* Share My Program Section */
@@ -3517,12 +3476,6 @@ a.blue-links:hover {
   .about-section__container {
     grid-template-columns: 1fr 1fr;
   }
-
-  /* FAQ */
-  .faq__content {
-    max-width: 766px;
-  }
-
 
   /* Share My Program Section */
   .form-field-and-description {
@@ -3631,7 +3584,6 @@ a.blue-links:hover {
   }
 }
 
-
 /* --------- MOBILE MENU (висувається справа) --------- */
 .mobile-menu {
   position: fixed;
@@ -3648,7 +3600,6 @@ a.blue-links:hover {
   z-index: 1200;
   overflow-y: auto;
   text-align: right;
-
 }
 
 .mobile-menu.open,
@@ -3762,7 +3713,7 @@ a.blue-links:hover {
   word-break: break-word;
   overflow-wrap: anywhere;
   padding: 8px 0;
-  /* за потреби */
+  font-size: 25px;
   text-align: right;
 }
 
