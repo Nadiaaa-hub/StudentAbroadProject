@@ -747,9 +747,10 @@ a:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
+  margin-bottom: 90px;
 }
 
-@media screen and (min-width: 760px) {
+@media screen and (min-width: 1280px) {
   .about-us-section__container {
     margin-bottom: 200px;
   }
@@ -848,15 +849,36 @@ a:focus {
 }
 
 .about__map-image {
-  margin-top: 0;
+  /* margin-top: 0;
   max-width: 484px;
   position: relative;
   transform: translateY(-20%);
   display: block;
   margin-bottom: 20px;
+  max-width: 100%; */
+
+  display: flex;
+  justify-content: center;
+  align-items: center;
 }
 
+.about-text-blocks {
+  display: flex;
+  flex-direction: column;
+  /* За замовчуванням — стовпчик */
+  gap: 20px;
+}
 
+@media screen and (min-width: 1024px) {
+
+  /* Перехід на горизонтальний макет для текстових блоків */
+  .about-text-blocks {
+    /* flex-direction: row;
+    justify-content: space-between;
+    align-items: flex-start; */
+    width: 100%;
+  }
+}
 
 @media screen and (min-width:1280px) {
   .about__map-image {
@@ -903,8 +925,6 @@ a:focus {
 }
 
 @media screen and (max-width: 767px) {
-
-  .about-section__title,
   .about-us__map-image {
     margin-left: 10px;
     margin-right: 10px;
@@ -938,11 +958,6 @@ a:focus {
   margin: 0px auto;
 }
 
-/* @media screen and (min-width: 1024px) {
-  .about-section__line {
-    display: none;
-  }
-} */
 
 /* About Uni/Proggram List Section */
 .about-section__info-columns {
@@ -951,41 +966,153 @@ a:focus {
 }
 
 .about-section__container {
-  display: grid;
-  grid-template-columns: 1fr;
+  flex-direction: column;
   gap: 20px;
   color: var(--color-main-black);
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1280px) {
   .about-section__container {
+    display: grid;
     grid-template-columns: 1fr 1fr;
-
     flex-wrap: wrap;
     gap: 20px;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    justify-content: center;
+    gap: 40px;
+  }
+}
+
+.about__top-row {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) {
+  .about__top-row {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+    gap: 40px;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about__top-row {
+    flex-direction: column;
+    justify-content: flex-start;
+    gap: 0;
+  }
+}
+
+.about__map-column {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about-section__container {
+    flex-direction: row;
+    justify-content: center;
+    align-items: flex-start;
+
   }
 
+  .about__map-column {
+    flex: 1;
+    max-width: 50%;
+  }
+}
 
+@media screen and (min-width: 1280px) {
+  .about__map-column {
+    display: none;
+
+  }
 }
 
 .about-section__info-block {
-  /* max-width: 570px;
-  height: 332px;
-  margin-bottom: 0; */
-  max-width: 400px;
-  height: 332px;
-  margin-bottom: 20px;
+  max-width: 100%;
+  height: auto;
+  margin-bottom: 0;
 }
 
-.about-section__info-block:last-child {
-  /* position: relative;
-  transform: translateY(-30%);
-  width: 920px; */
-  transform: none;
-  height: 332px;
-  /* прибираємо translateY */
-  width: 900px;
+@media screen and (min-width: 768px) {
+  .about-section__info-block {
+    max-width: 570px;
+    height: auto;
+    max-width: 50%;
 
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .about-section__info-block {
+    width: 570px;
+    max-width: 100%;
+
+  }
+}
+
+.about-program-list {
+  position: static;
+  transform: none;
+
+}
+
+@media screen and (min-width: 768px) {
+  .about-program-list {
+    width: 100%;
+    /* Цей блок займає всю ширину під верхнім рядом */
+  }
+}
+
+.about__image {
+  max-width: 100%;
+  height: auto;
+}
+
+.about__text-columns {
+  display: flex;
+  flex-direction: column;
+  /* На мобільному — стовпчик */
+  gap: 20px;
+}
+
+@media screen and (min-width: 768px) and (max-width: 1279px) {
+  .about__text-columns {
+    flex-direction: row;
+    max-width: 50%;
+  }
+}
+
+@media screen and (min-width: 1280px) {
+
+  .about__text-columns {
+    flex-direction: row;
+    justify-content: center;
+    width: 100%;
+    gap: 20px;
+  }
+}
+
+
+
+.about-program-block {
+  position: static;
+  transform: none;
+}
+
+@media screen and (min-width: 1280px) {
+  .about-program-block {
+    max-width: 920px;
+    margin: 0 auto;
+
+  }
 }
 
 .about-section__title {
@@ -1011,7 +1138,7 @@ a:focus {
   color: var(--color-blue-dark);
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width:760px) {
   .about-section__text {
     font-size: 20px;
   }
@@ -1022,11 +1149,7 @@ a:focus {
 }
 
 .program-btn-wrapper {
-  display: -webkit-box;
-  display: -ms-flexbox;
   display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
   justify-content: center;
   margin-top: 77px;
 }
@@ -1081,6 +1204,12 @@ a:focus {
 @media screen and (min-width: 1280px) {
   .faq__content {
     max-width: 766px;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .faq__content {
+    font-size: 20px;
   }
 }
 
@@ -3291,10 +3420,6 @@ a.blue-links:hover {
 
   /* About Uni/Program List Section */
 
-
-  .about-section__text {
-    font-size: 16px;
-  }
 
   .program-btn-wrapper {
     margin-top: 30px;
