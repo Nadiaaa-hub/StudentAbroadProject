@@ -4,7 +4,7 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="stylesheet" href="./project/css/s.css" />
     <link rel="website icon" type="png" href="./project/img/logo_01.png" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -23,6 +23,7 @@
             </a>
           </div>
 
+          <!-- Десктопна навігація -->
           <nav class="header__nav">
             <ul class="header__menu">
               <li>
@@ -76,13 +77,67 @@
               <input
                 type="text"
                 class="search-box__input"
-                data-en="Search..."
-                data-ua="Шукати..."
                 placeholder="Search..." />
             </div>
           </div>
+
+          <!-- Бургер для мобільного меню -->
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle" class="burger">
+            <span></span>
+          </label>
         </div>
       </div>
+      <!-- Мобільне меню -->
+      <ul class="mobile-menu">
+        <li class="abt_us">
+          <a class="link" href="index.html" data-en="ABOUT US" data-ua="ПРО НАС"
+            >ABOUT US</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="uni-list.html"
+            data-en="UNI LIST"
+            data-ua="СПИСОК ВНЗ"
+            >UNI LIST</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="program-list.html"
+            data-en="PROGRAM LIST"
+            data-ua="ПРОГРАМИ"
+            >PROGRAM LIST</a
+          >
+        </li>
+        <li>
+          <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+        </li>
+        <li>
+          <span class="mobile-language-switch" aria-hidden="true">
+            <button
+              type="button"
+              class="js-switch-button"
+              data-lang="ua"
+              aria-label="Українська">
+              UA
+            </button>
+            <button
+              type="button"
+              class="js-switch-button active"
+              data-lang="en"
+              aria-label="English">
+              EN
+            </button>
+          </span>
+        </li>
+      </ul>
+
+      <!-- Overlay -->
+      <div class="overlay"></div>
     </header>
 
     <main>
@@ -121,7 +176,7 @@
                 >
               </div>
 
-<div class="form-field-and-description">
+              <div class="form-field-and-description">
                 <div
                   class="input-with-optional-button custom-select-wrapper"
                   id="inviting-uni-wrapper">
@@ -142,19 +197,17 @@
                     id="add-inviting-uni-button">
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
-                </div>
 
-                <div class="new-item-form" id="new-inviting-uni-form">
-                  <div class="new-item-header">
-                    <p>
-                      Leave the details of the university that invited you. Our
-                      administrator will enter them into our database.
-                    </p>
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-inviting-uni-form">
+                    <div class="new-item-header">
+                      <p>
+                        Leave the details of the university that invited you.
+                        Our administrator will enter them into our database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Enter details here..."
-                    class="new-item-input" />
                 </div>
 
                 <label class="form-section__description">
@@ -183,18 +236,17 @@
                     id="add-home-uni-button">
                     <img src="./project/img/+.svg" alt="+" />
                   </button>
-                </div>
-                <div class="new-item-form" id="new-home-uni-form">
-                  <div class="new-item-header">
-                    <p>
-                      Leave the details of the university that invited you. Our
-                      administrator will enter them into our database.
-                    </p>
+
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-home-uni-form">
+                    <div class="new-item-header">
+                      <p>
+                        Leave the details of your home university. Our
+                        administrator will enter them into our database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
                   </div>
-                  <input
-                    type="text"
-                    placeholder="Enter details here..."
-                    class="new-item-input" />
                 </div>
                 <label class="form-section__description">
                   Choose Ukrainian university from the list. Add a new one, if
@@ -202,7 +254,7 @@
                 </label>
               </div>
 
-<div class="form-field-and-description">
+              <div class="form-field-and-description">
                 <div
                   class="input-with-optional-button custom-select-wrapper"
                   id="faculty-wrapper">
@@ -224,9 +276,8 @@
                     class="select-arrow" />
                 </div>
                 <label class="form-section__description">
-                  Please, provide the faculty of inviting uni for this
-                  program.</label
-                >
+                  Please, provide the faculty of inviting uni for this program.
+                </label>
               </div>
 
               <div class="form-field-and-description">
@@ -250,21 +301,29 @@
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
+                  <button
+                    type="button"
+                    class="form-section__add-button custom-select-add-button"
+                    id="add-level-button">
+                    <img src="./project/img/+.svg" alt="+" />
+                  </button>
+
+                  <!-- new item form всередині wrapper -->
+                  <div class="new-item-form" id="new-level-form">
+                    <div class="new-item-header">
+                      <p>
+                        Enter the details of the level. Our administrator will
+                        add it to the database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input"></textarea>
+                  </div>
                 </div>
+
                 <label class="form-section__description">
                   Choose the level of this program from the list. Add a new one,
                   if you can’t find it.
                 </label>
-              </div>
-
-              <div class="form-field-and-description">
-                <div class="input-with-optional-button">
-                  <input type="text" placeholder="Short description:" />
-                </div>
-                <label class="form-section__description"
-                  >A brief, meaningful description of the program with links to
-                  additional information, etc.</label
-                >
               </div>
 
               <div class="form-field-and-description">
@@ -295,7 +354,7 @@
       </section>
     </main>
 
-<footer class="footer">
+    <footer class="footer">
       <div class="container">
         <div class="footer__container">
           <div class="footer__logo">
@@ -311,12 +370,13 @@
                 <li>
                   <a
                     class="footer__link"
-                    href="index.html"
+                    href="#about-us-section"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
                     >ABOUT US</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -326,6 +386,7 @@
                     >UNI LIST</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -335,6 +396,7 @@
                     >PROGRAM LIST</a
                   >
                 </li>
+
                 <li>
                   <a
                     class="footer__link"
@@ -347,11 +409,12 @@
               </ul>
             </nav>
 
-            <div class="lang-search">
-              <span class="language-switch">
+            <div class="footer__lang-search">
+              <span class="footer__language-switch">
                 <button data-lang="ua" class="js-switch-button" type="button">
                   UA
                 </button>
+
                 <button
                   data-lang="en"
                   class="js-switch-button active"
@@ -359,7 +422,8 @@
                   EN
                 </button>
               </span>
-              <div class="search-box">
+
+              <div class="footer__search-box">
                 <input
                   type="text"
                   class="search-box__input"
@@ -367,12 +431,24 @@
                   data-ua="Шукати..."
                   placeholder="Search..." />
               </div>
+
+              <button
+                type="button"
+                class="footer__scroll-indicator"
+                role="button"
+                tabindex="0">
+                <img
+                  class="footer__scroll-indicator-img"
+                  src="./project/img/icon_arrow.svg"
+                  alt="Scroll Down Icon" />
+              </button>
             </div>
           </div>
+
           <div class="footer__line"></div>
         </div>
       </div>
     </footer>
     <script type="module" src="./js/main.js"></script>
   </body>
-  </html>
+</html>
