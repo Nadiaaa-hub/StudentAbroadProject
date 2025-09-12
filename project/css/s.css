@@ -966,13 +966,13 @@ a:focus {
 }
 
 .about-section__container {
-  flex-direction: column;
-  gap: 20px;
-  color: var(--color-main-black);
+  position: relative;
+
 }
 
 @media screen and (min-width: 1280px) {
   .about-section__container {
+    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
     flex-wrap: wrap;
@@ -990,11 +990,11 @@ a:focus {
   gap: 20px;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 960px) {
   .about__top-row {
     flex-direction: row;
     justify-content: center;
-    align-items: flex-start;
+    align-items: center;
     gap: 40px;
   }
 }
@@ -1015,13 +1015,6 @@ a:focus {
 }
 
 @media screen and (min-width: 768px) and (max-width: 1279px) {
-  .about-section__container {
-    flex-direction: row;
-    justify-content: center;
-    align-items: flex-start;
-
-  }
-
   .about__map-column {
     flex: 1;
     max-width: 50%;
@@ -1036,17 +1029,18 @@ a:focus {
 }
 
 .about-section__info-block {
+
   max-width: 100%;
   height: auto;
-  margin-bottom: 0;
+  max-width: 50%;
+  ;
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 760px) {
   .about-section__info-block {
     max-width: 570px;
     height: auto;
-    max-width: 50%;
-
+    width: 800px;
   }
 }
 
@@ -1058,28 +1052,41 @@ a:focus {
   }
 }
 
-.about-program-list {
-  position: static;
-  transform: none;
+
+.about-prgrm-list-section__text {
+  width: 920px;
 
 }
 
-@media screen and (min-width: 768px) {
+@media screen and (min-width: 480px) {
+  .about-prgrm-list-section__text {
+    width: 570px;
+    max-width: 100%;
+
+  }
+}
+
+.about-program-list {
+  position: static;
+}
+
+@media screen and (min-width: 1280px) {
   .about-program-list {
     width: 100%;
-    /* Цей блок займає всю ширину під верхнім рядом */
   }
 }
 
 .about__image {
-  max-width: 100%;
-  height: auto;
+  max-width: 480px;
+  height: 500px;
+  position: relative;
+  top: -25%;
 }
+
 
 .about__text-columns {
   display: flex;
   flex-direction: column;
-  /* На мобільному — стовпчик */
   gap: 20px;
 }
 
