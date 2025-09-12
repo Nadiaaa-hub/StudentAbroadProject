@@ -5,7 +5,12 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
 
-    <link rel="stylesheet" href="./project/css/s.css" />
+    <link
+      rel="preload"
+      href="./project/css/s.css"
+      as="style"
+      onload="this.rel='stylesheet'" />
+    <noscript><link rel="stylesheet" href="./project/css/s.css" /></noscript>
     <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -241,10 +246,6 @@
                 href="https://www.tiktok.com/@studentabroad.ua?_t=ZM-8xJBPrTpbXR&_r=1"
                 class="social-icon-link">
                 <img src="./project/img/tiktok.svg" alt="TikTok" />
-              </a>
-
-              <a href="/" class="social-icon-link">
-                <img src="./project/img/facebook.svg" alt="Facebook" />
               </a>
             </div>
           </div>

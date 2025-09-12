@@ -225,8 +225,9 @@ header {
 
 .search-box,
 .footer__search-box {
-  width: 162px;
-  height: 41px;
+
+  width: 100px;
+  height: 40px;
   border-radius: 20px;
   padding: 12px 83px 12px 20px;
   display: -webkit-box;
@@ -239,6 +240,13 @@ header {
   background-color: initial;
   transition: background-color 0.3s ease;
   cursor: pointer;
+}
+
+@media screen and (min-width: 760px) {
+  .footer__search-box {
+    width: 162px;
+    height: 41px;
+  }
 }
 
 .footer__search-box:focus-within {
@@ -266,6 +274,7 @@ header {
 
 .footer__scroll-indicator {
   display: block;
+  cursor: pointer;
   border: none;
   background: none;
 }
@@ -273,8 +282,7 @@ header {
 @media screen and (min-width: 960px) {
   .footer__scroll-indicator {
     display: none;
-    border: none;
-    background: none;
+
   }
 }
 
@@ -501,12 +509,20 @@ header {
   }
 }
 
+.study-abroad__container {
+  display: flex;
+  -webkit-box-orient: vertical;
+  -webkit-box-direction: normal;
+  -ms-flex-direction: column;
+  flex-direction: column;
+  align-items: center;
+  gap: 20px;
+}
 
 @media screen and (min-width: 760px) {
   .study-abroad__container {
-    display: flex;
     flex-direction: row;
-    align-items: center;
+    align-items: flex-start;
     justify-content: center;
     width: 100%;
     max-width: 1100px;
@@ -551,21 +567,16 @@ header {
 .study-abroad__title,
 .study-abroad__description {
   text-align: left;
-}
-
-
-.study-abroad__description {
-  font-weight: 400;
   font-size: 16px;
+  font-weight: 400;
+  margin-bottom: 40px;
+  line-height: 1.4;
+  letter-spacing: 0.04em;
 }
 
 @media screen and (min-width: 460px) {
   .study-abroad__description {
-    font-weight: 400;
     font-size: 20px;
-    line-height: 1.4;
-    letter-spacing: 0.04em;
-    margin-bottom: 40px;
   }
 }
 
@@ -596,8 +607,8 @@ header {
 }
 
 .btn {
-  width: 157px;
-  height: 47px;
+  width: 200px;
+  height: 57px;
   font-size: 14px;
   font-weight: 400;
   text-align: center;
@@ -612,8 +623,6 @@ header {
   transition: all 0.3s ease;
   margin-bottom: 30px;
 }
-
-
 
 @media screen and (min-width: 760px) {
   .btn {
@@ -679,7 +688,6 @@ a:focus {
   .social-icons {
     flex-direction: row;
     gap: 16px;
-    margin-top: 8px;
   }
 
   .social-icon-link {
@@ -747,12 +755,12 @@ a:focus {
   -webkit-box-align: center;
   -ms-flex-align: center;
   align-items: center;
-  margin-bottom: 90px;
+  margin-bottom: 20px;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 960px) {
   .about-us-section__container {
-    margin-bottom: 200px;
+    margin-bottom: 80px;
   }
 }
 
@@ -765,6 +773,7 @@ a:focus {
     -webkit-box-align: start;
     -ms-flex-align: start;
     align-items: flex-start;
+    margin-bottom: 200px;
   }
 }
 
@@ -803,7 +812,7 @@ a:focus {
 }
 
 .about-us__title {
-  font-size: 25px;
+  font-size: 20px;
   font-weight: 700;
   margin-bottom: 30px;
   color: var(--color-blue-dark);
@@ -811,7 +820,7 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .about-us__title {
-    font-size: 20px;
+    font-size: 25px;
 
   }
 }
@@ -972,21 +981,19 @@ a:focus {
 
 @media screen and (min-width: 1280px) {
   .about-section__container {
-    position: relative;
     display: grid;
     grid-template-columns: 1fr 1fr;
-    flex-wrap: wrap;
     gap: 20px;
     flex-direction: row;
     flex-wrap: nowrap;
     justify-content: center;
-    gap: 40px;
   }
 }
 
 .about__top-row {
   display: flex;
   flex-direction: column;
+  align-items: center;
   gap: 20px;
 }
 
@@ -1029,26 +1036,21 @@ a:focus {
 }
 
 .about-section__info-block {
-
-  max-width: 100%;
   height: auto;
-  max-width: 50%;
-  ;
+  width: 100%;
+  max-width: 920px;
+  display: flex;
+  flex-direction: column;
+  padding-left: 16px;
+  padding-right: 16px;
+
 }
 
-@media screen and (min-width: 760px) {
-  .about-section__info-block {
-    max-width: 570px;
-    height: auto;
-    width: 800px;
-  }
-}
 
 @media screen and (min-width: 1280px) {
   .about-section__info-block {
     width: 570px;
     max-width: 100%;
-
   }
 }
 
@@ -1077,12 +1079,20 @@ a:focus {
 }
 
 .about__image {
+  display: block;
+  width: 100%;
   max-width: 480px;
-  height: 500px;
-  position: relative;
-  top: -25%;
+  height: auto;
+  margin: 0 auto;
 }
 
+@media (min-width: 960px) {
+  .about__image {
+    width: 480px;
+    height: 500px;
+    object-fit: cover;
+  }
+}
 
 .about__text-columns {
   display: flex;
@@ -1130,9 +1140,9 @@ a:focus {
   margin-left: 0;
 }
 
-@media screen and (min-width: 1280px) {
+@media screen and (min-width: 760px) {
   .about-section__title {
-    font-size: 25px;
+    font-size: 30px;
   }
 }
 
@@ -1143,6 +1153,11 @@ a:focus {
   letter-spacing: 0;
   margin-bottom: 20px;
   color: var(--color-blue-dark);
+  max-width: 880px;
+  /* трохи менше за контейнер для відступів */
+  width: 100%;
+  white-space: normal;
+  overflow-wrap: break-word;
 }
 
 @media screen and (min-width:760px) {
@@ -1152,13 +1167,19 @@ a:focus {
 }
 
 .about-section__text:last-child {
-  margin-bottom: 0;
+  margin-bottom: 40px;
 }
 
 .program-btn-wrapper {
   display: flex;
   justify-content: center;
-  margin-top: 77px;
+  margin-top: 30px;
+}
+
+@media screen and (min-width:760px) {
+  .program-btn-wrapper {
+    margin-top: 60px;
+  }
 }
 
 /* FAQ */
@@ -1286,6 +1307,7 @@ a:focus {
   padding: 20px 0 70px;
 }
 
+
 .contact-details__heading {
   font-size: 30px;
   position: relative;
@@ -1300,8 +1322,6 @@ a:focus {
 
 .contact-details__main-content {
   display: flex;
-  flex-direction: column;
-  align-items: flex-start;
   flex-wrap: wrap;
   gap: 21px;
 }
@@ -1440,7 +1460,7 @@ a:focus {
   order: 2;
 }
 
-@media screen and (min-width: 1024px) {
+@media screen and (min-width: 1114px) {
   .contact-details__image-wrapper {
     max-width: 442px;
     height: 375px;
@@ -3403,20 +3423,6 @@ a.blue-links:hover {
 
   /* Study Abroad Section */
 
-  .study-abroad__container {
-    -webkit-box-orient: vertical;
-    -webkit-box-direction: normal;
-    -ms-flex-direction: column;
-    flex-direction: column;
-    gap: 20px;
-  }
-
-
-  .study-abroad__title,
-  .study-abroad__description {
-    font-size: 16px;
-    margin-bottom: 20px;
-  }
 
   /* About Us Section */
 
@@ -3428,9 +3434,7 @@ a.blue-links:hover {
   /* About Uni/Program List Section */
 
 
-  .program-btn-wrapper {
-    margin-top: 30px;
-  }
+
 
 
   /* Share My Program Section */
