@@ -3040,7 +3040,7 @@ select {
 .bg-overlay {
   position: absolute;
   inset: 0;
-  background-image: url("img/bg-Kyiv-uni.svg");
+  background-image: url("bg-uni/bg-Kyiv-uni.svg");
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
