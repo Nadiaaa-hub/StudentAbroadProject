@@ -191,29 +191,26 @@
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
-                  <button
-                    type="button"
-                    class="form-section__add-button custom-select-add-button"
-                    id="add-inviting-uni-button">
-                    <img src="./project/img/+.svg" alt="+" />
-                  </button>
-
-                  <!-- new item form всередині wrapper -->
-                  <div class="new-item-form" id="new-inviting-uni-form">
-                    <div class="new-item-header">
-                      <p>
-                        Leave the details of the university that invited you.
-                        Our administrator will enter them into our database.
-                      </p>
-                    </div>
-                    <textarea class="new-item-input"></textarea>
-                  </div>
                 </div>
-
+                <button
+                  type="button"
+                  class="form-section__add-button custom-select-add-button"
+                  id="add-inviting-uni-button">
+                  <img src="./project/img/+.svg" alt="+" />
+                </button>
                 <label class="form-section__description">
                   Choose a foreign university from the list. Add new one, if you
                   can’t find it.
                 </label>
+                <div class="new-item-form" id="new-inviting-uni-form">
+                  <div class="new-item-header">
+                    <p class="new-item-header__text">
+                      Leave the details of the university that invited you. Our
+                      administrator will enter them into our database.
+                    </p>
+                  </div>
+                  <textarea class="new-item-input"></textarea>
+                </div>
               </div>
 
               <div class="form-field-and-description">
@@ -230,17 +227,9 @@
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
-                  <button
-                    type="button"
-                    class="form-section__add-button custom-select-add-button"
-                    id="add-inviting-uni-button">
-                    <img src="./project/img/+.svg" alt="+" />
-                  </button>
-
-                  <!-- new item form всередині wrapper -->
                   <div class="new-item-form" id="new-home-uni-form">
                     <div class="new-item-header">
-                      <p>
+                      <p class="new-item-header__text">
                         Leave the details of your home university. Our
                         administrator will enter them into our database.
                       </p>
@@ -248,7 +237,12 @@
                     <textarea class="new-item-input"></textarea>
                   </div>
                 </div>
-
+                <button
+                  type="button"
+                  class="form-section__add-button custom-select-add-button"
+                  id="add-home-uni-button">
+                  <img src="./project/img/+.svg" alt="+" />
+                </button>
                 <label class="form-section__description">
                   Choose Ukrainian university from the list. Add a new one, if
                   you can’t find it.
@@ -302,17 +296,9 @@
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
-                  <button
-                    type="button"
-                    class="form-section__add-button custom-select-add-button"
-                    id="add-level-button">
-                    <img src="./project/img/+.svg" alt="+" />
-                  </button>
-
-                  <!-- new item form всередині wrapper -->
                   <div class="new-item-form" id="new-level-form">
                     <div class="new-item-header">
-                      <p>
+                      <p class="new-item-header__text">
                         Enter the details of the level. Our administrator will
                         add it to the database.
                       </p>
@@ -320,7 +306,12 @@
                     <textarea class="new-item-input"></textarea>
                   </div>
                 </div>
-
+                <button
+                  type="button"
+                  class="form-section__add-button custom-select-add-button"
+                  id="add-level-button">
+                  <img src="./project/img/+.svg" alt="+" />
+                </button>
                 <label class="form-section__description">
                   Choose the level of this program from the list. Add a new one,
                   if you can’t find it.
@@ -450,6 +441,6 @@
         </div>
       </div>
     </footer>
-    <script type="module" src="./js/main.js"></script>
+    <script src="./js/modules/custom-select.js"></script>
   </body>
 </html>
