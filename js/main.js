@@ -17,6 +17,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchableSections = document.querySelectorAll(
     ".study-abroad-section, .about-us-section, .about-section__info-columns, .faq-section, .contact-details-section"
   );
+
   initCustomSelects();
   initCountryFilter();
   initAddUniversity();

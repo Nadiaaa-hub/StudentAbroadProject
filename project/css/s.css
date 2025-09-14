@@ -2396,6 +2396,7 @@ select {
   width: 100%;
   flex-wrap: wrap;
 
+
 }
 
 .faq__meta-info {
@@ -2434,12 +2435,19 @@ select {
 .faq__line {
   border-top: 1px solid var(--color-grey);
   width: 100%;
+  border-top-width: 1.5px;
+  border-top-color: #888;
+}
+
+@media (max-width: 459px) {
+  .faq__line {
+    border-top: 1.5px solid var(--color-grey) !important;
+  }
 }
 
 .faq__meta--top {
   margin-top: 10px;
   margin-bottom: 20px;
-  max-height: 100px;
   opacity: 1;
   pointer-events: auto;
 }
