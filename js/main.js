@@ -23,7 +23,6 @@ document.addEventListener("DOMContentLoaded", () => {
   initAddUniversity();
   initSearchInput();
   modalBtnClose();
-
   burgerMenu();
   initFAQ();
 });

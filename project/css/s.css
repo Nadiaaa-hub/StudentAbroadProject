@@ -2182,8 +2182,7 @@ select {
   display: block;
   width: 330px;
   top: 56px;
-  left: 200px;
-
+  left: 10%
 }
 
 .custom-select-search {
