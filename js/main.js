@@ -6,6 +6,7 @@ import { initAddUniversity } from "./modules/add-university.js";
 import { initSearchInput } from "./modules/search.js";
 import { initFAQ } from "./modules/faq.js";
 import { modalBtnClose } from "./modules/modal.js";
+import { initFormSubmit } from "./modules/form-submit.js";
 
 import { burgerMenu } from "./modules/burger-menu.js";
 
@@ -17,7 +18,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const searchableSections = document.querySelectorAll(
     ".study-abroad-section, .about-us-section, .about-section__info-columns, .faq-section, .contact-details-section"
   );
-
+  initFormSubmit();
   initCustomSelects();
   initCountryFilter();
   initAddUniversity();

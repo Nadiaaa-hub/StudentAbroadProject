@@ -223,11 +223,12 @@ export function initCustomSelects() {
       } else newForm.classList.remove("active");
     };
 
-    // --- Events ---
-    mainInput.addEventListener("click", (e) => {
+    // --- Open dropdown only on arrow click ---
+    arrow?.addEventListener("click", (e) => {
       e.stopPropagation();
-      if (wrapper.classList.contains("active")) closeDropdown();
-      else {
+      if (wrapper.classList.contains("active")) {
+        closeDropdown();
+      } else {
         positionDropdown(wrapper, mainInput, dropdown);
         dropdown.classList.add("active");
         wrapper.classList.add("active");
@@ -244,11 +245,6 @@ export function initCustomSelects() {
       "input",
       debounce(() => filterOptions(searchInput.value), 120)
     );
-
-    arrow?.addEventListener("click", (e) => {
-      e.stopPropagation();
-      mainInput.click();
-    });
 
     dropdown.addEventListener("click", (e) => {
       const option = e.target.closest(".custom-select-option");
