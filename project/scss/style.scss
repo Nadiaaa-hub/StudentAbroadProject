@@ -3368,3 +3368,64 @@ video,
 *[style*="width:100vw"] {
   width: 100% !important;
 }
+
+.search-results {
+  padding: 60px 0;
+
+  .container {
+    max-width: 1200px;
+    margin: 0 auto;
+    padding: 0 20px;
+  }
+}
+
+.search-results__title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.search-results__count {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.search-results__message {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.search-results__back-btn {
+  display: block;
+  margin: 0 auto;
+  text-align: center;
+  max-width: 250px;
+}
+
+.search-highlight {
+  background-color: var(--color-main-yellow);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+// Адаптація для мобільних пристроїв
+@media (max-width: 768px) {
+  .search-results {
+    padding: 40px 0;
+  }
+
+  .search-results__title {
+    font-size: 2rem;
+  }
+
+  .search-results__count {
+    font-size: 1.1rem;
+  }
+}
