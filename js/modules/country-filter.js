@@ -3,7 +3,7 @@ export function initCountryFilter() {
     ".country-search-box__input"
   );
   const checkboxGroups = document.querySelectorAll(
-    ".checkbox-group, .checkbox-group-special"
+    ".checkbox-group, .checkbox-group-special, .checkbox-group-mobile"
   );
 
   // Створюємо кнопки навігації
@@ -18,6 +18,39 @@ export function initCountryFilter() {
       groupStates.set(group, state);
     });
 
+    // Функція для оновлення видимості поля пошуку та навігації
+    function updateVisibility() {
+      const allGroupsHidden = Array.from(checkboxGroups).every(
+        (group) => window.getComputedStyle(group).display === "none"
+      );
+      countrySearchInput.style.display = allGroupsHidden ? "none" : "block";
+
+      checkboxGroups.forEach((group) => {
+        const state = groupStates.get(group);
+        const navId = group.getAttribute("data-nav-id");
+        const navContainer = document.querySelector(
+          `.pagination-nav[data-nav-id="${navId}"]`
+        );
+
+        if (navContainer) {
+          const isGroupVisible =
+            window.getComputedStyle(group).display !== "none";
+          navContainer.style.display = isGroupVisible ? "flex" : "none";
+          if (isGroupVisible && !state.isSearchMode) {
+            showPage(group, state.currentPage, state.itemsPerPage, false);
+            updateNavigationButtons(
+              navContainer,
+              state.currentPage,
+              state.totalPages
+            );
+          }
+        }
+      });
+    }
+
+    // Початкова перевірка видимості
+    updateVisibility();
+
     countrySearchInput.addEventListener("input", () => {
       const query = countrySearchInput.value.trim().toLowerCase();
 
@@ -25,6 +58,19 @@ export function initCountryFilter() {
         const state = groupStates.get(group);
         const checkboxes = group.querySelectorAll(".container-checkbox");
         const visibleItems = [];
+
+        // Перевіряємо, чи сітка видима
+        const isGroupVisible =
+          window.getComputedStyle(group).display !== "none";
+        const navId = group.getAttribute("data-nav-id");
+        const navContainer = document.querySelector(
+          `.pagination-nav[data-nav-id="${navId}"]`
+        );
+
+        if (!isGroupVisible && navContainer) {
+          navContainer.style.display = "none";
+          return; // Пропускаємо обробку для прихованої сітки
+        }
 
         // Знаходимо всі видимі елементи
         checkboxes.forEach((checkbox) => {
@@ -48,12 +94,7 @@ export function initCountryFilter() {
         );
 
         // Оновлюємо навігацію
-        const navId = group.getAttribute("data-nav-id");
-        const navContainer = document.querySelector(
-          `.pagination-nav[data-nav-id="${navId}"]`
-        );
-
-        if (navContainer) {
+        if (navContainer && isGroupVisible) {
           if (query === "") {
             // Якщо пошук пустий - повертаємо звичайну пагінацію
             navContainer.style.display = "flex";
@@ -86,6 +127,9 @@ export function initCountryFilter() {
           }
         }
       });
+
+      // Оновлюємо видимість поля пошуку
+      updateVisibility();
     });
 
     countrySearchInput.addEventListener("search", () => {
@@ -97,7 +141,11 @@ export function initCountryFilter() {
             `.pagination-nav[data-nav-id="${navId}"]`
           );
 
-          if (navContainer) {
+          // Перевіряємо, чи сітка видима
+          const isGroupVisible =
+            window.getComputedStyle(group).display !== "none";
+
+          if (navContainer && isGroupVisible) {
             navContainer.style.display = "flex";
             state.isSearchMode = false;
             state.currentPage = Math.min(
@@ -110,17 +158,27 @@ export function initCountryFilter() {
               state.currentPage,
               state.totalPages
             );
+          } else if (navContainer) {
+            navContainer.style.display = "none";
           }
         });
       }
+
+      // Оновлюємо видимість поля пошуку
+      updateVisibility();
     });
+
+    // Відстежуємо зміни розміру вікна для оновлення видимості
+    window.addEventListener("resize", updateVisibility);
   }
 
   function initGroupPagination(group) {
     const checkboxes = group.querySelectorAll(".container-checkbox");
-    const itemsPerPage = group.classList.contains("checkbox-group-special")
-      ? 6
-      : 12;
+    const itemsPerPage =
+      group.classList.contains("checkbox-group-special") ||
+      group.classList.contains("checkbox-group-mobile")
+        ? 6
+        : 12;
     const totalPages = Math.ceil(checkboxes.length / itemsPerPage);
     const navId = `nav-${Math.random().toString(36).substr(2, 9)}`;
 
@@ -140,8 +198,10 @@ export function initCountryFilter() {
     // Додаємо навігацію для цієї групи
     addNavigationForGroup(group, state);
 
-    // Показуємо першу сторінку
-    showPage(group, 0, itemsPerPage, false);
+    // Показуємо першу сторінку, якщо сітка видима
+    if (window.getComputedStyle(group).display !== "none") {
+      showPage(group, 0, itemsPerPage, false);
+    }
 
     return state;
   }
@@ -299,6 +359,15 @@ export function initCountryFilter() {
       .page-info {
         font-size: 14px;
         color: #666;
+      }
+
+      .fade-in {
+        animation: fadeIn 0.2s ease-in;
+      }
+
+      @keyframes fadeIn {
+        from { opacity: 0; }
+        to { opacity: 1; }
       }
     `;
     document.head.appendChild(style);

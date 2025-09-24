@@ -4,24 +4,33 @@
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
-    <link rel="stylesheet" href="./project/css/style.css" />
+
+    <link
+      rel="preload"
+      href="./project/css/s.css"
+      as="style"
+      onload="this.rel='stylesheet'" />
+
+    <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
       rel="stylesheet" />
-    <link rel="website icon" type="png" href="./img/logo_01.png" />
   </head>
 
   <body>
-    <script src="index.js"></script>
     <header class="site-header" id="header-footer-color">
       <div class="container">
         <div class="header__container">
           <div class="logo">
-            <a href="index.html">
-              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            <a href="/">
+              <img
+                src="./project/img/logo.svg"
+                alt="StudentAbroad logo"
+                loading="lazy" />
             </a>
           </div>
 
+          <!-- Десктопна навігація -->
           <nav class="header__nav">
             <ul class="header__menu">
               <li>
@@ -75,18 +84,72 @@
               <input
                 type="text"
                 class="search-box__input"
-                data-en="Search..."
-                data-ua="Шукати..."
                 placeholder="Search..." />
             </div>
           </div>
+
+          <!-- Бургер для мобільного меню -->
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle" class="burger">
+            <span></span>
+          </label>
         </div>
       </div>
+      <!-- Мобільне меню -->
+      <ul class="mobile-menu">
+        <li class="abt_us">
+          <a class="link" href="index.html" data-en="ABOUT US" data-ua="ПРО НАС"
+            >ABOUT US</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="uni-list.html"
+            data-en="UNI LIST"
+            data-ua="СПИСОК ВНЗ"
+            >UNI LIST</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="program-list.html"
+            data-en="PROGRAM LIST"
+            data-ua="ПРОГРАМИ"
+            >PROGRAM LIST</a
+          >
+        </li>
+        <li>
+          <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+        </li>
+        <li>
+          <span class="mobile-language-switch" aria-hidden="true">
+            <button
+              type="button"
+              class="js-switch-button"
+              data-lang="ua"
+              aria-label="Українська">
+              UA
+            </button>
+            <button
+              type="button"
+              class="js-switch-button active"
+              data-lang="en"
+              aria-label="English">
+              EN
+            </button>
+          </span>
+        </li>
+      </ul>
+
+      <!-- Overlay -->
+      <div class="overlay"></div>
     </header>
 
     <main>
       <section class="country-section-s">
-        <div class="container">
+        <div class="container-s">
           <section class="program-body-special">
             <section class="left-switch-section">
               <div class="heading-search-wrapper">
@@ -104,7 +167,7 @@
                     HOME UNI
                   </h2>
                 </section>
-                <div class="country-search-box">
+                <div class="country-search-box-s">
                   <div class="search-input-wrapper">
                     <input
                       type="text"
@@ -312,13 +375,37 @@
 
             <div class="program-card">
               <h2
-                data-en="WU (KNEU - Vienna University)"
-                data-ua="WU (КНЕУ - Віденський Університет)">
-                WU (KNEU - Vienna University)
+                data-en="Erasmus + (KROK - KJU)"
+                data-ua="Erasmus+ (KROK-KJU)">
+                Erasmus+ (KROK-KJU)
               </h2>
               <img class="icon-img" src="./project/img/quotation.svg" />
               <p
                 data-en="It was a wonderful experience if we consider work which was done by <br> hosting university, the program the staff and all the info was immaculate, <br> i truly enjoyed and even switched now to Finnish university ..."
+                data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> університет, програму, персонал і всю інформацію було бездоганною, я <br> дійсно насолоджувався і навіть перейшов зараз до фінського університету ...">
+                It was a wonderful experience if we consider work which was done
+                by hosting university, the program the staff and all the info
+                was immaculate, i truly enjoyed and even switched now to Finnish
+                university ...
+              </p>
+              <a
+                href="programs-read-more.html"
+                class="btn read-more-btn2"
+                data-en="Read more"
+                data-ua="Читати більше"
+                >Read more</a
+              >
+            </div>
+
+            <div class="program-card">
+              <h2
+                data-en="ERASMUS + (2021-2027)"
+                data-ua="ERASMUS + (2021-2027)">
+                WU (KNEU - Vienna University)
+              </h2>
+              <img class="icon-img" src="./project/img/quotation.svg" />
+              <p
+                data-en="Erasmus+ is the EU program in the fields of education, training, youth and sport for the period 2021-2027. Education, training, youth and sport are key areas that contribute to the personal and professional development of citizens. Ultimately, high quality and inclusive education and training"
                 data-ua="Це був чудовий досвід, якщо ми врахуємо роботу, яку виконала приймаюча <br> університет, програму, персонал і всю інформацію було бездоганною, я <br> дійсно насолоджувався і навіть перейшов зараз до фінського університету ...">
                 It was a wonderful experience if we consider work which was done
                 by <br />
