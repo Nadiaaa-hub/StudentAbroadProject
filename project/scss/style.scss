@@ -42,31 +42,6 @@ $desktop: 1200px;
   }
 }
 
-$tablet: 768px;
-$desktop: 1200px;
-
-@mixin respond($break) {
-  @if $break ==tablet {
-    @media (min-width: #{$tablet}) and (max-width: #{$desktop - 1}) {
-      @content;
-    }
-
-    // від 768px до 1199px
-  } @else if $break ==mobile {
-    @media (max-width: #{$tablet - 1}) {
-      @content;
-    }
-
-    // до 767px
-  } @else if $break ==desktop {
-    @media (min-width: #{$desktop}) {
-      @content;
-    }
-
-    // від 1200px
-  }
-}
-
 *,
 *::before,
 *::after {
@@ -1825,9 +1800,8 @@ select {
 .checkbox-group {
   display: grid;
   font-weight: 300;
-  font-size: 13px;
+  font-size: 17px;
   grid-template-columns: repeat(4, auto);
-  grid-template-rows: repeat(3, auto);
   justify-content: space-between;
   align-items: center;
   gap: 10px;
@@ -2154,7 +2128,6 @@ select {
 .country-search-box {
   display: flex;
   justify-content: flex-end;
-  flex: 1;
   width: 100%;
   margin-bottom: 30px;
 
@@ -2796,9 +2769,6 @@ select {
 }
 
 .back-button {
-  display: flex;
-  align-items: center;
-  gap: 8px;
   color: var(--color-white-line);
   display: flex;
   align-items: center;
@@ -2825,11 +2795,7 @@ select {
 // programs-read-more
 .back-button-black a {
   margin-left: 40px;
-
-  a {
-    color: var(--color-grey);
-    text-decoration: none;
-  }
+  color: var(--color-main-black);
 }
 
 .program-name {
@@ -2972,14 +2938,14 @@ select {
     color: var(--color-main-black);
     font-weight: 200;
   }
-}
 
-a.blue-links {
-  color: var(--color-main-blue);
-  text-decoration: none;
+  a.blue-links {
+    color: var(--color-main-blue);
+    text-decoration: none;
 
-  &:hover {
-    text-decoration: underline;
+    &:hover {
+      text-decoration: underline;
+    }
   }
 }
 
