@@ -81,36 +81,6 @@ export function initCustomSelects() {
     document.querySelectorAll(".custom-select-wrapper")
   );
 
-  // --- Global click listener ---
-  document.addEventListener("click", (e) => {
-    if (!e.target.closest(".custom-select-wrapper")) {
-      wrappers.forEach((wrapper) => {
-        wrapper.classList.remove("active");
-        const dd = wrapper.querySelector(".custom-select-dropdown");
-        if (dd) dd.classList.remove("active");
-        const nf = wrapper.querySelector(".new-item-form");
-        if (nf) nf.classList.remove("active");
-        const si = wrapper.querySelector(".custom-select-search-input");
-        if (si) si.value = "";
-        wrapper
-          .querySelectorAll(".custom-select-option")
-          .forEach((o) => (o.style.display = "block"));
-      });
-    }
-  });
-
-  window.addEventListener("resize", () => {
-    wrappers.forEach((wrapper) => {
-      const dd = wrapper.querySelector(".custom-select-dropdown");
-      const mainInput = wrapper.querySelector(".custom-select-input");
-      const nf = wrapper.querySelector(".new-item-form");
-      if (dd && dd.classList.contains("active") && mainInput)
-        positionDropdown(wrapper, mainInput, dd);
-      if (nf && nf.classList.contains("active") && mainInput)
-        positionNewForm(wrapper, mainInput, nf);
-    });
-  });
-
   const debounce = (fn, wait = 150) => {
     let t;
     return (...args) => {
@@ -127,7 +97,6 @@ export function initCustomSelects() {
       wrapper.style.position = "relative";
     const rect = input.getBoundingClientRect();
     dropdown.style.position = "absolute";
-    dropdown.style.width = `${rect.width}px`;
     dropdown.style.top = `${input.offsetHeight + 8}px`;
     dropdown.style.left = `0px`;
     dropdown.style.zIndex = 200;
@@ -141,9 +110,48 @@ export function initCustomSelects() {
     form.style.top = `${input.offsetHeight + 8}px`;
     form.style.transform = "none";
     form.style.zIndex = 150;
-    if (!form.style.width) form.style.width = "320px";
   };
+  document.addEventListener("click", (e) => {
+    const clickedInsideWrapper = !!e.target.closest(".custom-select-wrapper");
+    const clickedInsideNewForm = !!e.target.closest(".new-item-form");
 
+    if (!clickedInsideWrapper && !clickedInsideNewForm) {
+      wrappers.forEach((wrapper) => {
+        wrapper.classList.remove("active");
+        const dd = wrapper.querySelector(".custom-select-dropdown");
+        if (dd) dd.classList.remove("active");
+        const nf =
+          wrapper.querySelector(".new-item-form") ||
+          wrapper
+            .closest(".form-field-and-description")
+            ?.querySelector(".new-item-form");
+        if (nf) nf.classList.remove("active");
+        const si = wrapper.querySelector(".custom-select-search-input");
+        if (si) si.value = "";
+        wrapper
+          .querySelectorAll(".custom-select-option")
+          .forEach((o) => (o.style.display = "block"));
+        const mainInput = wrapper.querySelector(".custom-select-input");
+        if (mainInput) mainInput.setAttribute("aria-expanded", "false");
+      });
+    }
+  });
+
+  window.addEventListener("resize", () => {
+    wrappers.forEach((wrapper) => {
+      const dd = wrapper.querySelector(".custom-select-dropdown");
+      const mainInput = wrapper.querySelector(".custom-select-input");
+      const nf =
+        wrapper.querySelector(".new-item-form") ||
+        wrapper
+          .closest(".form-field-and-description")
+          ?.querySelector(".new-item-form");
+      if (dd && dd.classList.contains("active") && mainInput)
+        positionDropdown(wrapper, mainInput, dd);
+      if (nf && nf.classList.contains("active") && mainInput)
+        positionNewForm(wrapper, mainInput, nf);
+    });
+  });
   wrappers.forEach((wrapper) => {
     const mainInput = wrapper.querySelector(".custom-select-input");
     const dropdown = wrapper.querySelector(".custom-select-dropdown");
@@ -165,7 +173,6 @@ export function initCustomSelects() {
 
     if (!mainInput || !dropdown) return;
 
-    // --- Add search input ---
     let searchInput = dropdown.querySelector(".custom-select-search-input");
     if (!searchInput) {
       const searchDiv = document.createElement("div");
@@ -182,8 +189,6 @@ export function initCustomSelects() {
       searchDiv.appendChild(searchIcon);
       dropdown.prepend(searchDiv);
     }
-
-    // --- Accessibility ---
     mainInput.setAttribute("role", "combobox");
     mainInput.setAttribute("aria-haspopup", "listbox");
     mainInput.setAttribute("aria-expanded", "false");
@@ -223,9 +228,23 @@ export function initCustomSelects() {
       } else newForm.classList.remove("active");
     };
 
-    // --- Open dropdown only on arrow click ---
     arrow?.addEventListener("click", (e) => {
       e.stopPropagation();
+
+      document.querySelectorAll(".new-item-form.active").forEach((nf) => {
+        if (nf !== newForm) nf.classList.remove("active");
+      });
+
+      document.querySelectorAll(".custom-select-wrapper.active").forEach((w) => {
+        if (w !== wrapper) {
+          w.classList.remove("active");
+          const dd = w.querySelector(".custom-select-dropdown");
+          if (dd) dd.classList.remove("active");
+          const mi = w.querySelector(".custom-select-input");
+          if (mi) mi.setAttribute("aria-expanded", "false");
+        }
+      });
+
       if (wrapper.classList.contains("active")) {
         closeDropdown();
       } else {
@@ -233,10 +252,44 @@ export function initCustomSelects() {
         dropdown.classList.add("active");
         wrapper.classList.add("active");
         mainInput.setAttribute("aria-expanded", "true");
+
+        document.querySelectorAll(".custom-select-search-input").forEach((si) => {
+          if (si !== dropdown.querySelector(".custom-select-search-input"))
+            si.value = "";
+        });
         searchInput?.focus();
       }
     });
+   mainInput.addEventListener("click", (e) => {
+  e.stopPropagation();
 
+  document.querySelectorAll(".new-item-form.active").forEach((nf) => {
+    nf.classList.remove("active");
+  });
+
+ 
+  if (wrapper.classList.contains("active")) return;
+
+  
+  document.querySelectorAll(".custom-select-wrapper.active").forEach((w) => {
+    if (w !== wrapper) {
+      w.classList.remove("active");
+      const dd = w.querySelector(".custom-select-dropdown");
+      if (dd) dd.classList.remove("active");
+      const mi = w.querySelector(".custom-select-input");
+      if (mi) mi.setAttribute("aria-expanded", "false");
+    }
+  });
+
+
+  positionDropdown(wrapper, mainInput, dropdown);
+  dropdown.classList.add("active");
+  wrapper.classList.add("active");
+  mainInput.setAttribute("aria-expanded", "true");
+  searchInput?.focus();
+});
+
+    
     mainInput.addEventListener(
       "input",
       debounce(() => filterOptions(mainInput.value), 120)
@@ -246,6 +299,7 @@ export function initCustomSelects() {
       debounce(() => filterOptions(searchInput.value), 120)
     );
 
+    // --- clicking an option sets value ---
     dropdown.addEventListener("click", (e) => {
       const option = e.target.closest(".custom-select-option");
       if (option) {
@@ -254,15 +308,29 @@ export function initCustomSelects() {
       }
     });
 
+    // --- Add button opens new-item form (close others first) ---
     if (addButton) {
       addButton.addEventListener("click", (e) => {
         e.preventDefault();
         e.stopPropagation();
+
+        document.querySelectorAll(".new-item-form.active").forEach((nf) => {
+          if (nf !== newForm) nf.classList.remove("active");
+        });
+        document.querySelectorAll(".custom-select-wrapper.active").forEach((w) => {
+          if (w !== wrapper) {
+            w.classList.remove("active");
+            const dd = w.querySelector(".custom-select-dropdown");
+            if (dd) dd.classList.remove("active");
+            const mi = w.querySelector(".custom-select-input");
+            if (mi) mi.setAttribute("aria-expanded", "false");
+          }
+        });
+
         closeDropdown();
         toggleNewForm(true);
       });
     }
-
     if (newFormInput) {
       newFormInput.addEventListener("keydown", (e) => {
         if (e.key === "Enter") {
@@ -282,6 +350,8 @@ export function initCustomSelects() {
           toggleNewForm(false);
         }
       });
+
+      newForm.addEventListener("click", (ev) => ev.stopPropagation());
     }
 
     mainInput.addEventListener("keydown", (e) => {
