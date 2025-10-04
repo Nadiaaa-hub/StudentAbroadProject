@@ -1,4 +1,13 @@
 export function initCountryFilter() {
+
+  if (!sessionStorage.getItem("countryFilterReloaded")) {
+    sessionStorage.setItem("countryFilterReloaded", "true");
+    window.location.reload();
+    return; // зупиняємо виконання функції до перезавантаження
+  } else {
+    sessionStorage.removeItem("countryFilterReloaded");
+  }
+
   const countrySearchInput = document.querySelector(
     ".country-search-box__input"
   );
