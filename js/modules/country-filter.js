@@ -1,13 +1,4 @@
 export function initCountryFilter() {
-
-  if (!sessionStorage.getItem("countryFilterReloaded")) {
-    sessionStorage.setItem("countryFilterReloaded", "true");
-    window.location.reload();
-    return; // зупиняємо виконання функції до перезавантаження
-  } else {
-    sessionStorage.removeItem("countryFilterReloaded");
-  }
-
   const countrySearchInput = document.querySelector(
     ".country-search-box__input"
   );
@@ -187,23 +178,39 @@ export function initCountryFilter() {
         ? 6
         : 12;
     const totalPages = Math.ceil(checkboxes.length / itemsPerPage);
-    const navId = `nav-${Math.random().toString(36).substr(2, 9)}`;
 
-    group.setAttribute("data-nav-id", navId);
+    // Перевіряємо, чи пагінація вже існує
+    let navContainer = group.nextElementSibling;
+    if (navContainer && navContainer.classList.contains("pagination-nav")) {
+      const existingNavId = navContainer.getAttribute("data-nav-id");
+      group.setAttribute("data-nav-id", existingNavId);
+    } else {
+      const navId = `nav-${Math.random().toString(36).substr(2, 9)}`;
+      group.setAttribute("data-nav-id", navId);
+      addNavigationForGroup(group, {
+        currentPage: 0,
+        totalPages,
+        itemsPerPage,
+        navId,
+        isSearchMode: false,
+        searchCurrentPage: 0,
+        searchTotalPages: 0,
+        visibleItems: [],
+        lastPageBeforeSearch: 0,
+      });
+    }
 
     const state = {
       currentPage: 0,
       totalPages,
       itemsPerPage,
-      navId,
+      navId: group.getAttribute("data-nav-id"),
       isSearchMode: false,
       searchCurrentPage: 0,
       searchTotalPages: 0,
       visibleItems: [],
       lastPageBeforeSearch: 0,
     };
-
-    addNavigationForGroup(group, state);
 
     if (window.getComputedStyle(group).display !== "none") {
       showPage(group, 0, itemsPerPage, false);
