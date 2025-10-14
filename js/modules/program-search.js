@@ -4,17 +4,43 @@
 export function initProgramSearch() {
     initSearchRedirect();
 
-    // Перевіряємо, чи ми на сторінці search.html
+    // Додаємо клас до body негайно, якщо ми на search.html
     if (window.location.pathname.includes('search.html')) {
         document.body.classList.add('search-page');
-        processSearchPage();
 
-        document.addEventListener('DOMContentLoaded', () => {
-            const cards = document.querySelectorAll('.program-card');
-            cards.forEach(card => {
-                card.style.display = 'flex !important';
-            });
-        });
+        // Якщо розмір вікна мобільний — додаємо ще один клас (точніше керування)
+        const MOBILE_BREAKPOINT = 767;
+        if (window.innerWidth <= MOBILE_BREAKPOINT) {
+            document.body.classList.add('search-page-mobile');
+
+            // 1) Інлайн-фікс: змушує контейнер показуватись навіть якщо CSS ховає його
+            // (інлайн стиль має високий пріоритет над звичайними правилами)
+            const programListEl = document.querySelector('.program-list');
+            if (programListEl) {
+                programListEl.style.display = 'flex';
+            }
+
+            // 2) Резерв: вмонтуємо CSS правило з !important у head (переб'є медіа-правила)
+            const styleId = 'search-page-mobile-override';
+            if (!document.getElementById(styleId)) {
+                const style = document.createElement('style');
+                style.id = styleId;
+                style.textContent = `
+                    /* Автоматично показувати програм-лист лише на сторінці пошуку у мобілці */
+                    body.search-page.search-page-mobile .program-list {
+                        display: flex !important;
+                    }
+                    /* Якщо програмки мають додаткові правила, переконаємось що картки теж відображаються */
+                    body.search-page.search-page-mobile .program-list .program-card {
+                        display: flex !important;
+                    }
+                `;
+                document.head.appendChild(style);
+            }
+        }
+
+        // Запускаємо обробку сторінки пошуку
+        processSearchPage();
     }
 }
 
@@ -41,7 +67,6 @@ function initSearchRedirect() {
  * Обробка сторінки пошуку
  */
 function processSearchPage() {
-    // Отримуємо ключове слово з URL параметрів
     const urlParams = new URLSearchParams(window.location.search);
     const searchQuery = urlParams.get('q');
 
@@ -50,7 +75,6 @@ function processSearchPage() {
         return;
     }
 
-    // Завантажуємо та обробляємо програми
     loadAndFilterPrograms(searchQuery);
 }
 
@@ -72,8 +96,9 @@ function loadAndFilterPrograms(searchQuery) {
 
             const filteredPrograms = filterPrograms(programCards, searchQuery);
 
-            // 🟢 ДОДАНО: Змінюємо стиль відображення навіть у завантажених картках
+            // Додатковий фікс: встановлюємо інлайн-стилі для клонованих карток
             filteredPrograms.forEach(card => {
+                // Клоновані елементи — гарантовано показуємо як flex
                 card.style.display = 'flex';
             });
 
@@ -147,18 +172,20 @@ function displayResults(programs, searchQuery) {
 
     const programList = resultsContainer.querySelector('.program-list');
 
+    // Якщо ми на мобільному і на сторінці пошуку — примусово показуємо контейнер
+    if (document.body.classList.contains('search-page-mobile')) {
+        programList.style.display = 'flex';
+    }
+
     programs.forEach(program => {
         const highlightedProgram = highlightSearchTerm(program, searchQuery);
+
+        // Безпечний інлайн-стиль для карток — щоб відображалися незалежно від зовнішніх правил
+        highlightedProgram.style.display = 'flex';
         programList.appendChild(highlightedProgram);
     });
 
     mainElement.appendChild(resultsContainer);
-
-    // 🟢 ДОДАНО: переконуємося, що всі додані картки відображаються
-    const visibleCards = resultsContainer.querySelectorAll('.program-card');
-    visibleCards.forEach(card => {
-        card.style.display = 'flex';
-    });
 
     if (window.updateLanguage) {
         window.updateLanguage();
