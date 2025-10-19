@@ -27,13 +27,17 @@ $desktop: 1200px;
     }
 
     // від 768px до 1199px
-  } @else if $break ==mobile {
+  }
+
+  @else if $break ==mobile {
     @media (max-width: #{$tablet - 1}) {
       @content;
     }
 
     // до 767px
-  } @else if $break ==desktop {
+  }
+
+  @else if $break ==desktop {
     @media (min-width: #{$desktop}) {
       @content;
     }
@@ -396,6 +400,7 @@ header {
 }
 
 @keyframes bounce {
+
   0%,
   100% {
     transform: translateY(0);
@@ -752,6 +757,7 @@ a {
 }
 
 @media screen and (max-width: 767px) {
+
   .about-section__title,
   .about-us__map-image {
     margin-left: 10px;
@@ -917,12 +923,11 @@ a {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
-    transform 0.3s ease-out;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out, transform 0.3s ease-out;
   transform: translateY(-10px);
   padding-bottom: 0;
 
-  .faq__answer.active + & {
+  .faq__answer.active+& {
     max-height: 200px;
     opacity: 1;
     padding-bottom: 45px;
@@ -1162,8 +1167,7 @@ a {
   max-height: 0;
   opacity: 0;
   visibility: hidden;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
-    visibility 0.4s ease-out, padding 0.4s ease-out, border 0.4s ease-out;
+  transition: max-height 0.4s ease-out, opacity 0.4s ease-out, visibility 0.4s ease-out, padding 0.4s ease-out, border 0.4s ease-out;
   padding: 0 20px;
   border: 1px solid transparent;
   border-radius: 30px;
@@ -1177,7 +1181,7 @@ a {
     border-radius: 30px;
     border: 1px solid var(--color-main-blue);
 
-    & ~ .faq__meta--top {
+    &~.faq__meta--top {
       max-height: 0;
       opacity: 0;
       margin-top: 0;
@@ -1185,7 +1189,7 @@ a {
       pointer-events: none;
     }
 
-    & + .faq__meta--bottom {
+    &+.faq__meta--bottom {
       margin-top: 20px;
       margin-bottom: 45px;
       max-height: 200px;
@@ -1345,12 +1349,7 @@ a {
     line-height: 24px;
     resize: none;
     overflow-y: auto;
-    background: repeating-linear-gradient(
-      to bottom,
-      transparent,
-      transparent 23px,
-      var(--color-grey) 24px
-    );
+    background: repeating-linear-gradient(to bottom, transparent, transparent 23px, var(--color-grey) 24px);
     background-attachment: local;
     white-space: pre-wrap;
     overflow-wrap: break-word;
@@ -1729,8 +1728,7 @@ select {
   width: 100%;
   gap: 5px;
   overflow: hidden;
-  transition: opacity 0.4s ease-out, max-height 0.4s ease-out,
-    margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
+  transition: opacity 0.4s ease-out, max-height 0.4s ease-out, margin-top 0.4s ease-out, margin-bottom 0.4s ease-out;
 
   .faq__paragraph {
     font-size: 16px;
@@ -1953,7 +1951,7 @@ select {
     }
   }
 
-  input:checked + .checkmark {
+  input:checked+.checkmark {
     background-color: var(--color-main-blue);
     border-color: var(--color-main-blue);
 
@@ -2019,6 +2017,16 @@ select {
   padding: 10px;
 }
 
+.program-card-m {
+  flex: 0 0 100%;
+  display: flex;
+  justify-content: space-between;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  padding: 10px;
+}
+
 .university-card-m__img {
   height: 158px;
   width: 240px;
@@ -2030,6 +2038,7 @@ select {
   display: flex;
   flex-direction: column;
   gap: 10px;
+  flex: 1;
 
   h2 {
     color: #333;
@@ -2039,6 +2048,28 @@ select {
 
   p {
     font-size: 14px;
+    color: #555;
+    margin: 5px 0;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    gap: 5px;
+  }
+}
+
+.program-info-m {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+
+  h2 {
+    color: #333;
+    margin: 0;
+    font-size: 25px;
+  }
+
+  p {
+    font-size: 18px;
     color: #555;
     margin: 5px 0;
     display: flex;
@@ -2065,8 +2096,16 @@ select {
   left: -25px;
 }
 
+.slider__arrow--left-p {
+  left: 8px;
+}
+
 .slider__arrow--right {
   right: -25px;
+}
+
+.slider__arrow--right-p {
+  right: 8px;
 }
 
 .slider__arrow--left::before,
@@ -2086,7 +2125,25 @@ select {
 
 .slider__arrow--left::before {
   transform: translate(-50%, -50%) rotate(225deg);
-  /* Виправлено на 225° для правильного лівого напрямку */
+}
+
+.slider__arrow--left-p::before,
+.slider__arrow--right-p::before {
+  content: "";
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  display: block;
+  width: 1em;
+  height: 1em;
+  border-right: 0.3em solid var(--color-grey);
+  border-top: 0.3em solid var(--color-grey);
+  transform: translate(-50%, -50%) rotate(45deg);
+  box-sizing: border-box;
+}
+
+.slider__arrow--left-p::before {
+  transform: translate(-50%, -50%) rotate(225deg);
 }
 
 .slider__arrow:hover {
@@ -2308,6 +2365,16 @@ select {
   display: flex;
   flex-direction: column;
   gap: 40px;
+
+  @include respond(mobile) {
+    display: none;
+  }
+
+  body.search-page .program-list {
+    @include respond(mobile) {
+      display: flex !important;
+    }
+  }
 }
 
 .program-card {
@@ -2514,7 +2581,7 @@ select {
   justify-content: space-between;
   align-items: center;
   gap: 10px;
-  column-gap: 50px;
+  column-gap: 30px;
 
   @include respond(mobile) {
     font-size: 7px;
@@ -2533,7 +2600,7 @@ select {
   padding-top: 20px;
 
   @include respond(mobile) {
-    font-size: 18px;
+    font-size: 16.7px;
     white-space: nowrap;
   }
 }
@@ -2553,8 +2620,8 @@ select {
   white-space: nowrap;
 
   @include respond(mobile) {
-    font-size: 22px;
-    transform: translate(14px, 7px);
+    font-size: 25px;
+    transform: translate(10px, 7px);
   }
 }
 
@@ -2608,7 +2675,7 @@ select {
   z-index: 0;
 }
 
-#bg > *:not(.bg-overlay) {
+#bg>*:not(.bg-overlay) {
   position: relative;
   z-index: 1;
 }
@@ -2898,6 +2965,7 @@ select {
     padding: 20px 10px;
   }
 
+
   .description {
     font-size: 16px;
     line-height: 1.6;
@@ -3169,12 +3237,12 @@ select {
 #burger-toggle {
   display: none;
 
-  &:checked ~ .mobile-menu {
+  &:checked~.mobile-menu {
     top: 0;
     transform: translateX(0);
   }
 
-  &:checked + .burger {
+  &:checked+.burger {
     span {
       transform: rotate(-45deg);
       top: 12px;
@@ -3335,6 +3403,7 @@ select {
 }
 
 @media (min-width: 960px) {
+
   .mobile-menu,
   .overlay {
     display: none;
@@ -3397,7 +3466,7 @@ video,
 }
 
 .search-results__back-btn {
-  display: flex;
+  display: block;
   margin: 0 auto;
   text-align: center;
   max-width: 250px;
@@ -3423,4 +3492,20 @@ video,
   .search-results__count {
     font-size: 1.1rem;
   }
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.nav-arrow {
+  -webkit-appearance: none;
+  appearance: none;
+}
+
+.pagination-nav {
+  display: none;
+  /* дефолтно приховані */
 }
