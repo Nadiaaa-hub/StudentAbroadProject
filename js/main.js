@@ -1,5 +1,3 @@
-// main.js - додаємо імпорт та ініціалізацію
-
 import { initLanguageSwitcher } from "./modules/language-switcher.js";
 import { initScrollIndicator } from "./modules/scroll-indicator.js";
 import { initCustomSelects } from "./modules/custom-select.js";
@@ -15,11 +13,6 @@ import { initSlider } from "./modules/slider-mobile.js";
 document.addEventListener("DOMContentLoaded", () => {
   initLanguageSwitcher();
   initScrollIndicator();
-
-  const searchInput = document.querySelector(".search-box__input");
-  const searchableSections = document.querySelectorAll(
-    ".study-abroad-section, .about-us-section, .about-section__info-columns, .faq-section, .contact-details-section"
-  );
   initFormSubmit();
   initCustomSelects();
   initCountryFilter();
