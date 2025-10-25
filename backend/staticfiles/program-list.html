@@ -1,0 +1,400 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+    <link rel="website icon" type="png" href="./img/logo_01.png" />
+  </head>
+
+  <body>
+    <script src="index.js"></script>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="index.html"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="country-section">
+        <div class="container">
+          <div class="country-section__heading">
+            <span
+              class="country-section__text-outline"
+              data-en="HOME UNI"
+              data-ua="Університет відправлення"
+              >HOME UNI
+            </span>
+            <h2
+              class="country-section__text-fill"
+              data-en="HOME UNI"
+              data-ua="Університет відправлення">
+              HOME UNI
+            </h2>
+          </div>
+
+          <div class="country-search-box">
+            <div class="search-input-wrapper">
+              <input
+                type="text"
+                id="homeUniSearch"
+                class="country-search-box__input"
+                placeholder="Search..."
+                data-en="Search..."
+                data-ua="Шукати університети відправлення..." />
+              <div class="country-search-box__line"></div>
+            </div>
+          </div>
+
+          <div class="checkbox-group" id="homeUniCheckboxes">
+            <!-- Home university checkboxes will be populated here -->
+          </div>
+          <div id="switch-country-button">&lt— — —&gt</div>
+          <h1 data-en="Level" data-ua="Ступінь" id="level">Level</h1>
+          <div class="level-checkbox-group">
+            <label class="container-checkbox">
+              <input type="checkbox" value="bachelor" class="level-filter" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Bachelor" data-ua="Бакалавр"
+                >Bachelor</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" value="master" class="level-filter" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="Master" data-ua="Магістр"
+                >Master</span
+              >
+            </label>
+
+            <label class="container-checkbox">
+              <input type="checkbox" value="phd" class="level-filter" />
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="PhD" data-ua="Доктор"
+                >PhD</span
+              >
+            </label>
+          </div>
+
+          <section class="program-list" id="programListContainer">
+            <!-- Programs will be loaded here dynamically -->
+            <div class="loading-spinner">Loading programs...</div>
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./project/img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="index.html"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="program-list.html"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="faq.html"
+                    data-en="FAQ"
+                    data-ua="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      const API_BASE_URL = 'http://127.0.0.1:8000/api';
+      let allPrograms = [];
+      let allHomeUniversities = [];
+
+      document.addEventListener('DOMContentLoaded', function() {
+        loadAllPrograms();
+        setupFilters();
+      });
+
+      function loadAllPrograms() {
+        const programListContainer = document.getElementById('programListContainer');
+        programListContainer.innerHTML = '<div class="loading-spinner">Loading programs...</div>';
+        
+        fetch(`${API_BASE_URL}/programs/`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(programs => {
+            allPrograms = programs;
+            allHomeUniversities = [...new Set(programs.map(p => p.home_university).filter(Boolean))];
+            updateHomeUniversityFilters();
+            filterPrograms();
+          })
+          .catch(error => {
+            console.error('Error fetching programs:', error);
+            programListContainer.innerHTML = '<p class="error-message">Failed to load programs. Please try again later.</p>';
+          });
+      }
+
+      function updateHomeUniversityFilters() {
+        const searchTerm = document.getElementById('homeUniSearch').value.toLowerCase();
+        const checkboxGroup = document.getElementById('homeUniCheckboxes');
+        checkboxGroup.innerHTML = '';
+        
+        // Filter home universities based on search term
+        const filteredHomeUnis = allHomeUniversities.filter(uni => 
+          uni.toLowerCase().includes(searchTerm))
+        
+        // Create checkboxes for filtered home universities
+        filteredHomeUnis.forEach(uni => {
+          const label = document.createElement('label');
+          label.className = 'container-checkbox';
+          
+          const input = document.createElement('input');
+          input.type = 'checkbox';
+          input.className = 'home-uni-filter';
+          input.value = uni;
+          
+          const checkmark = document.createElement('span');
+          checkmark.className = 'checkmark';
+          
+          const countryLabel = document.createElement('span');
+          countryLabel.className = 'country-label';
+          countryLabel.textContent = uni.length > 20 ? `${uni.substring(0, 20)}...` : uni;
+          
+          label.appendChild(input);
+          label.appendChild(checkmark);
+          label.appendChild(countryLabel);
+          
+          checkboxGroup.appendChild(label);
+        });
+      }
+
+      function filterPrograms() {
+        const programListContainer = document.getElementById('programListContainer');
+        
+        // Get selected filters
+        const selectedLevels = Array.from(document.querySelectorAll('.level-filter:checked')).map(el => el.value);
+        const selectedHomeUnis = Array.from(document.querySelectorAll('.home-uni-filter:checked')).map(el => el.value);
+        
+        // Filter programs
+        let filteredPrograms = allPrograms;
+        
+        // Filter by level
+        if (selectedLevels.length > 0) {
+          filteredPrograms = filteredPrograms.filter(program => 
+            selectedLevels.includes(program.study_level)
+          );
+        }
+        
+        // Filter by home university
+        if (selectedHomeUnis.length > 0) {
+          filteredPrograms = filteredPrograms.filter(program => 
+            selectedHomeUnis.includes(program.home_university)
+          );
+        }
+        
+        // Display results
+        if (filteredPrograms.length === 0) {
+          programListContainer.innerHTML = '<p class="no-programs">No programs found matching your criteria.</p>';
+          return;
+        }
+        
+        programListContainer.innerHTML = '';
+        filteredPrograms.forEach(program => {
+          const programCard = document.createElement('div');
+          programCard.className = 'program-card';
+          
+          const programTitle = document.createElement('h2');
+          programTitle.textContent = `${program.name} (${program.university})`;
+          
+          const quoteIcon = document.createElement('img');
+          quoteIcon.className = 'icon-img';
+          quoteIcon.src = './project/img/quotation.svg';
+          
+          const programDescription = document.createElement('p');
+          programDescription.textContent = program.testimonial || 'No testimonial available for this program.';
+          
+          const readMoreLink = document.createElement('a');
+          readMoreLink.href = `programs-read-more.html?id=${program.id}`;
+          readMoreLink.className = 'btn read-more-btn2';
+          readMoreLink.textContent = 'Read more';
+          readMoreLink.setAttribute('data-en', 'Read more');
+          readMoreLink.setAttribute('data-ua', 'Читати більше');
+          
+          programCard.appendChild(programTitle);
+          programCard.appendChild(quoteIcon);
+          programCard.appendChild(programDescription);
+          programCard.appendChild(readMoreLink);
+          
+          programListContainer.appendChild(programCard);
+        });
+      }
+
+      function setupFilters() {
+        // Level filter change
+        document.querySelectorAll('.level-filter').forEach(checkbox => {
+          checkbox.addEventListener('change', filterPrograms);
+        });
+        
+        // Home university search - now filters the checkboxes only
+        document.getElementById('homeUniSearch').addEventListener('input', function() {
+          updateHomeUniversityFilters();
+        });
+        
+        // Home university checkboxes
+        document.getElementById('homeUniCheckboxes').addEventListener('change', function(e) {
+          if (e.target.classList.contains('home-uni-filter')) {
+            filterPrograms();
+          }
+        });
+      }
+    </script>
+    <style>
+      .loading-spinner, .no-programs, .error-message {
+        text-align: center;
+        padding: 20px;
+        font-size: 18px;
+        color: #666;
+      }
+      
+      .error-message {
+        color: #d9534f;
+      }
+      
+      .no-programs {
+        color: #5bc0de;
+      }
+    </style>
+  </body>
+</html>

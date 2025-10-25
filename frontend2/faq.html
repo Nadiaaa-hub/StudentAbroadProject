@@ -1,0 +1,526 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="website icon" type="png" href="./project/img/logo_01.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+    <script src="index.js"></script>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="index.html"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="faq-section">
+        <div class="container">
+          <div class="faq-section__container">
+            <div class="faq__heading">
+              <span class="faq__text-outline" data-en="FAQ" data-ua="FAQ"
+                >FAQ</span
+              >
+              <h2 class="faq__text-fill" data-en="FAQ" data-ua="FAQ">FAQ</h2>
+            </div>
+            
+            <div id="faq-container">
+              <!-- FAQ items will be loaded here dynamically -->
+              <div class="loading-spinner">Loading FAQs...</div>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./project/img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="index.html"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="program-list.html"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="faq.html"
+                    data-en="FAQ"
+                    data-ua="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <!-- Updated JavaScript for FAQ loading with smooth animation -->
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        // Get current language
+        const currentLang = document.querySelector('.js-switch-button.active')?.dataset.lang || 'en';
+        
+        // Load FAQs from backend
+        const apiUrl = 'http://127.0.0.1:8000/api/faq/';
+        
+        fetch(`${apiUrl}?lang=${currentLang}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            console.log('Received data:', data);
+            const faqContainer = document.getElementById('faq-container');
+            faqContainer.innerHTML = '';
+            
+            if (data.status === 'error') {
+              faqContainer.innerHTML = '<p>Error loading FAQs: ' + data.message + '</p>';
+              return;
+            }
+            
+            if (data.faq_items && data.faq_items.length > 0) {
+              data.faq_items.forEach(faq => {
+                const categoriesHtml = faq.categories.map(cat => 
+                  `<p class="faq__text">${cat.name}</p>`
+                ).join('');
+                
+                // Format answer with paragraphs if it contains newlines
+                let answerHtml = '';
+                if (faq.answer.includes('\n')) {
+                  answerHtml = faq.answer.split('\n')
+                    .filter(p => p.trim() !== '')
+                    .map(p => `<p>${p.trim()}</p>`)
+                    .join('');
+                } else {
+                  answerHtml = `<p>${faq.answer}</p>`;
+                }
+                
+                const faqHtml = `
+                  <div class="faq__card">
+                    <div class="faq__programs">
+                      ${categoriesHtml}
+                    </div>
+                    <div class="faq__content">
+                      <h2 class="faq__h2 faq__toggle-question" tabindex="0" role="button" aria-expanded="false">
+                        ${faq.question}
+                      </h2>
+                      
+                      <div class="faq__meta faq__meta--top active">
+                        <div class="faq__meta-row">
+                          <div class="faq__meta-info">
+                            <p class="faq__paragraph">Author: ${faq.author}</p>
+                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                          </div>
+                          <div class="faq__date">
+                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
+                            <p class="faq__paragraph">${faq.updated_at}</p>
+                          </div>
+                        </div>
+                        <div class="faq__line"></div>
+                      </div>
+                      
+                      <div class="faq__answer">
+                        ${answerHtml}
+                      </div>
+                      
+                      <div class="faq__meta faq__meta--bottom">
+                        <div class="faq__meta-row">
+                          <div class="faq__meta-info">
+                            <p class="faq__paragraph">Author: ${faq.author}</p>
+                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                          </div>
+                          <div class="faq__date">
+                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
+                            <p class="faq__paragraph">${faq.updated_at}</p>
+                          </div>
+                        </div>
+                        <div class="faq__line"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                
+                faqContainer.innerHTML += faqHtml;
+              });
+              
+              // Initialize FAQ toggle functionality
+              initFAQToggle();
+            } else {
+              faqContainer.innerHTML = '<p>No FAQs found.</p>';
+            }
+          })
+          .catch(error => {
+            console.error('Error loading FAQs:', error);
+            document.getElementById('faq-container').innerHTML = 
+              '<p>Error loading FAQs. Please check console for details.</p>';
+          });
+          
+        // Language switch functionality
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          button.addEventListener('click', function() {
+            // Remove active class from all buttons
+            document.querySelectorAll('.js-switch-button').forEach(btn => {
+              btn.classList.remove('active');
+            });
+            
+            // Add active class to clicked button
+            this.classList.add('active');
+            
+            // Update all language-specific elements on the page
+            const newLang = this.dataset.lang;
+            updatePageLanguage(newLang);
+            
+            // Reload FAQs with new language
+            loadFAQs(newLang);
+          });
+        });
+        
+        // Initialize page language
+        updatePageLanguage(currentLang);
+      });
+      
+      function updatePageLanguage(lang) {
+        // Update all elements with data-en and data-ua attributes
+        document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+          if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
+            element.placeholder = element.getAttribute(`data-${lang}`);
+          } else {
+            element.textContent = element.getAttribute(`data-${lang}`);
+          }
+        });
+      }
+      
+      function loadFAQs(lang) {
+        const faqContainer = document.getElementById('faq-container');
+        faqContainer.innerHTML = '<div class="loading-spinner">Loading FAQs...</div>';
+        
+        const apiUrl = 'http://127.0.0.1:8000/api/faq/';
+        
+        fetch(`${apiUrl}?lang=${lang}`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error(`HTTP error! status: ${response.status}`);
+            }
+            return response.json();
+          })
+          .then(data => {
+            faqContainer.innerHTML = '';
+            
+            if (data.status === 'error') {
+              faqContainer.innerHTML = '<p>Error loading FAQs: ' + data.message + '</p>';
+              return;
+            }
+            
+            if (data.faq_items && data.faq_items.length > 0) {
+              data.faq_items.forEach(faq => {
+                const categoriesHtml = faq.categories.map(cat => 
+                  `<p class="faq__text">${cat.name}</p>`
+                ).join('');
+                
+                let answerHtml = '';
+                if (faq.answer.includes('\n')) {
+                  answerHtml = faq.answer.split('\n')
+                    .filter(p => p.trim() !== '')
+                    .map(p => `<p>${p.trim()}</p>`)
+                    .join('');
+                } else {
+                  answerHtml = `<p>${faq.answer}</p>`;
+                }
+                
+                const faqHtml = `
+                  <div class="faq__card">
+                    <div class="faq__programs">
+                      ${categoriesHtml}
+                    </div>
+                    <div class="faq__content">
+                      <h2 class="faq__h2 faq__toggle-question" tabindex="0" role="button" aria-expanded="false">
+                        ${faq.question}
+                      </h2>
+                      
+                      <div class="faq__meta faq__meta--top active">
+                        <div class="faq__meta-row">
+                          <div class="faq__meta-info">
+                            <p class="faq__paragraph">Author: ${faq.author}</p>
+                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                          </div>
+                          <div class="faq__date">
+                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
+                            <p class="faq__paragraph">${faq.updated_at}</p>
+                          </div>
+                        </div>
+                        <div class="faq__line"></div>
+                      </div>
+                      
+                      <div class="faq__answer">
+                        ${answerHtml}
+                      </div>
+                      
+                      <div class="faq__meta faq__meta--bottom">
+                        <div class="faq__meta-row">
+                          <div class="faq__meta-info">
+                            <p class="faq__paragraph">Author: ${faq.author}</p>
+                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                          </div>
+                          <div class="faq__date">
+                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
+                            <p class="faq__paragraph">${faq.updated_at}</p>
+                          </div>
+                        </div>
+                        <div class="faq__line"></div>
+                      </div>
+                    </div>
+                  </div>
+                `;
+                
+                faqContainer.innerHTML += faqHtml;
+              });
+              
+              // Reinitialize FAQ toggle functionality
+              initFAQToggle();
+            } else {
+              faqContainer.innerHTML = '<p>No FAQs found.</p>';
+            }
+          })
+          .catch(error => {
+            console.error('Error loading FAQs:', error);
+            faqContainer.innerHTML = '<p>Error loading FAQs. Please try again later.</p>';
+          });
+      }
+      
+      function initFAQToggle() {
+        // Add toggle functionality to FAQ questions
+        document.querySelectorAll('.faq__toggle-question').forEach(question => {
+          // Set initial state
+          question.setAttribute('aria-expanded', 'false');
+          
+          question.addEventListener('click', function() {
+            const answer = this.nextElementSibling.nextElementSibling;
+            const topMeta = this.nextElementSibling;
+            const bottomMeta = answer.nextElementSibling;
+            const isExpanded = this.getAttribute('aria-expanded') === 'true';
+            
+            // Toggle states
+            this.setAttribute('aria-expanded', !isExpanded);
+            
+            if (!isExpanded) {
+              // Show answer and bottom meta, hide top meta
+              answer.style.maxHeight = '0';
+              answer.classList.add('active');
+              answer.style.maxHeight = answer.scrollHeight + 'px';
+              
+              topMeta.classList.remove('active');
+              bottomMeta.classList.add('active');
+            } else {
+              // Hide answer and bottom meta, show top meta
+              answer.style.maxHeight = '0';
+              answer.classList.remove('active');
+              
+              topMeta.classList.add('active');
+              bottomMeta.classList.remove('active');
+            }
+          });
+          
+          // Add keyboard support
+          question.addEventListener('keydown', function(e) {
+            if (e.key === 'Enter' || e.key === ' ') {
+              e.preventDefault();
+              this.click();
+            }
+          });
+        });
+      }
+    </script>
+    
+    <style>
+      .loading-spinner {
+        text-align: center;
+        padding: 2rem;
+        font-style: italic;
+        color: #666;
+      }
+      
+      /* Smooth animation for FAQ elements */
+      .faq__meta--top {
+        max-height: 100px;
+        opacity: 1;
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+      }
+      
+      .faq__meta--top:not(.active) {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+      }
+      
+      .faq__meta--bottom {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+      }
+      
+      .faq__meta--bottom.active {
+        max-height: 100px;
+        opacity: 1;
+      }
+      
+      .faq__answer {
+        max-height: 0;
+        opacity: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease-out, opacity 0.4s ease-out;
+      }
+      
+      .faq__answer.active {
+        max-height: 1000px;
+        opacity: 1;
+      }
+      
+      /* Ensure proper spacing */
+      .faq__card {
+        margin-bottom: 30px;
+      }
+      
+      .faq__h2 {
+        cursor: pointer;
+        transition: color 0.2s ease;
+      }
+      
+      .faq__h2:hover {
+        color: #1743d7;
+      }
+    </style>
+  </body>
+</html>

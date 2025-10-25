@@ -1,0 +1,938 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad - Share Program</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="website icon" type="png" href="./project/img/logo_01.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+    <style>
+      /* Additional styles for the form elements */
+      .new-item-form {
+        display: none;
+        position: absolute;
+        width: 469px;
+        background-color: #fff;
+        border: 3px solid var(--color-main-blue);
+        border-radius: 30px;
+        box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+        z-index: 1000;
+        margin-top: 5px;
+        top: calc(100% + 5px);
+        padding: 38px 21px;
+        left: 50%;
+        transform: translateX(-50%);
+      }
+      
+      .new-item-form.active {
+        display: block;
+      }
+      
+      .new-item-form .new-item-header {
+        margin-bottom: 25px;
+        font-size: 17px;
+        font-weight: 400;
+        color: Grey;
+        line-height: 1.4;
+        text-align: left;
+      }
+      
+      .new-item-form input[type="text"],
+      .new-item-form textarea {
+        width: 100%;
+        height: 60px;
+        background-color: #fff;
+        border: 1px solid #ccc;
+        border-radius: 10px;
+        padding: 10px 15px;
+        box-sizing: border-box;
+        font-size: 12px;
+        color: var(--color-main-black);
+        resize: none;
+      }
+      
+      .new-item-form textarea {
+        height: 120px;
+        resize: vertical;
+      }
+
+      /* Custom select styles */
+      .custom-select-dropdown {
+        display: none;
+        position: absolute;
+        top: 100%;
+        left: 0;
+        width: 100%;
+        max-height: 200px;
+        overflow-y: auto;
+        background: white;
+        border: 1px solid #ccc;
+        border-radius: 0 0 10px 10px;
+        z-index: 100;
+        box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      }
+      
+      .custom-select-dropdown.active {
+        display: block;
+      }
+      
+      .custom-select-option {
+        padding: 10px 15px;
+        cursor: pointer;
+      }
+      
+      .custom-select-option:hover {
+        background-color: #f0f0f0;
+      }
+      
+      .select-arrow {
+        position: absolute;
+        right: 15px;
+        top: 50%;
+        transform: translateY(-50%);
+        pointer-events: none;
+      }
+      
+      .form-section__add-button {
+        position: absolute;
+        right: 40px;
+        top: 50%;
+        transform: translateY(-50%);
+        background: none;
+        border: none;
+        cursor: pointer;
+        z-index: 10;
+      }
+      
+      .input-with-optional-button {
+        position: relative;
+      }
+
+      /* Success modal styles */
+      .modal {
+        display: none;
+        position: fixed;
+        z-index: 1000;
+        left: 0;
+        top: 0;
+        width: 100%;
+        height: 100%;
+        background-color: rgba(0, 0, 0, 0.5);
+      }
+      
+      .modal-content {
+        background-color: #fefefe;
+        margin: 15% auto;
+        padding: 20px;
+        border: 1px solid #888;
+        width: 80%;
+        max-width: 500px;
+        border-radius: 10px;
+        text-align: center;
+      }
+      
+      .close-button {
+        color: #aaa;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        cursor: pointer;
+      }
+      
+      .close-button:hover {
+        color: black;
+      }
+
+      /* New styles for submit button in new item forms */
+      .new-item-submit-button {
+        margin-top: 15px;
+        text-align: right;
+      }
+
+      .new-item-submit-button .btn {
+        padding: 10px 20px;
+        font-size: 14px;
+      }
+    </style>
+  </head>
+  <body>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="/">
+              <img
+                src="./project/img/logo.svg"
+                alt="StudentAbroad logo"
+                loading="lazy" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="index.html"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="share-my-program-section">
+        <div class="container">
+          <div class="share-my-program__header">
+            <a href="/" class="go-back">
+              <svg
+                class="icon"
+                width="16.68"
+                height="8"
+                viewBox="0 0 15 32"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg">
+                <path
+                  d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+                  fill="currentColor" />
+              </svg>
+              <span>Go back</span>
+            </a>
+            <img
+              class="share-my-program__img"
+              src="./project/img/logo+share my programm.svg"
+              alt="" />
+          </div>
+
+          <div class="form-section">
+            <h2 class="form-section__title">Add program</h2>
+            <form id="programForm">
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="programName" name="name" placeholder="Name:" required />
+                </div>
+                <label class="form-section__description"
+                  >Full program name, please.</label
+                >
+              </div>
+
+              <div class="form-field-and-description">
+                <div
+                  class="input-with-optional-button custom-select-wrapper"
+                  id="inviting-uni-wrapper">
+                  <input
+                    required
+                    type="text"
+                    id="university"
+                    name="university"
+                    placeholder="Inviting uni:"
+                    class="custom-select-input"
+                    data-type="searchable-select" />
+                  <div class="custom-select-dropdown" id="universityDropdown"></div>
+                  <button
+                    type="button"
+                    class="form-section__add-button custom-select-add-button"
+                    id="add-inviting-uni-button">
+                    <img src="./project/img/+.svg" alt="+" />
+                  </button>
+                  <img
+                    src="./project/img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                </div>
+
+                <div class="new-item-form" id="new-inviting-uni-form">
+                  <div class="new-item-header">
+                    <p>
+                      Leave the details of the university that invited you. Our
+                      administrator will enter them into our database.
+                    </p>
+                  </div>
+                  <input
+                    type="text"
+                    id="newUniversity"
+                    placeholder="Enter university name here..."
+                    class="new-item-input" />
+                  <div class="new-item-submit-button">
+                    <button type="button" class="btn" id="submitNewInvitingUni">Submit</button>
+                  </div>
+                </div>
+
+                <label class="form-section__description">
+                  Choose a foreign university from the list. Add new one, if you
+                  can't find it.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div
+                  class="input-with-optional-button custom-select-wrapper"
+                  id="home-uni-wrapper">
+                  <input
+                    type="text"
+                    id="homeUniversity"
+                    name="home_university"
+                    placeholder="Home uni:"
+                    class="custom-select-input"
+                    data-type="searchable-select" />
+                  <div class="custom-select-dropdown" id="homeUniDropdown"></div>
+                  <button
+                    type="button"
+                    class="form-section__add-button custom-select-add-button"
+                    id="add-home-uni-button">
+                    <img src="./project/img/+.svg" alt="+" />
+                  </button>
+                  <img
+                    src="./project/img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                </div>
+                <div class="new-item-form" id="new-home-uni-form">
+                  <div class="new-item-header">
+                    <p>
+                      Leave the details of your home university. Our administrator 
+                      will enter them into our database.
+                    </p>
+                  </div>
+                  <input
+                    type="text"
+                    id="newHomeUniversity"
+                    placeholder="Enter university name here..."
+                    class="new-item-input" />
+                  <div class="new-item-submit-button">
+                    <button type="button" class="btn" id="submitNewHomeUni">Submit</button>
+                  </div>
+                </div>
+                <label class="form-section__description">
+                  Choose Ukrainian university from the list. Add a new one, if
+                  you can't find it.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div
+                  class="input-with-optional-button custom-select-wrapper"
+                  id="faculty-wrapper">
+                  <input
+                    required
+                    type="text"
+                    id="faculty"
+                    name="faculty"
+                    placeholder="Faculty:"
+                    class="custom-select-input"
+                    data-type="searchable-select" />
+                  <div class="custom-select-dropdown" id="facultyDropdown">
+                    <div class="custom-select-option" data-value="arts">Arts and Humanities</div>
+                    <div class="custom-select-option" data-value="business">Business and Economics</div>
+                    <div class="custom-select-option" data-value="engineering">Engineering and Technology</div>
+                    <div class="custom-select-option" data-value="law">Law</div>
+                    <div class="custom-select-option" data-value="medicine">Medicine and Health</div>
+                    <div class="custom-select-option" data-value="science">Natural Sciences</div>
+                    <div class="custom-select-option" data-value="social">Social Sciences</div>
+                    <div class="custom-select-option" data-value="computer">Computer Science</div>
+                    <div class="custom-select-option" data-value="education">Education</div>
+                    <div class="custom-select-option" data-value="other">Other</div>
+                  </div>
+                  <img
+                    src="./project/img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                </div>
+                <label class="form-section__description">
+                  Please, provide the faculty of inviting uni for this
+                  program. You can select from the list or type your own.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div
+                  class="input-with-optional-button custom-select-wrapper"
+                  id="level-wrapper">
+                  <input
+                    required
+                    type="text"
+                    id="level"
+                    name="level"
+                    placeholder="Level:"
+                    class="custom-select-input"
+                    data-type="searchable-select" />
+                  <div class="custom-select-dropdown">
+                    <div class="custom-select-option" data-value="bachelor">Bachelor</div>
+                    <div class="custom-select-option" data-value="master">Master</div>
+                    <div class="custom-select-option" data-value="phd">PhD</div>
+                  </div>
+                  <img
+                    src="./project/img/arrow in input.svg"
+                    alt="Arrow"
+                    class="select-arrow" />
+                </div>
+                <label class="form-section__description">
+                  Choose the level of this program from the list.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="shortDescription" name="short_description" placeholder="Short description:" />
+                </div>
+                <label class="form-section__description"
+                  >A brief, meaningful description of the program with links to
+                  additional information, etc.</label
+                >
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="feedback" name="feedback" placeholder="Your feedback:" />
+                </div>
+                <label class="form-section__description"
+                  >Your experience, a "quote" that you can use to describe this
+                  program from your point of view.</label
+                >
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="yourName" name="your_name" placeholder="Your name:" />
+                </div>
+                <label class="form-section__description"
+                  >If you wish, you can leave your name and contact details,
+                  which will be displayed on the site.</label
+                >
+              </div>
+              <div class="submit-button">
+                <button class="btn" type="submit">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- Success Modal -->
+    <div id="successModal" class="modal">
+      <div class="modal-content">
+        <span class="close-button">&times;</span>
+        <h2>Thank You!</h2>
+        <p>Your program has been submitted successfully and will be reviewed by our team.</p>
+        <button class="btn" id="closeModal">OK</button>
+      </div>
+    </div>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./project/img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="index.html"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="program-list.html"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="faq.html"
+                    data-en="FAQ"
+                    data-ua="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+// Base API URL - update this to your actual backend URL
+const API_BASE_URL = 'http://127.0.0.1:8000/api';
+
+// Global variables for storing data
+let universities = [];
+let programOptions = {
+    study_levels: [],
+    faculties: [],
+    program_types: []
+};
+
+// Helper function to get CSRF token
+function getCookie(name) {
+    let cookieValue = null;
+    if (document.cookie && document.cookie !== '') {
+        const cookies = document.cookie.split(';');
+        for (let i = 0; i < cookies.length; i++) {
+            const cookie = cookies[i].trim();
+            if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                break;
+            }
+        }
+    }
+    return cookieValue;
+}
+
+// Function to fetch universities from backend
+async function fetchUniversities() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/universities/`);
+        if (!response.ok) throw new Error('Failed to fetch universities');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching universities:', error);
+        return [];
+    }
+}
+
+// Function to fetch program options (study levels, faculties, etc.)
+async function fetchProgramOptions() {
+    try {
+        const response = await fetch(`${API_BASE_URL}/programs/options/`);
+        if (!response.ok) throw new Error('Failed to fetch program options');
+        return await response.json();
+    } catch (error) {
+        console.error('Error fetching program options:', error);
+        return {
+            study_levels: {},
+            faculties: {},
+            program_types: {}
+        };
+    }
+}
+
+// Function to populate dropdowns
+function populateDropdowns() {
+    // Populate universities dropdown (inviting uni)
+    const uniDropdown = document.getElementById('universityDropdown');
+    uniDropdown.innerHTML = '';
+    universities.forEach(uni => {
+        const option = document.createElement('div');
+        option.className = 'custom-select-option';
+        option.textContent = uni.name;
+        option.dataset.id = uni.id;
+        option.addEventListener('click', () => {
+            document.getElementById('university').value = uni.name;
+            document.getElementById('university').dataset.id = uni.id;
+            uniDropdown.classList.remove('active');
+        });
+        uniDropdown.appendChild(option);
+    });
+    
+    // Populate home universities dropdown
+    const homeUniDropdown = document.getElementById('homeUniDropdown');
+    homeUniDropdown.innerHTML = '';
+    universities.forEach(uni => {
+        const option = document.createElement('div');
+        option.className = 'custom-select-option';
+        option.textContent = uni.name;
+        option.dataset.id = uni.id;
+        option.addEventListener('click', () => {
+            document.getElementById('homeUniversity').value = uni.name;
+            document.getElementById('homeUniversity').dataset.id = uni.id;
+            homeUniDropdown.classList.remove('active');
+        });
+        homeUniDropdown.appendChild(option);
+    });
+    
+    // Populate study levels dropdown
+    const levelDropdown = document.querySelector('#level-wrapper .custom-select-dropdown');
+    levelDropdown.innerHTML = '';
+    Object.entries(programOptions.study_levels).forEach(([value, name]) => {
+        const option = document.createElement('div');
+        option.className = 'custom-select-option';
+        option.textContent = name;
+        option.dataset.value = value;
+        option.addEventListener('click', () => {
+            document.getElementById('level').value = name;
+            document.getElementById('level').dataset.value = value;
+            levelDropdown.classList.remove('active');
+        });
+        levelDropdown.appendChild(option);
+    });
+}
+
+// Initialize dropdown functionality
+function initDropdowns() {
+    // University dropdown
+    const universityInput = document.getElementById('university');
+    const universityDropdown = document.getElementById('universityDropdown');
+    const universityArrow = document.querySelector('#inviting-uni-wrapper .select-arrow');
+    
+    universityInput.addEventListener('click', () => {
+        universityDropdown.classList.toggle('active');
+        universityArrow.style.transform = universityDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    universityArrow.addEventListener('click', () => {
+        universityDropdown.classList.toggle('active');
+        universityArrow.style.transform = universityDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    // Home uni dropdown
+    const homeUniInput = document.getElementById('homeUniversity');
+    const homeUniDropdown = document.getElementById('homeUniDropdown');
+    const homeUniArrow = document.querySelector('#home-uni-wrapper .select-arrow');
+    
+    homeUniInput.addEventListener('click', () => {
+        homeUniDropdown.classList.toggle('active');
+        homeUniArrow.style.transform = homeUniDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    homeUniArrow.addEventListener('click', () => {
+        homeUniDropdown.classList.toggle('active');
+        homeUniArrow.style.transform = homeUniDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    // Level dropdown
+    const levelInput = document.getElementById('level');
+    const levelDropdown = document.querySelector('#level-wrapper .custom-select-dropdown');
+    const levelArrow = document.querySelector('#level-wrapper .select-arrow');
+    
+    levelInput.addEventListener('click', () => {
+        levelDropdown.classList.toggle('active');
+        levelArrow.style.transform = levelDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    levelArrow.addEventListener('click', () => {
+        levelDropdown.classList.toggle('active');
+        levelArrow.style.transform = levelDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    // Close dropdowns when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.custom-select-wrapper')) {
+            universityDropdown.classList.remove('active');
+            universityArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+            
+            homeUniDropdown.classList.remove('active');
+            homeUniArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+            
+            levelDropdown.classList.remove('active');
+            levelArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+        }
+    });
+}
+
+// Function to handle adding a new university (for both inviting and home)
+async function handleAddNewUniversity(universityName, isInviting = true) {
+    if (!universityName.trim()) {
+        alert('Please enter a university name');
+        return;
+    }
+
+    // In a real application, you would send this to your backend
+    // For now, we'll just add it to the local list
+    const newUni = {
+        id: 'new-' + Date.now(),
+        name: universityName
+    };
+
+    universities.push(newUni);
+    
+    // Repopulate dropdowns
+    populateDropdowns();
+    
+    // Set the value in the appropriate input
+    if (isInviting) {
+        document.getElementById('university').value = newUni.name;
+        document.getElementById('university').dataset.id = newUni.id;
+        document.getElementById('new-inviting-uni-form').classList.remove('active');
+    } else {
+        document.getElementById('homeUniversity').value = newUni.name;
+        document.getElementById('homeUniversity').dataset.id = newUni.id;
+        document.getElementById('new-home-uni-form').classList.remove('active');
+    }
+}
+
+// Form submission handler
+async function handleFormSubmit(event) {
+    event.preventDefault();
+    
+    const universityInput = document.getElementById('university');
+    const facultyInput = document.getElementById('faculty');
+    const levelInput = document.getElementById('level');
+    
+    if (!universityInput.value) {
+        alert('Please select or enter a university');
+        return;
+    }
+    
+    if (!facultyInput.value) {
+        alert('Please enter a faculty');
+        return;
+    }
+    
+    if (!levelInput.dataset.value) {
+        alert('Please select a study level from the list');
+        return;
+    }
+    
+    // Prepare form data
+    const formData = {
+        name: document.getElementById('programName').value,
+        home_university: document.getElementById('homeUniversity').value,
+        study_level: levelInput.dataset.value,
+        faculty: facultyInput.value, // Send whatever user entered
+        description: document.getElementById('shortDescription').value,
+        testimonial: document.getElementById('feedback').value,
+        submitted_by_name: document.getElementById('yourName').value,
+        submitted_by_email: '', // You can add an email field if needed
+        program_type: 'exchange' // Default value
+    };
+    
+    // Handle university field
+    if (universityInput.dataset.id) {
+        if (universityInput.dataset.id.startsWith('new-')) {
+            formData.university_name = universityInput.value;
+        } else {
+            formData.university_id = parseInt(universityInput.dataset.id);
+        }
+    } else {
+        formData.university_name = universityInput.value;
+    }
+    
+    try {
+        const response = await fetch(`${API_BASE_URL}/programs/`, {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+                'X-CSRFToken': getCookie('csrftoken')
+            },
+            body: JSON.stringify(formData),
+            credentials: 'include'
+        });
+        
+        if (!response.ok) {
+            const errorData = await response.json();
+            console.error('Error details:', errorData);
+            throw new Error(errorData.detail || JSON.stringify(errorData) || 'Failed to submit program');
+        }
+        
+        const responseData = await response.json();
+        console.log('Success:', responseData);
+        
+        document.getElementById('successModal').style.display = 'block';
+        document.getElementById('programForm').reset();
+    } catch (error) {
+        console.error('Error:', error);
+        alert('Error submitting program: ' + error.message);
+    }
+}
+
+// Initialize form
+document.addEventListener('DOMContentLoaded', async function() {
+    // Initialize dropdowns
+    initDropdowns();
+    
+    // Fetch universities and program options
+    const [unis, options] = await Promise.all([
+        fetchUniversities(),
+        fetchProgramOptions()
+    ]);
+    
+    universities = unis;
+    programOptions = options;
+    
+    if (universities.length > 0) {
+        populateDropdowns();
+    } else {
+        console.error('No universities loaded');
+    }
+    
+    // Form submission
+    document.getElementById('programForm').addEventListener('submit', handleFormSubmit);
+    
+    // Modal close button
+    document.querySelector('.close-button').addEventListener('click', () => {
+        document.getElementById('successModal').style.display = 'none';
+    });
+    
+    // OK button in modal
+    document.getElementById('closeModal').addEventListener('click', () => {
+        document.getElementById('successModal').style.display = 'none';
+    });
+    
+    // Close modal when clicking outside
+    window.addEventListener('click', (event) => {
+        if (event.target === document.getElementById('successModal')) {
+            document.getElementById('successModal').style.display = 'none';
+        }
+    });
+    
+    // Inviting uni button
+    const addInvitingUniButton = document.getElementById('add-inviting-uni-button');
+    const newInvitingUniForm = document.getElementById('new-inviting-uni-form');
+    const submitNewInvitingUni = document.getElementById('submitNewInvitingUni');
+    
+    // Home uni button
+    const addHomeUniButton = document.getElementById('add-home-uni-button');
+    const newHomeUniForm = document.getElementById('new-home-uni-form');
+    const submitNewHomeUni = document.getElementById('submitNewHomeUni');
+    
+    // Toggle inviting uni form
+    addInvitingUniButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        newInvitingUniForm.classList.toggle('active');
+        
+        // Hide home uni form if it's open
+        if (newHomeUniForm.classList.contains('active')) {
+            newHomeUniForm.classList.remove('active');
+        }
+    });
+    
+    // Toggle home uni form
+    addHomeUniButton.addEventListener('click', function(e) {
+        e.preventDefault();
+        newHomeUniForm.classList.toggle('active');
+        
+        // Hide inviting uni form if it's open
+        if (newInvitingUniForm.classList.contains('active')) {
+            newInvitingUniForm.classList.remove('active');
+        }
+    });
+    
+    // Submit new inviting university
+    submitNewInvitingUni.addEventListener('click', function(e) {
+        e.preventDefault();
+        const universityName = document.getElementById('newUniversity').value;
+        handleAddNewUniversity(universityName, true);
+        document.getElementById('newUniversity').value = ''; // Clear the input
+    });
+    
+    // Submit new home university
+    submitNewHomeUni.addEventListener('click', function(e) {
+        e.preventDefault();
+        const universityName = document.getElementById('newHomeUniversity').value;
+        handleAddNewUniversity(universityName, false);
+        document.getElementById('newHomeUniversity').value = ''; // Clear the input
+    });
+    
+    // Close forms when clicking outside
+    document.addEventListener('click', function(e) {
+        if (!e.target.closest('.input-with-optional-button') && 
+            !e.target.closest('.new-item-form')) {
+            newInvitingUniForm.classList.remove('active');
+            newHomeUniForm.classList.remove('active');
+        }
+    });
+});
+  </script>
+  </body>
+</html>
+
+
+
+

@@ -1,0 +1,340 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="website icon" type="png" href="./project/img/logo_01.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+    <style>
+      /* Custom styles for background and text colors */
+      #bg {
+        min-height: 100vh;
+        background-color: #f0f0f0; /* Fallback background */
+      }
+      
+      .bg-overlay {
+        position: absolute;
+        top: 0;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        background-size: cover;
+        background-position: center;
+        background-repeat: no-repeat;
+        filter: brightness(0.9) grayscale(20%);
+        z-index: 0;
+      }
+      
+      /* Dark text when no background image */
+      .no-bg .back-button a,
+      .no-bg .uni-name h1 {
+        color: var(--color-main-black) !important;
+      }
+      
+      /* Light text when background image exists */
+      .has-bg .back-button a,
+      .has-bg .uni-name h1 {
+        color: var(--color-white-line) !important;
+      }
+      
+      /* Adjust content spacing */
+      .page-content {
+        padding-bottom: 80px;
+      }
+      
+      .info-box {
+        margin-top: 40px;
+        margin-bottom: 60px;
+      }
+    </style>
+  </head>
+
+  <body>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="index.html"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link active"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main id="bg">
+      <div class="bg-overlay"></div>
+      <section class="go-back back-button">
+        <a href="uni-list.html">
+          <svg
+            class="icon"
+            width="16.68"
+            height="8"
+            viewBox="0 0 15 32"
+            fill="none"
+            xmlns="http://www.w3.org/2000/svg">
+            <path
+              d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+              fill="currentColor" />
+          </svg>
+          <span>Go back</span>
+        </a>
+      </section>
+
+      <div class="uni-name" id="universityName">
+        <!-- University name will be loaded here -->
+      </div>
+
+      <section class="page-content">
+        <div class="info-box">
+          <div class="uni-info" id="universityInfo">
+            <!-- University info will be loaded here -->
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./project/img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="index.html"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link active"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="program-list.html"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="faq.html"
+                    data-en="FAQ"
+                    data-ua="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const urlParams = new URLSearchParams(window.location.search);
+        const universityId = urlParams.get('id');
+        const universityName = document.getElementById('universityName');
+        const universityInfo = document.getElementById('universityInfo');
+        const universityBg = document.getElementById('bg');
+        const bgOverlay = universityBg.querySelector('.bg-overlay');
+
+        if (!universityId) {
+          universityInfo.innerHTML = `
+            <div class="error">
+              No university selected. Please go back and select a university.
+            </div>
+          `;
+          return;
+        }
+
+        // Load university details
+        fetch(`http://127.0.0.1:8000/api/universities/${universityId}/`)
+          .then(response => {
+            if (!response.ok) {
+              throw new Error('University not found');
+            }
+            return response.json();
+          })
+          .then(university => {
+            // Set university name
+            universityName.innerHTML = `
+              <h1 data-en="${university.name}" data-ua="${university.name}" class="container">
+                ${university.name}
+              </h1>
+            `;
+
+            // Set background if available
+            if (university.background_image_url) {
+              bgOverlay.style.backgroundImage = `url(${university.background_image_url})`;
+              bgOverlay.style.filter = 'brightness(0.4) grayscale(20%)';
+              universityBg.classList.add('has-bg');
+              universityBg.classList.remove('no-bg');
+            } else {
+              bgOverlay.style.backgroundImage = 'none';
+              bgOverlay.style.backgroundColor = '#f0f0f0';
+              universityBg.classList.add('no-bg');
+              universityBg.classList.remove('has-bg');
+            }
+
+            // Set university info
+            universityInfo.innerHTML = `
+              <div class="location-contact">
+                <div class="info-block">
+                  <div class="info-line">
+                    <span class="label" data-en="LOCATION:" data-ua="ЛОКАЦІЯ:">LOCATION:</span>
+                    <span class="thin-text" data-en="${university.location || university.country}" 
+                          data-ua="${university.location || university.country}">
+                      ${university.location || university.country}
+                    </span>
+                    <img src="./project/img/loc-blc.ico" alt="Location icon" />
+                  </div>
+                  <div class="info-line">
+                    <span class="label" data-en="CONTACTS:" data-ua="КОНТАКТИ:">CONTACTS:</span>
+                    <span class="thin-text">${university.contact_email || 'N/A'}</span>
+                    <img src="./project/img/mail-icon.svg" alt="Mail icon" />
+                  </div>
+                </div>
+              </div>
+              <div class="chill_line"></div>
+              <p class="description" data-en="${university.description || 'No description available'}" 
+                 data-ua="${university.description || 'Опис відсутній'}">
+                ${university.description || 'No description available'}
+              </p>
+              <br />
+              <a class="read-more-link" href="${university.website_url}" target="_blank" 
+                 data-en="Visit website" data-ua="Відвідати сайт">
+                Visit website
+              </a>
+              ${university.additional_info ? `
+              <section class="university-mobility">
+                <h3 data-en="Additional Information" data-ua="Додаткова інформація">
+                  Additional Information
+                </h3>
+                <div class="mobility-links">
+                  <p>${university.additional_info}</p>
+                </div>
+              </section>
+              ` : ''}
+            `;
+          })
+          .catch(error => {
+            console.error('Error:', error);
+            universityInfo.innerHTML = `
+              <div class="error">
+                Failed to load university details. Please try again later.<br>
+                <small>${error.message}</small>
+              </div>
+            `;
+          });
+      });
+    </script>
+    <script type="module" src="./js/main.js"></script>
+  </body>
+</html>

@@ -1,0 +1,359 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad</title>
+    <link rel="stylesheet" href="./project/css/style.css" />
+    <link rel="website icon" type="png" href="./project/img/logo_01.png" />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
+      rel="stylesheet" />
+  </head>
+
+  <body>
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="index.html">
+              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+            </a>
+          </div>
+
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li>
+                <a
+                  class="link"
+                  href="index.html"
+                  data-en="ABOUT US"
+                  data-ua="ПРО НАС"
+                  >ABOUT US</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link active"
+                  href="uni-list.html"
+                  data-en="UNI LIST"
+                  data-ua="СПИСОК ВНЗ"
+                  >UNI LIST</a
+                >
+              </li>
+              <li>
+                <a
+                  class="link"
+                  href="program-list.html"
+                  data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ"
+                  >PROGRAM LIST</a
+                >
+              </li>
+              <li>
+                <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ"
+                  >FAQ</a
+                >
+              </li>
+            </ul>
+          </nav>
+
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">
+                UA
+              </button>
+              <button
+                data-lang="en"
+                class="js-switch-button active"
+                type="button">
+                EN
+              </button>
+            </span>
+            <div class="search-box">
+              <input
+                type="text"
+                id="searchInput"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+          </div>
+        </div>
+      </div>
+    </header>
+
+    <main>
+      <section class="country-section">
+        <div class="container">
+          <div class="country-section__heading">
+            <span
+              class="country-section__text-outline"
+              data-en="COUNTRY"
+              data-ua="КРАЇНА"
+              >COUNTRY
+            </span>
+            <h2
+              class="country-section__text-fill"
+              data-en="COUNTRY"
+              data-ua="КРАЇНА">
+              COUNTRY
+            </h2>
+          </div>
+
+          <div class="country-search-box">
+            <div class="search-input-wrapper">
+              <input
+                type="text"
+                id="countrySearchInput"
+                class="country-search-box__input"
+                placeholder="Search..."
+                data-en="Search..."
+                data-ua="Шукати..." />
+              <div class="country-search-box__line"></div>
+            </div>
+          </div>
+
+          <div class="checkbox-group" id="countryFilter">
+            <!-- Countries will be loaded dynamically -->
+          </div>
+
+          <section class="university-list" id="universityListContainer">
+            <!-- Universities will be loaded dynamically -->
+          </section>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+      <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img
+              class="footer__img"
+              src="./project/img/name_no-background_01.svg"
+              alt="StudentAbroad logo" />
+          </div>
+
+          <div class="footer__bottom-row">
+            <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li>
+                  <a
+                    class="footer__link"
+                    href="index.html"
+                    data-en="ABOUT US"
+                    data-ua="ПРО НАС"
+                    >ABOUT US</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link active"
+                    href="uni-list.html"
+                    data-en="UNI LIST"
+                    data-ua="СПИСОК ВНЗ"
+                    >UNI LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="program-list.html"
+                    data-en="PROGRAM LIST"
+                    data-ua="ПРОГРАМИ"
+                    >PROGRAM LIST</a
+                  >
+                </li>
+                <li>
+                  <a
+                    class="footer__link"
+                    href="faq.html"
+                    data-en="FAQ"
+                    data-ua="FAQ"
+                    >FAQ</a
+                  >
+                </li>
+              </ul>
+            </nav>
+
+            <div class="lang-search">
+              <span class="language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">
+                  UA
+                </button>
+                <button
+                  data-lang="en"
+                  class="js-switch-button active"
+                  type="button">
+                  EN
+                </button>
+              </span>
+              <div class="search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Шукати..."
+                  placeholder="Search..." />
+              </div>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script>
+      document.addEventListener('DOMContentLoaded', function() {
+        const API_URL = 'http://127.0.0.1:8000/api/universities/';
+        const universityListContainer = document.getElementById('universityListContainer');
+        const countryFilter = document.getElementById('countryFilter');
+        const searchInput = document.getElementById('searchInput');
+        const countrySearchInput = document.getElementById('countrySearchInput');
+
+        // Country code to name mapping
+        const countryNames = {
+          'UA': 'Ukraine', 'ES': 'Spain', 'DE': 'Germany', 'AT': 'Austria',
+          'BE': 'Belgium', 'NL': 'Netherlands', 'FI': 'Finland', 'PL': 'Poland',
+          'SE': 'Sweden', 'CY': 'Cyprus', 'CZ': 'Czech Republic', 'HU': 'Hungary',
+          'AM': 'Armenia'
+        };
+
+        // Load universities data
+        function loadUniversities() {
+          universityListContainer.innerHTML = '<div class="loading">Loading universities...</div>';
+          
+          fetch(API_URL)
+            .then(response => {
+              if (!response.ok) {
+                throw new Error('Network response was not ok');
+              }
+              return response.json();
+            })
+            .then(data => {
+              if (!data || data.length === 0) {
+                universityListContainer.innerHTML = '<div class="no-data">No universities found</div>';
+                return;
+              }
+
+              renderUniversities(data);
+              renderCountryFilters(data);
+              setupEventListeners();
+            })
+            .catch(error => {
+              console.error('Error:', error);
+              universityListContainer.innerHTML = `
+                <div class="error">
+                  Failed to load data. Please try again later.
+                </div>
+              `;
+            });
+        }
+
+        // Render universities list
+        function renderUniversities(universities) {
+          universityListContainer.innerHTML = universities.map(university => `
+            <div class="university-card" data-country="${university.country}">
+              <img
+                class="university-card__img"
+                src="${university.logo_url || './project/img/uni1.svg'}"
+                alt="${university.name}"
+                onerror="this.onerror=null;this.src='./project/img/uni1.svg'">
+              <div class="university-info">
+                <h2 data-en="${university.name}" data-ua="${university.name}">
+                  ${university.name}
+                </h2>
+                <p>
+                  CONTACT: ${university.contact_email || 'N/A'}
+                  <img class="icon-img" src="./project/img/mail-icon.svg" />
+                </p>
+                <p>
+                  URL: ${university.website_url || 'N/A'}
+                  <img class="icon-img" src="./project/img/icon1.svg" />
+                </p>
+                <a
+                  href="uni-read-more.html?id=${university.id}"
+                  data-en="Read more"
+                  data-ua="Читати більш"
+                  class="btn read-more-btn"
+                  type="button"
+                  >Read</a
+                >
+              </div>
+            </div>
+          `).join('');
+        }
+
+        // Render country filters
+        function renderCountryFilters(universities) {
+          const countries = [...new Set(universities.map(u => u.country))];
+          countryFilter.innerHTML = countries.map(country => `
+            <label class="container-checkbox">
+              <input type="checkbox" class="country-checkbox" value="${country}">
+              <span class="checkmark"></span>
+              <span class="country-label" data-en="${countryNames[country] || country}" 
+                    data-ua="${countryNames[country] || country}">
+                ${countryNames[country] || country}
+              </span>
+            </label>
+          `).join('');
+        }
+
+        // Setup event listeners
+        function setupEventListeners() {
+          searchInput.addEventListener('input', filterUniversities);
+          countrySearchInput.addEventListener('input', filterCountries);
+          
+          countryFilter.addEventListener('change', function(e) {
+            if (e.target.classList.contains('country-checkbox')) {
+              filterUniversities();
+            }
+          });
+        }
+
+        // Filter universities by search and country
+        function filterUniversities() {
+          const searchTerm = searchInput.value.toLowerCase();
+          const selectedCountries = [...document.querySelectorAll('.country-checkbox:checked')]
+            .map(checkbox => checkbox.value);
+
+          const universityCards = document.querySelectorAll('.university-card');
+          
+          universityCards.forEach(card => {
+            const name = card.querySelector('h2').textContent.toLowerCase();
+            const country = card.getAttribute('data-country');
+            
+            const matchesSearch = name.includes(searchTerm);
+            const matchesCountry = selectedCountries.length === 0 || selectedCountries.includes(country);
+            
+            if (matchesSearch && matchesCountry) {
+              card.style.display = 'flex';
+              card.style.opacity = '1';
+            } else {
+              card.style.display = 'none';
+              card.style.opacity = '0';
+            }
+          });
+        }
+
+        // Filter countries by search
+        function filterCountries() {
+          const searchTerm = countrySearchInput.value.toLowerCase();
+          const countryLabels = document.querySelectorAll('.country-label');
+          
+          countryLabels.forEach(label => {
+            const countryName = label.textContent.toLowerCase();
+            const checkboxContainer = label.closest('.container-checkbox');
+            checkboxContainer.style.display = countryName.includes(searchTerm) ? 'flex' : 'none';
+          });
+        }
+
+        // Initial load
+        loadUniversities();
+      });
+    </script>
+    <script src="./js/main.js" type="module"></script>
+  </body>
+</html>
