@@ -1,6 +1,6 @@
 /**
  * Ініціалізує скорочення текстів у програмних картках
- * — обрізає <p> всередині .program-info-m до 284 символів.
+ * — обрізає <p> всередині .program-info-m до 112 символів.
  */
 export function initTrimText(limit = 112) {
     const paragraphs = document.querySelectorAll('.program-info-m p');
