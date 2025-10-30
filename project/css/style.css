@@ -2130,8 +2130,8 @@ select {
 .program-card-m {
   flex: 0 0 100%;
   display: flex;
-  justify-content: center;
-  flex-direction: column;
+  justify-content: space-between;
+  flex-direction: space-between;
   align-items: center;
   text-align: center;
   padding: 10px;
@@ -2486,11 +2486,11 @@ select {
   gap: 40px;
 }
 
-@media (max-width: 767px) {
+/* @media (max-width: 767px) {
   .program-list {
     display: none;
   }
-}
+} */
 
 @media (max-width: 767px) {
   .program-list body.search-page .program-list {
@@ -3636,4 +3636,138 @@ video,
 
 *[style*="width:100vw"] {
   width: 100% !important;
+}
+
+.search {
+  padding: 70px 0;
+}
+
+
+.search-results .container {
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 0 20px;
+}
+
+.search-results__title {
+  font-size: 2.5rem;
+  font-weight: 500;
+  color: var(--color-main-dark);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.search-results__count {
+  font-size: 1.2rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 40px;
+}
+
+.search-results__message {
+  font-size: 1.1rem;
+  color: var(--color-text-secondary);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+.search-results__back-btn {
+  cursor: pointer;
+  display: flex;
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+  transition: all 0.3s ease;
+  width: 225px;
+  height: 67px;
+  font-size: 20px;
+  margin: 0 auto;
+}
+
+.search-highlight {
+  background-color: var(--color-main-yellow);
+  padding: 2px 4px;
+  border-radius: 3px;
+  font-weight: 500;
+}
+
+@media (max-width: 768px) {
+  .search {
+    padding: 200px 0;
+  }
+
+
+  .search-results__title {
+    font-size: 2rem;
+  }
+
+  .search-results__count {
+    font-size: 1.1rem;
+  }
+}
+
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.nav-arrow {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.pagination-nav {
+  display: none;
+  /* дефолтно приховані */
+}
+
+/* Стилі для сторінки пошуку без результатів */
+.search-results-page {
+  /* Робимо, щоб main займав весь вільний простір */
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  /* Центруємо контент по горизонталі */
+  align-items: flex-start;
+  /* Вирівнюємо контент зверху */
+  padding: 100px 0;
+  /* Додаємо відступи зверху та знизу */
+}
+
+/* Стилі для центрального блоку з повідомленням */
+.no-results-content {
+  text-align: center;
+  max-width: 600px;
+  width: 100%;
+  margin-top: 50px;
+  /* Додатковий відступ зверху, щоб опустити контент */
+}
+
+.no-results-content h1 {
+  font-size: 36px;
+  margin-bottom: 20px;
+  color: var(--color-main-black);
+}
+
+.no-results-content p {
+  font-size: 20px;
+  margin-bottom: 40px;
+  color: var(--color-grey);
+}
+
+/* Стилі для кнопки "Back to all programs" */
+.button-back {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--color-main-blue);
+  /* Темно-синій фон */
+  color: var(--color-main-white);
+  /* Білий текст */
+  text-decoration: none;
+  border-radius: 4px;
+  font-size: 16px;
+  font-weight: 500;
+  transition: background-color 0.3s ease;
 }
