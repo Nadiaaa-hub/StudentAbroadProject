@@ -267,7 +267,7 @@ function escapeRegex(string) {
 function displayNoResults(searchQuery = "") {
   const mainElement = document.querySelector("main");
   mainElement.innerHTML = `
-        <section class="search-results">
+        <section class="search">
             <div class="container">
                 <h1 class="search-results__title" 
                     data-en="No results found"
