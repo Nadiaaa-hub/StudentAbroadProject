@@ -1988,7 +1988,7 @@ select {
 .program-card-m {
   flex: 0 0 100%;
   display: flex;
-  justify-content: space-between;
+  justify-content: center;
   flex-direction: column;
   align-items: center;
   text-align: center;
