@@ -3706,23 +3706,6 @@ video,
   }
 }
 
-.hidden {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-.nav-arrow {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.pagination-nav {
-  display: none;
-  /* дефолтно приховані */
-}
-
 /* Стилі для сторінки пошуку без результатів */
 .search-results-page {
   /* Робимо, щоб main займав весь вільний простір */
