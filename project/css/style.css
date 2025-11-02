@@ -2486,11 +2486,11 @@ select {
   gap: 40px;
 }
 
-/* @media (max-width: 767px) {
+@media (max-width: 767px) {
   .program-list {
     display: none;
   }
-} */
+}
 
 @media (max-width: 767px) {
   .program-list body.search-page .program-list {
