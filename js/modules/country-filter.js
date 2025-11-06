@@ -6,11 +6,9 @@ export function initCountryFilter() {
     ".checkbox-group, .checkbox-group-special, .checkbox-group-mobile"
   );
 
-  // Створюємо кнопки навігації
   createNavigationButtons();
 
   if (countrySearchInput && checkboxGroups.length > 0) {
-    // Зберігаємо початковий стан пагінації для кожної групи
     const groupStates = new Map();
 
     checkboxGroups.forEach((group) => {
@@ -18,7 +16,6 @@ export function initCountryFilter() {
       groupStates.set(group, state);
     });
 
-    // Функція для оновлення видимості поля пошуку та навігації
     function updateVisibility() {
       const allGroupsHidden = Array.from(checkboxGroups).every(
         (group) => window.getComputedStyle(group).display === "none"
@@ -35,7 +32,11 @@ export function initCountryFilter() {
         if (navContainer) {
           const isGroupVisible =
             window.getComputedStyle(group).display !== "none";
-          navContainer.style.display = isGroupVisible ? "flex" : "none";
+
+          // Показ/сховання через клас .show (щоб уникнути inline-style переписування)
+          navContainer.classList.toggle("show", isGroupVisible);
+          navContainer.setAttribute("aria-hidden", !isGroupVisible);
+
           if (isGroupVisible && !state.isSearchMode) {
             showPage(group, state.currentPage, state.itemsPerPage, false);
             updateNavigationButtons(
@@ -48,8 +49,9 @@ export function initCountryFilter() {
       });
     }
 
-    // Початкова перевірка видимості
+    // Викликаємо одразу і через rAF для стабільності (уникнути мерехтіння)
     updateVisibility();
+    requestAnimationFrame(() => updateVisibility());
 
     countrySearchInput.addEventListener("input", () => {
       const query = countrySearchInput.value.trim().toLowerCase();
@@ -59,7 +61,6 @@ export function initCountryFilter() {
         const checkboxes = group.querySelectorAll(".container-checkbox");
         const visibleItems = [];
 
-        // Перевіряємо, чи сітка видима
         const isGroupVisible =
           window.getComputedStyle(group).display !== "none";
         const navId = group.getAttribute("data-nav-id");
@@ -68,11 +69,12 @@ export function initCountryFilter() {
         );
 
         if (!isGroupVisible && navContainer) {
-          navContainer.style.display = "none";
-          return; // Пропускаємо обробку для прихованої сітки
+          // ховаємо навігацію, якщо група зовсім прихована
+          navContainer.classList.remove("show");
+          navContainer.setAttribute("aria-hidden", "true");
+          return;
         }
 
-        // Знаходимо всі видимі елементи
         checkboxes.forEach((checkbox) => {
           const labelEl = checkbox.querySelector(".country-label");
           const en = labelEl
@@ -87,22 +89,18 @@ export function initCountryFilter() {
           }
         });
 
-        // Оновлюємо стан
         state.visibleItems = visibleItems;
         state.searchTotalPages = Math.ceil(
           visibleItems.length / state.itemsPerPage
         );
 
-        // Оновлюємо навігацію
         if (navContainer && isGroupVisible) {
           if (query === "") {
-            // Якщо пошук пустий - повертаємо звичайну пагінацію
-            navContainer.style.display = "flex";
+            navContainer.classList.add("show");
             state.isSearchMode = false;
-            state.currentPage = Math.min(
-              state.currentPage,
-              state.totalPages - 1
-            );
+            const pageToRestore =
+              state.lastPageBeforeSearch ?? state.currentPage;
+            state.currentPage = Math.min(pageToRestore, state.totalPages - 1);
             showPage(group, state.currentPage, state.itemsPerPage, false);
             updateNavigationButtons(
               navContainer,
@@ -110,9 +108,14 @@ export function initCountryFilter() {
               state.totalPages
             );
           } else {
-            // Якщо є пошуковий запит - пагінація результатів пошуку
-            navContainer.style.display =
-              visibleItems.length > state.itemsPerPage ? "flex" : "none";
+            if (!state.isSearchMode) {
+              state.lastPageBeforeSearch = state.currentPage;
+            }
+
+            navContainer.classList.toggle(
+              "show",
+              visibleItems.length > state.itemsPerPage
+            );
             state.isSearchMode = true;
             state.searchCurrentPage = 0;
 
@@ -128,7 +131,6 @@ export function initCountryFilter() {
         }
       });
 
-      // Оновлюємо видимість поля пошуку
       updateVisibility();
     });
 
@@ -141,17 +143,15 @@ export function initCountryFilter() {
             `.pagination-nav[data-nav-id="${navId}"]`
           );
 
-          // Перевіряємо, чи сітка видима
           const isGroupVisible =
             window.getComputedStyle(group).display !== "none";
 
           if (navContainer && isGroupVisible) {
-            navContainer.style.display = "flex";
+            navContainer.classList.add("show");
             state.isSearchMode = false;
-            state.currentPage = Math.min(
-              state.currentPage,
-              state.totalPages - 1
-            );
+            const pageToRestore =
+              state.lastPageBeforeSearch ?? state.currentPage;
+            state.currentPage = Math.min(pageToRestore, state.totalPages - 1);
             showPage(group, state.currentPage, state.itemsPerPage, false);
             updateNavigationButtons(
               navContainer,
@@ -159,16 +159,14 @@ export function initCountryFilter() {
               state.totalPages
             );
           } else if (navContainer) {
-            navContainer.style.display = "none";
+            navContainer.classList.remove("show");
           }
         });
       }
 
-      // Оновлюємо видимість поля пошуку
       updateVisibility();
     });
 
-    // Відстежуємо зміни розміру вікна для оновлення видимості
     window.addEventListener("resize", updateVisibility);
   }
 
@@ -180,25 +178,40 @@ export function initCountryFilter() {
         ? 6
         : 12;
     const totalPages = Math.ceil(checkboxes.length / itemsPerPage);
-    const navId = `nav-${Math.random().toString(36).substr(2, 9)}`;
 
-    group.setAttribute("data-nav-id", navId);
+    // Перевіряємо, чи пагінація вже існує
+    let navContainer = group.nextElementSibling;
+    if (navContainer && navContainer.classList.contains("pagination-nav")) {
+      const existingNavId = navContainer.getAttribute("data-nav-id");
+      group.setAttribute("data-nav-id", existingNavId);
+    } else {
+      const navId = `nav-${Math.random().toString(36).substr(2, 9)}`;
+      group.setAttribute("data-nav-id", navId);
+      addNavigationForGroup(group, {
+        currentPage: 0,
+        totalPages,
+        itemsPerPage,
+        navId,
+        isSearchMode: false,
+        searchCurrentPage: 0,
+        searchTotalPages: 0,
+        visibleItems: [],
+        lastPageBeforeSearch: 0,
+      });
+    }
 
     const state = {
       currentPage: 0,
       totalPages,
       itemsPerPage,
-      navId,
+      navId: group.getAttribute("data-nav-id"),
       isSearchMode: false,
       searchCurrentPage: 0,
       searchTotalPages: 0,
       visibleItems: [],
+      lastPageBeforeSearch: 0,
     };
 
-    // Додаємо навігацію для цієї групи
-    addNavigationForGroup(group, state);
-
-    // Показуємо першу сторінку, якщо сітка видима
     if (window.getComputedStyle(group).display !== "none") {
       showPage(group, 0, itemsPerPage, false);
     }
@@ -208,7 +221,7 @@ export function initCountryFilter() {
 
   function addNavigationForGroup(group, state) {
     const navContainer = document.createElement("div");
-    navContainer.className = "pagination-nav";
+    navContainer.className = "pagination-nav"; // за замовчуванням без .show
     navContainer.setAttribute("data-nav-id", state.navId);
     navContainer.innerHTML = `
       <button class="nav-arrow prev-arrow" disabled>←</button>
@@ -216,14 +229,17 @@ export function initCountryFilter() {
       <button class="nav-arrow next-arrow">→</button>
     `;
 
+    // Вставляємо в DOM (за потрібу клас .show додамо пізніше)
     group.parentNode.insertBefore(navContainer, group.nextSibling);
+
+    // Початково ховаємо (double-safety)
+    navContainer.classList.remove("show");
+    navContainer.setAttribute("aria-hidden", "true");
 
     const prevBtn = navContainer.querySelector(".prev-arrow");
     const nextBtn = navContainer.querySelector(".next-arrow");
-    const pageInfo = navContainer.querySelector(".page-info");
 
-    // Зберігаємо посилання на елементи навігації
-    state.navElements = { prevBtn, nextBtn, pageInfo, navContainer };
+    state.navElements = { prevBtn, nextBtn, navContainer };
 
     prevBtn.addEventListener("click", () => {
       if (state.isSearchMode) {
@@ -294,7 +310,7 @@ export function initCountryFilter() {
     nextBtn.disabled = currentPage === totalPages - 1;
   }
 
-  function showPage(group, page, itemsPerPage, isSearch) {
+  function showPage(group, page, itemsPerPage) {
     const checkboxes = group.querySelectorAll(".container-checkbox");
     const start = page * itemsPerPage;
     const end = start + itemsPerPage;
@@ -310,13 +326,11 @@ export function initCountryFilter() {
   }
 
   function showSearchResults(group, visibleItems, page, itemsPerPage) {
-    // Спочатку ховаємо всі елементи
     const allCheckboxes = group.querySelectorAll(".container-checkbox");
     allCheckboxes.forEach((checkbox) => {
       checkbox.style.display = "none";
     });
 
-    // Показуємо тільки елементи поточної сторінки пошуку
     const start = page * itemsPerPage;
     const end = start + itemsPerPage;
 
@@ -327,15 +341,18 @@ export function initCountryFilter() {
   }
 
   function createNavigationButtons() {
-    // Додаємо стилі для навігації
     const style = document.createElement("style");
     style.textContent = `
+      /* за замовчуванням ховаємо навігацію, показуємо через .show */
       .pagination-nav {
-        display: flex;
+        display: none;
         align-items: center;
         justify-content: center;
         gap: 15px;
         margin: 15px 0;
+      }
+      .pagination-nav.show {
+        display: flex;
       }
       
       .nav-arrow {

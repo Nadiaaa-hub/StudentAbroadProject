@@ -3642,6 +3642,22 @@ video,
   padding: 70px 0;
 }
 
+.hidden {
+  display: none !important;
+  visibility: hidden !important;
+  pointer-events: none !important;
+}
+
+.nav-arrow {
+  -webkit-appearance: none;
+  -moz-appearance: none;
+  appearance: none;
+}
+
+.pagination-nav {
+  display: none;
+  /* дефолтно приховані */
+}
 
 .search-results .container {
   max-width: 1200px;
@@ -3704,23 +3720,6 @@ video,
   .search-results__count {
     font-size: 1.1rem;
   }
-}
-
-.hidden {
-  display: none !important;
-  visibility: hidden !important;
-  pointer-events: none !important;
-}
-
-.nav-arrow {
-  -webkit-appearance: none;
-  -moz-appearance: none;
-  appearance: none;
-}
-
-.pagination-nav {
-  display: none;
-  /* дефолтно приховані */
 }
 
 /* Стилі для сторінки пошуку без результатів */
