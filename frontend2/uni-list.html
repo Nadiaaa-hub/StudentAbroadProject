@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad</title>
+    <title data-en="StudentAbroad" data-ua="StudentAbroad">StudentAbroad</title>
     <link rel="stylesheet" href="./project/css/style.css" />
     <link rel="website icon" type="png" href="./project/img/logo_01.png" />
     <link
@@ -29,7 +29,7 @@
                   href="index.html"
                   data-en="ABOUT US"
                   data-ua="ПРО НАС"
-                  >ABOUT US</a
+                  >ПРО НАС</a
                 >
               </li>
               <li>
@@ -38,7 +38,7 @@
                   href="uni-list.html"
                   data-en="UNI LIST"
                   data-ua="СПИСОК ВНЗ"
-                  >UNI LIST</a
+                  >СПИСОК ВНЗ</a
                 >
               </li>
               <li>
@@ -47,7 +47,7 @@
                   href="program-list.html"
                   data-en="PROGRAM LIST"
                   data-ua="ПРОГРАМИ"
-                  >PROGRAM LIST</a
+                  >ПРОГРАМИ</a
                 >
               </li>
               <li>
@@ -60,12 +60,12 @@
 
           <div class="lang-search">
             <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
+              <button data-lang="ua" class="js-switch-button active" type="button">
                 UA
               </button>
               <button
                 data-lang="en"
-                class="js-switch-button active"
+                class="js-switch-button"
                 type="button">
                 EN
               </button>
@@ -77,7 +77,7 @@
                 class="search-box__input"
                 data-en="Search..."
                 data-ua="Шукати..."
-                placeholder="Search..." />
+                placeholder="Шукати..." />
             </div>
           </div>
         </div>
@@ -92,13 +92,13 @@
               class="country-section__text-outline"
               data-en="COUNTRY"
               data-ua="КРАЇНА"
-              >COUNTRY
+              >КРАЇНА
             </span>
             <h2
               class="country-section__text-fill"
               data-en="COUNTRY"
               data-ua="КРАЇНА">
-              COUNTRY
+              КРАЇНА
             </h2>
           </div>
 
@@ -108,7 +108,7 @@
                 type="text"
                 id="countrySearchInput"
                 class="country-search-box__input"
-                placeholder="Search..."
+                placeholder="Шукати..."
                 data-en="Search..."
                 data-ua="Шукати..." />
               <div class="country-search-box__line"></div>
@@ -145,7 +145,7 @@
                     href="index.html"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
-                    >ABOUT US</a
+                    >ПРО НАС</a
                   >
                 </li>
                 <li>
@@ -154,7 +154,7 @@
                     href="uni-list.html"
                     data-en="UNI LIST"
                     data-ua="СПИСОК ВНЗ"
-                    >UNI LIST</a
+                    >СПИСОК ВНЗ</a
                   >
                 </li>
                 <li>
@@ -163,7 +163,7 @@
                     href="program-list.html"
                     data-en="PROGRAM LIST"
                     data-ua="ПРОГРАМИ"
-                    >PROGRAM LIST</a
+                    >ПРОГРАМИ</a
                   >
                 </li>
                 <li>
@@ -180,12 +180,12 @@
 
             <div class="lang-search">
               <span class="language-switch">
-                <button data-lang="ua" class="js-switch-button" type="button">
+                <button data-lang="ua" class="js-switch-button active" type="button">
                   UA
                 </button>
                 <button
                   data-lang="en"
-                  class="js-switch-button active"
+                  class="js-switch-button"
                   type="button">
                   EN
                 </button>
@@ -196,7 +196,7 @@
                   class="search-box__input"
                   data-en="Search..."
                   data-ua="Шукати..."
-                  placeholder="Search..." />
+                  placeholder="Шукати..." />
               </div>
             </div>
           </div>
@@ -206,168 +206,333 @@
     </footer>
 
     <script>
-      document.addEventListener('DOMContentLoaded', function() {
-        const API_URL = 'http://127.0.0.1:8000/api/universities/';
+      // Мовні налаштування
+      let currentLanguage = localStorage.getItem('language') || 'ua';
+      let allUniversities = [];
+
+      // Country code to name mapping
+      const countryNames = {
+        'UA': { en: 'Ukraine', ua: 'Україна' },
+        'ES': { en: 'Spain', ua: 'Іспанія' },
+        'DE': { en: 'Germany', ua: 'Німеччина' },
+        'AT': { en: 'Austria', ua: 'Австрія' },
+        'BE': { en: 'Belgium', ua: 'Бельгія' },
+        'NL': { en: 'Netherlands', ua: 'Нідерланди' },
+        'FI': { en: 'Finland', ua: 'Фінляндія' },
+        'PL': { en: 'Poland', ua: 'Польща' },
+        'SE': { en: 'Sweden', ua: 'Швеція' },
+        'CY': { en: 'Cyprus', ua: 'Кіпр' },
+        'CZ': { en: 'Czech Republic', ua: 'Чехія' },
+        'HU': { en: 'Hungary', ua: 'Угорщина' },
+        'AM': { en: 'Armenia', ua: 'Вірменія' },
+        'FR': { en: 'France', ua: 'Франція' },
+        'IT': { en: 'Italy', ua: 'Італія' },
+        'GB': { en: 'United Kingdom', ua: 'Великобританія' },
+        'PT': { en: 'Portugal', ua: 'Португалія' },
+        'GR': { en: 'Greece', ua: 'Греція' },
+        'TR': { en: 'Turkey', ua: 'Туреччина' },
+        'RO': { en: 'Romania', ua: 'Румунія' },
+        'BG': { en: 'Bulgaria', ua: 'Болгарія' },
+        'RS': { en: 'Serbia', ua: 'Сербія' },
+        'HR': { en: 'Croatia', ua: 'Хорватія' },
+        'SI': { en: 'Slovenia', ua: 'Словенія' },
+        'SK': { en: 'Slovakia', ua: 'Словаччина' },
+        'LT': { en: 'Lithuania', ua: 'Литва' },
+        'LV': { en: 'Latvia', ua: 'Латвія' },
+        'EE': { en: 'Estonia', ua: 'Естонія' },
+        'IE': { en: 'Ireland', ua: 'Ірландія' },
+        'DK': { en: 'Denmark', ua: 'Данія' },
+        'NO': { en: 'Norway', ua: 'Норвегія' },
+        'CH': { en: 'Switzerland', ua: 'Швейцарія' },
+        'LU': { en: 'Luxembourg', ua: 'Люксембург' },
+        'MT': { en: 'Malta', ua: 'Мальта' },
+        'IS': { en: 'Iceland', ua: 'Ісландія' },
+        'AL': { en: 'Albania', ua: 'Албанія' },
+        'BA': { en: 'Bosnia and Herzegovina', ua: 'Боснія і Герцеговина' },
+        'ME': { en: 'Montenegro', ua: 'Чорногорія' },
+        'MK': { en: 'North Macedonia', ua: 'Північна Македонія' },
+        'MD': { en: 'Moldova', ua: 'Молдова' },
+        'GE': { en: 'Georgia', ua: 'Грузія' },
+        'AZ': { en: 'Azerbaijan', ua: 'Азербайджан' },
+        'BY': { en: 'Belarus', ua: 'Білорусь' }
+      };
+
+      // Translations for all UI elements
+      const translations = {
+        en: {
+          // Header
+          'ПРО НАС': 'ABOUT US',
+          'СПИСОК ВНЗ': 'UNI LIST', 
+          'ПРОГРАМИ': 'PROGRAM LIST',
+          'FAQ': 'FAQ',
+          
+          // Main section
+          'КРАЇНА': 'COUNTRY',
+          'Шукати...': 'Search...',
+          
+          // University cards
+          'КОНТАКТ:': 'CONTACT:',
+          'Читати більше': 'Read more',
+          'Немає': 'N/A',
+          
+          // Status messages
+          'Завантаження університетів...': 'Loading universities...',
+          'Університетів не знайдено': 'No universities found',
+          'Не вдалося завантажити дані. Спробуйте пізніше.': 'Failed to load data. Please try again later.'
+        },
+        ua: {
+          // Header  
+          'ABOUT US': 'ПРО НАС',
+          'UNI LIST': 'СПИСОК ВНЗ',
+          'PROGRAM LIST': 'ПРОГРАМИ', 
+          'FAQ': 'FAQ',
+          
+          // Main section
+          'COUNTRY': 'КРАЇНА',
+          'Search...': 'Шукати...',
+          
+          // University cards
+          'CONTACT:': 'КОНТАКТ:',
+          'Read more': 'Читати більше',
+          'N/A': 'Немає',
+          
+          // Status messages
+          'Loading universities...': 'Завантаження університетів...',
+          'No universities found': 'Університетів не знайдено',
+          'Failed to load data. Please try again later.': 'Не вдалося завантажити дані. Спробуйте пізніше.'
+        }
+      };
+
+      // Функція для перекладу тексту
+      function translateText(text) {
+        return translations[currentLanguage][text] || text;
+      }
+
+      // Функція для отримання назви країни за кодом
+      function getCountryName(countryCode) {
+        return countryNames[countryCode] ? countryNames[countryCode][currentLanguage] : countryCode;
+      }
+
+      // Функція для завантаження університетів з бекенду
+      async function loadUniversitiesFromBackend() {
         const universityListContainer = document.getElementById('universityListContainer');
+        if (!universityListContainer) return;
+
+        // Показуємо loading
+        universityListContainer.innerHTML = `<div class="loading">${translateText('Loading universities...')}</div>`;
+        
+        try {
+          // Додаємо параметр мови до запиту
+          const url = `http://127.0.0.1:8000/api/universities/?lang=${currentLanguage === 'en' ? 'en' : 'uk'}`;
+          
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error('Network response was not ok');
+          }
+          
+          const data = await response.json();
+          
+          if (!data || data.length === 0) {
+            universityListContainer.innerHTML = `<div class="no-data">${translateText('No universities found')}</div>`;
+            return;
+          }
+
+          allUniversities = data;
+          updateUniversitiesDisplay();
+          updateCountryFilters();
+          setupEventListeners();
+          
+        } catch (error) {
+          console.error('Error:', error);
+          universityListContainer.innerHTML = `<div class="error">${translateText('Failed to load data. Please try again later.')}</div>`;
+        }
+      }
+
+      // Функція для миттєвої зміни мови
+      async function switchLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        
+        // Миттєво оновлюємо весь інтерфейс
+        updatePageLanguage();
+        
+        // Перезавантажуємо дані з бекенду з новою мовою
+        await loadUniversitiesFromBackend();
+      }
+
+      // Функція для оновлення тексту на сторінці
+      function updatePageLanguage() {
+        // Оновлення тексту в елементах з data-атрибутами
+        document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+          const text = element.getAttribute(`data-${currentLanguage}`);
+          if (element.placeholder !== undefined) {
+            element.placeholder = text;
+          } else {
+            element.textContent = text;
+          }
+        });
+
+        // Оновлення заголовка сторінки
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+          titleElement.textContent = currentLanguage === 'en' 
+            ? titleElement.getAttribute('data-en') 
+            : titleElement.getAttribute('data-ua');
+        }
+
+        // Оновлення активних кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          if (button.getAttribute('data-lang') === currentLanguage) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // Оновлення атрибута lang у html
+        document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'uk';
+      }
+
+      // Функція для оновлення фільтрів країн
+      function updateCountryFilters() {
+        const countries = [...new Set(allUniversities.map(u => u.country))];
         const countryFilter = document.getElementById('countryFilter');
+        
+        if (!countryFilter) return;
+        
+        // Зберігаємо вибрані країни перед оновленням
+        const selectedCountries = [...document.querySelectorAll('.country-checkbox:checked')]
+          .map(checkbox => checkbox.value);
+        
+        countryFilter.innerHTML = countries.map(country => {
+          const countryName = getCountryName(country);
+          const isChecked = selectedCountries.includes(country);
+          
+          return `
+            <label class="container-checkbox">
+              <input type="checkbox" class="country-checkbox" value="${country}" ${isChecked ? 'checked' : ''}>
+              <span class="checkmark"></span>
+              <span class="country-label">${countryName}</span>
+            </label>
+          `;
+        }).join('');
+      }
+
+      // Функція для оновлення відображення університетів
+      function updateUniversitiesDisplay() {
+        const universityListContainer = document.getElementById('universityListContainer');
+        
+        if (!universityListContainer) return;
+        
+        if (allUniversities.length === 0) {
+          universityListContainer.innerHTML = `<div class="no-data">${translateText('No universities found')}</div>`;
+          return;
+        }
+        
+        universityListContainer.innerHTML = allUniversities.map(university => `
+          <div class="university-card" data-country="${university.country}">
+            <img
+              class="university-card__img"
+              src="${university.logo_url || './project/img/uni1.svg'}"
+              alt="${university.name}"
+              onerror="this.onerror=null;this.src='./project/img/uni1.svg'">
+            <div class="university-info">
+              <h2>${university.name}</h2>
+              <p>
+                ${translateText('КОНТАКТ:')} 
+                ${university.contact_email || translateText('Немає')}
+                <img class="icon-img" src="./project/img/mail-icon.svg" />
+              </p>
+              <p>
+                URL: ${university.website_url || translateText('Немає')}
+                <img class="icon-img" src="./project/img/icon1.svg" />
+              </p>
+              <a
+                href="uni-read-more.html?id=${university.id}&lang=${currentLanguage}"
+                class="btn read-more-btn"
+                type="button">
+                ${translateText('Читати більше')}
+              </a>
+            </div>
+          </div>
+        `).join('');
+      }
+
+      // Setup event listeners
+      function setupEventListeners() {
         const searchInput = document.getElementById('searchInput');
         const countrySearchInput = document.getElementById('countrySearchInput');
+        const countryFilter = document.getElementById('countryFilter');
 
-// Country code to name mapping
-const countryNames = {
-  'UA': 'Ukraine', 'ES': 'Spain', 'DE': 'Germany', 'AT': 'Austria',
-  'BE': 'Belgium', 'NL': 'Netherlands', 'FI': 'Finland', 'PL': 'Poland',
-  'SE': 'Sweden', 'CY': 'Cyprus', 'CZ': 'Czech Republic', 'HU': 'Hungary',
-  'AM': 'Armenia', 'FR': 'France', 'IT': 'Italy', 'GB': 'United Kingdom',
-  'PT': 'Portugal', 'GR': 'Greece', 'TR': 'Turkey', 'RO': 'Romania',
-  'BG': 'Bulgaria', 'RS': 'Serbia', 'HR': 'Croatia', 'SI': 'Slovenia',
-  'SK': 'Slovakia', 'LT': 'Lithuania', 'LV': 'Latvia', 'EE': 'Estonia',
-  'IE': 'Ireland', 'DK': 'Denmark', 'NO': 'Norway', 'CH': 'Switzerland',
-  'LU': 'Luxembourg', 'MT': 'Malta', 'IS': 'Iceland', 'AL': 'Albania',
-  'BA': 'Bosnia and Herzegovina', 'ME': 'Montenegro', 'MK': 'North Macedonia',
-  'MD': 'Moldova', 'GE': 'Georgia', 'AZ': 'Azerbaijan', 'BY': 'Belarus',
-  'LI': 'Liechtenstein', 'MC': 'Monaco', 'SM': 'San Marino',
-  'VA': 'Vatican City', 'AD': 'Andorra', 'FO': 'Faroe Islands', 'GI': 'Gibraltar',
-  'GG': 'Guernsey', 'JE': 'Jersey', 'IM': 'Isle of Man', 'AX': 'Åland Islands',
-  'SJ': 'Svalbard and Jan Mayen', 'XK': 'Kosovo'
-};
-
-        // Load universities data
-        function loadUniversities() {
-          universityListContainer.innerHTML = '<div class="loading">Loading universities...</div>';
-          
-          fetch(API_URL)
-            .then(response => {
-              if (!response.ok) {
-                throw new Error('Network response was not ok');
-              }
-              return response.json();
-            })
-            .then(data => {
-              if (!data || data.length === 0) {
-                universityListContainer.innerHTML = '<div class="no-data">No universities found</div>';
-                return;
-              }
-
-              renderUniversities(data);
-              renderCountryFilters(data);
-              setupEventListeners();
-              
-              // Ініціалізуємо фільтр країн після завантаження даних
-              if (typeof initCountryFilter === 'function') {
-                initCountryFilter();
-              }
-            })
-            .catch(error => {
-              console.error('Error:', error);
-              universityListContainer.innerHTML = `
-                <div class="error">
-                  Failed to load data. Please try again later.
-                </div>
-              `;
-            });
-        }
-
-        // Render universities list
-        function renderUniversities(universities) {
-          universityListContainer.innerHTML = universities.map(university => `
-            <div class="university-card" data-country="${university.country}">
-              <img
-                class="university-card__img"
-                src="${university.logo_url || './project/img/uni1.svg'}"
-                alt="${university.name}"
-                onerror="this.onerror=null;this.src='./project/img/uni1.svg'">
-              <div class="university-info">
-                <h2 data-en="${university.name}" data-ua="${university.name}">
-                  ${university.name}
-                </h2>
-                <p>
-                  CONTACT: ${university.contact_email || 'N/A'}
-                  <img class="icon-img" src="./project/img/mail-icon.svg" />
-                </p>
-                <p>
-                  URL: ${university.website_url || 'N/A'}
-                  <img class="icon-img" src="./project/img/icon1.svg" />
-                </p>
-                <a
-                  href="uni-read-more.html?id=${university.id}"
-                  data-en="Read more"
-                  data-ua="Читати більш"
-                  class="btn read-more-btn"
-                  type="button"
-                  >Read</a
-                >
-              </div>
-            </div>
-          `).join('');
-        }
-
-        // Render country filters
-        function renderCountryFilters(universities) {
-          const countries = [...new Set(universities.map(u => u.country))];
-          countryFilter.innerHTML = countries.map(country => `
-            <label class="container-checkbox">
-              <input type="checkbox" class="country-checkbox" value="${country}">
-              <span class="checkmark"></span>
-              <span class="country-label" data-en="${countryNames[country] || country}" 
-                    data-ua="${countryNames[country] || country}">
-                ${countryNames[country] || country}
-              </span>
-            </label>
-          `).join('');
-        }
-
-        // Setup event listeners
-        function setupEventListeners() {
+        if (searchInput) {
           searchInput.addEventListener('input', filterUniversities);
+        }
+        if (countrySearchInput) {
           countrySearchInput.addEventListener('input', filterCountries);
-          
+        }
+        
+        if (countryFilter) {
           countryFilter.addEventListener('change', function(e) {
             if (e.target.classList.contains('country-checkbox')) {
               filterUniversities();
             }
           });
         }
+      }
 
-        // Filter universities by search and country
-        function filterUniversities() {
-          const searchTerm = searchInput.value.toLowerCase();
-          const selectedCountries = [...document.querySelectorAll('.country-checkbox:checked')]
-            .map(checkbox => checkbox.value);
+      // Filter universities by search and country
+      function filterUniversities() {
+        const universityCards = document.querySelectorAll('.university-card');
+        const searchInput = document.getElementById('searchInput');
+        const searchTerm = searchInput ? searchInput.value.toLowerCase() : '';
+        const selectedCountries = [...document.querySelectorAll('.country-checkbox:checked')]
+          .map(checkbox => checkbox.value);
 
-          const universityCards = document.querySelectorAll('.university-card');
+        universityCards.forEach(card => {
+          const name = card.querySelector('h2').textContent.toLowerCase();
+          const country = card.getAttribute('data-country');
           
-          universityCards.forEach(card => {
-            const name = card.querySelector('h2').textContent.toLowerCase();
-            const country = card.getAttribute('data-country');
-            
-            const matchesSearch = name.includes(searchTerm);
-            const matchesCountry = selectedCountries.length === 0 || selectedCountries.includes(country);
-            
-            if (matchesSearch && matchesCountry) {
-              card.style.display = 'flex';
-              card.style.opacity = '1';
-            } else {
-              card.style.display = 'none';
-              card.style.opacity = '0';
-            }
-          });
-        }
-
-        // Filter countries by search
-        function filterCountries() {
-          const searchTerm = countrySearchInput.value.toLowerCase();
-          const countryLabels = document.querySelectorAll('.country-label');
+          const matchesSearch = name.includes(searchTerm);
+          const matchesCountry = selectedCountries.length === 0 || selectedCountries.includes(country);
           
-          countryLabels.forEach(label => {
-            const countryName = label.textContent.toLowerCase();
-            const checkboxContainer = label.closest('.container-checkbox');
+          if (matchesSearch && matchesCountry) {
+            card.style.display = 'flex';
+            card.style.opacity = '1';
+          } else {
+            card.style.display = 'none';
+            card.style.opacity = '0';
+          }
+        });
+      }
+
+      // Filter countries by search
+      function filterCountries() {
+        const countrySearchInput = document.getElementById('countrySearchInput');
+        const searchTerm = countrySearchInput ? countrySearchInput.value.toLowerCase() : '';
+        const countryLabels = document.querySelectorAll('.country-label');
+        
+        countryLabels.forEach(label => {
+          const countryName = label.textContent.toLowerCase();
+          const checkboxContainer = label.closest('.container-checkbox');
+          if (checkboxContainer) {
             checkboxContainer.style.display = countryName.includes(searchTerm) ? 'flex' : 'none';
+          }
+        });
+      }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Ініціалізація мови
+        updatePageLanguage();
+
+        // Додаємо обробники подій для кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          button.addEventListener('click', function() {
+            switchLanguage(this.getAttribute('data-lang'));
           });
-        }
+        });
 
         // Initial load
-        loadUniversities();
+        loadUniversitiesFromBackend();
       });
     </script>
     

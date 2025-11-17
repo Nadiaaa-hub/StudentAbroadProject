@@ -3,7 +3,7 @@
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad</title>
+    <title data-en="StudentAbroad" data-ua="StudentAbroad">StudentAbroad</title>
     <link rel="stylesheet" href="./project/css/style.css" />
     <link rel="website icon" type="png" href="./project/img/logo_01.png" />
     <link
@@ -57,6 +57,21 @@
         grid-template-columns: repeat(3, 1fr);
         gap: 10px;
         margin-top: 15px;
+      }
+
+      .loading {
+        text-align: center;
+        padding: 40px;
+        color: #666;
+      }
+
+      .error {
+        text-align: center;
+        padding: 40px;
+        color: #d32f2f;
+        background: #ffebee;
+        border-radius: 8px;
+        margin: 20px 0;
       }
     </style>
   </head>
@@ -148,7 +163,7 @@
               d="M0.551 17.884c-0.735-0.876-0.735-2.298 极 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
               fill="currentColor" />
           </svg>
-          <span>Go back</span>
+          <span data-en="Go back" data-ua="Назад">Go back</span>
         </a>
       </section>
 
@@ -159,7 +174,9 @@
       <section class="page-content">
         <div class="info-box">
           <div class="uni-info" id="universityInfo">
-            <!-- University info will be loaded here -->
+            <div class="loading" data-en="Loading university details..." data-ua="Завантаження деталей університету...">
+              Loading university details...
+            </div>
           </div>
         </div>
       </section>
@@ -245,7 +262,69 @@
     </footer>
 
     <script>
+      // Мовні налаштування
+      let currentLanguage = localStorage.getItem('language') || 'en';
+      
+      // Функція для зміни мови
+      function switchLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
+        updatePageLanguage();
+        loadUniversityData(); // Перезавантажити дані з новою мовою
+      }
+
+      // Функція для оновлення тексту на сторінці
+      function updatePageLanguage() {
+        // Оновлення тексту в елементах з data-атрибутами
+        document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+          if (currentLanguage === 'en') {
+            if (element.placeholder !== undefined) {
+              element.placeholder = element.getAttribute('data-en');
+            } else {
+              element.textContent = element.getAttribute('data-en');
+            }
+          } else {
+            if (element.placeholder !== undefined) {
+              element.placeholder = element.getAttribute('data-ua');
+            } else {
+              element.textContent = element.getAttribute('data-ua');
+            }
+          }
+        });
+
+        // Оновлення заголовка сторінки
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+          titleElement.textContent = currentLanguage === 'en' 
+            ? titleElement.getAttribute('data-en') 
+            : titleElement.getAttribute('data-ua');
+        }
+
+        // Оновлення активних кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          if (button.getAttribute('data-lang') === currentLanguage) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+      }
+
       document.addEventListener('DOMContentLoaded', function() {
+        // Ініціалізація мови
+        updatePageLanguage();
+
+        // Додаємо обробники подій для кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          button.addEventListener('click', function() {
+            switchLanguage(this.getAttribute('data-lang'));
+          });
+        });
+
+        loadUniversityData();
+      });
+
+      function loadUniversityData() {
         const urlParams = new URLSearchParams(window.location.search);
         const universityId = urlParams.get('id');
         const universityName = document.getElementById('universityName');
@@ -255,25 +334,36 @@
 
         if (!universityId) {
           universityInfo.innerHTML = `
-            <div class="error">
-              No university selected. Please go back and select a university.
+            <div class="error" data-en="No university selected. Please go back and select a university." 
+                 data-ua="Університет не вибрано. Будь ласка, поверніться назад та виберіть університет.">
+              ${currentLanguage === 'en' 
+                ? 'No university selected. Please go back and select a university.' 
+                : 'Університет не вибрано. Будь ласка, поверніться назад та виберіть університет.'}
             </div>
           `;
+          updatePageLanguage();
           return;
         }
 
-        // Load university details
-        fetch(`http://127.0.0.1:8000/api/universities/${universityId}/`)
+        // Показати завантаження
+        universityInfo.innerHTML = `
+          <div class="loading">
+            ${currentLanguage === 'en' ? 'Loading university details...' : 'Завантаження деталей університету...'}
+          </div>
+        `;
+
+        // Load university details з параметром мови
+        fetch(`http://127.0.0.1:8000/api/universities/${universityId}/?lang=${currentLanguage}`)
           .then(response => {
             if (!response.ok) {
-              throw new Error('University not found');
+              throw new Error(currentLanguage === 'en' ? 'University not found' : 'Університет не знайдено');
             }
             return response.json();
           })
           .then(university => {
             // Set university name
             universityName.innerHTML = `
-              <h1 data-en="${university.name}" data-ua="${university.name}" class="container">
+              <h1 class="container">
                 ${university.name}
               </h1>
             `;
@@ -291,18 +381,17 @@
               universityBg.classList.remove('has-bg');
             }
 
-            // Load university programs
-            fetch(`http://127.0.0.1:8000/api/programs/university/${universityId}/`)
+            // Load university programs з параметром мови
+            fetch(`http://127.0.0.1:8000/api/programs/university/${universityId}/?lang=${currentLanguage}`)
               .then(response => {
                 let programsHTML = '';
                 if (response.ok) {
                   return response.json().then(programs => {
                     if (programs.length > 0) {
+                      const programsTitle = currentLanguage === 'en' ? 'University mobility:' : 'Мобільність університету:';
                       programsHTML = `
                         <br />
-                        <h3 data-en="University mobility:" data-ua="Мобільність університету:">
-                          University mobility:
-                        </h3>
+                        <h3>${programsTitle}</h3>
                         <div class="programs-grid">
                           ${programs.map(program => `
                             <a href="programs-read-more.html?id=${program.id}" class="blue-links">
@@ -323,40 +412,38 @@
               })
               .then(programsHTML => {
                 // Set university info with programs
+                const locationText = currentLanguage === 'en' ? 'LOCATION:' : 'ЛОКАЦІЯ:';
+                const contactsText = currentLanguage === 'en' ? 'CONTACTS:' : 'КОНТАКТИ:';
+                const visitWebsiteText = currentLanguage === 'en' ? 'Visit website' : 'Відвідати сайт';
+                const additionalInfoText = currentLanguage === 'en' ? 'Additional Information' : 'Додаткова інформація';
+
                 universityInfo.innerHTML = `
                   <div class="location-contact">
                     <div class="info-block">
                       <div class="info-line">
-                        <span class="label" data-en="LOCATION:" data-ua="ЛОКАЦІЯ:">LOCATION:</span>
-                        <span class="thin-text" data-en="${university.location || university.country}" 
-                              data-ua="${university.location || university.country}">
-                          ${university.location || university.country}
-                        </span>
+                        <span class="label">${locationText}</span>
+                        <span class="thin-text">${university.location || university.country}</span>
                         <img src="./project/img/loc-blc.ico" alt="Location icon" />
                       </div>
                       <div class="info-line">
-                        <span class="label" data-en="CONTACTS:" data-ua="КОНТАКТИ:">CONTACTS:</span>
+                        <span class="label">${contactsText}</span>
                         <span class="thin-text">${university.contact_email || 'N/A'}</span>
                         <img src="./project/img/mail-icon.svg" alt="Mail icon" />
                       </div>
                     </div>
                   </div>
                   <div class="chill_line"></div>
-                  <p class="description" data-en="${university.description || 'No description available'}" 
-                     data-ua="${university.description || 'Опис відсутній'}">
-                    ${university.description || 'No description available'}
+                  <p class="description">
+                    ${university.description || (currentLanguage === 'en' ? 'No description available' : 'Опис відсутній')}
                   </p>
                   <br />
-                  <a class="read-more-link" href="${university.website_url}" target="_blank" 
-                     data-en="Visit website" data-ua="Відвідати сайт">
-                    Visit website
+                  <a class="read-more-link" href="${university.website_url}" target="_blank">
+                    ${visitWebsiteText}
                   </a>
                   ${programsHTML || ''}
                   ${university.additional_info ? `
                   <br />
-                  <h3 data-en="Additional Information" data-ua="Додаткова інформація">
-                    Additional Information
-                  </h3>
+                  <h3>${additionalInfoText}</h3>
                   <p>${university.additional_info}</p>
                   ` : ''}
                 `;
@@ -365,14 +452,18 @@
           })
           .catch(error => {
             console.error('Error:', error);
+            const errorMessage = currentLanguage === 'en' 
+              ? 'Failed to load university details. Please try again later.' 
+              : 'Не вдалося завантажити деталі університету. Спробуйте пізніше.';
+            
             universityInfo.innerHTML = `
               <div class="error">
-                Failed to load university details. Please try again later.<br>
+                ${errorMessage}<br>
                 <small>${error.message}</small>
               </div>
             `;
           });
-      });
+      }
     </script>
     <script type="module" src="./js/main.js"></script>
   </body>

@@ -5,19 +5,35 @@ from .serializers import ProgramSerializer
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
 from rest_framework.views import APIView
+from django.db.models import Q
 
 class ProgramList(generics.ListCreateAPIView):
     serializer_class = ProgramSerializer
     permission_classes = [AllowAny]
     
     def get_queryset(self):
-        if self.request.method == 'GET':
-            return Program.objects.filter(is_approved=True)
-        return Program.objects.all()
+        queryset = Program.objects.filter(is_approved=True) if self.request.method == 'GET' else Program.objects.all()
+        
+        # Пошук по обох мовах
+        search = self.request.query_params.get('search')
+        if search:
+            queryset = queryset.filter(
+                Q(name_uk__icontains=search) | 
+                Q(name_en__icontains=search) |
+                Q(description_uk__icontains=search) |
+                Q(description_en__icontains=search) |
+                Q(faculty_uk__icontains=search) |
+                Q(faculty_en__icontains=search) |
+                Q(home_university_uk__icontains=search) |
+                Q(home_university_en__icontains=search)
+            )
+        
+        return queryset
     
     def perform_create(self, serializer):
         serializer.save(is_approved=False)
 
+# Решта класів залишаються незмінними
 class ProgramDetail(generics.RetrieveUpdateDestroyAPIView):
     queryset = Program.objects.all()
     serializer_class = ProgramSerializer
@@ -38,7 +54,8 @@ class HomeUniversityPrograms(generics.ListAPIView):
     def get_queryset(self):
         home_university = self.request.query_params.get('home_university', '')
         return Program.objects.filter(
-            home_university__icontains=home_university,
+            Q(home_university__name_uk__icontains=home_university) |
+            Q(home_university__name_en__icontains=home_university),
             is_approved=True
         )
 

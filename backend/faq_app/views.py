@@ -11,21 +11,27 @@ def faq_list(request):
     try:
         lang = request.GET.get('lang', 'en')
         
-        # Перевіряємо чи підтримується мова
-        if lang not in ['en', 'ua']:
+        # Перевіряємо чи підтримується мова (додаємо підтримку 'uk' як альтернативи 'ua')
+        if lang not in ['en', 'ua', 'uk']:
             lang = 'en'
+        # Якщо використовується 'uk', змінюємо на 'ua' для зворотньої сумісності
+        if lang == 'uk':
+            lang = 'ua'
         
-        faq_items = FAQItem.objects.all().order_by('-created_at')
+        # Фільтруємо тільки опубліковані FAQ
+        faq_items = FAQItem.objects.filter(is_published=True).order_by('-created_at')
         
         result = []
         for item in faq_items:
             categories = []
             for category in item.categories.all():
                 categories.append({
+                    'id': category.id,
                     'name': getattr(category, f'name_{lang}', category.name_en)
                 })
             
             result.append({
+                'id': item.id,
                 'question': getattr(item, f'question_{lang}', item.question_en),
                 'answer': getattr(item, f'answer_{lang}', item.answer_en),
                 'categories': categories,
@@ -35,7 +41,7 @@ def faq_list(request):
                 'updated_at': item.updated_at.strftime('%d/%m/%Y')
             })
         
-        response = JsonResponse({'faq_items': result, 'status': 'success'})
+        response = JsonResponse({'faq_items': result, 'status': 'success', 'language': lang})
         response["Access-Control-Allow-Origin"] = "*"
         return response
         

@@ -58,3 +58,8 @@ htmlcov/
 .venv
 env/
 ENV/
+
+# Бази даних
+*.sqlite3
+*.db
+db.sqlite3

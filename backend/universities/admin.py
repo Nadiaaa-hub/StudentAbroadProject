@@ -4,21 +4,27 @@ from django.utils.html import format_html
 
 @admin.register(University)
 class UniversityAdmin(admin.ModelAdmin):
-    list_display = ('name', 'country', 'location', 'is_approved', 'logo_preview')
+    list_display = ('name_uk', 'name_en', 'country', 'location_uk', 'is_approved', 'logo_preview')
     list_filter = ('country', 'is_approved')
-    search_fields = ('name', 'country', 'location')
+    search_fields = ('name_uk', 'name_en', 'country', 'location_uk', 'location_en')
     list_editable = ('is_approved',)
     readonly_fields = ('logo_preview', 'background_image_preview')
     
     fieldsets = (
-        ('Основна інформація', {
-            'fields': ('name', 'country', 'location', 'is_approved')
+        ('Основна інформація (Українська)', {
+            'fields': ('name_uk', 'country', 'location_uk', 'description_uk', 'is_approved')
+        }),
+        ('Основна інформація (Англійська)', {
+            'fields': ('name_en', 'location_en', 'description_en')
         }),
         ('Контактна інформація', {
             'fields': ('contact_email', 'website_url')
         }),
-        ('Опис', {
-            'fields': ('description', 'additional_info')
+        ('Додаткова інформація (Українська)', {
+            'fields': ('additional_info_uk',)
+        }),
+        ('Додаткова інформація (Англійська)', {
+            'fields': ('additional_info_en',)
         }),
         ('Зображення', {
             'fields': (

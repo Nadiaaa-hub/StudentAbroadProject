@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad</title>
+    <title data-en="StudentAbroad - Program Details" data-ua="StudentAbroad - Деталі програми">StudentAbroad - Деталі програми</title>
     <link rel="stylesheet" href="./project/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -54,7 +54,7 @@
                   href="index.html"
                   data-en="ABOUT US"
                   data-ua="ПРО НАС"
-                  >ABOUT US</a
+                  >ПРО НАС</a
                 >
               </li>
               <li>
@@ -63,16 +63,16 @@
                   href="uni-list.html"
                   data-en="UNI LIST"
                   data-ua="СПИСОК ВНЗ"
-                  >UNI LIST</a
+                  >СПИСОК ВНЗ</a
                 >
               </li>
               <li>
                 <a
-                  class="link"
+                  class="link active"
                   href="program-list.html"
                   data-en="PROGRAM LIST"
                   data-ua="ПРОГРАМИ"
-                  >PROGRAM LIST</a
+                  >ПРОГРАМИ</a
                 >
               </li>
               <li>
@@ -85,12 +85,12 @@
 
           <div class="lang-search">
             <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
+              <button data-lang="ua" class="js-switch-button active" type="button">
                 UA
               </button>
               <button
                 data-lang="en"
-                class="js-switch-button active"
+                class="js-switch-button"
                 type="button">
                 EN
               </button>
@@ -98,10 +98,11 @@
             <div class="search-box">
               <input
                 type="text"
+                id="searchInput"
                 class="search-box__input"
                 data-en="Search..."
                 data-ua="Шукати..."
-                placeholder="Search..." />
+                placeholder="Шукати..." />
             </div>
           </div>
         </div>
@@ -114,35 +115,35 @@
           href="program-list.html"
           data-en="&larr; Go back"
           data-ua="&larr; Назад"
-          >&larr; Go back</a
+          >&larr; Назад</a
         >
       </section>
 
       <div class="program-name" id="programTitle">
-        <h1 class="container">Loading program...</h1>
+        <h1 class="container">Завантаження програми...</h1>
       </div>
       <section>
         <div class="program-info">
           <div class="info-row">
-            <h2 data-en="LEVEL:" data-ua="СТУПІНЬ:">LEVEL:</h2>
+            <h2 data-en="LEVEL:" data-ua="СТУПІНЬ:">СТУПІНЬ:</h2>
             <span class="thin-text" id="programLevel">-</span>
           </div>
           <br />
           <div class="info-row">
-            <h2 data-en="FACULTY:" data-ua="ФАКУЛЬТЕТ:">FACULTY:</h2>
+            <h2 data-en="FACULTY:" data-ua="ФАКУЛЬТЕТ:">ФАКУЛЬТЕТ:</h2>
             <span class="thin-text" id="programFaculty">-</span>
           </div>
           <br />
           <div class="info-row">
             <h2 data-en="HOME UNI:" data-ua="БАЗОВИЙ УНІВЕРСИТЕТ:">
-              HOME UNI:
+              БАЗОВИЙ УНІВЕРСИТЕТ:
             </h2>
             <span id="programHomeUni" class="university-name">-</span>
           </div>
           <br />
           <div class="info-row">
             <h2 data-en="INVITING UNI:" data-ua="УНІВЕРСИТЕТ-ПАРТНЕР:">
-              INVITING UNI:
+              УНІВЕРСИТЕТ-ПАРТНЕР:
             </h2>
             <span id="programUniversity" class="university-name">-</span>
           </div>
@@ -152,26 +153,26 @@
         <section class="left-section">
           <img class="icon-img" src="./project/img/quotation.svg" />
           <p class="description" id="programTestimonial">
-            Loading testimonial...
+            Завантаження відгуку...
           </p>
           <br />
           <p class="user-greetings" id="programAuthor">
-            Loading author information...
+            Завантаження інформації про автора...
           </p>
         </section>
 
         <section class="right-section">
-          <h3 data-en="Description" data-ua="Опис програми">Description</h3>
+          <h3 data-en="Description" data-ua="Опис програми">Опис програми</h3>
           <br />
           <p id="programDescription">
-            Loading program description...
+            Завантаження опису програми...
           </p>
 
           <h3 data-en="Useful links/contacts:" data-ua="Корисні посилання/контакти">
-            Useful links/contacts:
+            Корисні посилання/контакти:
           </h3>
           <br />
-          <span id="programContacts">Loading contacts...</span>
+          <span id="programContacts">Завантаження контактів...</span>
         </section>
       </section>
     </main>
@@ -195,7 +196,7 @@
                     href="index.html"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
-                    >ABOUT US</a
+                    >ПРО НАС</a
                   >
                 </li>
                 <li>
@@ -204,16 +205,16 @@
                     href="uni-list.html"
                     data-en="UNI LIST"
                     data-ua="СПИСОК ВНЗ"
-                    >UNI LIST</a
+                    >СПИСОК ВНЗ</a
                   >
                 </li>
                 <li>
                   <a
-                    class="footer__link"
+                    class="footer__link active"
                     href="program-list.html"
                     data-en="PROGRAM LIST"
                     data-ua="ПРОГРАМИ"
-                    >PROGRAM LIST</a
+                    >ПРОГРАМИ</a
                   >
                 </li>
                 <li>
@@ -230,12 +231,12 @@
 
             <div class="lang-search">
               <span class="language-switch">
-                <button data-lang="ua" class="js-switch-button" type="button">
+                <button data-lang="ua" class="js-switch-button active" type="button">
                   UA
                 </button>
                 <button
                   data-lang="en"
-                  class="js-switch-button active"
+                  class="js-switch-button"
                   type="button">
                   EN
                 </button>
@@ -246,7 +247,7 @@
                   class="search-box__input"
                   data-en="Search..."
                   data-ua="Шукати..."
-                  placeholder="Search..." />
+                  placeholder="Шукати..." />
               </div>
             </div>
           </div>
@@ -255,172 +256,348 @@
       </div>
     </footer>
 
-    <script>
-      document.addEventListener('DOMContentLoaded', async function() {
-        const urlParams = new URLSearchParams(window.location.search);
-        const programId = urlParams.get('id');
-        
-        if (!programId) {
-          showError('No program ID specified');
-          return;
+ <script>
+  let currentLanguage = localStorage.getItem('language') || 'ua';
+  let currentProgram = null;
+
+  // Translations dictionary
+  const translations = {
+    en: {
+      // Header
+      'ПРО НАС': 'ABOUT US',
+      'СПИСОК ВНЗ': 'UNI LIST', 
+      'ПРОГРАМИ': 'PROGRAM LIST',
+      'FAQ': 'FAQ',
+      
+      // Main section
+      'СТУПІНЬ:': 'LEVEL:',
+      'ФАКУЛЬТЕТ:': 'FACULTY:',
+      'БАЗОВИЙ УНІВЕРСИТЕТ:': 'HOME UNI:',
+      'УНІВЕРСИТЕТ-ПАРТНЕР:': 'INVITING UNI:',
+      'Опис програми': 'Description',
+      'Корисні посилання/контакти': 'Useful links/contacts:',
+      'Шукати...': 'Search...',
+      '&larr; Назад': '&larr; Go back',
+      
+      // Program data
+      'Бакалавр': 'Bachelor',
+      'Магістр': 'Master', 
+      'Доктор': 'PhD',
+      'Не вказано': 'Not specified',
+      'Для цієї програми немає відгуку.': 'No testimonial available for this program.',
+      'Для цієї програми немає опису.': 'No description available for this program.',
+      'Анонімне подання': 'Anonymous submission',
+      'Контактна інформація та корисні посилання недоступні': 'Contact information and useful links not available',
+      'Корисне посилання 1': 'Useful link 1',
+      'Корисне посилання 2': 'Useful link 2',
+      'Корисне посилання 3': 'Useful link 3',
+      
+      // Status messages
+      'Завантаження програми...': 'Loading program...',
+      'Завантаження відгуку...': 'Loading testimonial...',
+      'Завантаження інформації про автора...': 'Loading author information...',
+      'Завантаження опису програми...': 'Loading program description...',
+      'Завантаження контактів...': 'Loading contacts...',
+      'Не вдалося завантажити деталі програми. Спробуйте пізніше.': 'Failed to load program details. Please try again later.',
+      'ID програми не вказано': 'No program ID specified'
+    },
+    ua: {
+      // Header  
+      'ABOUT US': 'ПРО НАС',
+      'UNI LIST': 'СПИСОК ВНЗ',
+      'PROGRAM LIST': 'ПРОГРАМИ', 
+      'FAQ': 'FAQ',
+      
+      // Main section
+      'LEVEL:': 'СТУПІНЬ:',
+      'FACULTY:': 'ФАКУЛЬТЕТ:',
+      'HOME UNI:': 'БАЗОВИЙ УНІВЕРСИТЕТ:',
+      'INVITING UNI:': 'УНІВЕРСИТЕТ-ПАРТНЕР:',
+      'Description': 'Опис програми',
+      'Useful links/contacts:': 'Корисні посилання/контакти',
+      'Search...': 'Шукати...',
+      '&larr; Go back': '&larr; Назад',
+      
+      // Program data
+      'Bachelor': 'Бакалавр',
+      'Master': 'Магістр',
+      'PhD': 'Доктор',
+      'Not specified': 'Не вказано',
+      'No testimonial available for this program.': 'Для цієї програми немає відгуку.',
+      'No description available for this program.': 'Для цієї програми немає опису.',
+      'Anonymous submission': 'Анонімне подання',
+      'Contact information and useful links not available': 'Контактна інформація та корисні посилання недоступні',
+      'Useful link 1': 'Корисне посилання 1',
+      'Useful link 2': 'Корисне посилання 2',
+      'Useful link 3': 'Корисне посилання 3',
+      
+      // Status messages
+      'Loading program...': 'Завантаження програми...',
+      'Loading testimonial...': 'Завантаження відгуку...',
+      'Loading author information...': 'Завантаження інформації про автора...',
+      'Loading program description...': 'Завантаження опису програми...',
+      'Loading contacts...': 'Завантаження контактів...',
+      'Failed to load program details. Please try again later.': 'Не вдалося завантажити деталі програми. Спробуйте пізніше.',
+      'No program ID specified': 'ID програми не вказано'
+    }
+  };
+
+  // Функція для перекладу тексту
+  function translateText(text) {
+    return translations[currentLanguage][text] || text;
+  }
+
+  // Функція для миттєвої зміни мови
+  async function switchLanguage(lang) {
+    currentLanguage = lang;
+    localStorage.setItem('language', lang);
+    
+    // Миттєво оновлюємо весь інтерфейс
+    updatePageLanguage();
+    
+    // Перезавантажуємо дані з бекенду з новою мовою
+    await reloadProgramData();
+  }
+
+  // Функція для оновлення тексту на сторінці
+  function updatePageLanguage() {
+    // Оновлення тексту в елементах з data-атрибутами
+    document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+      const text = element.getAttribute(`data-${currentLanguage}`);
+      if (element.placeholder !== undefined) {
+        element.placeholder = text;
+      } else {
+        element.textContent = text;
+      }
+    });
+
+    // Оновлення заголовка сторінки
+    const titleElement = document.querySelector('title');
+    if (titleElement) {
+      titleElement.textContent = currentLanguage === 'en' 
+        ? titleElement.getAttribute('data-en') 
+        : titleElement.getAttribute('data-ua');
+    }
+
+    // Оновлення активних кнопок мови
+    document.querySelectorAll('.js-switch-button').forEach(button => {
+      if (button.getAttribute('data-lang') === currentLanguage) {
+        button.classList.add('active');
+      } else {
+        button.classList.remove('active');
+      }
+    });
+
+    // Оновлення атрибута lang у html
+    document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'uk';
+  }
+
+  // Функція для перезавантаження даних програми
+  async function reloadProgramData() {
+    if (!currentProgram) return;
+    
+    // Оновлюємо статусні повідомлення
+    document.querySelector('#programTitle h1').textContent = translateText('Loading program...');
+    document.getElementById('programTestimonial').textContent = translateText('Loading testimonial...');
+    document.getElementById('programAuthor').textContent = translateText('Loading author information...');
+    document.getElementById('programDescription').textContent = translateText('Loading program description...');
+    document.getElementById('programContacts').textContent = translateText('Loading contacts...');
+    
+    await loadProgramData();
+  }
+
+  async function loadProgramData() {
+    const urlParams = new URLSearchParams(window.location.search);
+    const programId = urlParams.get('id');
+    
+    if (!programId) {
+      showError(translateText('No program ID specified'));
+      return;
+    }
+
+    try {
+      // Fetch program data with language parameter
+      const programResponse = await fetch(`http://127.0.0.1:8000/api/programs/${programId}/?lang=${currentLanguage}`);
+      if (!programResponse.ok) throw new Error('Program not found');
+      const program = await programResponse.json();
+
+      currentProgram = program;
+      updateProgramData(program);
+
+    } catch (error) {
+      console.error('Error:', error);
+      showError(translateText('Failed to load program details. Please try again later.'));
+    }
+  }
+
+  function updateProgramData(program) {
+    // Update basic program info
+    updateBasicProgramInfo(program);
+
+    // Update university links
+    handleUniversityLinks(program);
+
+    // Update testimonial and description
+    document.getElementById('programTestimonial').textContent = 
+      program.testimonial || translateText('No testimonial available for this program.');
+    document.getElementById('programDescription').textContent = 
+      program.description || translateText('No description available for this program.');
+      
+    // Update author info
+    if (program.submitted_by_name) {
+      const authorText = currentLanguage === 'en' 
+        ? `Thank you for sharing ${program.submitted_by_name}`
+        : `Дякуємо за ваш відгук, ${program.submitted_by_name}`;
+      document.getElementById('programAuthor').textContent = authorText;
+    } else {
+      document.getElementById('programAuthor').textContent = translateText('Anonymous submission');
+    }
+
+    // Update contacts and links
+    updateContactsAndLinks(program);
+  }
+
+  function updateBasicProgramInfo(program) {
+    document.querySelector('#programTitle h1').textContent = program.name;
+    
+    const levelMap = {
+      'bachelor': { en: 'Bachelor', ua: 'Бакалавр' },
+      'master': { en: 'Master', ua: 'Магістр' },
+      'phd': { en: 'PhD', ua: 'Доктор' }
+    };
+    
+    const levelText = levelMap[program.study_level] 
+      ? levelMap[program.study_level][currentLanguage] 
+      : program.study_level;
+    document.getElementById('programLevel').textContent = levelText;
+    
+    document.getElementById('programFaculty').textContent = program.faculty;
+  }
+
+  async function findUniversityByName(name) {
+    if (!name) return null;
+    
+    try {
+      const response = await fetch(`http://127.0.0.1:8000/api/universities/?search=${encodeURIComponent(name)}&lang=${currentLanguage}`);
+      if (response.ok) {
+        const universities = await response.json();
+        if (universities.length > 0) {
+          // Знаходимо найкращий match - спочатку шукаємо точний match, потім partial match
+          const exactMatch = universities.find(u => 
+            u.name.toLowerCase() === name.toLowerCase() ||
+            u.name_uk?.toLowerCase() === name.toLowerCase() ||
+            u.name_en?.toLowerCase() === name.toLowerCase()
+          );
+          
+          if (exactMatch) return exactMatch;
+          
+          // Якщо точного match немає, повертаємо перший результат
+          return universities[0];
         }
+      }
+    } catch (error) {
+      console.error('Error searching university:', error);
+    }
+    return null;
+  }
 
-        try {
-          // 1. Fetch program data
-          const programResponse = await fetch(`http://127.0.0.1:8000/api/programs/${programId}/`);
-          if (!programResponse.ok) throw new Error('Program not found');
-          const program = await programResponse.json();
+  async function handleUniversityLinks(program) {
+    // Process both HOME UNI and INVITING UNI
+    await processUniversityLink('programHomeUni', program.home_university);
+    await processUniversityLink('programUniversity', program.university);
+  }
 
-          // 2. Update basic program info
-          updateBasicProgramInfo(program);
+  async function processUniversityLink(elementId, universityName) {
+    const element = document.getElementById(elementId);
+    
+    if (!universityName) {
+      element.textContent = translateText('Not specified');
+      element.className = 'university-name';
+      return;
+    }
 
-          // 3. Handle university links for both HOME UNI and INVITING UNI
-          await handleUniversityLinks(program);
+    // Шукаємо університет за назвою
+    const university = await findUniversityByName(universityName);
 
-          // 4. Update testimonial and description
-          document.getElementById('programTestimonial').textContent = 
-            program.testimonial || 'No testimonial available for this program.';
-          document.getElementById('programDescription').textContent = 
-            program.description || 'No description available for this program.';
-            
-          // 5. Update author info
-          document.getElementById('programAuthor').textContent = 
-            program.submitted_by_name ? `Thank you for sharing ${program.submitted_by_name}` : 'Anonymous submission';
+    // Update the element with translated university name
+    if (university) {
+      // Використовуємо переклад назви університету з бекенду
+      const translatedUniversityName = university.name;
+      element.innerHTML = `<a href="uni-read-more.html?id=${university.id}&lang=${currentLanguage}" class="university-name link">${translatedUniversityName}</a>`;
+    } else {
+      // Якщо університет не знайдено, показуємо оригінальну назву
+      element.textContent = universityName;
+      element.className = 'university-name';
+    }
+  }
 
-          // 6. Update contacts and useful links
-          await updateContactsAndLinks(program);
+async function updateContactsAndLinks(program) {
+  const contactsElement = document.getElementById('programContacts');
+  let contactsHTML = '';
+  
+  // Додаємо контакти університету-партнера
+  if (program.university) {
+    const university = await findUniversityByName(program.university);
+    if (university && university.contact_email) {
+      contactsHTML += `<a href="mailto:${university.contact_email}" class="blue-links">${university.contact_email}</a><br>`;
+    }
+  }
+  
+  // Add useful links from the program
+  if (program.useful_links && program.useful_links.length > 0) {
+    program.useful_links.forEach(link => {
+      contactsHTML += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="blue-links">${link.title}</a><br>`;
+    });
+  } 
+  // Fallback to individual link fields if useful_links is not available
+  else if (program.useful_link_1 || program.useful_link_2 || program.useful_link_3) {
+    if (program.useful_link_1) {
+      const titleField = `useful_link_1_title_${currentLanguage}`;
+      const title = program[titleField] || translateText('Useful link 1');
+      contactsHTML += `<a href="${program.useful_link_1}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
+    }
+    
+    if (program.useful_link_2) {
+      const titleField = `useful_link_2_title_${currentLanguage}`;
+      const title = program[titleField] || translateText('Useful link 2');
+      contactsHTML += `<a href="${program.useful_link_2}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
+    }
+    
+    if (program.useful_link_3) {
+      const titleField = `useful_link_3_title_${currentLanguage}`;
+      const title = program[titleField] || translateText('Useful link 3');
+      contactsHTML += `<a href="${program.useful_link_3}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
+    }
+  }
+  
+  // If no contacts or links found
+  if (contactsHTML === '') {
+    contactsHTML = translateText('Contact information and useful links not available');
+  }
+  
+  contactsElement.innerHTML = contactsHTML;
+}
 
-        } catch (error) {
-          console.error('Error:', error);
-          showError('Failed to load program details. Please try again later.');
-        }
+  function showError(message) {
+    const programTitle = document.querySelector('#programTitle h1');
+    programTitle.textContent = message;
+    programTitle.style.color = '#d9534f';
+  }
+
+  document.addEventListener('DOMContentLoaded', async function() {
+    // Ініціалізація мови
+    updatePageLanguage();
+
+    // Додаємо обробники подій для кнопок мови
+    document.querySelectorAll('.js-switch-button').forEach(button => {
+      button.addEventListener('click', function() {
+        switchLanguage(this.getAttribute('data-lang'));
       });
+    });
 
-      function updateBasicProgramInfo(program) {
-        document.querySelector('#programTitle h1').textContent = program.name;
-        
-        const levelMap = {
-          'bachelor': 'Bachelor',
-          'master': 'Master',
-          'phd': 'PhD'
-        };
-        document.getElementById('programLevel').textContent = levelMap[program.study_level] || program.study_level;
-        document.getElementById('programFaculty').textContent = program.faculty;
-      }
-
-      async function findUniversityByName(name) {
-        if (!name) return null;
-        
-        try {
-          const response = await fetch(`http://127.0.0.1:8000/api/universities/?search=${encodeURIComponent(name)}`);
-          if (response.ok) {
-            const universities = await response.json();
-            // Find exact match (case insensitive)
-            return universities.find(u => u.name.toLowerCase() === name.toLowerCase());
-          }
-        } catch (error) {
-          console.error('Error searching university:', error);
-        }
-        return null;
-      }
-
-      async function handleUniversityLinks(program) {
-        // Process both HOME UNI and INVITING UNI
-        await processUniversityLink('programHomeUni', program.home_university);
-        await processUniversityLink('programUniversity', program.university, program.university_id);
-      }
-
-      async function processUniversityLink(elementId, universityName, universityId = null) {
-        const element = document.getElementById(elementId);
-        
-        if (!universityName) {
-          element.textContent = 'Not specified';
-          return;
-        }
-
-        // First try by ID if available
-        let university = null;
-        if (universityId) {
-          try {
-            const response = await fetch(`http://127.0.0.1:8000/api/universities/${universityId}/`);
-            if (response.ok) {
-              university = await response.json();
-            }
-          } catch (error) {
-            console.error('Error fetching university by ID:', error);
-          }
-        }
-
-        // If not found by ID, try by name
-        if (!university) {
-          university = await findUniversityByName(universityName);
-        }
-
-        // Update the element
-        if (university) {
-          element.innerHTML = `<a href="uni-read-more.html?id=${university.id}" class="university-name link">${universityName}</a>`;
-        } else {
-          element.textContent = universityName;
-          element.className = 'university-name';
-        }
-      }
-
-      async function updateContactsAndLinks(program) {
-        const contactsElement = document.getElementById('programContacts');
-        let contactsHTML = '';
-        
-        // Add university contact email if available
-        if (program.university_id) {
-          try {
-            const response = await fetch(`http://127.0.0.1:8000/api/universities/${program.university_id}/`);
-            if (response.ok) {
-              const university = await response.json();
-              if (university.contact_email) {
-                contactsHTML += `<a href="mailto:${university.contact_email}" class="blue-links">${university.contact_email}</a><br>`;
-              }
-            }
-          } catch (error) {
-            console.error('Error fetching university contacts:', error);
-          }
-        }
-        
-        // Add useful links from the program
-        if (program.useful_links && program.useful_links.length > 0) {
-          program.useful_links.forEach(link => {
-            contactsHTML += `<a href="${link.url}" target="_blank" rel="noopener noreferrer" class="blue-links">${link.title}</a><br>`;
-          });
-        } 
-        // Fallback to individual link fields if useful_links is not available
-        else if (program.useful_link_1 || program.useful_link_2 || program.useful_link_3) {
-          if (program.useful_link_1) {
-            const title = program.useful_link_1_title || 'Useful link 1';
-            contactsHTML += `<a href="${program.useful_link_1}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
-          }
-          
-          if (program.useful_link_2) {
-            const title = program.useful_link_2_title || 'Useful link 2';
-            contactsHTML += `<a href="${program.useful_link_2}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
-          }
-          
-          if (program.useful_link_3) {
-            const title = program.useful_link_3_title || 'Useful link 3';
-            contactsHTML += `<a href="${program.useful_link_3}" target="_blank" rel="noopener noreferrer" class="blue-links">${title}</a><br>`;
-          }
-        }
-        
-        // If no contacts or links found
-        if (contactsHTML === '') {
-          contactsHTML = 'Contact information and useful links not available';
-        }
-        
-        contactsElement.innerHTML = contactsHTML;
-      }
-
-      function showError(message) {
-        const programTitle = document.querySelector('#programTitle h1');
-        programTitle.textContent = message;
-        programTitle.style.color = '#d9534f';
-      }
-    </script>
+    // Initial load
+    await loadProgramData();
+  });
+</script>
   </body>
 </html>

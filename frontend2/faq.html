@@ -30,7 +30,7 @@
                   href="index.html"
                   data-en="ABOUT US"
                   data-ua="ПРО НАС"
-                  >ABOUT US</a
+                  >ПРО НАС</a
                 >
               </li>
               <li>
@@ -39,7 +39,7 @@
                   href="uni-list.html"
                   data-en="UNI LIST"
                   data-ua="СПИСОК ВНЗ"
-                  >UNI LIST</a
+                  >СПИСОК ВНЗ</a
                 >
               </li>
               <li>
@@ -48,7 +48,7 @@
                   href="program-list.html"
                   data-en="PROGRAM LIST"
                   data-ua="ПРОГРАМИ"
-                  >PROGRAM LIST</a
+                  >ПРОГРАМИ</a
                 >
               </li>
               <li>
@@ -61,12 +61,12 @@
 
           <div class="lang-search">
             <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
+              <button data-lang="ua" class="js-switch-button active" type="button">
                 UA
               </button>
               <button
                 data-lang="en"
-                class="js-switch-button active"
+                class="js-switch-button"
                 type="button">
                 EN
               </button>
@@ -77,7 +77,7 @@
                 class="search-box__input"
                 data-en="Search..."
                 data-ua="Шукати..."
-                placeholder="Search..." />
+                placeholder="Шукати..." />
             </div>
           </div>
         </div>
@@ -97,7 +97,7 @@
             
             <div id="faq-container">
               <!-- FAQ items will be loaded here dynamically -->
-              <div class="loading-spinner">Loading FAQs...</div>
+              <div class="loading-spinner" data-en="Loading FAQs..." data-ua="Завантаження FAQ...">Завантаження FAQ...</div>
             </div>
           </div>
         </div>
@@ -124,7 +124,7 @@
                     href="index.html"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
-                    >ABOUT US</a
+                    >ПРО НАС</a
                   >
                 </li>
                 <li>
@@ -133,7 +133,7 @@
                     href="uni-list.html"
                     data-en="UNI LIST"
                     data-ua="СПИСОК ВНЗ"
-                    >UNI LIST</a
+                    >СПИСОК ВНЗ</a
                   >
                 </li>
                 <li>
@@ -142,7 +142,7 @@
                     href="program-list.html"
                     data-en="PROGRAM LIST"
                     data-ua="ПРОГРАМИ"
-                    >PROGRAM LIST</a
+                    >ПРОГРАМИ</a
                   >
                 </li>
                 <li>
@@ -159,12 +159,12 @@
 
             <div class="lang-search">
               <span class="language-switch">
-                <button data-lang="ua" class="js-switch-button" type="button">
+                <button data-lang="ua" class="js-switch-button active" type="button">
                   UA
                 </button>
                 <button
                   data-lang="en"
-                  class="js-switch-button active"
+                  class="js-switch-button"
                   type="button">
                   EN
                 </button>
@@ -175,7 +175,7 @@
                   class="search-box__input"
                   data-en="Search..."
                   data-ua="Шукати..."
-                  placeholder="Search..." />
+                  placeholder="Шукати..." />
               </div>
             </div>
           </div>
@@ -186,147 +186,63 @@
 
     <!-- Updated JavaScript for FAQ loading with smooth animation -->
     <script>
+      let currentLanguage = 'ua'; // Українська за замовчуванням
+
       document.addEventListener('DOMContentLoaded', function() {
-        // Get current language
-        const currentLang = document.querySelector('.js-switch-button.active')?.dataset.lang || 'en';
+        setupLanguageSwitch();
+        loadFAQs(currentLanguage);
+      });
+
+      function setupLanguageSwitch() {
+        const switchButtons = document.querySelectorAll('.js-switch-button');
         
-        // Load FAQs from backend
-        const apiUrl = 'http://127.0.0.1:8000/api/faq/';
-        
-        fetch(`${apiUrl}?lang=${currentLang}`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(data => {
-            console.log('Received data:', data);
-            const faqContainer = document.getElementById('faq-container');
-            faqContainer.innerHTML = '';
-            
-            if (data.status === 'error') {
-              faqContainer.innerHTML = '<p>Error loading FAQs: ' + data.message + '</p>';
-              return;
-            }
-            
-            if (data.faq_items && data.faq_items.length > 0) {
-              data.faq_items.forEach(faq => {
-                const categoriesHtml = faq.categories.map(cat => 
-                  `<p class="faq__text">${cat.name}</p>`
-                ).join('');
-                
-                // Format answer with paragraphs if it contains newlines
-                let answerHtml = '';
-                if (faq.answer.includes('\n')) {
-                  answerHtml = faq.answer.split('\n')
-                    .filter(p => p.trim() !== '')
-                    .map(p => `<p>${p.trim()}</p>`)
-                    .join('');
-                } else {
-                  answerHtml = `<p>${faq.answer}</p>`;
-                }
-                
-                const faqHtml = `
-                  <div class="faq__card">
-                    <div class="faq__programs">
-                      ${categoriesHtml}
-                    </div>
-                    <div class="faq__content">
-                      <h2 class="faq__h2 faq__toggle-question" tabindex="0" role="button" aria-expanded="false">
-                        ${faq.question}
-                      </h2>
-                      
-                      <div class="faq__meta faq__meta--top active">
-                        <div class="faq__meta-row">
-                          <div class="faq__meta-info">
-                            <p class="faq__paragraph">Author: ${faq.author}</p>
-                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
-                          </div>
-                          <div class="faq__date">
-                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
-                            <p class="faq__paragraph">${faq.updated_at}</p>
-                          </div>
-                        </div>
-                        <div class="faq__line"></div>
-                      </div>
-                      
-                      <div class="faq__answer">
-                        ${answerHtml}
-                      </div>
-                      
-                      <div class="faq__meta faq__meta--bottom">
-                        <div class="faq__meta-row">
-                          <div class="faq__meta-info">
-                            <p class="faq__paragraph">Author: ${faq.author}</p>
-                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
-                          </div>
-                          <div class="faq__date">
-                            <img src="./project/img/clock_img.svg" alt="Clock icon" />
-                            <p class="faq__paragraph">${faq.updated_at}</p>
-                          </div>
-                        </div>
-                        <div class="faq__line"></div>
-                      </div>
-                    </div>
-                  </div>
-                `;
-                
-                faqContainer.innerHTML += faqHtml;
-              });
-              
-              // Initialize FAQ toggle functionality
-              initFAQToggle();
-            } else {
-              faqContainer.innerHTML = '<p>No FAQs found.</p>';
-            }
-          })
-          .catch(error => {
-            console.error('Error loading FAQs:', error);
-            document.getElementById('faq-container').innerHTML = 
-              '<p>Error loading FAQs. Please check console for details.</p>';
-          });
-          
-        // Language switch functionality
-        document.querySelectorAll('.js-switch-button').forEach(button => {
+        switchButtons.forEach(button => {
           button.addEventListener('click', function() {
-            // Remove active class from all buttons
-            document.querySelectorAll('.js-switch-button').forEach(btn => {
-              btn.classList.remove('active');
+            const lang = this.getAttribute('data-lang');
+            
+            // Update active button state
+            switchButtons.forEach(btn => {
+              btn.classList.toggle('active', btn.getAttribute('data-lang') === lang);
             });
             
-            // Add active class to clicked button
-            this.classList.add('active');
-            
-            // Update all language-specific elements on the page
-            const newLang = this.dataset.lang;
-            updatePageLanguage(newLang);
-            
-            // Reload FAQs with new language
-            loadFAQs(newLang);
+            // Change language
+            changeLanguage(lang);
           });
         });
+      }
+
+      function changeLanguage(lang) {
+        currentLanguage = lang;
         
-        // Initialize page language
-        updatePageLanguage(currentLang);
-      });
+        // Update all elements with data attributes
+        updatePageLanguage(lang);
+        
+        // Reload FAQs with new language
+        loadFAQs(lang);
+      }
       
       function updatePageLanguage(lang) {
         // Update all elements with data-en and data-ua attributes
         document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+          const text = element.getAttribute(`data-${lang}`);
           if (element.tagName === 'INPUT' || element.tagName === 'TEXTAREA') {
-            element.placeholder = element.getAttribute(`data-${lang}`);
+            element.placeholder = text;
           } else {
-            element.textContent = element.getAttribute(`data-${lang}`);
+            element.textContent = text;
           }
         });
       }
       
       function loadFAQs(lang) {
         const faqContainer = document.getElementById('faq-container');
-        faqContainer.innerHTML = '<div class="loading-spinner">Loading FAQs...</div>';
+        const loadingText = lang === 'en' ? 'Loading FAQs...' : 'Завантаження FAQ...';
+        const noFAQsText = lang === 'en' ? 'No FAQs found.' : 'FAQ не знайдено.';
+        const errorText = lang === 'en' ? 'Error loading FAQs. Please try again later.' : 'Помилка завантаження FAQ. Спробуйте пізніше.';
         
-        const apiUrl = 'http://127.0.0.1:8000/api/faq/';
+        faqContainer.innerHTML = `<div class="loading-spinner">${loadingText}</div>`;
+        
+        // Виправлений URL API згідно з вашим бекендом
+        const apiUrl = 'http://127.0.0.1:8000/faq_app/api/faq/';
         
         fetch(`${apiUrl}?lang=${lang}`)
           .then(response => {
@@ -336,28 +252,56 @@
             return response.json();
           })
           .then(data => {
+            console.log('FAQ data received:', data); // Додано лог для дебагу
             faqContainer.innerHTML = '';
             
-            if (data.status === 'error') {
-              faqContainer.innerHTML = '<p>Error loading FAQs: ' + data.message + '</p>';
+            // Обробка різних форматів відповіді
+            let faqItems = [];
+            
+            if (data.faq_items) {
+              // Новий формат: {faq_items: [...]}
+              faqItems = data.faq_items;
+            } else if (Array.isArray(data)) {
+              // Старий формат: [...]
+              faqItems = data;
+            } else if (data.status === 'error') {
+              const errorMessage = lang === 'en' 
+                ? `Error loading FAQs: ${data.message}`
+                : `Помилка завантаження FAQ: ${data.message}`;
+              faqContainer.innerHTML = `<p class="error-message">${errorMessage}</p>`;
               return;
             }
             
-            if (data.faq_items && data.faq_items.length > 0) {
-              data.faq_items.forEach(faq => {
-                const categoriesHtml = faq.categories.map(cat => 
-                  `<p class="faq__text">${cat.name}</p>`
-                ).join('');
+            if (faqItems.length > 0) {
+              faqItems.forEach(faq => {
+                // Обробка категорій
+                let categoriesHtml = '';
+                if (faq.categories && Array.isArray(faq.categories)) {
+                  categoriesHtml = faq.categories.map(cat => 
+                    `<p class="faq__text">${cat.name || cat.name_en || ''}</p>`
+                  ).join('');
+                }
                 
+                // Обробка відповіді
                 let answerHtml = '';
-                if (faq.answer.includes('\n')) {
-                  answerHtml = faq.answer.split('\n')
+                const answer = faq.answer || '';
+                if (answer.includes('\n')) {
+                  answerHtml = answer.split('\n')
                     .filter(p => p.trim() !== '')
                     .map(p => `<p>${p.trim()}</p>`)
                     .join('');
                 } else {
-                  answerHtml = `<p>${faq.answer}</p>`;
+                  answerHtml = `<p>${answer}</p>`;
                 }
+                
+                // Переклади для авторів
+                const authorLabel = lang === 'en' ? 'Author:' : 'Автор:';
+                const editorLabel = lang === 'en' ? 'Editor and translator:' : 'Редактор та перекладач:';
+                
+                // Безпечне отримання даних
+                const author = faq.author || 'Unknown';
+                const editor = faq.editor || 'Unknown';
+                const updatedAt = faq.updated_at || 'Unknown date';
                 
                 const faqHtml = `
                   <div class="faq__card">
@@ -366,36 +310,36 @@
                     </div>
                     <div class="faq__content">
                       <h2 class="faq__h2 faq__toggle-question" tabindex="0" role="button" aria-expanded="false">
-                        ${faq.question}
+                        ${faq.question || 'No question'}
                       </h2>
                       
                       <div class="faq__meta faq__meta--top active">
                         <div class="faq__meta-row">
                           <div class="faq__meta-info">
-                            <p class="faq__paragraph">Author: ${faq.author}</p>
-                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                            <p class="faq__paragraph">${authorLabel} ${author}</p>
+                            <p class="faq__paragraph">${editorLabel} ${editor}</p>
                           </div>
                           <div class="faq__date">
                             <img src="./project/img/clock_img.svg" alt="Clock icon" />
-                            <p class="faq__paragraph">${faq.updated_at}</p>
+                            <p class="faq__paragraph">${updatedAt}</p>
                           </div>
                         </div>
                         <div class="faq__line"></div>
                       </div>
                       
                       <div class="faq__answer">
-                        ${answerHtml}
+                        ${answerHtml || '<p>No answer available</p>'}
                       </div>
                       
                       <div class="faq__meta faq__meta--bottom">
                         <div class="faq__meta-row">
                           <div class="faq__meta-info">
-                            <p class="faq__paragraph">Author: ${faq.author}</p>
-                            <p class="faq__paragraph">Editor and translator: ${faq.editor}</p>
+                            <p class="faq__paragraph">${authorLabel} ${author}</p>
+                            <p class="faq__paragraph">${editorLabel} ${editor}</p>
                           </div>
                           <div class="faq__date">
                             <img src="./project/img/clock_img.svg" alt="Clock icon" />
-                            <p class="faq__paragraph">${faq.updated_at}</p>
+                            <p class="faq__paragraph">${updatedAt}</p>
                           </div>
                         </div>
                         <div class="faq__line"></div>
@@ -410,12 +354,15 @@
               // Reinitialize FAQ toggle functionality
               initFAQToggle();
             } else {
-              faqContainer.innerHTML = '<p>No FAQs found.</p>';
+              faqContainer.innerHTML = `<p class="no-faqs-message">${noFAQsText}</p>`;
             }
           })
           .catch(error => {
             console.error('Error loading FAQs:', error);
-            faqContainer.innerHTML = '<p>Error loading FAQs. Please try again later.</p>';
+            const detailedError = lang === 'en' 
+              ? `Error: ${error.message}. Please check if the server is running.`
+              : `Помилка: ${error.message}. Будь ласка, перевірте чи запущений сервер.`;
+            faqContainer.innerHTML = `<p class="error-message">${detailedError}</p>`;
           });
       }
       
@@ -469,6 +416,20 @@
         padding: 2rem;
         font-style: italic;
         color: #666;
+      }
+      
+      .error-message {
+        text-align: center;
+        padding: 2rem;
+        color: #d9534f;
+        font-style: italic;
+      }
+      
+      .no-faqs-message {
+        text-align: center;
+        padding: 2rem;
+        color: #666;
+        font-style: italic;
       }
       
       /* Smooth animation for FAQ elements */

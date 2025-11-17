@@ -1,9 +1,9 @@
 <!DOCTYPE html>
-<html>
+<html lang="uk">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad</title>
+    <title data-en="StudentAbroad - Programs" data-ua="StudentAbroad - Програми">StudentAbroad - Програми</title>
     <link rel="stylesheet" href="./project/css/style.css" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
@@ -30,7 +30,7 @@
                   href="index.html"
                   data-en="ABOUT US"
                   data-ua="ПРО НАС"
-                  >ABOUT US</a
+                  >ПРО НАС</a
                 >
               </li>
               <li>
@@ -39,16 +39,16 @@
                   href="uni-list.html"
                   data-en="UNI LIST"
                   data-ua="СПИСОК ВНЗ"
-                  >UNI LIST</a
+                  >СПИСОК ВНЗ</a
                 >
               </li>
               <li>
                 <a
-                  class="link"
+                  class="link active"
                   href="program-list.html"
                   data-en="PROGRAM LIST"
                   data-ua="ПРОГРАМИ"
-                  >PROGRAM LIST</a
+                  >ПРОГРАМИ</a
                 >
               </li>
               <li>
@@ -61,12 +61,12 @@
 
           <div class="lang-search">
             <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
+              <button data-lang="ua" class="js-switch-button active" type="button">
                 UA
               </button>
               <button
                 data-lang="en"
-                class="js-switch-button active"
+                class="js-switch-button"
                 type="button">
                 EN
               </button>
@@ -74,10 +74,11 @@
             <div class="search-box">
               <input
                 type="text"
+                id="searchInput"
                 class="search-box__input"
                 data-en="Search..."
                 data-ua="Шукати..."
-                placeholder="Search..." />
+                placeholder="Шукати..." />
             </div>
           </div>
         </div>
@@ -90,15 +91,15 @@
           <div class="country-section__heading">
             <span
               class="country-section__text-outline"
-              data-en="HOME UNI"
-              data-ua="Університет відправлення"
-              >HOME UNI
+              data-en="HOME UNIVERSITY"
+              data-ua="УНІВЕРСИТЕТ ВІДПРАВЛЕННЯ"
+              >УНІВЕРСИТЕТ ВІДПРАВЛЕННЯ
             </span>
             <h2
               class="country-section__text-fill"
-              data-en="HOME UNI"
-              data-ua="Університет відправлення">
-              HOME UNI
+              data-en="HOME UNIVERSITY"
+              data-ua="УНІВЕРСИТЕТ ВІДПРАВЛЕННЯ">
+              УНІВЕРСИТЕТ ВІДПРАВЛЕННЯ
             </h2>
           </div>
 
@@ -108,8 +109,8 @@
                 type="text"
                 id="homeUniSearch"
                 class="country-search-box__input"
-                placeholder="Search..."
-                data-en="Search..."
+                placeholder="Шукати університети відправлення..."
+                data-en="Search home universities..."
                 data-ua="Шукати університети відправлення..." />
               <div class="country-search-box__line"></div>
             </div>
@@ -118,14 +119,17 @@
           <div class="checkbox-group" id="homeUniCheckboxes">
             <!-- Home university checkboxes will be populated here -->
           </div>
+          
           <div id="switch-country-button">&lt— — —&gt</div>
-          <h1 data-en="Level" data-ua="Ступінь" id="level">Level</h1>
+          
+          <h1 data-en="Level" data-ua="Ступінь" id="level">Ступінь</h1>
+          
           <div class="level-checkbox-group">
             <label class="container-checkbox">
               <input type="checkbox" value="bachelor" class="level-filter" />
               <span class="checkmark"></span>
               <span class="country-label" data-en="Bachelor" data-ua="Бакалавр"
-                >Bachelor</span
+                >Бакалавр</span
               >
             </label>
 
@@ -133,7 +137,7 @@
               <input type="checkbox" value="master" class="level-filter" />
               <span class="checkmark"></span>
               <span class="country-label" data-en="Master" data-ua="Магістр"
-                >Master</span
+                >Магістр</span
               >
             </label>
 
@@ -141,14 +145,14 @@
               <input type="checkbox" value="phd" class="level-filter" />
               <span class="checkmark"></span>
               <span class="country-label" data-en="PhD" data-ua="Доктор"
-                >PhD</span
+                >Доктор</span
               >
             </label>
           </div>
 
           <section class="program-list" id="programListContainer">
             <!-- Programs will be loaded here dynamically -->
-            <div class="loading-spinner">Loading programs...</div>
+            <div class="loading-spinner">Завантаження програм...</div>
           </section>
         </div>
       </section>
@@ -173,7 +177,7 @@
                     href="index.html"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
-                    >ABOUT US</a
+                    >ПРО НАС</a
                   >
                 </li>
                 <li>
@@ -182,16 +186,16 @@
                     href="uni-list.html"
                     data-en="UNI LIST"
                     data-ua="СПИСОК ВНЗ"
-                    >UNI LIST</a
+                    >СПИСОК ВНЗ</a
                   >
                 </li>
                 <li>
                   <a
-                    class="footer__link"
+                    class="footer__link active"
                     href="program-list.html"
                     data-en="PROGRAM LIST"
                     data-ua="ПРОГРАМИ"
-                    >PROGRAM LIST</a
+                    >ПРОГРАМИ</a
                   >
                 </li>
                 <li>
@@ -208,12 +212,12 @@
 
             <div class="lang-search">
               <span class="language-switch">
-                <button data-lang="ua" class="js-switch-button" type="button">
+                <button data-lang="ua" class="js-switch-button active" type="button">
                   UA
                 </button>
                 <button
                   data-lang="en"
-                  class="js-switch-button active"
+                  class="js-switch-button"
                   type="button">
                   EN
                 </button>
@@ -224,7 +228,7 @@
                   class="search-box__input"
                   data-en="Search..."
                   data-ua="Шукати..."
-                  placeholder="Search..." />
+                  placeholder="Шукати..." />
               </div>
             </div>
           </div>
@@ -237,43 +241,151 @@
       const API_BASE_URL = 'http://127.0.0.1:8000/api';
       let allPrograms = [];
       let allHomeUniversities = [];
+      let currentLanguage = localStorage.getItem('language') || 'ua';
 
-      document.addEventListener('DOMContentLoaded', function() {
-        loadAllPrograms();
-        setupFilters();
-      });
+      // Translations dictionary
+      const translations = {
+        en: {
+          // Header
+          'ПРО НАС': 'ABOUT US',
+          'СПИСОК ВНЗ': 'UNI LIST', 
+          'ПРОГРАМИ': 'PROGRAM LIST',
+          'FAQ': 'FAQ',
+          
+          // Main section
+          'Університет відправлення': 'HOME UNIVERSITY',
+          'Шукати...': 'Search...',
+          'Шукати університети відправлення...': 'Search home universities...',
+          'Ступінь': 'Level',
+          'Бакалавр': 'Bachelor',
+          'Магістр': 'Master',
+          'Доктор': 'PhD',
+          
+          // Program cards
+          'Читати більше': 'Read more',
+          'Для цієї програми немає відгуку.': 'No testimonial available for this program.',
+          
+          // Status messages
+          'Завантаження програм...': 'Loading programs...',
+          'Не знайдено програм, що відповідають вашим критеріям.': 'No programs found matching your criteria.',
+          'Не вдалося завантажити програми. Будь ласка, спробуйте пізніше.': 'Failed to load programs. Please try again later.'
+        },
+        ua: {
+          // Header  
+          'ABOUT US': 'ПРО НАС',
+          'UNI LIST': 'СПИСОК ВНЗ',
+          'PROGRAM LIST': 'ПРОГРАМИ', 
+          'FAQ': 'FAQ',
+          
+          // Main section
+          'HOME UNIVERSITY': 'Університет відправлення',
+          'Search...': 'Шукати...',
+          'Search home universities...': 'Шукати університети відправлення...',
+          'Level': 'Ступінь',
+          'Bachelor': 'Бакалавр',
+          'Master': 'Магістр',
+          'PhD': 'Доктор',
+          
+          // Program cards
+          'Read more': 'Читати більше',
+          'No testimonial available for this program.': 'Для цієї програми немає відгуку.',
+          
+          // Status messages
+          'Loading programs...': 'Завантаження програм...',
+          'No programs found matching your criteria.': 'Не знайдено програм, що відповідають вашим критеріям.',
+          'Failed to load programs. Please try again later.': 'Не вдалося завантажити програми. Будь ласка, спробуйте пізніше.'
+        }
+      };
 
-      function loadAllPrograms() {
-        const programListContainer = document.getElementById('programListContainer');
-        programListContainer.innerHTML = '<div class="loading-spinner">Loading programs...</div>';
+      // Функція для перекладу тексту
+      function translateText(text) {
+        return translations[currentLanguage][text] || text;
+      }
+
+      // Функція для миттєвої зміни мови
+      async function switchLanguage(lang) {
+        currentLanguage = lang;
+        localStorage.setItem('language', lang);
         
-        fetch(`${API_BASE_URL}/programs/`)
-          .then(response => {
-            if (!response.ok) {
-              throw new Error(`HTTP error! status: ${response.status}`);
-            }
-            return response.json();
-          })
-          .then(programs => {
-            allPrograms = programs;
-            allHomeUniversities = [...new Set(programs.map(p => p.home_university).filter(Boolean))];
-            updateHomeUniversityFilters();
-            filterPrograms();
-          })
-          .catch(error => {
-            console.error('Error fetching programs:', error);
-            programListContainer.innerHTML = '<p class="error-message">Failed to load programs. Please try again later.</p>';
-          });
+        // Миттєво оновлюємо весь інтерфейс
+        updatePageLanguage();
+        
+        // Перезавантажуємо дані з бекенду з новою мовою
+        await loadAllPrograms();
+      }
+
+      // Функція для оновлення тексту на сторінці
+      function updatePageLanguage() {
+        // Оновлення тексту в елементах з data-атрибутами
+        document.querySelectorAll('[data-en][data-ua]').forEach(element => {
+          const text = element.getAttribute(`data-${currentLanguage}`);
+          if (element.placeholder !== undefined) {
+            element.placeholder = text;
+          } else {
+            element.textContent = text;
+          }
+        });
+
+        // Оновлення заголовка сторінки
+        const titleElement = document.querySelector('title');
+        if (titleElement) {
+          titleElement.textContent = currentLanguage === 'en' 
+            ? titleElement.getAttribute('data-en') 
+            : titleElement.getAttribute('data-ua');
+        }
+
+        // Оновлення активних кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          if (button.getAttribute('data-lang') === currentLanguage) {
+            button.classList.add('active');
+          } else {
+            button.classList.remove('active');
+          }
+        });
+
+        // Оновлення атрибута lang у html
+        document.documentElement.lang = currentLanguage === 'en' ? 'en' : 'uk';
+      }
+
+      // Функція для завантаження програм з бекенду
+      async function loadAllPrograms() {
+        const programListContainer = document.getElementById('programListContainer');
+        if (!programListContainer) return;
+
+        // Показуємо loading
+        programListContainer.innerHTML = `<div class="loading-spinner">${translateText('Loading programs...')}</div>`;
+        
+        try {
+          // Додаємо параметр мови до запиту
+          const url = `${API_BASE_URL}/programs/?lang=${currentLanguage === 'en' ? 'en' : 'uk'}`;
+          
+          const response = await fetch(url);
+          if (!response.ok) {
+            throw new Error(`HTTP error! status: ${response.status}`);
+          }
+          
+          const programs = await response.json();
+          allPrograms = programs;
+          allHomeUniversities = [...new Set(programs.map(p => p.home_university).filter(Boolean))];
+          updateHomeUniversityFilters();
+          filterPrograms();
+          
+        } catch (error) {
+          console.error('Error fetching programs:', error);
+          programListContainer.innerHTML = `<p class="error-message">${translateText('Failed to load programs. Please try again later.')}</p>`;
+        }
       }
 
       function updateHomeUniversityFilters() {
         const searchTerm = document.getElementById('homeUniSearch').value.toLowerCase();
         const checkboxGroup = document.getElementById('homeUniCheckboxes');
+        if (!checkboxGroup) return;
+        
         checkboxGroup.innerHTML = '';
         
         // Filter home universities based on search term
         const filteredHomeUnis = allHomeUniversities.filter(uni => 
-          uni.toLowerCase().includes(searchTerm))
+          uni.toLowerCase().includes(searchTerm));
         
         // Create checkboxes for filtered home universities
         filteredHomeUnis.forEach(uni => {
@@ -298,10 +410,16 @@
           
           checkboxGroup.appendChild(label);
         });
+
+        // Додаємо обробники подій для нових чекбоксів
+        document.querySelectorAll('.home-uni-filter').forEach(checkbox => {
+          checkbox.addEventListener('change', filterPrograms);
+        });
       }
 
       function filterPrograms() {
         const programListContainer = document.getElementById('programListContainer');
+        if (!programListContainer) return;
         
         // Get selected filters
         const selectedLevels = Array.from(document.querySelectorAll('.level-filter:checked')).map(el => el.value);
@@ -326,7 +444,7 @@
         
         // Display results
         if (filteredPrograms.length === 0) {
-          programListContainer.innerHTML = '<p class="no-programs">No programs found matching your criteria.</p>';
+          programListContainer.innerHTML = `<p class="no-programs">${translateText('No programs found matching your criteria.')}</p>`;
           return;
         }
         
@@ -336,21 +454,19 @@
           programCard.className = 'program-card';
           
           const programTitle = document.createElement('h2');
-          programTitle.textContent = `${program.name} (${program.university})`;
+          programTitle.textContent = `${program.name} (${program.home_university} - ${program.university})`;
           
           const quoteIcon = document.createElement('img');
           quoteIcon.className = 'icon-img';
           quoteIcon.src = './project/img/quotation.svg';
           
           const programDescription = document.createElement('p');
-          programDescription.textContent = program.testimonial || 'No testimonial available for this program.';
+          programDescription.textContent = program.testimonial || translateText('No testimonial available for this program.');
           
           const readMoreLink = document.createElement('a');
-          readMoreLink.href = `programs-read-more.html?id=${program.id}`;
+          readMoreLink.href = `programs-read-more.html?id=${program.id}&lang=${currentLanguage}`;
           readMoreLink.className = 'btn read-more-btn2';
-          readMoreLink.textContent = 'Read more';
-          readMoreLink.setAttribute('data-en', 'Read more');
-          readMoreLink.setAttribute('data-ua', 'Читати більше');
+          readMoreLink.textContent = translateText('Читати більше');
           
           programCard.appendChild(programTitle);
           programCard.appendChild(quoteIcon);
@@ -367,18 +483,42 @@
           checkbox.addEventListener('change', filterPrograms);
         });
         
-        // Home university search - now filters the checkboxes only
-        document.getElementById('homeUniSearch').addEventListener('input', function() {
-          updateHomeUniversityFilters();
-        });
+        // Home university search
+        const homeUniSearch = document.getElementById('homeUniSearch');
+        if (homeUniSearch) {
+          homeUniSearch.addEventListener('input', function() {
+            updateHomeUniversityFilters();
+          });
+        }
         
         // Home university checkboxes
-        document.getElementById('homeUniCheckboxes').addEventListener('change', function(e) {
-          if (e.target.classList.contains('home-uni-filter')) {
-            filterPrograms();
-          }
-        });
+        const homeUniCheckboxes = document.getElementById('homeUniCheckboxes');
+        if (homeUniCheckboxes) {
+          homeUniCheckboxes.addEventListener('change', function(e) {
+            if (e.target.classList.contains('home-uni-filter')) {
+              filterPrograms();
+            }
+          });
+        }
       }
+
+      document.addEventListener('DOMContentLoaded', function() {
+        // Ініціалізація мови
+        updatePageLanguage();
+
+        // Додаємо обробники подій для кнопок мови
+        document.querySelectorAll('.js-switch-button').forEach(button => {
+          button.addEventListener('click', function() {
+            switchLanguage(this.getAttribute('data-lang'));
+          });
+        });
+
+        // Setup filters
+        setupFilters();
+
+        // Initial load
+        loadAllPrograms();
+      });
     </script>
     <style>
       .loading-spinner, .no-programs, .error-message {

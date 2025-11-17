@@ -249,7 +249,7 @@
                   d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
                   fill="currentColor" />
               </svg>
-              <span>Go back</span>
+              <span data-en="Go back" data-ua="Назад">Go back</span>
             </a>
             <img
               class="share-my-program__img"
@@ -258,15 +258,20 @@
           </div>
 
           <div class="form-section">
-            <h2 class="form-section__title">Add program</h2>
+            <h2 class="form-section__title" data-en="Add program" data-ua="Додати програму">Add program</h2>
             <form id="programForm">
               <div class="form-field-and-description">
                 <div class="input-with-optional-button">
-                  <input type="text" id="programName" name="name" placeholder="Name:" required />
+                  <input type="text" id="programName" name="name" 
+                         data-en-placeholder="Name:" 
+                         data-ua-placeholder="Назва:" 
+                         placeholder="Name:" required />
                 </div>
                 <label class="form-section__description"
-                  >Full program name, please.</label
-                >
+                       data-en="Full program name, please."
+                       data-ua="Будь ласка, вкажіть повну назву програми.">
+                  Full program name, please.
+                </label>
               </div>
 
               <div class="form-field-and-description">
@@ -278,6 +283,8 @@
                     type="text"
                     id="university"
                     name="university"
+                    data-en-placeholder="Inviting uni:"
+                    data-ua-placeholder="Запрошуючий університет:"
                     placeholder="Inviting uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
@@ -296,7 +303,8 @@
 
                 <div class="new-item-form" id="new-inviting-uni-form">
                   <div class="new-item-header">
-                    <p>
+                    <p data-en="Leave the details of the university that invited you. Our administrator will enter them into our database."
+                       data-ua="Залиште деталі університету, який вас запросив. Наш адміністратор внесе їх до нашої бази даних.">
                       Leave the details of the university that invited you. Our
                       administrator will enter them into our database.
                     </p>
@@ -304,14 +312,18 @@
                   <input
                     type="text"
                     id="newUniversity"
+                    data-en-placeholder="Enter university name here..."
+                    data-ua-placeholder="Введіть назву університету тут..."
                     placeholder="Enter university name here..."
                     class="new-item-input" />
                   <div class="new-item-submit-button">
-                    <button type="button" class="btn" id="submitNewInvitingUni">Submit</button>
+                    <button type="button" class="btn" id="submitNewInvitingUni" data-en="Submit" data-ua="Надіслати">Submit</button>
                   </div>
                 </div>
 
-                <label class="form-section__description">
+                <label class="form-section__description"
+                       data-en="Choose a foreign university from the list. Add new one, if you can't find it."
+                       data-ua="Виберіть закордонний університет зі списку. Додайте новий, якщо не можете знайти.">
                   Choose a foreign university from the list. Add new one, if you
                   can't find it.
                 </label>
@@ -325,6 +337,8 @@
                     type="text"
                     id="homeUniversity"
                     name="home_university"
+                    data-en-placeholder="Home uni:"
+                    data-ua-placeholder="Домашній університет:"
                     placeholder="Home uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
@@ -342,7 +356,8 @@
                 </div>
                 <div class="new-item-form" id="new-home-uni-form">
                   <div class="new-item-header">
-                    <p>
+                    <p data-en="Leave the details of your home university. Our administrator will enter them into our database."
+                       data-ua="Залиште деталі вашого домашнього університету. Наш адміністратор внесе їх до нашої бази даних.">
                       Leave the details of your home university. Our administrator 
                       will enter them into our database.
                     </p>
@@ -350,13 +365,17 @@
                   <input
                     type="text"
                     id="newHomeUniversity"
+                    data-en-placeholder="Enter university name here..."
+                    data-ua-placeholder="Введіть назву університету тут..."
                     placeholder="Enter university name here..."
                     class="new-item-input" />
                   <div class="new-item-submit-button">
-                    <button type="button" class="btn" id="submitNewHomeUni">Submit</button>
+                    <button type="button" class="btn" id="submitNewHomeUni" data-en="Submit" data-ua="Надіслати">Submit</button>
                   </div>
                 </div>
-                <label class="form-section__description">
+                <label class="form-section__description"
+                       data-en="Choose Ukrainian university from the list. Add a new one, if you can't find it."
+                       data-ua="Виберіть український університет зі списку. Додайте новий, якщо не можете знайти.">
                   Choose Ukrainian university from the list. Add a new one, if
                   you can't find it.
                 </label>
@@ -371,27 +390,31 @@
                     type="text"
                     id="faculty"
                     name="faculty"
+                    data-en-placeholder="Faculty:"
+                    data-ua-placeholder="Факультет:"
                     placeholder="Faculty:"
                     class="custom-select-input"
                     data-type="searchable-select" />
                   <div class="custom-select-dropdown" id="facultyDropdown">
-                    <div class="custom-select-option" data-value="arts">Arts and Humanities</div>
-                    <div class="custom-select-option" data-value="business">Business and Economics</div>
-                    <div class="custom-select-option" data-value="engineering">Engineering and Technology</div>
-                    <div class="custom-select-option" data-value="law">Law</div>
-                    <div class="custom-select-option" data-value="medicine">Medicine and Health</div>
-                    <div class="custom-select-option" data-value="science">Natural Sciences</div>
-                    <div class="custom-select-option" data-value="social">Social Sciences</div>
-                    <div class="custom-select-option" data-value="computer">Computer Science</div>
-                    <div class="custom-select-option" data-value="education">Education</div>
-                    <div class="custom-select-option" data-value="other">Other</div>
+                    <div class="custom-select-option" data-value="arts" data-en="Arts and Humanities" data-ua="Мистецтво та гуманітарні науки">Arts and Humanities</div>
+                    <div class="custom-select-option" data-value="business" data-en="Business and Economics" data-ua="Бізнес та економіка">Business and Economics</div>
+                    <div class="custom-select-option" data-value="engineering" data-en="Engineering and Technology" data-ua="Інженерія та технології">Engineering and Technology</div>
+                    <div class="custom-select-option" data-value="law" data-en="Law" data-ua="Право">Law</div>
+                    <div class="custom-select-option" data-value="medicine" data-en="Medicine and Health" data-ua="Медицина та здоров'я">Medicine and Health</div>
+                    <div class="custom-select-option" data-value="science" data-en="Natural Sciences" data-ua="Природничі науки">Natural Sciences</div>
+                    <div class="custom-select-option" data-value="social" data-en="Social Sciences" data-ua="Соціальні науки">Social Sciences</div>
+                    <div class="custom-select-option" data-value="computer" data-en="Computer Science" data-ua="Комп'ютерні науки">Computer Science</div>
+                    <div class="custom-select-option" data-value="education" data-en="Education" data-ua="Освіта">Education</div>
+                    <div class="custom-select-option" data-value="other" data-en="Other" data-ua="Інше">Other</div>
                   </div>
                   <img
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
                 </div>
-                <label class="form-section__description">
+                <label class="form-section__description"
+                       data-en="Please, provide the faculty of inviting uni for this program. You can select from the list or type your own."
+                       data-ua="Будь ласка, вкажіть факультет запрошуючого університету для цієї програми. Ви можете вибрати зі списку або ввести свій.">
                   Please, provide the faculty of inviting uni for this
                   program. You can select from the list or type your own.
                 </label>
@@ -406,55 +429,74 @@
                     type="text"
                     id="level"
                     name="level"
+                    data-en-placeholder="Level:"
+                    data-ua-placeholder="Рівень:"
                     placeholder="Level:"
                     class="custom-select-input"
                     data-type="searchable-select" />
                   <div class="custom-select-dropdown">
-                    <div class="custom-select-option" data-value="bachelor">Bachelor</div>
-                    <div class="custom-select-option" data-value="master">Master</div>
-                    <div class="custom-select-option" data-value="phd">PhD</div>
+                    <div class="custom-select-option" data-value="bachelor" data-en="Bachelor" data-ua="Бакалавр">Bachelor</div>
+                    <div class="custom-select-option" data-value="master" data-en="Master" data-ua="Магістр">Master</div>
+                    <div class="custom-select-option" data-value="phd" data-en="PhD" data-ua="Доктор філософії">PhD</div>
                   </div>
                   <img
                     src="./project/img/arrow in input.svg"
                     alt="Arrow"
                     class="select-arrow" />
                 </div>
-                <label class="form-section__description">
+                <label class="form-section__description"
+                       data-en="Choose the level of this program from the list."
+                       data-ua="Виберіть рівень цієї програми зі списку.">
                   Choose the level of this program from the list.
                 </label>
               </div>
 
               <div class="form-field-and-description">
                 <div class="input-with-optional-button">
-                  <input type="text" id="shortDescription" name="short_description" placeholder="Short description:" />
+                  <input type="text" id="shortDescription" name="short_description" 
+                         data-en-placeholder="Short description:"
+                         data-ua-placeholder="Короткий опис:"
+                         placeholder="Short description:" />
                 </div>
                 <label class="form-section__description"
-                  >A brief, meaningful description of the program with links to
-                  additional information, etc.</label
-                >
+                       data-en="A brief, meaningful description of the program with links to additional information, etc."
+                       data-ua="Короткий, змістовний опис програми з посиланнями на додаткову інформацію тощо.">
+                  A brief, meaningful description of the program with links to
+                  additional information, etc.
+                </label>
               </div>
 
               <div class="form-field-and-description">
                 <div class="input-with-optional-button">
-                  <input type="text" id="feedback" name="feedback" placeholder="Your feedback:" />
+                  <input type="text" id="feedback" name="feedback" 
+                         data-en-placeholder="Your feedback:"
+                         data-ua-placeholder="Ваш відгук:"
+                         placeholder="Your feedback:" />
                 </div>
                 <label class="form-section__description"
-                  >Your experience, a "quote" that you can use to describe this
-                  program from your point of view.</label
-                >
+                       data-en="Your experience, a &quot;quote&quot; that you can use to describe this program from your point of view."
+                       data-ua="Ваш досвід, &quot;цитата&quot;, яку ви можете використовувати для опису цієї програми з вашої точки зору.">
+                  Your experience, a "quote" that you can use to describe this
+                  program from your point of view.
+                </label>
               </div>
 
               <div class="form-field-and-description">
                 <div class="input-with-optional-button">
-                  <input type="text" id="yourName" name="your_name" placeholder="Your name:" />
+                  <input type="text" id="yourName" name="your_name" 
+                         data-en-placeholder="Your name:"
+                         data-ua-placeholder="Ваше ім'я:"
+                         placeholder="Your name:" />
                 </div>
                 <label class="form-section__description"
-                  >If you wish, you can leave your name and contact details,
-                  which will be displayed on the site.</label
-                >
+                       data-en="If you wish, you can leave your name and contact details, which will be displayed on the site."
+                       data-ua="Якщо бажаєте, ви можете залишити своє ім'я та контактні дані, які будуть відображатися на сайті.">
+                  If you wish, you can leave your name and contact details,
+                  which will be displayed on the site.
+                </label>
               </div>
               <div class="submit-button">
-                <button class="btn" type="submit">Submit</button>
+                <button class="btn" type="submit" data-en="Submit" data-ua="Надіслати">Submit</button>
               </div>
             </form>
           </div>
@@ -466,9 +508,12 @@
     <div id="successModal" class="modal">
       <div class="modal-content">
         <span class="close-button">&times;</span>
-        <h2>Thank You!</h2>
-        <p>Your program has been submitted successfully and will be reviewed by our team.</p>
-        <button class="btn" id="closeModal">OK</button>
+        <h2 data-en="Thank You!" data-ua="Дякуємо!">Thank You!</h2>
+        <p data-en="Your program has been submitted successfully and will be reviewed by our team."
+           data-ua="Вашу програму успішно надіслано, і наша команда розгляне її.">
+          Your program has been submitted successfully and will be reviewed by our team.
+        </p>
+        <button class="btn" id="closeModal" data-en="OK" data-ua="OK">OK</button>
       </div>
     </div>
 
@@ -563,6 +608,9 @@ let programOptions = {
     program_types: []
 };
 
+// Language management
+let currentLang = 'en';
+
 // Helper function to get CSRF token
 function getCookie(name) {
     let cookieValue = null;
@@ -577,6 +625,62 @@ function getCookie(name) {
         }
     }
     return cookieValue;
+}
+
+// Function to switch language
+function switchLanguage(lang) {
+    currentLang = lang;
+    
+    // Update language buttons
+    document.querySelectorAll('.js-switch-button').forEach(button => {
+        button.classList.toggle('active', button.dataset.lang === lang);
+    });
+    
+    // Update elements with data attributes
+    document.querySelectorAll('[data-en]').forEach(element => {
+        if (element.dataset[lang]) {
+            element.textContent = element.dataset[lang];
+        }
+    });
+    
+    // Update placeholders
+    document.querySelectorAll('[data-en-placeholder]').forEach(input => {
+        if (input.dataset[`${lang}Placeholder`]) {
+            input.placeholder = input.dataset[`${lang}Placeholder`];
+        }
+    });
+    
+    // Update search placeholder
+    document.querySelectorAll('.search-box__input').forEach(input => {
+        if (input.dataset[lang]) {
+            input.placeholder = input.dataset[lang];
+        }
+    });
+    
+    // Update dropdown options
+    updateDropdownTranslations();
+    
+    // Save language preference
+    localStorage.setItem('preferredLanguage', lang);
+}
+
+// Function to update dropdown options translations
+function updateDropdownTranslations() {
+    // Update faculty dropdown
+    const facultyOptions = document.querySelectorAll('#facultyDropdown .custom-select-option');
+    facultyOptions.forEach(option => {
+        if (option.dataset[currentLang]) {
+            option.textContent = option.dataset[currentLang];
+        }
+    });
+    
+    // Update level dropdown
+    const levelOptions = document.querySelectorAll('#level-wrapper .custom-select-option');
+    levelOptions.forEach(option => {
+        if (option.dataset[currentLang]) {
+            option.textContent = option.dataset[currentLang];
+        }
+    });
 }
 
 // Function to fetch universities from backend
@@ -649,6 +753,8 @@ function populateDropdowns() {
         option.className = 'custom-select-option';
         option.textContent = name;
         option.dataset.value = value;
+        option.dataset.en = name;
+        option.dataset.ua = getUaTranslationForLevel(value);
         option.addEventListener('click', () => {
             document.getElementById('level').value = name;
             document.getElementById('level').dataset.value = value;
@@ -656,6 +762,16 @@ function populateDropdowns() {
         });
         levelDropdown.appendChild(option);
     });
+}
+
+// Helper function to get Ukrainian translation for study levels
+function getUaTranslationForLevel(level) {
+    const translations = {
+        'bachelor': 'Бакалавр',
+        'master': 'Магістр',
+        'phd': 'Доктор філософії'
+    };
+    return translations[level] || level;
 }
 
 // Initialize dropdown functionality
@@ -711,6 +827,23 @@ function initDropdowns() {
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
     });
     
+    // Faculty dropdown
+    const facultyInput = document.getElementById('faculty');
+    const facultyDropdown = document.getElementById('facultyDropdown');
+    const facultyArrow = document.querySelector('#faculty-wrapper .select-arrow');
+    
+    facultyInput.addEventListener('click', () => {
+        facultyDropdown.classList.toggle('active');
+        facultyArrow.style.transform = facultyDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
+    facultyArrow.addEventListener('click', () => {
+        facultyDropdown.classList.toggle('active');
+        facultyArrow.style.transform = facultyDropdown.classList.contains('active') ? 
+            'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+    });
+    
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.custom-select-wrapper')) {
@@ -722,6 +855,9 @@ function initDropdowns() {
             
             levelDropdown.classList.remove('active');
             levelArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+            
+            facultyDropdown.classList.remove('active');
+            facultyArrow.style.transform = 'translateY(-50%) rotate(0deg)';
         }
     });
 }
@@ -729,7 +865,7 @@ function initDropdowns() {
 // Function to handle adding a new university (for both inviting and home)
 async function handleAddNewUniversity(universityName, isInviting = true) {
     if (!universityName.trim()) {
-        alert('Please enter a university name');
+        alert(currentLang === 'en' ? 'Please enter a university name' : 'Будь ласка, введіть назву університету');
         return;
     }
 
@@ -766,17 +902,17 @@ async function handleFormSubmit(event) {
     const levelInput = document.getElementById('level');
     
     if (!universityInput.value) {
-        alert('Please select or enter a university');
+        alert(currentLang === 'en' ? 'Please select or enter a university' : 'Будь ласка, виберіть або введіть університет');
         return;
     }
     
     if (!facultyInput.value) {
-        alert('Please enter a faculty');
+        alert(currentLang === 'en' ? 'Please enter a faculty' : 'Будь ласка, введіть факультет');
         return;
     }
     
     if (!levelInput.dataset.value) {
-        alert('Please select a study level from the list');
+        alert(currentLang === 'en' ? 'Please select a study level from the list' : 'Будь ласка, виберіть рівень навчання зі списку');
         return;
     }
     
@@ -804,135 +940,106 @@ async function handleFormSubmit(event) {
         formData.university_name = universityInput.value;
     }
     
+    // Handle home university field
+    if (document.getElementById('homeUniversity').dataset.id) {
+        if (document.getElementById('homeUniversity').dataset.id.startsWith('new-')) {
+            formData.home_university_name = document.getElementById('homeUniversity').value;
+        } else {
+            formData.home_university_id = parseInt(document.getElementById('homeUniversity').dataset.id);
+        }
+    } else {
+        formData.home_university_name = document.getElementById('homeUniversity').value;
+    }
+    
     try {
+        const csrfToken = getCookie('csrftoken');
         const response = await fetch(`${API_BASE_URL}/programs/`, {
             method: 'POST',
             headers: {
                 'Content-Type': 'application/json',
-                'X-CSRFToken': getCookie('csrftoken')
+                'X-CSRFToken': csrfToken
             },
-            body: JSON.stringify(formData),
-            credentials: 'include'
+            body: JSON.stringify(formData)
         });
         
-        if (!response.ok) {
-            const errorData = await response.json();
-            console.error('Error details:', errorData);
-            throw new Error(errorData.detail || JSON.stringify(errorData) || 'Failed to submit program');
-        }
+        if (!response.ok) throw new Error('Failed to submit program');
         
-        const responseData = await response.json();
-        console.log('Success:', responseData);
-        
+        // Show success modal
         document.getElementById('successModal').style.display = 'block';
+        
+        // Reset form
         document.getElementById('programForm').reset();
+        
     } catch (error) {
-        console.error('Error:', error);
-        alert('Error submitting program: ' + error.message);
+        console.error('Error submitting program:', error);
+        alert(currentLang === 'en' ? 'Failed to submit program. Please try again.' : 'Не вдалося надіслати програму. Будь ласка, спробуйте ще раз.');
     }
 }
 
-// Initialize form
-document.addEventListener('DOMContentLoaded', async function() {
-    // Initialize dropdowns
+// Initialize the page
+async function init() {
+    // Initialize language
+    const savedLang = localStorage.getItem('preferredLanguage') || 'en';
+    switchLanguage(savedLang);
+    
+    // Add event listeners for language switching
+    document.querySelectorAll('.js-switch-button').forEach(button => {
+        button.addEventListener('click', () => {
+            switchLanguage(button.dataset.lang);
+        });
+    });
+    
+    // Fetch data from backend
+    universities = await fetchUniversities();
+    programOptions = await fetchProgramOptions();
+    
+    // Initialize UI components
+    populateDropdowns();
     initDropdowns();
     
-    // Fetch universities and program options
-    const [unis, options] = await Promise.all([
-        fetchUniversities(),
-        fetchProgramOptions()
-    ]);
+    // Add event listeners for "+" buttons
+    document.getElementById('add-inviting-uni-button').addEventListener('click', () => {
+        document.getElementById('new-inviting-uni-form').classList.toggle('active');
+    });
     
-    universities = unis;
-    programOptions = options;
+    document.getElementById('add-home-uni-button').addEventListener('click', () => {
+        document.getElementById('new-home-uni-form').classList.toggle('active');
+    });
     
-    if (universities.length > 0) {
-        populateDropdowns();
-    } else {
-        console.error('No universities loaded');
-    }
+    // Add event listeners for new university forms
+    document.getElementById('submitNewInvitingUni').addEventListener('click', () => {
+        const newUniName = document.getElementById('newUniversity').value;
+        handleAddNewUniversity(newUniName, true);
+    });
     
-    // Form submission
+    document.getElementById('submitNewHomeUni').addEventListener('click', () => {
+        const newUniName = document.getElementById('newHomeUniversity').value;
+        handleAddNewUniversity(newUniName, false);
+    });
+    
+    // Add form submit handler
     document.getElementById('programForm').addEventListener('submit', handleFormSubmit);
     
-    // Modal close button
+    // Modal handlers
     document.querySelector('.close-button').addEventListener('click', () => {
         document.getElementById('successModal').style.display = 'none';
     });
     
-    // OK button in modal
     document.getElementById('closeModal').addEventListener('click', () => {
         document.getElementById('successModal').style.display = 'none';
     });
     
     // Close modal when clicking outside
     window.addEventListener('click', (event) => {
-        if (event.target === document.getElementById('successModal')) {
-            document.getElementById('successModal').style.display = 'none';
+        const modal = document.getElementById('successModal');
+        if (event.target === modal) {
+            modal.style.display = 'none';
         }
     });
-    
-    // Inviting uni button
-    const addInvitingUniButton = document.getElementById('add-inviting-uni-button');
-    const newInvitingUniForm = document.getElementById('new-inviting-uni-form');
-    const submitNewInvitingUni = document.getElementById('submitNewInvitingUni');
-    
-    // Home uni button
-    const addHomeUniButton = document.getElementById('add-home-uni-button');
-    const newHomeUniForm = document.getElementById('new-home-uni-form');
-    const submitNewHomeUni = document.getElementById('submitNewHomeUni');
-    
-    // Toggle inviting uni form
-    addInvitingUniButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        newInvitingUniForm.classList.toggle('active');
-        
-        // Hide home uni form if it's open
-        if (newHomeUniForm.classList.contains('active')) {
-            newHomeUniForm.classList.remove('active');
-        }
-    });
-    
-    // Toggle home uni form
-    addHomeUniButton.addEventListener('click', function(e) {
-        e.preventDefault();
-        newHomeUniForm.classList.toggle('active');
-        
-        // Hide inviting uni form if it's open
-        if (newInvitingUniForm.classList.contains('active')) {
-            newInvitingUniForm.classList.remove('active');
-        }
-    });
-    
-    // Submit new inviting university
-    submitNewInvitingUni.addEventListener('click', function(e) {
-        e.preventDefault();
-        const universityName = document.getElementById('newUniversity').value;
-        handleAddNewUniversity(universityName, true);
-        document.getElementById('newUniversity').value = ''; // Clear the input
-    });
-    
-    // Submit new home university
-    submitNewHomeUni.addEventListener('click', function(e) {
-        e.preventDefault();
-        const universityName = document.getElementById('newHomeUniversity').value;
-        handleAddNewUniversity(universityName, false);
-        document.getElementById('newHomeUniversity').value = ''; // Clear the input
-    });
-    
-    // Close forms when clicking outside
-    document.addEventListener('click', function(e) {
-        if (!e.target.closest('.input-with-optional-button') && 
-            !e.target.closest('.new-item-form')) {
-            newInvitingUniForm.classList.remove('active');
-            newHomeUniForm.classList.remove('active');
-        }
-    });
-});
-  </script>
+}
+
+// Initialize when DOM is loaded
+document.addEventListener('DOMContentLoaded', init);
+    </script>
   </body>
 </html>
-
-
-
-
