@@ -2080,11 +2080,20 @@ select {
   margin-top: auto;
   padding: 25px 58px;
 }
-
+@media (min-width: 768px) and (max-width: 1199px) {
+  .read-more-btn {
+    position: absolute;
+    left: 540px;
+    top: 170px;
+    transform: translateY(5%);
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 25px 58px;
+  }
+}
 .read-more-btn:last-child {
   transform: translateY(-10%);
 }
-
 .read-more-btn:hover {
   color: var(--color-blue-dark);
   background-color: white;
