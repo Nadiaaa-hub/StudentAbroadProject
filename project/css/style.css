@@ -1947,14 +1947,18 @@ select {
   opacity: 1;
   padding: 19px 0;
 }
-
 .university-card__img {
   height: 158px;
   width: 240px;
   -o-object-fit: cover;
-  object-fit: cover;
+     object-fit: cover;
   margin: 0 70px;
   border-radius: 30px;
+}
+@media (min-width: 768px) and (max-width: 1199px) {
+  .university-card__img {
+    margin: 0 70px 0 5px;
+  }
 }
 
 .university-info {
