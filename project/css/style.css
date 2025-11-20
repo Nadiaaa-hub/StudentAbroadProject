@@ -604,7 +604,6 @@ header {
 .btn:hover,
 .btn.hover {
   color: var(--color-blue-dark);
-  background-color: transparent;
   border-color: var(--color-main-blue);
   transform: scale(1.05);
 }
@@ -723,7 +722,7 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .about-us__text-fill {
-    font-size: 45px;
+    font-size: 35px;
   }
 }
 
@@ -914,8 +913,8 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .text-outline-style {
-    transform: translate(27px, 11px);
-    font-size: 45px;
+    transform: translate(15px, 7px);
+    font-size: 35px;
   }
 }
 
@@ -2086,6 +2085,13 @@ select {
   transform: translateY(-10%);
 }
 
+.read-more-btn:hover {
+  color: var(--color-blue-dark);
+  background-color: white;
+  border-color: var(--color-main-blue);
+  transform: scale(1.05);
+}
+
 .mobile-slider {
   display: none;
 }
@@ -2754,7 +2760,7 @@ select {
 
 .country-section-s__heading-s {
   position: relative;
-  font-size: 25px;
+  font-size: 23px;
   display: inline-block;
   padding-top: 20px;
 }
@@ -2768,7 +2774,7 @@ select {
 
 .country-section-s__text-outline-s {
   position: absolute;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   padding-bottom: 5px;
   color: transparent;
@@ -2837,7 +2843,7 @@ select {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.4);
+  filter: brightness(0.2);
   z-index: 0;
 }
 
@@ -2897,7 +2903,7 @@ select {
 
 .info-box {
   max-width: 1000px;
-  padding: 4rem 13rem;
+  padding: 4rem 5rem;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
