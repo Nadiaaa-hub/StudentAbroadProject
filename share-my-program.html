@@ -16,7 +16,10 @@
         <div class="header__container">
           <div class="logo">
             <a href="index.html">
-              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+              <img
+                src="./project/img/name_no-background_01.svg"
+                alt=" StudentAbroad logo"
+                loading="lazy" />
             </a>
           </div>
 
@@ -74,6 +77,8 @@
               <input
                 type="text"
                 class="search-box__input"
+                data-en="Search..."
+                data-ua="Пошук..."
                 placeholder="Search..." />
             </div>
           </div>
@@ -141,20 +146,22 @@
       <section class="share-my-program-section">
         <div class="container">
           <div class="share-my-program__header">
-            <a href="/" class="go-back">
-              <svg
-                class="icon"
-                width="16.68"
-                height="8"
-                viewBox="0 0 15 32"
-                fill="none"
-                xmlns="http://www.w3.org/2000/svg">
-                <path
-                  d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
-                  fill="currentColor" />
-              </svg>
-              <span>Go back</span>
-            </a>
+            <div class="go-back-wrapper">
+              <a href="/" class="go-back">
+                <svg
+                  class="icon"
+                  width="16.68"
+                  height="8"
+                  viewBox="0 0 15 32"
+                  fill="none"
+                  xmlns="http://www.w3.org/2000/svg">
+                  <path
+                    d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+                    fill="currentColor" />
+                </svg>
+                <span>Go back</span>
+              </a>
+            </div>
             <img
               class="share-my-program__img"
               src="./project/img/logo+share my programm.svg"
@@ -166,9 +173,12 @@
             <form>
               <div class="form-field-and-description">
                 <div class="input-with-optional-button">
-                  <input type="text" placeholder="Name:" required />
+                  <input type="text" placeholder="Name:" data-required />
                 </div>
-                <label class="form-section__description"
+                <label
+                  class="form-section__description"
+                  data-en="Full program name, please."
+                  data-ua="Повна назва програми, будь ласка."
                   >Full program name, please.</label
                 >
               </div>
@@ -178,7 +188,7 @@
                   class="input-with-optional-button custom-select-wrapper"
                   id="inviting-uni-wrapper">
                   <input
-                    required
+                    data-required
                     type="text"
                     placeholder="Inviting uni:"
                     class="custom-select-input"
@@ -195,7 +205,11 @@
                   id="add-inviting-uni-button">
                   <img src="./project/img/+.svg" alt="+" />
                 </button>
-                <label class="form-section__description">
+                <label
+                  class="form-section__description"
+                  data-en="Choose a foreign university from the list. Add new one, if you
+                  can’t find it."
+                  data-ua="Обери закордонний університет. Якщо його немає в списку, додай.">
                   Choose a foreign university from the list. Add new one, if you
                   can’t find it.
                 </label>
@@ -226,7 +240,11 @@
                     class="select-arrow" />
                   <div class="new-item-form" id="new-home-uni-form">
                     <div class="new-item-header">
-                      <p class="new-item-header__text">
+                      <p
+                        class="new-item-header__text"
+                        data-en="Leave the details of your home university. Our
+                        administrator will enter them into our database."
+                        data-ua="Залиште дані вашого домашнього університету. Наш адміністратор внесе їх у базу даних.">
                         Leave the details of your home university. Our
                         administrator will enter them into our database.
                       </p>
@@ -251,7 +269,7 @@
                   class="input-with-optional-button custom-select-wrapper"
                   id="faculty-wrapper">
                   <input
-                    required
+                    data-required
                     type="text"
                     placeholder="Faculty:"
                     class="custom-select-input"
@@ -277,7 +295,7 @@
                   class="input-with-optional-button custom-select-wrapper"
                   id="level-wrapper">
                   <input
-                    required
+                    data-required
                     type="text"
                     placeholder="Level:"
                     class="custom-select-input"
