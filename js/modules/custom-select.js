@@ -373,4 +373,33 @@ export function initCustomSelects(options = {}) {
   } catch (err) {
     console.error("initCustomSelects (selects) error:", err);
   }
+  // валідація
+
+  const fields = document.querySelectorAll("[data-required]");
+  const submitBtn = document.querySelector(".submit-button .btn");
+  const goBackBtn = document.querySelector(".go-back");
+
+  goBackBtn.addEventListener("click", (e) => {
+    e.preventDefault();
+    window.location.href = "index.html";
+  });
+
+  submitBtn.addEventListener("click", (e) => {
+    e.preventDefault(); // зупиняє стандартну відправку форми
+    let hasError = false;
+
+    fields.forEach((field) => {
+      const value = field.value.trim();
+      field.classList.remove("input-error");
+
+      if (value === "") {
+        field.classList.add("input-error");
+        hasError = true;
+      }
+    });
+
+    if (!hasError) {
+      window.location.href = "confirmation.html";
+    }
+  });
 }
