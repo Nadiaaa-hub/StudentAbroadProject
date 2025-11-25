@@ -2342,9 +2342,8 @@ select {
   font-weight: 700;
   width: 100%;
   max-width: 90%;
-  /* щоб не виходив за екран */
-  text-align: center;
   margin-bottom: 10px;
+  text-align: left;
 }
 
 .greetings__text {
@@ -2353,7 +2352,7 @@ select {
   font-style: italic;
   width: 100%;
   max-width: 90%;
-  text-align: center;
+  text-align: left;
 }
 
 .greetings__img {
