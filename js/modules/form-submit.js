@@ -1,11 +1,10 @@
 export function initFormSubmit() {
   const form = document.querySelector(".form-section form");
-  if (!form) return; // якщо форми немає на сторінці
+  if (!form) return;
 
   const submitBtn = form.querySelector(".btn");
   if (!submitBtn) return;
 
-  // блокуємо автоматичний сабміт форми
   form.addEventListener("submit", (e) => e.preventDefault());
 
   submitBtn.addEventListener("click", () => {
@@ -15,9 +14,9 @@ export function initFormSubmit() {
     requiredFields.forEach((field) => {
       if (!field.value.trim()) {
         allFilled = false;
-        field.classList.add("input-error"); // додаємо червону рамку
+        field.classList.add("input-error");
       } else {
-        field.classList.remove("input-error"); // прибираємо рамку
+        field.classList.remove("input-error");
       }
     });
 
@@ -25,7 +24,6 @@ export function initFormSubmit() {
       return;
     }
 
-    // редірект на confirmation.html
     window.location.href = "confirmation.html";
   });
 }
