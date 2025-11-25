@@ -105,6 +105,7 @@ p {
 .logo * {
   -webkit-tap-highlight-color: transparent;
   outline: none;
+  filter: brightness(0) invert(1);
 
 }
 
@@ -232,7 +233,7 @@ header {
   width: 100px;
   height: 40px;
   border-radius: 20px;
-  /* padding: 9px 20px; */
+
   display: -webkit-box;
   display: -ms-flexbox;
   display: flex;
@@ -3038,8 +3039,6 @@ video,
     height: 154px;
   }
 }
-
-
 
 
 /*# sourceMappingURL=style.css.map */
