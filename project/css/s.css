@@ -106,7 +106,6 @@ p {
   -webkit-tap-highlight-color: transparent;
   outline: none;
   filter: brightness(0) invert(1);
-
 }
 
 .logo:focus {
@@ -2231,8 +2230,6 @@ select {
   pointer-events: none;
 }
 
-
-
 .custom-select-search img {
   width: 18px;
   height: 18px;
@@ -2241,33 +2238,13 @@ select {
 }
 
 
+.input-error {
+  border: 2px solid red;
+  outline: none;
+}
+
+
 /* Confitmation page */
-.greetings__container {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  gap: 35px;
-  padding: 140px 0 100px 0;
-}
-
-.greetings__btn {
-  display: -webkit-box;
-  display: -ms-flexbox;
-  display: flex;
-  -webkit-box-pack: center;
-  -ms-flex-pack: center;
-  justify-content: center;
-  -webkit-box-align: center;
-  -ms-flex-align: center;
-  align-items: center;
-}
-
 .go-back-wrapper {
   display: -webkit-box;
   display: -ms-flexbox;
@@ -2313,9 +2290,18 @@ select {
   height: 154px;
 }
 
-.input-error {
-  border: 2px solid red;
-  outline: none;
+.greetings__main {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  /* щоб main займав весь екран висотою */
+  padding: 20px;
+  /* відступи від країв */
+  box-sizing: border-box;
+  background-color: #fff;
+  /* або будь-який потрібний фон */
 }
 
 .greetings__container {
@@ -2324,8 +2310,11 @@ select {
   align-items: center;
   justify-content: center;
   gap: 20px;
-  padding: 80px 20px;
+  padding: 40px 20px;
+  display: flex;
+  justify-content: center;
 }
+
 
 .greetings__btn {
   display: flex;
@@ -2334,9 +2323,8 @@ select {
 }
 
 .go-back-wrapper {
-  display: flex;
   justify-content: center;
-  position: relative;
+  margin-top: 20px;
 }
 
 .greetings__info {
@@ -2350,25 +2338,27 @@ select {
 
 .greetings__title {
   color: var(--color-main-blue);
-  font-family: Rubik;
+  font-size: 24px;
   font-weight: 700;
-  font-size: 28px;
   width: 100%;
-  max-width: 100%;
+  max-width: 90%;
+  /* щоб не виходив за екран */
+  text-align: center;
   margin-bottom: 10px;
 }
 
 .greetings__text {
+  font-size: 16px;
   font-weight: 300;
   font-style: italic;
-  font-size: 16px;
   width: 100%;
   max-width: 90%;
+  text-align: center;
 }
 
 .greetings__img {
-  width: 120px;
-  height: 120px;
+  width: 100px;
+  height: 100px;
 }
 
 @media (min-width: 769px) {
@@ -2386,12 +2376,13 @@ select {
   .greetings__title {
     font-size: 40px;
     width: 453px;
-    margin-bottom: 0;
+    text-align: left;
   }
 
   .greetings__text {
     font-size: 20px;
     width: 411px;
+    text-align: left;
   }
 
   .greetings__img {
@@ -2399,6 +2390,7 @@ select {
     height: 154px;
   }
 }
+
 
 /* FAQ page */
 
