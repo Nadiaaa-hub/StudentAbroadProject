@@ -111,6 +111,10 @@ p {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+
+  filter: brightness(0) invert(1);
+
+
 }
 
 .logo:focus {
@@ -234,44 +238,58 @@ header {
 
 .search-box,
 .footer__search-box {
-  width: 162px;
-  height: 41px;
+  width: 100px;
+  height: 40px;
   border-radius: 20px;
-  padding: 12px 83px 12px 20px;
+
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-align: center;
+  -ms-flex-align: center;
   align-items: center;
   border: 1px solid var(--color-main-yellow);
   background-color: initial;
   transition: background-color 0.3s ease;
   cursor: pointer;
+  overflow: hidden;
 }
 
-.search-box:focus-within,
+@media screen and (min-width: 760px) {
+
+  .search-box,
+  .footer__search-box {
+    width: 162px;
+    height: 41px;
+  }
+}
+
 .footer__search-box:focus-within {
   background-color: var(--color-main-yellow);
 }
 
+
 .footer__search-box__input {
   -webkit-tap-highlight-color: transparent;
+  width: 100%;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+  border: none;
+  background: transparent;
+  padding: 0;
+  padding: 9px 20px;
 }
+
 
 .footer__search-box__input:focus {
   outline: 0;
   color: var(--color-main-black);
 }
 
-.footer__search-box__input::-moz-placeholder {
-  color: var(--color-main-white);
-  opacity: 1;
-}
-
 .footer__search-box__input::placeholder {
   color: var(--color-main-white);
   opacity: 1;
-}
-
-.footer__search-box__input:focus::-moz-placeholder {
-  color: var(--color-main-black);
 }
 
 .footer__search-box__input:focus::placeholder {
@@ -296,6 +314,10 @@ header {
   transform: rotate(180deg);
 }
 
+.search-box:focus-within {
+  background-color: var(--color-main-yellow);
+}
+
 .search-box__input {
   background: none;
   border: none;
@@ -303,9 +325,15 @@ header {
   color: var(--color-main-white);
   font-weight: 500;
   font-size: 14px;
+  -webkit-box-flex: 1;
+  -ms-flex-positive: 1;
   flex-grow: 1;
-  width: 120px;
+  width: 100px;
   cursor: pointer;
+  padding: 9px 20px;
+}
+
+.search-box__input {
   -webkit-tap-highlight-color: transparent;
 }
 
@@ -314,18 +342,9 @@ header {
   color: var(--color-main-black);
 }
 
-.search-box__input::-moz-placeholder {
-  color: var(--color-main-white);
-  opacity: 1;
-}
-
 .search-box__input::placeholder {
   color: var(--color-main-white);
   opacity: 1;
-}
-
-.search-box__input:focus::-moz-placeholder {
-  color: var(--color-main-black);
 }
 
 .search-box__input:focus::placeholder {
@@ -604,7 +623,6 @@ header {
 .btn:hover,
 .btn.hover {
   color: var(--color-blue-dark);
-  background-color: transparent;
   border-color: var(--color-main-blue);
   transform: scale(1.05);
 }
@@ -723,7 +741,7 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .about-us__text-fill {
-    font-size: 45px;
+    font-size: 35px;
   }
 }
 
@@ -914,8 +932,8 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .text-outline-style {
-    transform: translate(27px, 11px);
-    font-size: 45px;
+    transform: translate(15px, 7px);
+    font-size: 35px;
   }
 }
 
@@ -1298,14 +1316,16 @@ a:focus {
   align-items: center;
 }
 
-.footer__logo {
-  text-align: center;
-  padding-bottom: 20px;
-  display: block;
+.logo,
+.logo * {
+  -webkit-tap-highlight-color: transparent;
   outline: none;
+  -webkit-user-select: none;
+  -moz-user-select: none;
+  user-select: none;
 }
 
-.footer__logo:focus {
+.logo:focus {
   outline: 0;
 }
 
@@ -1958,6 +1978,12 @@ select {
   border-radius: 30px;
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .university-card__img {
+    margin: 0 70px 0 5px;
+  }
+}
+
 .university-info {
   display: flex;
   flex-direction: column;
@@ -2082,8 +2108,27 @@ select {
   padding: 25px 58px;
 }
 
+@media (min-width: 768px) and (max-width: 1199px) {
+  .read-more-btn {
+    position: absolute;
+    left: 540px;
+    top: 170px;
+    transform: translateY(5%);
+    align-self: flex-end;
+    margin-top: auto;
+    padding: 25px 58px;
+  }
+}
+
 .read-more-btn:last-child {
   transform: translateY(-10%);
+}
+
+.read-more-btn:hover {
+  color: var(--color-blue-dark);
+  background-color: white;
+  border-color: var(--color-main-blue);
+  transform: scale(1.05);
 }
 
 .mobile-slider {
@@ -2754,7 +2799,7 @@ select {
 
 .country-section-s__heading-s {
   position: relative;
-  font-size: 25px;
+  font-size: 23px;
   display: inline-block;
   padding-top: 20px;
 }
@@ -2768,7 +2813,7 @@ select {
 
 .country-section-s__text-outline-s {
   position: absolute;
-  font-size: 40px;
+  font-size: 36px;
   font-weight: 700;
   padding-bottom: 5px;
   color: transparent;
@@ -2837,7 +2882,7 @@ select {
   background-size: cover;
   background-position: center;
   background-repeat: no-repeat;
-  filter: brightness(0.4);
+  filter: brightness(0.2);
   z-index: 0;
 }
 
@@ -2897,7 +2942,7 @@ select {
 
 .info-box {
   max-width: 1000px;
-  padding: 4rem 13rem;
+  padding: 4rem 5rem;
   background-color: #fff;
   border-radius: 20px;
   box-shadow: 0 12px 24px rgba(0, 0, 0, 0.08);
@@ -3732,16 +3777,15 @@ video,
   align-items: flex-start;
   /* Вирівнюємо контент зверху */
   padding: 100px 0;
-  /* Додаємо відступи зверху та знизу */
+
 }
 
-/* Стилі для центрального блоку з повідомленням */
 .no-results-content {
   text-align: center;
   max-width: 600px;
   width: 100%;
   margin-top: 50px;
-  /* Додатковий відступ зверху, щоб опустити контент */
+
 }
 
 .no-results-content h1 {
@@ -3756,14 +3800,13 @@ video,
   color: var(--color-grey);
 }
 
-/* Стилі для кнопки "Back to all programs" */
 .button-back {
   display: inline-block;
   padding: 10px 20px;
   background-color: var(--color-main-blue);
-  /* Темно-синій фон */
+
   color: var(--color-main-white);
-  /* Білий текст */
+
   text-decoration: none;
   border-radius: 4px;
   font-size: 16px;
