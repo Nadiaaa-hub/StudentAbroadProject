@@ -174,7 +174,7 @@ export function initCountryFilter() {
     const checkboxes = group.querySelectorAll(".container-checkbox");
     const itemsPerPage =
       group.classList.contains("checkbox-group-special") ||
-        group.classList.contains("checkbox-group-mobile")
+      group.classList.contains("checkbox-group-mobile")
         ? 6
         : 12;
     const totalPages = Math.ceil(checkboxes.length / itemsPerPage);

@@ -31,7 +31,6 @@ export function initScrollIndicator() {
     });
   });
 
-  // Hover ефект для кнопок на touch
   document.querySelectorAll(".btn").forEach((btn) => {
     btn.addEventListener("touchstart", () => btn.classList.add("hover"));
     btn.addEventListener("touchend", () => btn.classList.remove("hover"));

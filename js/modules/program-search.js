@@ -1,20 +1,13 @@
-/**
- * Головна функція ініціалізації пошуку програм
- */
 export function initProgramSearch() {
   initSearchRedirect();
 
-  // Додаємо клас до body негайно, якщо ми на search.html
   if (window.location.pathname.includes("search.html")) {
     document.body.classList.add("search-page");
 
-    // Якщо розмір вікна мобільний — додаємо ще один клас (точніше керування)
     const MOBILE_BREAKPOINT = 767;
     if (window.innerWidth <= MOBILE_BREAKPOINT) {
       document.body.classList.add("search-page-mobile");
 
-      // 1) Інлайн-фікс: змушує контейнер показуватись навіть якщо CSS ховає його
-      // (інлайн стиль має високий пріоритет над звичайними правилами)
       const programListEl = document.querySelector(".program-list");
       if (programListEl) {
         programListEl.style.display = "flex";
@@ -82,34 +75,25 @@ function processSearchPage() {
   loadAndFilterPrograms(searchQuery);
 }
 
-/**
- * Завантаження та фільтрація програм
- */
 function loadAndFilterPrograms(searchQuery) {
   fetch("program-list.html")
-    .then((response) => {
-      if (!response.ok) {
-        throw new Error("Не вдалося завантажити список програм");
-      }
-      return response.text();
+    .then((res) => {
+      if (!res.ok) throw new Error("Не вдалося завантажити список програм");
+      return res.text();
     })
     .then((html) => {
       const parser = new DOMParser();
       const doc = parser.parseFromString(html, "text/html");
       const programCards = doc.querySelectorAll(".program-card");
 
-      const filteredPrograms = filterPrograms(programCards, searchQuery);
+      const filtered = filterPrograms(programCards, searchQuery);
 
-      // Додатковий фікс: встановлюємо інлайн-стилі для клонованих карток
-      filteredPrograms.forEach((card) => {
-        // Клоновані елементи — гарантовано показуємо як flex
-        card.style.display = "flex";
-      });
+      filtered.forEach((card) => (card.style.display = "flex"));
 
-      displayResults(filteredPrograms, searchQuery);
+      displayResults(filtered, searchQuery);
     })
-    .catch((error) => {
-      console.error("Помилка завантаження програм:", error);
+    .catch((err) => {
+      console.error(err);
       displayErrorMessage();
     });
 }
@@ -145,9 +129,6 @@ function filterPrograms(programCards, searchQuery) {
   return filtered;
 }
 
-/**
- * Відображення результатів пошуку
- */
 function displayResults(programs, searchQuery) {
   const mainElement = document.querySelector("main");
 
@@ -158,67 +139,65 @@ function displayResults(programs, searchQuery) {
 
   const resultsContainer = document.createElement("section");
   resultsContainer.className = "search-results";
+
   resultsContainer.innerHTML = `
-        <div class="container">
-            <h1 class="search-results__title" 
-                data-en="Search results for: \\"${searchQuery}\\""
-                data-ua="Результати пошуку для: \\"${searchQuery}\\"">
-                Search results for: "${searchQuery}"
-            </h1>
-            <p class="search-results__count" 
-               data-en="Found ${programs.length} programs"
-               data-ua="Знайдено ${programs.length} програм">
-               Found ${programs.length} programs
-            </p>
-            <div class="program-list"></div>
-        </div>
-    `;
+    <div class="container">
+      <h1 class="search-results__title"
+          data-en="Search results for: '${searchQuery}'"
+          data-ua="Результати пошуку для: '${searchQuery}'">
+          Search results for: '${searchQuery}'
+      </h1>
+
+      <p class="search-results__count"
+         data-en="Found ${programs.length} programs"
+         data-ua="Знайдено ${programs.length} програм">
+         Found ${programs.length} programs
+      </p>
+
+      <div class="program-list"></div>
+    </div>
+  `;
 
   const programList = resultsContainer.querySelector(".program-list");
 
-  // Якщо ми на мобільному і на сторінці пошуку — примусово показуємо контейнер
   if (document.body.classList.contains("search-page-mobile")) {
     programList.style.display = "flex";
   }
 
   programs.forEach((program) => {
-    const highlightedProgram = highlightSearchTerm(program, searchQuery);
-
-    // Безпечний інлайн-стиль для карток — щоб відображалися незалежно від зовнішніх правил
-    highlightedProgram.style.display = "flex";
-    programList.appendChild(highlightedProgram);
+    const highlighted = highlightSearchTerm(program, searchQuery);
+    highlighted.style.display = "flex";
+    programList.appendChild(highlighted);
   });
 
   mainElement.appendChild(resultsContainer);
 
-  if (window.updateLanguage) {
-    window.updateLanguage();
-  }
+  if (window.updateLanguage) window.updateLanguage();
 }
 
 /**
  * Виділення ключового слова жовтим кольором
  */
 function highlightSearchTerm(programElement, searchQuery) {
-  const query = searchQuery.toLowerCase();
+  const q = searchQuery.toLowerCase();
   const elements = programElement.querySelectorAll("h2, p, span");
 
-  elements.forEach((element) => {
-    if (element.textContent.toLowerCase().includes(query)) {
-      highlightTextInElement(element, query);
+  elements.forEach((el) => {
+    if (el.textContent.toLowerCase().includes(q)) {
+      highlightTextInElement(el, q);
     }
 
-    if (element.hasAttribute("data-ua")) {
-      const uaText = element.getAttribute("data-ua");
-      if (uaText.toLowerCase().includes(query)) {
-        element.setAttribute("data-ua", highlightText(uaText, query));
+    if (el.hasAttribute("data-ua")) {
+      let ua = el.getAttribute("data-ua");
+      if (ua.toLowerCase().includes(q)) {
+        el.setAttribute("data-ua", highlightText(ua, q));
       }
     }
 
-    if (element.hasAttribute("data-en")) {
-      const enText = element.getAttribute("data-en");
-      if (enText.toLowerCase().includes(query)) {
-        element.setAttribute("data-en", highlightText(enText, query));
+    if (el.hasAttribute("data-en")) {
+      let en = el.getAttribute("data-en");
+      if (en.toLowerCase().includes(q)) {
+        el.setAttribute("data-en", highlightText(en, q));
       }
     }
   });
@@ -230,74 +209,64 @@ function highlightSearchTerm(programElement, searchQuery) {
  * Виділення тексту в елементі
  */
 function highlightTextInElement(element, query) {
-  const text = element.textContent;
-  const highlightedHtml = highlightText(text, query);
+  const original = element.textContent;
+  const highlightedHtml = highlightText(original, query);
 
-  const dataAttributes = {};
+  const attrs = {};
   for (let attr of element.attributes) {
-    if (attr.name.startsWith("data-")) {
-      dataAttributes[attr.name] = attr.value;
-    }
+    if (attr.name.startsWith("data-")) attrs[attr.name] = attr.value;
   }
 
   element.innerHTML = highlightedHtml;
-  Object.keys(dataAttributes).forEach((attr) => {
-    element.setAttribute(attr, dataAttributes[attr]);
-  });
+
+  Object.entries(attrs).forEach(([k, v]) => element.setAttribute(k, v));
 }
 
-/**
- * Функція для виділення тексту
- */
 function highlightText(text, query) {
   const regex = new RegExp(`(${escapeRegex(query)})`, "gi");
   return text.replace(regex, '<mark class="search-highlight">$1</mark>');
 }
 
-/**
- * Екранування спеціальних символів для regex
- */
-function escapeRegex(string) {
-  return string.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
+function escapeRegex(str) {
+  return str.replace(/[.*+?^${}()|[\]\\]/g, "\\$&");
 }
 
-/**
- * Відображення повідомлення про відсутність результатів
- */
 function displayNoResults(searchQuery = "") {
   const mainElement = document.querySelector("main");
+
   mainElement.innerHTML = `
-        <section class="search">
-            <div class="container">
-                <h1 class="search-results__title" 
-                    data-en="No results found"
-                    data-ua="Результатів не знайдено">
-                    No results found
-                </h1>
-                ${
-                  searchQuery
-                    ? `
-                <p class="search-results__message"
-                   data-en="No programs found for: \\"${searchQuery}\\""
-                   data-ua="Не знайдено програм для: \\"${searchQuery}\\"">
-                   No programs found for: "${searchQuery}"
-                </p>
-                `
-                    : ""
-                }
-                <a href="program-list.html" class="btn search-results__back-btn"
-                   data-en="Back to all programs"
-                   data-ua="Повернутися до всіх програм">
-                   Back to all programs
-                </a>
-            </div>
-        </section>
-    `;
+    <section class="search">
+      <div class="container">
+
+        <h1 class="search-results__title"
+            data-en="No results found"
+            data-ua="Результатів не знайдено">
+            No results found
+        </h1>
+
+        ${
+          searchQuery
+            ? `
+        <p class="search-results__message"
+           data-en="No programs found for: '${searchQuery}'"
+           data-ua="Не знайдено програм для: '${searchQuery}'">
+           No programs found for: '${searchQuery}'
+        </p>
+        `
+            : ""
+        }
+
+        <a href="program-list.html" class="btn search-results__back-btn"
+           data-en="Back to all programs"
+           data-ua="Повернутися до програм">
+           Back to all programs
+        </a>
+
+      </div>
+    </section>
+  `;
 }
 
-/**
- * Відображення повідомлення про помилку
- */
 function displayErrorMessage() {
   const mainElement = document.querySelector("main");
   mainElement.innerHTML = `
