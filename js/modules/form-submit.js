@@ -1,34 +1,29 @@
-// export function initFormSubmit() {
-//   const form = document.querySelector("form");
-//   if (!form) return;
-
-//   form.addEventListener("submit", async (event) => {
-//     event.preventDefault();
-
-//     const formData = new FormData(form);
-
-//     try {
-//       const response = await fetch("/submit-form", {
-//         method: "POST",
-//         body: formData,
-//       });
-
-//       if (response.ok) {
-//         window.location.href = "confirmation.html";
-//       } else {
-//         alert("Error sending form.");
-//       }
-//     } catch (error) {
-//       alert("Network or server error.");
-//       console.error(error);
-//     }
-//   });
-// }
 export function initFormSubmit() {
-  form.addEventListener("submit", function (event) {
-    event.preventDefault();
-    setTimeout(() => {
-      window.location.href = "confirmation.html";
-    }, 1000);
+  const form = document.querySelector(".form-section form");
+  if (!form) return;
+
+  const submitBtn = form.querySelector(".btn");
+  if (!submitBtn) return;
+
+  form.addEventListener("submit", (e) => e.preventDefault());
+
+  submitBtn.addEventListener("click", () => {
+    const requiredFields = form.querySelectorAll("[required]");
+    let allFilled = true;
+
+    requiredFields.forEach((field) => {
+      if (!field.value.trim()) {
+        allFilled = false;
+        field.classList.add("input-error");
+      } else {
+        field.classList.remove("input-error");
+      }
+    });
+
+    if (!allFilled) {
+      return;
+    }
+
+    window.location.href = "confirmation.html";
   });
 }
