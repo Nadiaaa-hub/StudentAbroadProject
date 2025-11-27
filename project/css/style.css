@@ -3051,7 +3051,7 @@ select {
 
 @media (max-width: 767px) {
   .back-button {
-    font-size: 10px;
+    font-size: 15px;
     margin-left: 10px;
   }
 }
