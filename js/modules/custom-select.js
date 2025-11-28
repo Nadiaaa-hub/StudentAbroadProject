@@ -1,6 +1,6 @@
 export function initCustomSelects(options = {}) {
   try {
-    // --- Hero scroll indicator (на сторінці index)
+    // --- Hero scroll indicator ---
     const scrollIndicator = document.querySelector(".scroll-indicator");
     if (scrollIndicator) {
       scrollIndicator.addEventListener("click", (e) => {
@@ -16,27 +16,21 @@ export function initCustomSelects(options = {}) {
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (ev) => {
         const href = anchor.getAttribute("href").trim();
+        ev.preventDefault();
 
         if (!href || href === "#") {
-          ev.preventDefault();
           window.scrollTo({ top: 0, behavior: "smooth" });
           return;
         }
-        if (href.length < 2 || href.lastIndexOf("#") !== 0) {
-          console.warn("Invalid anchor selector:", href);
-          ev.preventDefault();
-          return;
-        }
 
-        ev.preventDefault();
         const target = document.querySelector(href);
-
         if (target) {
           target.scrollIntoView({ behavior: "smooth", block: "start" });
         }
       });
     });
 
+    // --- Button touch effects ---
     document.querySelectorAll(".btn").forEach((btn) => {
       btn.addEventListener("touchstart", () => btn.classList.add("hover"), {
         passive: true,
@@ -49,7 +43,7 @@ export function initCustomSelects(options = {}) {
     console.error("initCustomSelects (top) error:", err);
   }
 
-  // --- Custom select logic
+  // --- Custom selects logic ---
   try {
     const wrappers = Array.from(
       document.querySelectorAll(".custom-select-wrapper")
@@ -85,6 +79,7 @@ export function initCustomSelects(options = {}) {
       form.style.zIndex = 150;
     };
 
+    // --- Закриття всіх дропдаунів при кліку поза ---
     document.addEventListener("click", (e) => {
       const clickedInsideWrapper = !!e.target.closest(".custom-select-wrapper");
       const clickedInsideNewForm = !!e.target.closest(".new-item-form");
@@ -148,6 +143,7 @@ export function initCustomSelects(options = {}) {
 
       if (!mainInput || !dropdown) return;
 
+      // --- Створення поля пошуку в дропдауні, якщо його немає ---
       let searchInput = dropdown.querySelector(".custom-select-search-input");
       if (!searchInput) {
         const searchDiv = document.createElement("div");
@@ -169,6 +165,7 @@ export function initCustomSelects(options = {}) {
       mainInput.setAttribute("aria-haspopup", "listbox");
       mainInput.setAttribute("aria-expanded", "false");
       dropdown.setAttribute("role", "listbox");
+
       getOptions(dropdown).forEach((opt, i) => {
         opt.setAttribute("role", "option");
         opt.dataset.index = i;
@@ -204,6 +201,7 @@ export function initCustomSelects(options = {}) {
         } else newForm.classList.remove("active");
       };
 
+      // --- Клік по стрілці ---
       arrow?.addEventListener("click", (e) => {
         e.stopPropagation();
 
@@ -230,17 +228,11 @@ export function initCustomSelects(options = {}) {
           dropdown.classList.add("active");
           wrapper.classList.add("active");
           mainInput.setAttribute("aria-expanded", "true");
-
-          document
-            .querySelectorAll(".custom-select-search-input")
-            .forEach((si) => {
-              if (si !== dropdown.querySelector(".custom-select-search-input"))
-                si.value = "";
-            });
           searchInput?.focus();
         }
       });
 
+      // --- Клік по головному інпуту ---
       mainInput.addEventListener("click", (e) => {
         e.stopPropagation();
 
@@ -269,16 +261,23 @@ export function initCustomSelects(options = {}) {
         searchInput?.focus();
       });
 
+      // --- Фільтрування при вводі ---
       mainInput.addEventListener(
         "input",
         debounce(() => filterOptions(mainInput.value), 120)
       );
+
       searchInput.addEventListener(
         "input",
         debounce(() => filterOptions(searchInput.value), 120)
       );
 
-      // --- clicking an option sets value ---
+      // --- Дублювання в головний інпут ---
+      searchInput.addEventListener("input", (e) => {
+        mainInput.value = e.target.value;
+      });
+
+      // --- Клік по опції ---
       dropdown.addEventListener("click", (e) => {
         const option = e.target.closest(".custom-select-option");
         if (option) {
@@ -287,12 +286,11 @@ export function initCustomSelects(options = {}) {
         }
       });
 
-      // --- Add button opens new-item form ---
+      // --- Кнопка додавання нового елемента ---
       if (addButton) {
         addButton.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
-
           document.querySelectorAll(".new-item-form.active").forEach((nf) => {
             if (nf !== newForm) nf.classList.remove("active");
           });
@@ -307,11 +305,11 @@ export function initCustomSelects(options = {}) {
                 if (mi) mi.setAttribute("aria-expanded", "false");
               }
             });
-
           closeDropdown();
           toggleNewForm(true);
         });
       }
+
       if (newFormInput) {
         newFormInput.addEventListener("keydown", (e) => {
           if (e.key === "Enter") {
@@ -373,9 +371,8 @@ export function initCustomSelects(options = {}) {
   } catch (err) {
     console.error("initCustomSelects (selects) error:", err);
   }
-  // валідація
 
-  // --- Submit button ---
+  // --- Валідація і сабміт ---
   const submitBtn = document.querySelector(".submit-button .btn");
   const fields = document.querySelectorAll("[data-required]");
 
@@ -387,7 +384,6 @@ export function initCustomSelects(options = {}) {
       fields.forEach((field) => {
         const value = field.value.trim();
         field.classList.remove("input-error");
-
         if (value === "") {
           field.classList.add("input-error");
           hasError = true;

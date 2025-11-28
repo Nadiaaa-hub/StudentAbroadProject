@@ -26,4 +26,11 @@ export function initFormSubmit() {
 
     window.location.href = "confirmation.html";
   });
+
+  const searchInput = document.querySelector(".custom-select-search-input");
+  const mainInput = document.querySelector(".custom-select-input");
+
+  searchInput.addEventListener("input", () => {
+    mainInput.value = searchInput.value;
+  });
 }
