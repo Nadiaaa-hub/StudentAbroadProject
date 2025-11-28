@@ -112,9 +112,10 @@ p {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
 }
-}
+
 
 .logo:focus {
   outline: 0;
