@@ -917,8 +917,8 @@ a:focus {
 
 @media screen and (min-width: 760px) {
   .text-outline-style {
-    transform: translate(15px, 7px);
-    font-size: 35px;
+    transform: translate(27px, 11px);
+    font-size: 45px;
   }
 }
 
@@ -979,7 +979,7 @@ a:focus {
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out, transform 0.3s ease-out;
+transition: transform 0.3s ease-out;
   transform: translateY(-10px);
   padding-bottom: 0;
 }
@@ -994,6 +994,18 @@ a:focus {
 
 .faq__answer.active+.faq__footer-info .faq__meta {
   display: block;
+}
+
+.faq_read-more {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-main-blue);
+  text-decoration: underline;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-block;
 }
 
 .contact-details-section {
