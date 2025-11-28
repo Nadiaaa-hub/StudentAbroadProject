@@ -607,7 +607,7 @@ header {
 
 .btn:hover,
 .btn.hover {
-  color: var(--color-blue-dark);
+
   border-color: var(--color-main-blue);
   transform: scale(1.05);
 }
