@@ -839,13 +839,14 @@ a {
   margin-top: 77px;
 }
 
-// FAQ
+/* FAQ */
 .faq__heading {
   position: relative;
   width: 100%;
   max-width: 760px;
   text-align: left;
   margin-bottom: 30px;
+  width: 100%;
 }
 
 .text-outline-style {
@@ -860,8 +861,10 @@ a {
   left: 0px;
   transform: translate(29px, 10px);
   white-space: nowrap;
+}
 
-  @media screen and (min-width: 760px) {
+@media screen and (min-width: 760px) {
+  .text-outline-style {
     transform: translate(27px, 11px);
     font-size: 45px;
   }
@@ -881,9 +884,17 @@ a {
   display: flex;
   flex-direction: column;
   gap: 10px;
+}
 
-  @media screen and (min-width: 1280px) {
+@media screen and (min-width: 1280px) {
+  .faq__content {
     max-width: 766px;
+  }
+}
+
+@media screen and (min-width: 760px) {
+  .faq__content {
+    font-size: 20px;
   }
 }
 
@@ -893,8 +904,10 @@ a {
   letter-spacing: 0;
   margin-bottom: 40px;
   color: var(--color-blue-dark);
+}
 
-  @media screen and (min-width: 760px) {
+@media screen and (min-width: 760px) {
+  .faq__subtitles {
     font-size: 20px;
     margin-bottom: 70px;
   }
@@ -906,36 +919,54 @@ a {
   padding-bottom: 10px;
   margin-bottom: 0;
   line-height: 1.4;
+}
 
-  &:last-child {
-    padding-bottom: 0;
-  }
+.faq__paragraph:last-child {
+  padding-bottom: 0;
 }
 
 .faq__footer-info {
+  display: -webkit-box;
+  display: -ms-flexbox;
   display: flex;
+  -webkit-box-pack: justify;
+  -ms-flex-pack: justify;
   justify-content: space-between;
+  -webkit-box-align: end;
+  -ms-flex-align: end;
   align-items: flex-end;
   width: 100%;
   max-height: 0;
   overflow: hidden;
   opacity: 0;
-  transition: max-height 0.4s ease-out, opacity 0.4s ease-out,
-    transform 0.3s ease-out;
+  transition: transform 0.3s ease-out;
   transform: translateY(-10px);
   padding-bottom: 0;
+}
 
-  .faq__answer.active + & {
-    max-height: 200px;
-    opacity: 1;
-    padding-bottom: 45px;
-    margin-top: 20px;
-    transform: translateY(0);
+.faq__answer.active + .faq__footer-info {
+  max-height: 200px;
+  opacity: 1;
+  padding-bottom: 45px;
+  margin-top: 20px;
+  -webkit-transform: translateY(0);
+  transform: translateY(0);
+}
 
-    .faq__meta {
-      display: block;
-    }
-  }
+.faq__answer.active + .faq__footer-info .faq__meta {
+  display: block;
+}
+
+.faq_read-more {
+  font-weight: 700;
+  font-style: italic;
+  font-size: 14px;
+  color: var(--color-main-blue);
+  text-decoration: underline;
+  border: none;
+  background-color: transparent;
+  cursor: pointer;
+  display: inline-block;
 }
 
 // Contact Details Section
