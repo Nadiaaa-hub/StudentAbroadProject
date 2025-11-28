@@ -1,11 +1,12 @@
 <!DOCTYPE html>
-<html>
+<html lang="en">
   <head>
     <meta charset="UTF-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1.0" />
     <title>StudentAbroad</title>
     <link rel="stylesheet" href="./project/css/style.css" />
-    <link rel="website icon" type="png" href="./project/img/logo_01.png" />
+
+    <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
       rel="stylesheet" />
@@ -17,7 +18,10 @@
         <div class="header__container">
           <div class="logo">
             <a href="index.html">
-              <img src="./project/img/logo.svg" alt="StudentAbroad logo" />
+              <img
+                src="./project/img/name_no-background_01.svg"
+                alt=" StudentAbroad logo"
+                loading="lazy" />
             </a>
           </div>
 
@@ -85,6 +89,7 @@
           <input type="checkbox" id="burger-toggle" />
           <label for="burger-toggle" class="burger">
             <span></span>
+            <span class="visually-hidden">Відкрити меню</span>
           </label>
         </div>
       </div>
@@ -144,7 +149,7 @@
       <section class="faq-section">
         <div class="container">
           <div class="faq-section__container">
-            <div class="faq__heading">
+            <div class="faq__heading" id="faq__heading">
               <span class="faq__text-outline" data-en="FAQ" data-ua="FAQ"
                 >FAQ</span
               >
@@ -173,6 +178,9 @@
                 <div class="faq__meta faq__meta--top">
                   <div class="faq__meta-row">
                     <div class="faq__meta-info">
+                      <button type="button" class="faq_read-more">
+                        Read more
+                      </button>
                       <p
                         class="faq__paragraph"
                         data-en=" Author: Bohdan Holubets"
@@ -311,6 +319,9 @@
                 <div class="faq__meta faq__meta--top">
                   <div class="faq__meta-row">
                     <div class="faq__meta-info">
+                      <button type="button" class="faq_read-more">
+                        Read more
+                      </button>
                       <p
                         class="faq__paragraph"
                         data-en=" Author: Bohdan Holubets"
@@ -422,6 +433,9 @@
                 <div class="faq__meta faq__meta--top">
                   <div class="faq__meta-row">
                     <div class="faq__meta-info">
+                      <button type="button" class="faq_read-more">
+                        Read more
+                      </button>
                       <p
                         class="faq__paragraph"
                         data-en=" Author: Bohdan Holubets"
@@ -521,6 +535,9 @@
                 <div class="faq__meta faq__meta--top">
                   <div class="faq__meta-row">
                     <div class="faq__meta-info">
+                      <button type="button" class="faq_read-more">
+                        Read more
+                      </button>
                       <p
                         class="faq__paragraph"
                         data-en=" Author: Bohdan Holubets"
@@ -720,17 +737,12 @@
                   data-ua="Шукати..."
                   placeholder="Search..." />
               </div>
-
-              <button
-                type="button"
-                class="footer__scroll-indicator"
-                role="button"
-                tabindex="0">
+              <div class="footer__scroll-indicator">
                 <img
                   class="footer__scroll-indicator-img"
                   src="./project/img/icon_arrow.svg"
-                  alt="Scroll Down Icon" />
-              </button>
+                  alt="Scroll Up Icon" />
+              </div>
             </div>
           </div>
 
