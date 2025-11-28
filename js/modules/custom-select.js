@@ -15,18 +15,15 @@ export function initCustomSelects(options = {}) {
     // --- Smooth anchor scroll ---
     document.querySelectorAll('a[href^="#"]').forEach((anchor) => {
       anchor.addEventListener("click", (ev) => {
-        const href = anchor.getAttribute("href").trim();
+        const href = anchor.getAttribute("href")?.trim();
         ev.preventDefault();
-
         if (!href || href === "#") {
           window.scrollTo({ top: 0, behavior: "smooth" });
           return;
         }
-
         const target = document.querySelector(href);
-        if (target) {
+        if (target)
           target.scrollIntoView({ behavior: "smooth", block: "start" });
-        }
       });
     });
 
@@ -77,6 +74,29 @@ export function initCustomSelects(options = {}) {
       form.style.top = `${input.offsetHeight + 8}px`;
       form.style.transform = "none";
       form.style.zIndex = 150;
+    };
+
+    // --- New helper: close all other wrappers except the current one ---
+    const closeOthers = (current) => {
+      wrappers.forEach((w) => {
+        if (w === current) return;
+        w.classList.remove("active");
+        const dd = w.querySelector(".custom-select-dropdown");
+        if (dd) dd.classList.remove("active");
+        const nf =
+          w.querySelector(".new-item-form") ||
+          w
+            .closest(".form-field-and-description")
+            ?.querySelector(".new-item-form");
+        if (nf) nf.classList.remove("active");
+        const si = w.querySelector(".custom-select-search-input");
+        if (si) si.value = "";
+        w.querySelectorAll(".custom-select-option").forEach(
+          (o) => (o.style.display = "block")
+        );
+        const mi = w.querySelector(".custom-select-input");
+        if (mi) mi.setAttribute("aria-expanded", "false");
+      });
     };
 
     // --- Закриття всіх дропдаунів при кліку поза ---
@@ -172,6 +192,9 @@ export function initCustomSelects(options = {}) {
       });
 
       const filterOptions = (term = "") => {
+        // закриваємо інші перед відкриттям поточного
+        closeOthers(wrapper);
+
         const t = term.toLowerCase();
         getOptions(dropdown).forEach((o) => {
           o.style.display = o.textContent.toLowerCase().includes(t)
@@ -205,6 +228,9 @@ export function initCustomSelects(options = {}) {
       arrow?.addEventListener("click", (e) => {
         e.stopPropagation();
 
+        // закриваємо інші
+        closeOthers(wrapper);
+
         document.querySelectorAll(".new-item-form.active").forEach((nf) => {
           if (nf !== newForm) nf.classList.remove("active");
         });
@@ -236,23 +262,14 @@ export function initCustomSelects(options = {}) {
       mainInput.addEventListener("click", (e) => {
         e.stopPropagation();
 
+        // закриваємо інші
+        closeOthers(wrapper);
+
         document.querySelectorAll(".new-item-form.active").forEach((nf) => {
           nf.classList.remove("active");
         });
 
         if (wrapper.classList.contains("active")) return;
-
-        document
-          .querySelectorAll(".custom-select-wrapper.active")
-          .forEach((w) => {
-            if (w !== wrapper) {
-              w.classList.remove("active");
-              const dd = w.querySelector(".custom-select-dropdown");
-              if (dd) dd.classList.remove("active");
-              const mi = w.querySelector(".custom-select-input");
-              if (mi) mi.setAttribute("aria-expanded", "false");
-            }
-          });
 
         positionDropdown(wrapper, mainInput, dropdown);
         dropdown.classList.add("active");
@@ -267,12 +284,12 @@ export function initCustomSelects(options = {}) {
         debounce(() => filterOptions(mainInput.value), 120)
       );
 
+      // фільтрація + дублювання пошуку в mainInput
       searchInput.addEventListener(
         "input",
         debounce(() => filterOptions(searchInput.value), 120)
       );
-
-      // --- Дублювання в головний інпут ---
+      // дублювання в головний інпут одразу (без дебаунсу)
       searchInput.addEventListener("input", (e) => {
         mainInput.value = e.target.value;
       });
@@ -291,6 +308,7 @@ export function initCustomSelects(options = {}) {
         addButton.addEventListener("click", (e) => {
           e.preventDefault();
           e.stopPropagation();
+          closeOthers(wrapper);
           document.querySelectorAll(".new-item-form.active").forEach((nf) => {
             if (nf !== newForm) nf.classList.remove("active");
           });
