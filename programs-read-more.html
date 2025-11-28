@@ -8,10 +8,7 @@
     <link
       href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
       rel="stylesheet" />
-    <link
-      rel="website icon"
-      type="png"
-      href="./project/img/logo_01_white.png" />
+    <link rel="website icon" type="png" href="./project/img/logo_part1.svg" />
   </head>
 
   <body>
@@ -19,7 +16,7 @@
       <div class="container">
         <div class="header__container">
           <div class="logo">
-            <a href="/index.html">
+            <a href="index.html">
               <img
                 src="./project/img/name_no-background_01.svg"
                 alt=" StudentAbroad logo"
@@ -154,7 +151,7 @@
         >
       </section>
 
-      <div class="program-name">
+      <div class="program-name" id="program-section">
         <h1
           data-en="Academic mobility (NLU - UCLan Cyprus)"
           data-ua="Академічна мобільність (НЮУ – UCLan Cyprus)"
@@ -284,7 +281,8 @@
                     href="#about-us-section"
                     data-en="ABOUT US"
                     data-ua="ПРО НАС"
-                    >ABOUT US</a
+                    data-_lang-applied="ua"
+                    >ПРО НАС</a
                   >
                 </li>
 
@@ -294,7 +292,8 @@
                     href="uni-list.html"
                     data-en="UNI LIST"
                     data-ua="СПИСОК ВНЗ"
-                    >UNI LIST</a
+                    data-_lang-applied="ua"
+                    >СПИСОК ВНЗ</a
                   >
                 </li>
 
@@ -304,7 +303,8 @@
                     href="program-list.html"
                     data-en="PROGRAM LIST"
                     data-ua="ПРОГРАМИ"
-                    >PROGRAM LIST</a
+                    data-_lang-applied="ua"
+                    >ПРОГРАМИ</a
                   >
                 </li>
 
@@ -314,6 +314,7 @@
                     href="faq.html"
                     data-en="FAQ"
                     data-ua="FAQ"
+                    data-_lang-applied="ua"
                     >FAQ</a
                   >
                 </li>
@@ -322,14 +323,14 @@
 
             <div class="footer__lang-search">
               <span class="footer__language-switch">
-                <button data-lang="ua" class="js-switch-button" type="button">
+                <button
+                  data-lang="ua"
+                  class="js-switch-button active"
+                  type="button">
                   UA
                 </button>
 
-                <button
-                  data-lang="en"
-                  class="js-switch-button active"
-                  type="button">
+                <button data-lang="en" class="js-switch-button" type="button">
                   EN
                 </button>
               </span>
@@ -342,17 +343,14 @@
                   data-ua="Шукати..."
                   placeholder="Search..." />
               </div>
-
-              <button
-                type="button"
-                class="footer__scroll-indicator"
-                role="button"
-                tabindex="0">
-                <img
-                  class="footer__scroll-indicator-img"
-                  src="./project/img/icon_arrow.svg"
-                  alt="Scroll Down Icon" />
-              </button>
+              <div class="footer__scroll-indicator">
+                <a href="#header-footer-color">
+                  <img
+                    class="footer__scroll-indicator-img"
+                    src="./project/img/icon_arrow.svg"
+                    alt="Scroll Up Icon" />
+                </a>
+              </div>
             </div>
           </div>
 

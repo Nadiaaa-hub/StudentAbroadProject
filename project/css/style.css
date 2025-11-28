@@ -34,6 +34,7 @@ html,
 body {
   max-width: 100%;
   overflow-x: hidden;
+  overscroll-behavior: none;
 }
 
 body {
@@ -111,7 +112,9 @@ p {
   -webkit-user-select: none;
   -moz-user-select: none;
   user-select: none;
+  filter: brightness(0) invert(1);
 }
+
 
 .logo:focus {
   outline: 0;
@@ -1947,14 +1950,16 @@ select {
   opacity: 1;
   padding: 19px 0;
 }
+
 .university-card__img {
   height: 158px;
   width: 240px;
   -o-object-fit: cover;
-     object-fit: cover;
+  object-fit: cover;
   margin: 0 70px;
   border-radius: 30px;
 }
+
 @media (min-width: 768px) and (max-width: 1199px) {
   .university-card__img {
     margin: 0 70px 0 5px;
@@ -2084,6 +2089,7 @@ select {
   margin-top: auto;
   padding: 25px 58px;
 }
+
 @media (min-width: 768px) and (max-width: 1199px) {
   .read-more-btn {
     position: absolute;
@@ -2095,9 +2101,11 @@ select {
     padding: 25px 58px;
   }
 }
+
 .read-more-btn:last-child {
   transform: translateY(-10%);
 }
+
 .read-more-btn:hover {
   color: var(--color-blue-dark);
   background-color: white;
@@ -3050,7 +3058,7 @@ select {
 
 @media (max-width: 767px) {
   .back-button {
-    font-size: 10px;
+    font-size: 15px;
     margin-left: 10px;
   }
 }
