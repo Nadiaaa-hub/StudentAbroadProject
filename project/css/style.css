@@ -1972,6 +1972,20 @@ select {
 
 
 /* Confitmation page */
+.go-back-wrapper {
+  display: -webkit-box;
+  display: -ms-flexbox;
+  display: flex;
+  -webkit-box-pack: center;
+  -ms-flex-pack: center;
+  justify-content: center;
+  position: relative;
+}
+
+.go-back-wrapper {
+  justify-content: center;
+  margin-top: 20px;
+}
 
 .greetings__info {
   text-align: center;
@@ -4276,7 +4290,8 @@ video,
   white-space: nowrap;
 }
 
-.icon {
+
+.go-back-wrapper .icon {
   display: inline-block;
   fill: var(--color-grey);
   width: 16px;
@@ -4661,22 +4676,6 @@ select {
   box-shadow: none;
 }
 
-.go-back {
-  position: absolute;
-  display: inline-flex;
-  align-items: center;
-  text-decoration: none;
-  color: var(--color-grey);
-  font-weight: 400;
-  font-size: 12px;
-  line-height: 1;
-  cursor: pointer;
-  transition: color 0.3s ease;
-  width: 64px;
-  height: 20px;
-  gap: 11px;
-  white-space: nowrap;
-}
 
 .icon {
   display: inline-block;
