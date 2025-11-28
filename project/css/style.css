@@ -1916,8 +1916,8 @@ select {
 
 .custom-select-dropdown.active {
   display: block;
-  max-width: 250px;
-  top: 56px;
+  max-width: 539px;
+  top: 130px;
   left: 10%
 }
 
@@ -5055,13 +5055,6 @@ select {
   padding: 37px 35px 37px 17px;
   opacity: 1;
   border-radius: 30px;
-}
-
-.custom-select-dropdown.active {
-  display: block;
-  max-width: 250px;
-  top: 56px;
-  left: 10%
 }
 
 .custom-select-search {
