@@ -133,6 +133,7 @@ p {
   -webkit-tap-highlight-color: transparent;
   outline: none;
   user-select: none;
+  filter: brightness(0) invert(1);
 }
 
 .logo:focus {
