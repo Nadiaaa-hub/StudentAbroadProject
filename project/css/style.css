@@ -3820,7 +3820,7 @@ video,
 }
 
 .search {
-  padding: 70px 0;
+  padding: 160px 0 100px 0;
 }
 
 .hidden {
@@ -3890,7 +3890,7 @@ video,
 
 @media (max-width: 768px) {
   .search {
-    padding: 200px 0;
+    padding: 190px 0;
   }
 
 
@@ -4296,7 +4296,7 @@ video,
   display: inline-flex;
   align-items: center;
   text-decoration: none;
-  color: var(--color-grey);
+  color: var(--color-white-line);
   font-weight: 400;
   font-size: 12px;
   line-height: 1;
@@ -4306,6 +4306,7 @@ video,
   height: 20px;
   gap: 11px;
   white-space: nowrap;
+
 
 }
 
