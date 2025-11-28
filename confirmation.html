@@ -23,6 +23,8 @@
                 loading="lazy" />
             </a>
           </div>
+
+          <!-- Десктопна навігація -->
           <nav class="header__nav">
             <ul class="header__menu">
               <li>
@@ -81,8 +83,64 @@
                 placeholder="Search..." />
             </div>
           </div>
+
+          <!-- Бургер для мобільного меню -->
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle" class="burger">
+            <span></span>
+          </label>
         </div>
       </div>
+      <!-- Мобільне меню -->
+      <ul class="mobile-menu">
+        <li class="abt_us">
+          <a class="link" href="index.html" data-en="ABOUT US" data-ua="ПРО НАС"
+            >ABOUT US</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="uni-list.html"
+            data-en="UNI LIST"
+            data-ua="СПИСОК ВНЗ"
+            >UNI LIST</a
+          >
+        </li>
+        <li>
+          <a
+            class="link"
+            href="program-list.html"
+            data-en="PROGRAM LIST"
+            data-ua="ПРОГРАМИ"
+            >PROGRAM LIST</a
+          >
+        </li>
+        <li>
+          <a class="link" href="./faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+        </li>
+        <li>
+          <span class="mobile-language-switch" aria-hidden="true">
+            <button
+              type="button"
+              class="js-switch-button"
+              data-lang="ua"
+              aria-label="Українська">
+              UA
+            </button>
+            <button
+              type="button"
+              class="js-switch-button active"
+              data-lang="en"
+              aria-label="English">
+              EN
+            </button>
+          </span>
+        </li>
+      </ul>
+
+      <!-- Overlay -->
+      <div class="overlay"></div>
     </header>
 
     <main>
@@ -107,7 +165,7 @@
           </div>
 
           <div class="go-back-wrapper">
-            <a href="/index.html" class="go-back">
+            <a href="/index.html" class="go-back_conf">
               <svg
                 class="icon"
                 width="16.68"

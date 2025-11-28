@@ -3510,7 +3510,7 @@ select {
   }
 
   .greetings__container {
-    padding: 50px 0;
+    padding: 70px 0;
     flex-direction: column;
     gap: 20px;
   }
@@ -4291,6 +4291,23 @@ video,
   margin-left: 50px;
 }
 
+.go-back_conf {
+  position: absolute;
+  display: inline-flex;
+  align-items: center;
+  text-decoration: none;
+  color: var(--color-grey);
+  font-weight: 400;
+  font-size: 12px;
+  line-height: 1;
+  cursor: pointer;
+  transition: color 0.3s ease;
+  width: 64px;
+  height: 20px;
+  gap: 11px;
+  white-space: nowrap;
+
+}
 
 .go-back-wrapper .icon {
   display: inline-block;
