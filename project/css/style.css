@@ -1244,7 +1244,7 @@ a:focus {
 
 .faq__meta--bottom.active {
   margin-top: 20px;
-  margin-bottom: 45px;
+  margin-bottom: 0px;
   max-height: 200px;
   opacity: 1;
   pointer-events: auto;
@@ -1280,7 +1280,7 @@ a:focus {
 
 .faq__answer.active+.faq__meta--bottom {
   margin-top: 20px;
-  margin-bottom: 45px;
+  margin-bottom: 0px;
   max-height: 200px;
   opacity: 1;
   pointer-events: auto;
@@ -4117,7 +4117,7 @@ video,
 
 .faq__meta--bottom.active {
   margin-top: 20px;
-  margin-bottom: 45px;
+  margin-bottom: 0px;
   max-height: 200px;
   opacity: 1;
   pointer-events: auto;
@@ -4133,7 +4133,7 @@ video,
 
 .faq__answer.active+.faq__meta--bottom {
   margin-top: 20px;
-  margin-bottom: 45px;
+  margin-bottom: 0px;
   max-height: 200px;
   opacity: 1;
   pointer-events: auto;
@@ -4630,6 +4630,7 @@ select {
 .faq__line {
   border-top: 1px solid var(--color-grey);
   width: 100%;
+  padding-bottom: 25px;
   border-top-width: 1.5px;
   border-top-color: #888;
 }
