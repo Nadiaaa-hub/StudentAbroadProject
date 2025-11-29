@@ -156,6 +156,33 @@
         padding: 10px 20px;
         font-size: 14px;
       }
+
+      /* Loading state */
+      .loading {
+        opacity: 0.6;
+        pointer-events: none;
+      }
+
+      /* Search input in dropdown */
+      .dropdown-search {
+        padding: 10px 15px;
+        border-bottom: 1px solid #eee;
+      }
+      
+      .dropdown-search input {
+        width: 100%;
+        padding: 8px 12px;
+        border: 1px solid #ccc;
+        border-radius: 5px;
+        font-size: 12px;
+      }
+
+      .no-results {
+        padding: 10px 15px;
+        color: #666;
+        font-style: italic;
+        text-align: center;
+      }
     </style>
   </head>
   <body>
@@ -288,7 +315,12 @@
                     placeholder="Inviting uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
-                  <div class="custom-select-dropdown" id="universityDropdown"></div>
+                  <div class="custom-select-dropdown" id="universityDropdown">
+                    <div class="dropdown-search">
+                      <input type="text" id="universitySearch" placeholder="Search universities..." data-en-placeholder="Search universities..." data-ua-placeholder="Пошук університетів...">
+                    </div>
+                    <div class="custom-select-options" id="universityOptions"></div>
+                  </div>
                   <button
                     type="button"
                     class="form-section__add-button custom-select-add-button"
@@ -342,7 +374,12 @@
                     placeholder="Home uni:"
                     class="custom-select-input"
                     data-type="searchable-select" />
-                  <div class="custom-select-dropdown" id="homeUniDropdown"></div>
+                  <div class="custom-select-dropdown" id="homeUniDropdown">
+                    <div class="dropdown-search">
+                      <input type="text" id="homeUniSearch" placeholder="Search universities..." data-en-placeholder="Search universities..." data-ua-placeholder="Пошук університетів...">
+                    </div>
+                    <div class="custom-select-options" id="homeUniOptions"></div>
+                  </div>
                   <button
                     type="button"
                     class="form-section__add-button custom-select-add-button"
@@ -496,7 +533,7 @@
                 </label>
               </div>
               <div class="submit-button">
-                <button class="btn" type="submit" data-en="Submit" data-ua="Надіслати">Submit</button>
+                <button class="btn" type="submit" id="submitButton" data-en="Submit" data-ua="Надіслати">Submit</button>
               </div>
             </form>
           </div>
@@ -596,17 +633,12 @@
       </div>
     </footer>
 
-    <script>
+<script>
 // Base API URL - update this to your actual backend URL
 const API_BASE_URL = 'http://127.0.0.1:8000/api';
 
 // Global variables for storing data
 let universities = [];
-let programOptions = {
-    study_levels: [],
-    faculties: [],
-    program_types: []
-};
 
 // Language management
 let currentLang = 'en';
@@ -657,6 +689,13 @@ function switchLanguage(lang) {
         }
     });
     
+    // Update dropdown search placeholders
+    document.querySelectorAll('#universitySearch, #homeUniSearch').forEach(input => {
+        if (input.dataset[`${lang}Placeholder`]) {
+            input.placeholder = input.dataset[`${lang}Placeholder`];
+        }
+    });
+    
     // Update dropdown options
     updateDropdownTranslations();
     
@@ -686,128 +725,150 @@ function updateDropdownTranslations() {
 // Function to fetch universities from backend
 async function fetchUniversities() {
     try {
-        const response = await fetch(`${API_BASE_URL}/universities/`);
+        // Використовуємо новий endpoint для опцій
+        const response = await fetch(`${API_BASE_URL}/universities/options/`);
         if (!response.ok) throw new Error('Failed to fetch universities');
-        return await response.json();
+        const data = await response.json();
+        console.log('Fetched universities:', data);
+        return data;
     } catch (error) {
         console.error('Error fetching universities:', error);
         return [];
     }
 }
 
-// Function to fetch program options (study levels, faculties, etc.)
-async function fetchProgramOptions() {
-    try {
-        const response = await fetch(`${API_BASE_URL}/programs/options/`);
-        if (!response.ok) throw new Error('Failed to fetch program options');
-        return await response.json();
-    } catch (error) {
-        console.error('Error fetching program options:', error);
-        return {
-            study_levels: {},
-            faculties: {},
-            program_types: {}
-        };
-    }
-}
-
-// Function to populate dropdowns
-function populateDropdowns() {
-    // Populate universities dropdown (inviting uni)
-    const uniDropdown = document.getElementById('universityDropdown');
-    uniDropdown.innerHTML = '';
+// Function to populate university dropdowns with search functionality
+function populateUniversityDropdowns() {
+    const universityOptions = document.getElementById('universityOptions');
+    const homeUniOptions = document.getElementById('homeUniOptions');
+    
+    // Clear existing options
+    universityOptions.innerHTML = '';
+    homeUniOptions.innerHTML = '';
+    
+    // Add universities to both dropdowns
     universities.forEach(uni => {
-        const option = document.createElement('div');
-        option.className = 'custom-select-option';
-        option.textContent = uni.name;
-        option.dataset.id = uni.id;
-        option.addEventListener('click', () => {
-            document.getElementById('university').value = uni.name;
+        const displayName = uni.name_uk || 'Unknown University';
+        
+        // For inviting university dropdown
+        const uniOption = document.createElement('div');
+        uniOption.className = 'custom-select-option';
+        uniOption.textContent = displayName;
+        uniOption.dataset.id = uni.id;
+        uniOption.dataset.name_uk = uni.name_uk || displayName;
+        uniOption.dataset.name_en = uni.name_en || displayName;
+        uniOption.addEventListener('click', () => {
+            document.getElementById('university').value = displayName;
             document.getElementById('university').dataset.id = uni.id;
-            uniDropdown.classList.remove('active');
+            document.getElementById('university').dataset.name_uk = uni.name_uk || displayName;
+            document.getElementById('universityDropdown').classList.remove('active');
         });
-        uniDropdown.appendChild(option);
-    });
-    
-    // Populate home universities dropdown
-    const homeUniDropdown = document.getElementById('homeUniDropdown');
-    homeUniDropdown.innerHTML = '';
-    universities.forEach(uni => {
-        const option = document.createElement('div');
-        option.className = 'custom-select-option';
-        option.textContent = uni.name;
-        option.dataset.id = uni.id;
-        option.addEventListener('click', () => {
-            document.getElementById('homeUniversity').value = uni.name;
+        universityOptions.appendChild(uniOption);
+        
+        // For home university dropdown
+        const homeUniOption = document.createElement('div');
+        homeUniOption.className = 'custom-select-option';
+        homeUniOption.textContent = displayName;
+        homeUniOption.dataset.id = uni.id;
+        homeUniOption.dataset.name_uk = uni.name_uk || displayName;
+        homeUniOption.dataset.name_en = uni.name_en || displayName;
+        homeUniOption.addEventListener('click', () => {
+            document.getElementById('homeUniversity').value = displayName;
             document.getElementById('homeUniversity').dataset.id = uni.id;
-            homeUniDropdown.classList.remove('active');
+            document.getElementById('homeUniversity').dataset.name_uk = uni.name_uk || displayName;
+            document.getElementById('homeUniDropdown').classList.remove('active');
         });
-        homeUniDropdown.appendChild(option);
-    });
-    
-    // Populate study levels dropdown
-    const levelDropdown = document.querySelector('#level-wrapper .custom-select-dropdown');
-    levelDropdown.innerHTML = '';
-    Object.entries(programOptions.study_levels).forEach(([value, name]) => {
-        const option = document.createElement('div');
-        option.className = 'custom-select-option';
-        option.textContent = name;
-        option.dataset.value = value;
-        option.dataset.en = name;
-        option.dataset.ua = getUaTranslationForLevel(value);
-        option.addEventListener('click', () => {
-            document.getElementById('level').value = name;
-            document.getElementById('level').dataset.value = value;
-            levelDropdown.classList.remove('active');
-        });
-        levelDropdown.appendChild(option);
+        homeUniOptions.appendChild(homeUniOption);
     });
 }
 
-// Helper function to get Ukrainian translation for study levels
-function getUaTranslationForLevel(level) {
-    const translations = {
-        'bachelor': 'Бакалавр',
-        'master': 'Магістр',
-        'phd': 'Доктор філософії'
-    };
-    return translations[level] || level;
+// Function to filter universities based on search
+function filterUniversities(searchTerm, optionsContainer) {
+    const options = optionsContainer.querySelectorAll('.custom-select-option');
+    let hasVisibleOptions = false;
+    
+    options.forEach(option => {
+        const text = option.textContent.toLowerCase();
+        if (text.includes(searchTerm.toLowerCase())) {
+            option.style.display = 'block';
+            hasVisibleOptions = true;
+        } else {
+            option.style.display = 'none';
+        }
+    });
+    
+    // Show no results message if no options match
+    let noResults = optionsContainer.querySelector('.no-results');
+    if (!hasVisibleOptions) {
+        if (!noResults) {
+            noResults = document.createElement('div');
+            noResults.className = 'no-results';
+            noResults.textContent = currentLang === 'en' ? 'No universities found' : 'Університетів не знайдено';
+            optionsContainer.appendChild(noResults);
+        }
+    } else if (noResults) {
+        noResults.remove();
+    }
 }
 
 // Initialize dropdown functionality
 function initDropdowns() {
-    // University dropdown
+    // University dropdown with search
     const universityInput = document.getElementById('university');
     const universityDropdown = document.getElementById('universityDropdown');
     const universityArrow = document.querySelector('#inviting-uni-wrapper .select-arrow');
+    const universitySearch = document.getElementById('universitySearch');
     
     universityInput.addEventListener('click', () => {
         universityDropdown.classList.toggle('active');
         universityArrow.style.transform = universityDropdown.classList.contains('active') ? 
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+        if (universityDropdown.classList.contains('active')) {
+            universitySearch.focus();
+        }
     });
     
     universityArrow.addEventListener('click', () => {
         universityDropdown.classList.toggle('active');
         universityArrow.style.transform = universityDropdown.classList.contains('active') ? 
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+        if (universityDropdown.classList.contains('active')) {
+            universitySearch.focus();
+        }
     });
     
-    // Home uni dropdown
+    // University search functionality
+    universitySearch.addEventListener('input', (e) => {
+        filterUniversities(e.target.value, document.getElementById('universityOptions'));
+    });
+    
+    // Home uni dropdown with search
     const homeUniInput = document.getElementById('homeUniversity');
     const homeUniDropdown = document.getElementById('homeUniDropdown');
     const homeUniArrow = document.querySelector('#home-uni-wrapper .select-arrow');
+    const homeUniSearch = document.getElementById('homeUniSearch');
     
     homeUniInput.addEventListener('click', () => {
         homeUniDropdown.classList.toggle('active');
         homeUniArrow.style.transform = homeUniDropdown.classList.contains('active') ? 
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+        if (homeUniDropdown.classList.contains('active')) {
+            homeUniSearch.focus();
+        }
     });
     
     homeUniArrow.addEventListener('click', () => {
         homeUniDropdown.classList.toggle('active');
         homeUniArrow.style.transform = homeUniDropdown.classList.contains('active') ? 
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
+        if (homeUniDropdown.classList.contains('active')) {
+            homeUniSearch.focus();
+        }
+    });
+    
+    // Home university search functionality
+    homeUniSearch.addEventListener('input', (e) => {
+        filterUniversities(e.target.value, document.getElementById('homeUniOptions'));
     });
     
     // Level dropdown
@@ -844,6 +905,28 @@ function initDropdowns() {
             'translateY(-50%) rotate(180deg)' : 'translateY(-50%) rotate(0deg)';
     });
     
+    // Faculty dropdown options
+    const facultyOptions = document.querySelectorAll('#facultyDropdown .custom-select-option');
+    facultyOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            facultyInput.value = option.dataset[currentLang] || option.textContent;
+            facultyInput.dataset.value = option.dataset.value;
+            facultyDropdown.classList.remove('active');
+            facultyArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+        });
+    });
+    
+    // Level dropdown options
+    const levelOptions = document.querySelectorAll('#level-wrapper .custom-select-option');
+    levelOptions.forEach(option => {
+        option.addEventListener('click', () => {
+            levelInput.value = option.dataset[currentLang] || option.textContent;
+            levelInput.dataset.value = option.dataset.value;
+            levelDropdown.classList.remove('active');
+            levelArrow.style.transform = 'translateY(-50%) rotate(0deg)';
+        });
+    });
+    
     // Close dropdowns when clicking outside
     document.addEventListener('click', (e) => {
         if (!e.target.closest('.custom-select-wrapper')) {
@@ -863,33 +946,38 @@ function initDropdowns() {
 }
 
 // Function to handle adding a new university (for both inviting and home)
-async function handleAddNewUniversity(universityName, isInviting = true) {
+function handleAddNewUniversity(universityName, isInviting = true) {
     if (!universityName.trim()) {
         alert(currentLang === 'en' ? 'Please enter a university name' : 'Будь ласка, введіть назву університету');
         return;
     }
 
-    // In a real application, you would send this to your backend
-    // For now, we'll just add it to the local list
+    // Create a temporary university object
     const newUni = {
         id: 'new-' + Date.now(),
-        name: universityName
+        name_uk: universityName,
+        name_en: universityName
     };
 
+    // Add to universities array for dropdown
     universities.push(newUni);
     
     // Repopulate dropdowns
-    populateDropdowns();
+    populateUniversityDropdowns();
     
     // Set the value in the appropriate input
     if (isInviting) {
-        document.getElementById('university').value = newUni.name;
+        document.getElementById('university').value = universityName;
         document.getElementById('university').dataset.id = newUni.id;
+        document.getElementById('university').dataset.name_uk = universityName;
         document.getElementById('new-inviting-uni-form').classList.remove('active');
+        document.getElementById('newUniversity').value = '';
     } else {
-        document.getElementById('homeUniversity').value = newUni.name;
+        document.getElementById('homeUniversity').value = universityName;
         document.getElementById('homeUniversity').dataset.id = newUni.id;
+        document.getElementById('homeUniversity').dataset.name_uk = universityName;
         document.getElementById('new-home-uni-form').classList.remove('active');
+        document.getElementById('newHomeUniversity').value = '';
     }
 }
 
@@ -897,61 +985,81 @@ async function handleAddNewUniversity(universityName, isInviting = true) {
 async function handleFormSubmit(event) {
     event.preventDefault();
     
-    const universityInput = document.getElementById('university');
-    const facultyInput = document.getElementById('faculty');
-    const levelInput = document.getElementById('level');
+    const submitButton = document.getElementById('submitButton');
+    const originalText = submitButton.textContent;
     
-    if (!universityInput.value) {
-        alert(currentLang === 'en' ? 'Please select or enter a university' : 'Будь ласка, виберіть або введіть університет');
-        return;
-    }
-    
-    if (!facultyInput.value) {
-        alert(currentLang === 'en' ? 'Please enter a faculty' : 'Будь ласка, введіть факультет');
-        return;
-    }
-    
-    if (!levelInput.dataset.value) {
-        alert(currentLang === 'en' ? 'Please select a study level from the list' : 'Будь ласка, виберіть рівень навчання зі списку');
-        return;
-    }
-    
-    // Prepare form data
-    const formData = {
-        name: document.getElementById('programName').value,
-        home_university: document.getElementById('homeUniversity').value,
-        study_level: levelInput.dataset.value,
-        faculty: facultyInput.value, // Send whatever user entered
-        description: document.getElementById('shortDescription').value,
-        testimonial: document.getElementById('feedback').value,
-        submitted_by_name: document.getElementById('yourName').value,
-        submitted_by_email: '', // You can add an email field if needed
-        program_type: 'exchange' // Default value
-    };
-    
-    // Handle university field
-    if (universityInput.dataset.id) {
-        if (universityInput.dataset.id.startsWith('new-')) {
-            formData.university_name = universityInput.value;
-        } else {
-            formData.university_id = parseInt(universityInput.dataset.id);
-        }
-    } else {
-        formData.university_name = universityInput.value;
-    }
-    
-    // Handle home university field
-    if (document.getElementById('homeUniversity').dataset.id) {
-        if (document.getElementById('homeUniversity').dataset.id.startsWith('new-')) {
-            formData.home_university_name = document.getElementById('homeUniversity').value;
-        } else {
-            formData.home_university_id = parseInt(document.getElementById('homeUniversity').dataset.id);
-        }
-    } else {
-        formData.home_university_name = document.getElementById('homeUniversity').value;
-    }
+    // Show loading state
+    submitButton.textContent = currentLang === 'en' ? 'Submitting...' : 'Надсилання...';
+    submitButton.disabled = true;
+    document.getElementById('programForm').classList.add('loading');
     
     try {
+        // Get form values
+        const universityInput = document.getElementById('university');
+        const homeUniversityInput = document.getElementById('homeUniversity');
+        const levelInput = document.getElementById('level');
+        const facultyInput = document.getElementById('faculty');
+        
+        // Validation
+        if (!universityInput.value) {
+            throw new Error(currentLang === 'en' ? 'Please select or enter a university' : 'Будь ласка, виберіть або введіть університет');
+        }
+        
+        if (!facultyInput.value) {
+            throw new Error(currentLang === 'en' ? 'Please enter a faculty' : 'Будь ласка, введіть факультет');
+        }
+        
+        if (!levelInput.dataset.value) {
+            throw new Error(currentLang === 'en' ? 'Please select a study level from the list' : 'Будь ласка, виберіть рівень навчання зі списку');
+        }
+        
+        // Prepare form data
+        const formData = {
+            // Основні поля програми
+            name_uk: document.getElementById('programName').value,
+            name_en: document.getElementById('programName').value,
+            faculty_uk: document.getElementById('faculty').value,
+            faculty_en: document.getElementById('faculty').value,
+            study_level: levelInput.dataset.value,
+            description_uk: document.getElementById('shortDescription').value,
+            description_en: document.getElementById('shortDescription').value,
+            testimonial_uk: document.getElementById('feedback').value,
+            testimonial_en: document.getElementById('feedback').value,
+            submitted_by_name: document.getElementById('yourName').value,
+            program_type: 'exchange'
+        };
+        
+        // Handle university field
+        if (universityInput.dataset.id) {
+            if (universityInput.dataset.id.startsWith('new-')) {
+                // Новий університет
+                formData.university_name = universityInput.value;
+            } else {
+                // Існуючий університет
+                formData.university = parseInt(universityInput.dataset.id);
+            }
+        } else {
+            // Якщо користувач ввів університет вручну
+            formData.university_name = universityInput.value;
+        }
+        
+        // Handle home university field
+        if (homeUniversityInput.dataset.id) {
+            if (homeUniversityInput.dataset.id.startsWith('new-')) {
+                // Новий університет
+                formData.home_university_name = homeUniversityInput.value;
+            } else {
+                // Існуючий університет
+                formData.home_university = parseInt(homeUniversityInput.dataset.id);
+            }
+        } else if (homeUniversityInput.value) {
+            // Якщо користувач ввів університет вручну
+            formData.home_university_name = homeUniversityInput.value;
+        }
+        
+        console.log('Sending data to backend:', formData);
+        
+        // Send data to backend
         const csrfToken = getCookie('csrftoken');
         const response = await fetch(`${API_BASE_URL}/programs/`, {
             method: 'POST',
@@ -962,7 +1070,14 @@ async function handleFormSubmit(event) {
             body: JSON.stringify(formData)
         });
         
-        if (!response.ok) throw new Error('Failed to submit program');
+        if (!response.ok) {
+            const errorText = await response.text();
+            console.error('Server error response:', errorText);
+            throw new Error('Failed to submit program. Server returned: ' + response.status);
+        }
+        
+        const result = await response.json();
+        console.log('Success response:', result);
         
         // Show success modal
         document.getElementById('successModal').style.display = 'block';
@@ -970,9 +1085,22 @@ async function handleFormSubmit(event) {
         // Reset form
         document.getElementById('programForm').reset();
         
+        // Clear dataset values
+        universityInput.dataset.id = '';
+        universityInput.dataset.name_uk = '';
+        homeUniversityInput.dataset.id = '';
+        homeUniversityInput.dataset.name_uk = '';
+        levelInput.dataset.value = '';
+        facultyInput.dataset.value = '';
+        
     } catch (error) {
         console.error('Error submitting program:', error);
-        alert(currentLang === 'en' ? 'Failed to submit program. Please try again.' : 'Не вдалося надіслати програму. Будь ласка, спробуйте ще раз.');
+        alert(error.message || (currentLang === 'en' ? 'Failed to submit program. Please try again.' : 'Не вдалося надіслати програму. Будь ласка, спробуйте ще раз.'));
+    } finally {
+        // Restore button state
+        submitButton.textContent = originalText;
+        submitButton.disabled = false;
+        document.getElementById('programForm').classList.remove('loading');
     }
 }
 
@@ -989,12 +1117,12 @@ async function init() {
         });
     });
     
-    // Fetch data from backend
+    // Fetch universities from backend
     universities = await fetchUniversities();
-    programOptions = await fetchProgramOptions();
+    console.log('Loaded universities:', universities);
     
     // Initialize UI components
-    populateDropdowns();
+    populateUniversityDropdowns();
     initDropdowns();
     
     // Add event listeners for "+" buttons
@@ -1036,10 +1164,17 @@ async function init() {
             modal.style.display = 'none';
         }
     });
+    
+    // Close new item forms when clicking outside
+    document.addEventListener('click', (e) => {
+        if (!e.target.closest('.new-item-form') && !e.target.closest('.form-section__add-button')) {
+            document.getElementById('new-inviting-uni-form').classList.remove('active');
+            document.getElementById('new-home-uni-form').classList.remove('active');
+        }
+    });
 }
-
 // Initialize when DOM is loaded
 document.addEventListener('DOMContentLoaded', init);
-    </script>
+</script>
   </body>
 </html>

@@ -61,3 +61,11 @@ class UniversitySerializer(serializers.ModelSerializer):
         if obj.background_image and request:
             return request.build_absolute_uri(obj.background_image.url)
         return None
+
+# ДОДАЙТЕ ЦЕЙ НОВИЙ SERIALIZER
+class UniversityOptionsSerializer(serializers.ModelSerializer):
+    """Простий serializer для вибору університетів у формі"""
+    
+    class Meta:
+        model = University
+        fields = ['id', 'name_uk', 'name_en']

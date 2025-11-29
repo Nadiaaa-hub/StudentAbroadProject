@@ -1,6 +1,6 @@
 from rest_framework import generics
 from .models import University
-from .serializers import UniversitySerializer
+from .serializers import UniversitySerializer, UniversityOptionsSerializer
 from rest_framework.permissions import AllowAny
 from django.db.models import Q
 
@@ -38,3 +38,12 @@ class UniversityCreateView(generics.CreateAPIView):
     queryset = University.objects.all()
     serializer_class = UniversitySerializer
     permission_classes = [AllowAny]
+
+# ДОДАЙТЕ ЦЕЙ НОВИЙ VIEW
+class UniversityOptionsView(generics.ListAPIView):
+    """View для отримання університетів для вибору в формі"""
+    serializer_class = UniversityOptionsSerializer
+    permission_classes = [AllowAny]
+    
+    def get_queryset(self):
+        return University.objects.filter(is_approved=True).order_by('name_uk')
