@@ -1,0 +1,79 @@
+from django.http import JsonResponse
+from django.views.decorators.http import require_GET
+from django.views.decorators.csrf import csrf_exempt
+from django.core.exceptions import ObjectDoesNotExist
+import json
+from .models import FAQItem, FAQCategory
+from django.shortcuts import render
+from rest_framework import generics # <-- Додано імпорт generics
+from rest_framework.permissions import AllowAny
+from .models import FAQItem  # <-- Виправлено назву моделі (було FAQ)
+from .serializers import FAQSerializer
+
+@csrf_exempt
+@require_GET
+def faq_list(request):
+    try:
+        lang = request.GET.get('lang', 'en')
+        
+        # Перевіряємо чи підтримується мова (додаємо підтримку 'uk' як альтернативи 'ua')
+        if lang not in ['en', 'ua', 'uk']:
+            lang = 'en'
+        # Якщо використовується 'uk', змінюємо на 'ua' для зворотньої сумісності
+        if lang == 'uk':
+            lang = 'ua'
+        
+        # Фільтруємо тільки опубліковані FAQ
+        faq_items = FAQItem.objects.filter(is_published=True).order_by('-created_at')
+        
+        result = []
+        for item in faq_items:
+            categories = []
+            for category in item.categories.all():
+                categories.append({
+                    'id': category.id,
+                    'name': getattr(category, f'name_{lang}', category.name_en)
+                })
+            
+            result.append({
+                'id': item.id,
+                'question': getattr(item, f'question_{lang}', item.question_en),
+                'answer': getattr(item, f'answer_{lang}', item.answer_en),
+                'categories': categories,
+                'author': getattr(item, f'author_{lang}', item.author),
+                'editor': getattr(item, f'editor_{lang}', item.editor),
+                'created_at': item.created_at.strftime('%d/%m/%Y'),
+                'updated_at': item.updated_at.strftime('%d/%m/%Y')
+            })
+        
+        response = JsonResponse({'faq_items': result, 'status': 'success', 'language': lang})
+        response["Access-Control-Allow-Origin"] = "*"
+        return response
+        
+    except Exception as e:
+        return JsonResponse({
+            'status': 'error',
+            'message': str(e),
+            'faq_items': []
+        }, status=500)
+    
+# API View (для мобільних додатків або AJAX, якщо потрібно)
+class FAQListView(generics.ListAPIView):
+    # Використовуємо FAQItem та фільтруємо по is_published
+    queryset = FAQItem.objects.filter(is_published=True).order_by('-created_at')
+    serializer_class = FAQSerializer
+    permission_classes = [AllowAny]
+
+# View для HTML сторінки (те, що ми підключили в urls.py)
+def faq_page_view(request):
+    """
+    View для відображення HTML сторінки FAQ.
+    """
+    # Додано prefetch_related('categories') для оптимізації
+    faqs = FAQItem.objects.filter(is_published=True).order_by('-created_at').prefetch_related('categories')
+    
+    context = {
+        'faqs': faqs,
+    }
+    
+    return render(request, 'faq.html', context)

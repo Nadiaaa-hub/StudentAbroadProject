@@ -1,0 +1,498 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>StudentAbroad - Program List</title>
+  <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
+  <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
+  <style>
+    /* --- CSS Fix для мобільного фільтра (горизонтальний скрол) --- */
+    
+    /* Коли фільтр активний: перетворюємо слайдер на нативний скрол-контейнер */
+    .slider.is-filtered .slider__track {
+      display: flex;
+      flex-direction: row; /* В ряд, а не в стовпчик */
+      overflow-x: auto;    /* Дозволяємо гортати вбік */
+      scroll-snap-type: x mandatory; /* Ефект прилипання */
+      gap: 20px;
+      
+      /* Вимикаємо JS-трансформації, щоб скрипт не заважав */
+      transform: none !important; 
+      width: 100%;
+      padding-bottom: 10px; /* Відступ для скролбару */
+    }
+    
+    /* Стилізація карток у режимі фільтрації */
+    .slider.is-filtered .program-card-m {
+      /* Фіксована ширина, щоб вони не стискалися */
+      min-width: 85vw; 
+      max-width: 85vw;
+      
+      scroll-snap-align: center; /* Центрування при зупинці */
+      margin-right: 0; /* Відступи контролює gap батька */
+    }
+
+    /* Ховаємо стрілки та крапки, бо нативний скрол працює від пальця */
+    .slider.is-filtered .slider__arrow,
+    .slider.is-filtered .slider__indicators {
+      display: none !important;
+    }
+
+    /* Ховаємо скролбар для краси (Chrome/Safari/Opera) */
+    .slider.is-filtered .slider__track::-webkit-scrollbar {
+      display: none;
+    }
+    /* Ховаємо скролбар для IE/Edge/Firefox */
+    .slider.is-filtered .slider__track {
+      -ms-overflow-style: none;  
+      scrollbar-width: none;  
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="header-footer-color">
+    <div class="container">
+      <div class="header__container">
+        <div class="logo">
+          <a href="/">
+            <img src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" loading="lazy" />
+          </a>
+        </div>
+
+        <nav class="header__nav">
+          <ul class="header__menu">
+            <li>
+              <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+            </li>
+            <li>
+              <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="lang-search">
+          <span class="language-switch">
+            <button data-lang="ua" class="js-switch-button" type="button">
+              UA
+            </button>
+            <button data-lang="en" class="js-switch-button active" type="button">
+              EN
+            </button>
+          </span>
+             <div class="search-box">
+              <input
+                type="text"
+                class="search-box__input"
+                data-en="Search..."
+                data-ua="Пошук..."
+                placeholder="Search..." />
+            </div>
+        </div>
+
+        <input type="checkbox" id="burger-toggle" />
+        <label for="burger-toggle" class="burger">
+          <span></span>
+        </label>
+      </div>
+    </div>
+    <ul class="mobile-menu">
+      <li class="abt_us">
+        <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+      </li>
+      <li>
+        <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+      </li>
+      <li>
+        <span class="mobile-language-switch" aria-hidden="true">
+          <button type="button" class="js-switch-button" data-lang="ua" aria-label="Українська">
+            UA
+          </button>
+          <button type="button" class="js-switch-button active" data-lang="en" aria-label="English">
+            EN
+          </button>
+        </span>
+      </li>
+    </ul>
+
+    <div class="overlay"></div>
+  </header>
+
+  <main>
+    <section class="country-section-s" id="country-section">
+      <div class="container">
+        <section class="program-body-special">
+          
+          <section class="left-switch-section">
+            <div class="heading-search-wrapper">
+              <section class="country-section-s__heading-s">
+                <span class="country-section-s__text-outline-s" data-en="HOME UNI" data-ua="Домашній університет">HOME
+                  UNI</span>
+                <h2 class="country-section-s__text-fill-s" data-en="HOME UNI" data-ua="Домашній університет">HOME
+                  UNI
+                </h2>
+              </section>
+              <div class="country-search-box-s">
+                <div class="search-input-wrapper">
+                  <input type="text" class="country-search-box__input" placeholder="Search..." data-en="Search..."
+                    data-ua="Пошук..." />
+                  <div class="country-search-box__line"></div>
+                </div>
+              </div>
+            </div>
+            <div alt="" class="vertical-line"></div>
+            
+            <div class="checkbox-group-special" id="home-uni-filters">
+              
+              <label class="container-checkbox">
+                <input type="checkbox" value="any" />
+                <span class="checkmark"></span>
+                <span class="country-label" data-en="Any University" data-ua="Будь-який університет">Any University</span>
+              </label>
+
+              {% for uni in home_universities %}
+              <label class="container-checkbox">
+                <input type="checkbox" value="{{ uni.id }}" />
+                <span class="checkmark"></span>
+                <span class="country-label" data-en="{{ uni.name_en }}" data-ua="{{ uni.name_uk }}">
+                    {{ uni.name_en|default:uni.name_uk }}
+                </span>
+              </label>
+              {% endfor %}
+            </div>
+          </section>
+
+          <section class="right-degree-section">
+            <div data-en="LEVEL" data-ua="Ступінь" class="level">Level</div>
+            <div class="level-checkbox-group" id="level-filters">
+              <label class="container-checkbox">
+                <input type="checkbox" value="bachelor" />
+                <span class="checkmark"></span>
+                <span class="country-label" data-en="Bachelor" data-ua="Бакалавр">Bachelor</span>
+              </label>
+              <label class="container-checkbox">
+                <input type="checkbox" value="master" />
+                <span class="checkmark"></span>
+                <span class="country-label" data-en="Master" data-ua="Магістр">Master</span>
+              </label>
+              <label class="container-checkbox">
+                <input type="checkbox" value="phd" />
+                <span class="checkmark"></span>
+                <span class="country-label" data-en="PhD" data-ua="Доктор">PhD</span>
+              </label>
+            </div>
+          </section>
+        </section>
+
+        <section class="program-list" id="program-list-container">
+          {% for program in programs %}
+          <div class="program-card" 
+               data-home-id="{% if program.home_university %}{{ program.home_university.id }}{% else %}any{% endif %}"
+               data-level="{{ program.study_level|lower|default:'other' }}">
+            
+            <h2 
+                data-en="{{ program.name_en|default:program.name_uk }} {% if not program.home_university and not program.university %}(Any University){% elif not program.home_university %}(Any University - {{ program.university.name_en|default:program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University){% else %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }}){% endif %}" 
+                
+                data-ua="{{ program.name_uk }} {% if not program.home_university and not program.university %}(Будь-який університет){% elif not program.home_university %}(Будь-який університет - {{ program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_uk }} - Будь-який університет){% else %}({{ program.home_university.name_uk }} - {{ program.university.name_uk }}){% endif %}">
+              
+              {{ program.name_en|default:program.name_uk }}
+              
+              {% if not program.home_university and not program.university %}
+                  (Any University)
+              {% elif not program.home_university %}
+                  (Any University - {{ program.university.name_en|default:program.university.name_uk }})
+              {% elif not program.university %}
+                  ({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University)
+              {% else %}
+                  ({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }})
+              {% endif %}
+            </h2>
+            
+            <img class="icon-img" src="{% static 'project/img/quotation.svg' %}" alt="Quote" />
+            
+            <p 
+                data-en="{{ program.testimonial_en|default:program.description_en|truncatewords:30 }}"
+                data-ua="{{ program.testimonial_uk|default:program.description_uk|truncatewords:30 }}">
+              {{ program.testimonial_en|default:program.testimonial_uk|default:program.description_en|truncatewords:30 }}
+            </p>
+            
+            <a href="{% url 'programs-read-more' %}?id={{ program.id }}" class="btn read-more-btn2" data-en="Read more"
+              data-ua="Читати більше">Read more</a>
+          </div>
+          {% empty %}
+          <div class="program-card no-results-message" style="display: flex;">
+             <p data-en="No programs available at the moment." data-ua="На даний момент програм немає.">
+                 No programs available at the moment.
+             </p>
+          </div>
+          {% endfor %}
+          
+          <div id="no-filter-results" class="program-card" style="display: none;">
+             <p data-en="No programs found matching filters." data-ua="Програм за вибраними фільтрами не знайдено.">
+                 No programs found matching filters.
+             </p>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section class="mobile-slider">
+      <div class="container">
+        <div class="slider" id="mobile-slider-container">
+          <div class="slider__track">
+            
+            {% for program in programs %}
+            <div class="program-card-m"
+                 data-home-id="{% if program.home_university %}{{ program.home_university.id }}{% else %}any{% endif %}"
+                 data-level="{{ program.study_level|lower|default:'other' }}">
+              
+              <div class="program-info-m">
+                <h2 
+                    data-en="{{ program.name_en|default:program.name_uk }} {% if not program.home_university and not program.university %}(Any University){% elif not program.home_university %}(Any University - {{ program.university.name_en|default:program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University){% else %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }}){% endif %}" 
+                    
+                    data-ua="{{ program.name_uk }} {% if not program.home_university and not program.university %}(Будь-який університет){% elif not program.home_university %}(Будь-який університет - {{ program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_uk }} - Будь-який університет){% else %}({{ program.home_university.name_uk }} - {{ program.university.name_uk }}){% endif %}">
+                  
+                  {{ program.name_en|default:program.name_uk }}
+                  
+                  {% if not program.home_university and not program.university %}
+                      (Any University)
+                  {% elif not program.home_university %}
+                      (Any University - {{ program.university.name_en|default:program.university.name_uk }})
+                  {% elif not program.university %}
+                      ({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University)
+                  {% else %}
+                      ({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }})
+                  {% endif %}
+                </h2>
+                
+                <img class="icon-img" src="{% static 'project/img/quotation.svg' %}" alt="Quote" />
+                
+                <p 
+                    data-en="{{ program.testimonial_en|default:program.description_en|truncatewords:20 }}"
+                    data-ua="{{ program.testimonial_uk|default:program.description_uk|truncatewords:20 }}">
+                  {{ program.testimonial_en|default:program.testimonial_uk|default:program.description_en|truncatewords:20 }}
+                </p>
+                
+                <a href="{% url 'programs-read-more' %}?id={{ program.id }}" data-en="Read more" data-ua="Читати більше"
+                  class="btn read-more-btn-m" type="button">Read</a>
+              </div>
+            </div>
+            {% endfor %}
+            
+            <div id="no-filter-results-mobile" class="program-card-m" style="display: none; width: 100%;">
+                <div class="program-info-m">
+                   <p data-en="No programs found." data-ua="Програм не знайдено." style="text-align:center;">
+                       No programs found.
+                   </p>
+                </div>
+            </div>
+
+          </div>
+
+          <button class="slider__arrow slider__arrow--left-p"></button>
+          <button class="slider__arrow slider__arrow--right-p"></button>
+        </div>
+        <div class="slider__indicators">
+          <span class="slider__indicator"></span>
+          <span class="slider__indicator"></span>
+        </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__logo">
+          <img class="footer__img" src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo">
+        </div>
+
+        <div class="footer__bottom-row">
+          <nav class="footer__nav">
+            <ul class="footer__menu">
+              <li>
+                <a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС"
+                  data-_lang-applied="ua">ПРО НАС</a>
+              </li>
+
+              <li>
+                <a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ"
+                  data-_lang-applied="ua">СПИСОК ВНЗ</a>
+              </li>
+
+              <li>
+                <a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ"
+                  data-_lang-applied="ua">ПРОГРАМИ</a>
+              </li>
+
+              <li>
+                <a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ" data-_lang-applied="ua">FAQ</a>
+              </li>
+            </ul>
+          </nav>
+
+          <div class="footer__lang-search">
+            <span class="footer__language-switch">
+              <button data-lang="ua" class="js-switch-button active" type="button">
+                UA
+              </button>
+
+              <button data-lang="en" class="js-switch-button" type="button">
+                EN
+              </button>
+            </span>
+
+          <div class="footer__search-box">
+                <input
+                  type="text"
+                  class="search-box__input"
+                  data-en="Search..."
+                  data-ua="Пошук..."
+                  placeholder="Search..." />
+              </div>
+            <div class="footer__scroll-indicator">
+              <a href="#header-footer-color">
+                <img class="footer__scroll-indicator-img" src="{% static 'project/img/icon_arrow.svg' %}" alt="Scroll Up Icon">
+              </a>
+            </div>
+          </div>
+        </div>
+
+        <div class="footer__line"></div>
+      </div>
+    </div>
+  </footer>
+  <script type="module" src="{% static 'js/main.js' %}"></script>
+  
+  <script>
+    document.addEventListener('DOMContentLoaded', function() {
+        const homeUniCheckboxes = document.querySelectorAll('#home-uni-filters input[type="checkbox"]');
+        const levelCheckboxes = document.querySelectorAll('#level-filters input[type="checkbox"]');
+        
+        // Desktop elements
+        const programCardsDesktop = document.querySelectorAll('.program-card:not(.no-results-message):not(#no-filter-results)');
+        const noResultsMsgDesktop = document.getElementById('no-filter-results');
+        
+        // Mobile elements
+        const programCardsMobile = document.querySelectorAll('.program-card-m:not(#no-filter-results-mobile)');
+        const noResultsMsgMobile = document.getElementById('no-filter-results-mobile');
+        const mobileSliderContainer = document.getElementById('mobile-slider-container');
+        
+        const searchInput = document.querySelector('.country-search-box__input');
+
+        // 1. Logic for Home Uni Checkboxes
+        homeUniCheckboxes.forEach(cb => {
+            cb.addEventListener('change', applyFilters);
+        });
+
+        // 2. Logic for Level Checkboxes
+        levelCheckboxes.forEach(cb => {
+            cb.addEventListener('change', applyFilters);
+        });
+        
+        // 3. Simple Search in Filter List
+        if (searchInput) {
+            searchInput.addEventListener('input', function(e) {
+                const term = e.target.value.toLowerCase();
+                const labels = document.querySelectorAll('#home-uni-filters label');
+                labels.forEach(label => {
+                    const text = label.textContent.toLowerCase();
+                    if (text.includes(term)) {
+                        label.style.display = 'block';
+                    } else {
+                        label.style.display = 'none';
+                    }
+                });
+            });
+        }
+
+        // 4. Main Filter Function
+        function applyFilters() {
+            // Collect selected filters
+            const checkedHomeUnis = Array.from(homeUniCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value);
+            
+            const checkedLevels = Array.from(levelCheckboxes)
+                .filter(cb => cb.checked)
+                .map(cb => cb.value.toLowerCase());
+
+            const hasActiveFilters = checkedHomeUnis.length > 0 || checkedLevels.length > 0;
+
+            // --- FILTER DESKTOP ---
+            let visibleCountDesktop = 0;
+            programCardsDesktop.forEach(card => {
+                if (shouldShowCard(card, checkedHomeUnis, checkedLevels)) {
+                    card.style.display = 'flex';
+                    visibleCountDesktop++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            if (noResultsMsgDesktop) {
+                noResultsMsgDesktop.style.display = visibleCountDesktop === 0 ? 'flex' : 'none';
+            }
+
+            // --- FILTER MOBILE ---
+            // If filters are active, enable the horizontal scroll (filtered) mode
+            if (hasActiveFilters) {
+                mobileSliderContainer.classList.add('is-filtered');
+            } else {
+                mobileSliderContainer.classList.remove('is-filtered');
+            }
+
+            let visibleCountMobile = 0;
+            programCardsMobile.forEach(card => {
+                if (shouldShowCard(card, checkedHomeUnis, checkedLevels)) {
+                    card.style.display = 'block'; 
+                    visibleCountMobile++;
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+            
+            if (noResultsMsgMobile) {
+                noResultsMsgMobile.style.display = visibleCountMobile === 0 ? 'block' : 'none';
+            }
+        }
+
+        // Helper function to check if card matches filters
+        function shouldShowCard(card, checkedHomeUnis, checkedLevels) {
+            const cardHomeId = card.getAttribute('data-home-id');
+            const cardLevel = card.getAttribute('data-level').toLowerCase();
+
+            let homeMatch = false;
+            if (checkedHomeUnis.length === 0) {
+                homeMatch = true;
+            } else {
+                if (checkedHomeUnis.includes(cardHomeId)) homeMatch = true;
+            }
+
+            let levelMatch = false;
+            if (checkedLevels.length === 0) {
+                levelMatch = true;
+            } else {
+                if (checkedLevels.includes(cardLevel)) levelMatch = true;
+            }
+
+            return homeMatch && levelMatch;
+        }
+    });
+  </script>
+</body>
+</html>

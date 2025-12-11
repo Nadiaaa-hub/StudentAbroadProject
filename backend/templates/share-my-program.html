@@ -1,0 +1,476 @@
+<!DOCTYPE html>
+{% load static %}
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>StudentAbroad - Share Program</title>
+    <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
+    <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
+    
+    <style>
+      /* Обмеження висоти списку (приблизно 4 елементи) та скрол */
+      .custom-select-dropdown {
+          max-height: 200px;
+          overflow-y: auto;
+          /* Плавний скрол для iOS */
+          -webkit-overflow-scrolling: touch; 
+          z-index: 1000;
+          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
+      }
+
+      /* Стилізація скролбару */
+      .custom-select-dropdown::-webkit-scrollbar {
+          width: 6px;
+      }
+      .custom-select-dropdown::-webkit-scrollbar-thumb {
+          background-color: #ccc;
+          border-radius: 4px;
+      }
+      .custom-select-dropdown::-webkit-scrollbar-track {
+          background-color: #f1f1f1;
+      }
+
+      /* Адаптація під мобільні пристрої */
+      @media screen and (max-width: 768px) {
+          .custom-select-dropdown .custom-select-option {
+              padding: 15px 12px; /* Більша зона кліку */
+              font-size: 16px;    /* Запобігає зуму на iPhone */
+              white-space: normal; /* Довгі назви переносяться */
+              line-height: 1.4;
+              border-bottom: 1px solid #f0f0f0;
+          }
+          
+          .custom-select-dropdown {
+              max-height: 250px; /* Трохи більше місця на мобільному */
+          }
+      }
+    </style>
+  </head>
+  <body>
+    {% csrf_token %}
+    
+    <header class="site-header" id="header-footer-color">
+      <div class="container">
+        <div class="header__container">
+          <div class="logo">
+            <a href="{% url 'index' %}">
+              <img src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" loading="lazy" />
+            </a>
+          </div>
+          <nav class="header__nav">
+            <ul class="header__menu">
+              <li><a class="link" href="{% url 'index' %}" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a></li>
+              <li><a class="link" href="{% url 'uni-list' %}" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a></li>
+              <li><a class="link" href="{% url 'program-list' %}" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a></li>
+              <li><a class="link" href="{% url 'faq' %}" data-en="FAQ" data-ua="FAQ">FAQ</a></li>
+            </ul>
+          </nav>
+          <div class="lang-search">
+            <span class="language-switch">
+              <button data-lang="ua" class="js-switch-button" type="button">UA</button>
+              <button data-lang="en" class="js-switch-button active" type="button">EN</button>
+            </span>
+            <div class="search-box">
+              <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..." placeholder="Search..." />
+            </div>
+          </div>
+          <input type="checkbox" id="burger-toggle" />
+          <label for="burger-toggle" class="burger"><span></span></label>
+        </div>
+      </div>
+      <ul class="mobile-menu">
+         <li class="abt_us"><a class="link" href="{% url 'index' %}" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a></li>
+         <li><a class="link" href="{% url 'uni-list' %}" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a></li>
+         <li><a class="link" href="{% url 'program-list' %}" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a></li>
+         <li><a class="link" href="{% url 'faq' %}" data-en="FAQ" data-ua="FAQ">FAQ</a></li>
+         <li>
+          <span class="mobile-language-switch" aria-hidden="true">
+            <button type="button" class="js-switch-button" data-lang="ua">UA</button>
+            <button type="button" class="js-switch-button active" data-lang="en">EN</button>
+          </span>
+        </li>
+      </ul>
+      <div class="overlay"></div>
+    </header>
+
+    <main>
+      <section class="share-my-program-section">
+        <div class="container">
+          <div class="share-my-program__header">
+            <div class="go-back-wrapper">
+              <a href="{% url 'index' %}" class="go-back">
+                <svg class="icon" width="16.68" height="8" viewBox="0 0 15 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+                  <path d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z" fill="currentColor" />
+                </svg>
+                <span>Go back</span>
+              </a>
+            </div>
+            <img class="share-my-program__img" src="{% static 'project/img/logo+share my programm.svg' %}" alt="" />
+          </div>
+
+          <div class="form-section">
+            <h2 class="form-section__title">Add program</h2>
+            
+            <form id="share-program-form">
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="program-name" placeholder="Name:" data-required />
+                </div>
+                <label class="form-section__description" data-en="Full program name, please." data-ua="Повна назва програми, будь ласка.">Full program name, please.</label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button custom-select-wrapper" id="inviting-uni-wrapper">
+                  <input data-required type="text" placeholder="Inviting uni:" class="custom-select-input" data-type="searchable-select" id="inviting-uni-input" autocomplete="off" />
+                  
+                  <div class="custom-select-dropdown" id="inviting-uni-list">
+                      <div class="custom-select-option" 
+                          data-id="any" 
+                          data-en="Any University" 
+                          data-ua="Будь-який університет">Any University</div>
+                      
+                      {% for u in universities %}
+                          <div class="custom-select-option" 
+                              data-id="{{ u.id }}"
+                              data-en="{{ u.name_en }}" 
+                              data-ua="{{ u.name_uk }}">
+                              {{ u.name_en }}
+                          </div>
+                      {% endfor %}
+                  </div>
+
+                  <img src="{% static 'project/img/arrow in input.svg' %}" alt="Arrow" class="select-arrow" />
+                </div>
+                <button type="button" class="form-section__add-button custom-select-add-button" id="add-inviting-uni-button">
+                  <img src="{% static 'project/img/+.svg' %}" alt="+" />
+                </button>
+                <label class="form-section__description" 
+                       data-en="Choose a foreign university from the list. Add new one, if you can’t find it." 
+                       data-ua="Обери закордонний університет. Якщо його немає в списку, додай.">
+                  Choose a foreign university from the list. Add new one, if you can’t find it.
+                </label>
+                
+                <div class="new-item-form" id="new-inviting-uni-form">
+                  <div class="new-item-header">
+                    <p class="new-item-header__text" 
+                       data-en="Leave the details of the university that invited you. Our administrator will enter them into our database." 
+                       data-ua="Залиште дані університету, який вас запросив. Наш адміністратор внесе їх у базу даних">
+                      Leave the details of the university that invited you. Our administrator will enter them into our database.
+                    </p>
+                  </div>
+                  <textarea class="new-item-input" id="inviting-uni-details"></textarea>
+                </div>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button custom-select-wrapper" id="home-uni-wrapper">
+                  <input type="text" placeholder="Home uni:" class="custom-select-input" data-type="searchable-select" id="home-uni-input" autocomplete="off"/>
+                  
+                  <div class="custom-select-dropdown" id="home-uni-list">
+                      <div class="custom-select-option" 
+                          data-id="any" 
+                          data-en="Any University" 
+                          data-ua="Будь-який університет">Any University</div>
+
+                      {% for u in universities %}
+                          <div class="custom-select-option" 
+                              data-id="{{ u.id }}"
+                              data-en="{{ u.name_en }}" 
+                              data-ua="{{ u.name_uk }}">
+                              {{ u.name_en }}
+                          </div>
+                      {% endfor %}
+                  </div>
+
+                  <img src="{% static 'project/img/arrow in input.svg' %}" alt="Arrow" class="select-arrow" />
+                  
+                  <div class="new-item-form" id="new-home-uni-form">
+                    <div class="new-item-header">
+                      <p class="new-item-header__text" 
+                           data-en="Leave the details of your home university. Our administrator will enter them into our database." 
+                           data-ua="Залиште дані вашого домашнього університету. Наш адміністратор внесе їх у базу даних.">
+                         Leave the details of your home university. Our administrator will enter them into our database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input" id="home-uni-details"></textarea>
+                  </div>
+                </div>
+                <button type="button" class="form-section__add-button custom-select-add-button" id="add-home-uni-button">
+                  <img src="{% static 'project/img/+.svg' %}" alt="+" />
+                </button>
+                <label class="form-section__description" 
+                       data-en="Choose Ukrainian university from the list. Add a new one, if you can’t find it." 
+                       data-ua="Обери український університет. Якщо його немає в списку, додай.">
+                  Choose Ukrainian university from the list. Add a new one, if you can’t find it.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button custom-select-wrapper" id="faculty-wrapper">
+                  <input data-required type="text" placeholder="Faculty:" class="custom-select-input" data-type="searchable-select" id="faculty-input" autocomplete="off"/>
+                  <div class="custom-select-dropdown">
+                    <div class="custom-select-option" data-en="Computer Science" data-ua="Комп'ютерні науки">Computer Science</div>
+                    <div class="custom-select-option" data-en="Engineering" data-ua="Інженерія">Engineering</div>
+                    <div class="custom-select-option" data-en="Arts and Sciences" data-ua="Мистецтва та науки">Arts and Sciences</div>
+                    <div class="custom-select-option" data-en="Business" data-ua="Бізнес">Business</div>
+                    <div class="custom-select-option" data-en="Law" data-ua="Право">Law</div>
+                    <div class="custom-select-option" data-en="Medicine" data-ua="Медицина">Medicine</div>
+                    <div class="custom-select-option" data-en="Other" data-ua="Інше">Other</div>
+                  </div>
+                  <img src="{% static 'project/img/arrow in input.svg' %}" alt="Arrow" class="select-arrow" />
+                  
+                   <div class="new-item-form" id="new-faculty-form">
+                     <div class="new-item-header">
+                      <p class="new-item-header__text" 
+                           data-en="Enter the details of the faculty." 
+                           data-ua="Введіть деталі факультету.">
+                         Enter the details of the faculty.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input" id="faculty-details"></textarea>
+                  </div>
+                </div>
+                 <button type="button" class="form-section__add-button custom-select-add-button" id="add-faculty-button">
+                   <img src="{% static 'project/img/+.svg' %}" alt="+" />
+                </button>
+                <label class="form-section__description" 
+                       data-en="Please, provide the faculty of inviting uni for this program." 
+                       data-ua="Факультет приймаючого університету.">
+                  Please, provide the faculty of inviting uni for this program.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button custom-select-wrapper" id="level-wrapper">
+                  <input data-required type="text" placeholder="Level:" class="custom-select-input" data-type="searchable-select" id="level-input" readonly/>
+                  <div class="custom-select-dropdown">
+                     <div class="custom-select-option" data-en="Bachelor" data-ua="Бакалавр">Bachelor</div>
+                    <div class="custom-select-option" data-en="Master" data-ua="Магістр">Master</div>
+                    <div class="custom-select-option" data-en="PhD" data-ua="PhD / Аспірантура">PhD</div>
+                    <div class="custom-select-option" data-en="Other" data-ua="Інше">Other</div>
+                  </div>
+                  <img src="{% static 'project/img/arrow in input.svg' %}" alt="Arrow" class="select-arrow" />
+                  
+                  <div class="new-item-form" id="new-level-form">
+                     <div class="new-item-header">
+                      <p class="new-item-header__text" 
+                           data-en="Enter the details of the level. Our administrator will add it to the database." 
+                           data-ua="Введіть дані про рівень програми. Наш адміністратор додасть їх у базу даних.">
+                         Enter the details of the level. Our administrator will add it to the database.
+                      </p>
+                    </div>
+                    <textarea class="new-item-input" id="level-details"></textarea>
+                  </div>
+                </div>
+                <button type="button" class="form-section__add-button custom-select-add-button" id="add-level-button">
+                   <img src="{% static 'project/img/+.svg' %}" alt="+" />
+                </button>
+                <label class="form-section__description" 
+                       data-en="Choose the level of this program from the list. Add a new one, if you can’t find it." 
+                       data-ua="Обери рівень програми. Якщо його немає в списку, додай.">
+                  Choose the level of this program from the list. Add a new one, if you can’t find it.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="feedback-input" placeholder="Your feedback:" data-required />
+                </div>
+                <label class="form-section__description" 
+                       data-en='Your experience, a "quote" that you can use to describe this program from your point of view.' 
+                       data-ua="Твій досвід, якась цитата, що характеризує програму з твоєї точки зору.">
+                  Your experience, a "quote" that you can use to describe this program from your point of view.
+                </label>
+              </div>
+
+              <div class="form-field-and-description">
+                <div class="input-with-optional-button">
+                  <input type="text" id="user-name-input" placeholder="Your name:" />
+                </div>
+                <label class="form-section__description" 
+                       data-en="If you wish, you can leave your name and contact details, which will be displayed on the site." 
+                       data-ua="За бажанням, залиш своє ім’я та контактну адресу, яка буде показана на сторінці цієї програми для того, щоб інші студенти могли зв’язатися з тобою.">
+                  If you wish, you can leave your name and contact details, which will be displayed on the site.
+                </label>
+              </div>
+
+              <div class="submit-button">
+                <button class="btn" type="submit" id="final-submit-btn" data-en="Submit" data-ua="Підтвердити">Submit</button>
+              </div>
+            </form>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <footer class="footer">
+       <div class="container">
+        <div class="footer__container">
+          <div class="footer__logo">
+            <img class="footer__img" src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" />
+          </div>
+          <div class="footer__bottom-row">
+             <nav class="footer__nav">
+              <ul class="footer__menu">
+                <li><a class="footer__link" href="{% url 'index' %}" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a></li>
+                <li><a class="footer__link" href="{% url 'uni-list' %}" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a></li>
+                <li><a class="footer__link" href="{% url 'program-list' %}" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a></li>
+                <li><a class="footer__link" href="{% url 'faq' %}" data-en="FAQ" data-ua="FAQ">FAQ</a></li>
+              </ul>
+            </nav>
+            <div class="footer__lang-search">
+                <span class="footer__language-switch">
+                <button data-lang="ua" class="js-switch-button" type="button">UA</button>
+                <button data-lang="en" class="js-switch-button active" type="button">EN</button>
+                </span>
+                <div class="footer__search-box">
+                <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..." placeholder="Search..." />
+                </div>
+                <button type="button" class="footer__scroll-indicator"><img class="footer__scroll-indicator-img" src="{% static 'project/img/icon_arrow.svg' %}" alt="Arrow" /></button>
+            </div>
+          </div>
+          <div class="footer__line"></div>
+        </div>
+      </div>
+    </footer>
+
+    <script type="module" src="{% static 'js/main.js' %}"></script>
+    <script>
+      document.addEventListener('DOMContentLoaded', () => {
+        
+        // 1. БЛОКУВАННЯ ВИПАДКОВОГО ENTER ДЛЯ INPUT
+        document.addEventListener('keydown', (e) => {
+            if (e.key === 'Enter' && e.target.tagName === 'INPUT') {
+                e.preventDefault();
+                return false;
+            }
+        });
+
+        // 2. FIX: ВИДАЛЯЄМО ЛОГІКУ 'ENTER' ДЛЯ TEXTAREA (ДЕТАЛІ)
+        setTimeout(() => {
+            const textareas = document.querySelectorAll('.new-item-form textarea');
+            textareas.forEach(oldTx => {
+                const newTx = oldTx.cloneNode(true);
+                oldTx.parentNode.replaceChild(newTx, oldTx);
+                
+                // Зупиняємо спливання Enter, щоб custom-select.js не перехопив його і не очистив поле
+                newTx.addEventListener('keydown', (e) => {
+                    if(e.key === 'Enter') {
+                        e.stopPropagation(); 
+                    }
+                });
+            });
+        }, 500); 
+
+        const form = document.getElementById('share-program-form');
+        const submitBtn = document.getElementById('final-submit-btn');
+        
+        function getCookie(name) {
+            let cookieValue = null;
+            if (document.cookie && document.cookie !== '') {
+                const cookies = document.cookie.split(';');
+                for (let i = 0; i < cookies.length; i++) {
+                    const cookie = cookies[i].trim();
+                    if (cookie.substring(0, name.length + 1) === (name + '=')) {
+                        cookieValue = decodeURIComponent(cookie.substring(name.length + 1));
+                        break;
+                    }
+                }
+            }
+            return cookieValue;
+        }
+
+        submitBtn.addEventListener('click', async (e) => {
+          e.preventDefault();
+
+          // Validation
+          const requiredFields = form.querySelectorAll('[data-required]');
+          let isValid = true;
+          requiredFields.forEach(f => {
+              if(!f.value.trim()) {
+                  f.classList.add('input-error');
+                  isValid = false;
+              } else {
+                  f.classList.remove('input-error');
+              }
+          });
+
+          if (!isValid) {
+              return;
+          }
+
+          // Payload
+          const payload = {};
+          payload.program_name = document.getElementById('program-name').value;
+
+          // Inviting Uni Logic
+          const invitingInput = document.getElementById('inviting-uni-input');
+          const invitingList = document.getElementById('inviting-uni-list');
+          const invitingOption = Array.from(invitingList.children).find(opt => opt.textContent.trim() === invitingInput.value.trim());
+          
+          if (invitingOption) {
+              payload.inviting_uni_id = invitingOption.getAttribute('data-id');
+          } else {
+              payload.inviting_uni_text = invitingInput.value.trim(); // Нова назва
+          }
+          payload.inviting_uni_details = document.getElementById('inviting-uni-details').value;
+
+          // Home Uni Logic
+          const homeInput = document.getElementById('home-uni-input');
+          const homeList = document.getElementById('home-uni-list');
+          const homeOption = Array.from(homeList.children).find(opt => opt.textContent.trim() === homeInput.value.trim());
+
+          if (homeOption) {
+              payload.home_uni_id = homeOption.getAttribute('data-id');
+          } else {
+              payload.home_uni_text = homeInput.value.trim();
+          }
+          payload.home_uni_details = document.getElementById('home-uni-details').value;
+
+          // Faculty Logic
+          payload.faculty = document.getElementById('faculty-input').value;
+          const facultyDetails = document.getElementById('faculty-details');
+          if (facultyDetails) payload.faculty_details = facultyDetails.value;
+
+          // Level Logic
+          payload.level = document.getElementById('level-input').value;
+          const levelDetails = document.getElementById('level-details');
+          if (levelDetails) payload.level_details = levelDetails.value;
+
+          payload.feedback = document.getElementById('feedback-input').value;
+          payload.user_name = document.getElementById('user-name-input').value;
+
+          try {
+              const response = await fetch(window.location.href, {
+                  method: 'POST',
+                  headers: {
+                      'Content-Type': 'application/json',
+                      'X-CSRFToken': getCookie('csrftoken')
+                  },
+                  body: JSON.stringify(payload)
+              });
+
+              const result = await response.json();
+              if (result.status === 'success') {
+                  window.location.href = "{% url 'confirmation' %}";
+              } else {
+                  alert('Error: ' + result.message);
+              }
+          } catch (error) {
+              console.error('Error:', error);
+          }
+        });
+        
+        // Remove error on input
+        const inputs = form.querySelectorAll('input, textarea');
+        inputs.forEach(input => {
+            input.addEventListener('input', () => {
+                input.classList.remove('input-error');
+            });
+        });
+      });
+    </script>
+  </body>
+</html>
