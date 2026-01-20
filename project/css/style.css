@@ -114,6 +114,7 @@ p {
   user-select: none;
   -webkit-filter: brightness(0) invert(1);
   filter: brightness(0) invert(1);
+  height: 16px;
 }
 
 
@@ -1325,7 +1326,6 @@ a:focus {
 }
 
 .footer__img {
-  width: 156px;
   height: 16px;
 }
 
@@ -4637,7 +4637,7 @@ select {
 
 @media (max-width: 459px) {
   .faq__line {
-      width: 100%;
+    width: 100%;
     border-top: 1.5px solid var(--color-grey) !important;
   }
 }
