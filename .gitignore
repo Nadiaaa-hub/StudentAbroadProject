@@ -1,0 +1,16 @@
+# Python cache (це те, що треба прибрати)
+__pycache__/
+*.py[cod]
+*$py.class
+
+# Environment variables (безпека)
+.env
+.env.*
+
+# Virtual Environment
+venv/
+env/
+.venv/
+
+# macOS system files (важливо для майбутнього переходу на Мак!)
+.DS_Store

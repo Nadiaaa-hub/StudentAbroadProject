@@ -9,41 +9,64 @@
     <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
     <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
     
-    <style>
-      /* Обмеження висоти списку (приблизно 4 елементи) та скрол */
-      .custom-select-dropdown {
-          max-height: 200px;
-          overflow-y: auto;
-          /* Плавний скрол для iOS */
-          -webkit-overflow-scrolling: touch; 
-          z-index: 1000;
-          box-shadow: 0px 4px 15px rgba(0, 0, 0, 0.15);
-      }
-
-      /* Стилізація скролбару */
-      .custom-select-dropdown::-webkit-scrollbar {
-          width: 6px;
-      }
-      .custom-select-dropdown::-webkit-scrollbar-thumb {
-          background-color: #ccc;
-          border-radius: 4px;
-      }
-      .custom-select-dropdown::-webkit-scrollbar-track {
-          background-color: #f1f1f1;
-      }
-
-      /* Адаптація під мобільні пристрої */
+<style>
+      /* --- ВИПРАВЛЕНІ СТИЛІ ДЛЯ МОБІЛЬНОГО СЛАЙДЕРА --- */
       @media screen and (max-width: 768px) {
-          .custom-select-dropdown .custom-select-option {
-              padding: 15px 12px; /* Більша зона кліку */
-              font-size: 16px;    /* Запобігає зуму на iPhone */
-              white-space: normal; /* Довгі назви переносяться */
-              line-height: 1.4;
-              border-bottom: 1px solid #f0f0f0;
-          }
           
-          .custom-select-dropdown {
-              max-height: 250px; /* Трохи більше місця на мобільному */
+          /* 1. Контейнер слайдера */
+          #mobile-slider {
+              width: 100%;
+              overflow: hidden; /* Щоб скролбар не вилазив за межі */
+          }
+
+          /* 2. Трек (стрічка з картками) */
+          #mobile-slider .slider__track {
+              display: flex !important;
+              flex-direction: row !important;
+              flex-wrap: nowrap !important;
+              
+              /* Вмикаємо горизонтальний скрол */
+              overflow-x: auto !important;
+              /* Магнітне прилипання (snap) */
+              scroll-snap-type: x mandatory; 
+              
+              gap: 16px; /* Відстань між картками */
+              width: 100% !important;
+              
+              /* --- КЛЮЧОВЕ ВИПРАВЛЕННЯ ЦЕНТРУВАННЯ --- */
+              /* Картка займає 85%. Залишається 15% вільного місця. */
+              /* Ділимо на 2 => 7.5%. Це відступ зліва і справа, щоб картка стала по центру. */
+              padding: 0 7.5% 30px 7.5% !important; 
+              
+              transform: none !important; /* Вимикаємо JS зміщення */
+              box-sizing: border-box;
+
+              /* Плавність для iOS */
+              -webkit-overflow-scrolling: touch;
+              /* Ховаємо скролбар */
+              scrollbar-width: none; 
+          }
+
+          /* Ховаємо скролбар для Chrome/Safari */
+          #mobile-slider .slider__track::-webkit-scrollbar {
+              display: none;
+          }
+
+          /* 3. Сама картка програми */
+          #mobile-slider .slider__item {
+              /* Жорстка фіксація ширини */
+              min-width: 85% !important;
+              width: 85% !important;
+              flex: 0 0 85% !important;
+              
+              /* Картка завжди вирівнюється по центру екрану при зупинці */
+              scroll-snap-align: center;
+              scroll-snap-stop: always; /* Запобігає пролітанню багатьох карток за раз */
+              
+              margin: 0 !important; /* Прибираємо margin, бо є gap у батька */
+              position: relative !important;
+              left: auto !important;
+              top: auto !important;
           }
       }
     </style>
@@ -232,13 +255,10 @@
                     <textarea class="new-item-input" id="faculty-details"></textarea>
                   </div>
                 </div>
-                 <button type="button" class="form-section__add-button custom-select-add-button" id="add-faculty-button">
-                   <img src="{% static 'project/img/+.svg' %}" alt="+" />
-                </button>
                 <label class="form-section__description" 
-                       data-en="Please, provide the faculty of inviting uni for this program." 
-                       data-ua="Факультет приймаючого університету.">
-                  Please, provide the faculty of inviting uni for this program.
+                       data-en="Choose the faculty from the list or enter your own." 
+                       data-ua="Обери факультет зі списку або введи свій.">
+                  Choose the faculty from the list or enter your own.
                 </label>
               </div>
 

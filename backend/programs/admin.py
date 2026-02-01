@@ -76,7 +76,7 @@ class ProgramAdmin(admin.ModelAdmin):
         # Встановлюємо ширину (cols) та висоту (rows) для зручності
         form.base_fields['user_university_text'].widget = forms.Textarea(attrs={'rows': 4, 'cols': 100})
         # Робимо підказку більш помітною
-        form.base_fields['user_university_text'].help_text = "Технічне поле: тут зберігаються додаткові деталі про факультет/рівень від користувача."
+        form.base_fields['user_university_text'].help_text = "Технічне поле: тут зберігаються додаткові деталі про ступінь (level) від користувача."
         return form
 
 admin.site.register(Program, ProgramAdmin)

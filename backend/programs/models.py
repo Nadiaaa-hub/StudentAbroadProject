@@ -59,7 +59,7 @@ class Program(models.Model):
     # ВИПРАВЛЕНО: Додано choices=STUDY_LEVEL_CHOICES
     study_level = models.CharField(max_length=50, choices=STUDY_LEVEL_CHOICES, verbose_name="Рівень навчання") 
     
-    description_uk = models.TextField(blank=True, default='', verbose_name="Опис/Відгук")
+    description_uk = models.TextField(blank=True, default='', verbose_name="Опис (укр)")
     description_en = models.TextField(blank=True, default='', verbose_name="Description (eng)")
     testimonial_uk = models.TextField(blank=True, default='', verbose_name="Відгук (укр)")
     testimonial_en = models.TextField(blank=True, default='', verbose_name="Testimonial (eng)")
