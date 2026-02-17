@@ -1,449 +1,440 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad - Uni List</title>
-    <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
-    <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
-      rel="stylesheet"
-    />
-    
-    <style>
-      /* --- Загальні стилі для рядків з даними --- */
-      .uni-data__row {
-        margin-bottom: 10px;
-        display: flex;
-        align-items: center;
-        flex-wrap: wrap;
-        gap: 5px;
-        font-size: 16px; 
-      }
-      .uni-data__label {
-        font-weight: inherit;
-      }
 
-      /* Відступ для іконки */
-      .uni-data__row .icon-img {
-        margin-left: 5px;
-      }
-      
-      /* --- Стилі для посилань (тільки для вебсайту) --- */
-      .uni-data__link {
-        color: inherit;
-        text-decoration: none; /* Без підкреслення за замовчуванням */
-        cursor: pointer;
-      }
-      
-      /* Підкреслення з'являється ТІЛЬКИ при наведенні */
-      .uni-data__link:hover,
-      .uni-data__link:active,
-      .uni-data__link:focus {
-        color: inherit;
-        text-decoration: underline;
-        opacity: 1;
-      }
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-      /* --- Стилі для звичайного тексту (для пошти) --- */
-      .uni-data__text {
-        color: inherit;
-        cursor: default; /* Курсор як текст */
-        text-decoration: none;
-      }
+  <!-- SEO Meta Tags -->
+  <title>{{ meta_title|default:"Universities | StudentAbroad" }}</title>
+  <meta name="description" content="{{ meta_description|default:" Browse partner universities offering exchange
+    programs." }}">
+  <link rel="canonical" href="{{ canonical_url }}">
 
-      /* --- Мобільні стилі (тільки для карток у слайдері) --- */
-      .university-info-m .uni-data__row {
-        justify-content: center; /* Центрування по горизонталі */
-        color: #555555;          /* Колір тексту для мобільних */
-      }
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ meta_title|default:" Universities | StudentAbroad" }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:image" content="{{ default_og_image }}">
+  <meta property="og:site_name" content="{{ site_name }}">
 
-      /* Примусовий колір для посилань і тексту на мобільному */
-      .university-info-m .uni-data__link,
-      .university-info-m .uni-data__text {
-        color: #555555;
-      }
-      
-      .university-info-m .uni-data__link:hover {
-        color: #555555;
-      }
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ meta_title }}">
+  <meta name="twitter:description" content="{{ meta_description }}">
 
-    </style>
-  </head>
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{% static 'project/img/logo_part1.svg' %}">
 
-  <body>
-    <header class="site-header" id="header-footer-color">
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet" />
+
+  <style>
+    /* --- Загальні стилі для рядків з даними --- */
+    .uni-data__row {
+      margin-bottom: 10px;
+      display: flex;
+      align-items: center;
+      flex-wrap: wrap;
+      gap: 5px;
+      font-size: 16px;
+    }
+
+    .uni-data__label {
+      font-weight: inherit;
+    }
+
+    /* Відступ для іконки */
+    .uni-data__row .icon-img {
+      margin-left: 5px;
+    }
+
+    /* --- Стилі для посилань (тільки для вебсайту) --- */
+    .uni-data__link {
+      color: inherit;
+      text-decoration: none;
+      /* Без підкреслення за замовчуванням */
+      cursor: pointer;
+    }
+
+    /* Підкреслення з'являється ТІЛЬКИ при наведенні */
+    .uni-data__link:hover,
+    .uni-data__link:active,
+    .uni-data__link:focus {
+      color: inherit;
+      text-decoration: underline;
+      opacity: 1;
+    }
+
+    /* --- Стилі для звичайного тексту (для пошти) --- */
+    .uni-data__text {
+      color: inherit;
+      cursor: default;
+      /* Курсор як текст */
+      text-decoration: none;
+    }
+
+    /* --- Мобільні стилі (тільки для карток у слайдері) --- */
+    .university-info-m .uni-data__row {
+      justify-content: center;
+      /* Центрування по горизонталі */
+      color: #555555;
+      /* Колір тексту для мобільних */
+    }
+
+    /* Примусовий колір для посилань і тексту на мобільному */
+    .university-info-m .uni-data__link,
+    .university-info-m .uni-data__text {
+      color: #555555;
+    }
+
+    .university-info-m .uni-data__link:hover {
+      color: #555555;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="header-footer-color">
+    <div class="container">
+      <div class="header__container">
+        <div class="logo">
+          <a href="/">
+            <img src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" loading="lazy" />
+          </a>
+        </div>
+
+        <nav class="header__nav">
+          <ul class="header__menu">
+            <li>
+              <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+            </li>
+            <li>
+              <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="lang-search">
+          <span class="language-switch">
+            <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
+            <button data-lang="en" class="js-switch-button" type="button">EN</button>
+          </span>
+          <div class="search-box">
+            <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..."
+              placeholder="Search..." />
+          </div>
+        </div>
+
+        <input type="checkbox" id="burger-toggle" />
+        <label for="burger-toggle" class="burger">
+          <span></span>
+        </label>
+      </div>
+    </div>
+
+    <ul class="mobile-menu">
+      <li class="abt_us">
+        <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+      </li>
+      <li>
+        <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+      </li>
+      <li>
+        <span class="mobile-language-switch" aria-hidden="true">
+          <button type="button" class="js-switch-button active" data-lang="ua">UA</button>
+          <button type="button" class="js-switch-button" data-lang="en">EN</button>
+        </span>
+      </li>
+    </ul>
+
+    <div class="overlay"></div>
+  </header>
+
+  <main>
+    <section class="country-section">
       <div class="container">
-        <div class="header__container">
-          <div class="logo">
-            <a href="/">
-              <img
-                src="{% static 'project/img/name_no-background_01.svg' %}"
-                alt="StudentAbroad logo"
-                loading="lazy"
-              />
-            </a>
+        <div class="country-section__heading">
+          <span class="text-outline-style" data-en="COUNTRY" data-ua="Країна">COUNTRY</span>
+          <h2 class="about-us__text-fill" data-en="COUNTRY" data-ua="Країна">COUNTRY</h2>
+        </div>
+
+        <div class="country-search-box">
+          <div class="search-input-wrapper">
+            <input type="text" class="country-search-box__input" placeholder="Search..." data-en="Search..."
+              data-ua="Шукати..." />
+            <div class="country-search-box__line"></div>
+          </div>
+        </div>
+
+        <div class="checkbox-group">
+          {% for country in countries %}
+          <label class="container-checkbox">
+            <input class="container-checkbox__input" type="checkbox" value="{{ country.name_en }}" />
+            <span class="checkmark"></span>
+            <span class="country-label" data-en="{{ country.name_en }}" data-ua="{{ country.name_uk }}">
+              {{ country.name_en }}
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+
+        <div class="checkbox-group-mobile">
+          {% for country in countries %}
+          <label class="container-checkbox">
+            <input class="container-checkbox__input" type="checkbox" value="{{ country.name_en }}" />
+            <span class="checkmark"></span>
+            <span class="country-label" data-en="{{ country.name_en }}" data-ua="{{ country.name_uk }}">
+              {{ country.name_en }}
+            </span>
+          </label>
+          {% endfor %}
+        </div>
+
+        <section class="university-list">
+          {% for uni in universities %}
+          <div class="university-card" data-country="{{ uni.country_en }}">
+            <img class="university-card__img"
+              src="{% if uni.logo %}{{ uni.logo.url }}{% else %}{% static 'project/img/uni1.svg' %}{% endif %}"
+              alt="{{ uni.name_en|default:uni.name_uk }}" />
+            <div class="university-info">
+              <h2 data-en="{{ uni.name_en }}" data-ua="{{ uni.name_uk }}">
+                {{ uni.name_en|default:uni.name_uk }}
+              </h2>
+
+              <div class="uni-data__row">
+                <span class="uni-data__label" data-en="CONTACT:" data-ua="КОНТАКТ:">CONTACT:</span>
+                {% if uni.contact_email %}
+                <span class="uni-data__text js-truncate-link" title="{{ uni.contact_email }}">
+                  {{ uni.contact_email }}
+                </span>
+                {% else %}
+                -
+                {% endif %}
+                <img class="icon-img" src="{% static 'project/img/mail-icon.svg' %}" />
+              </div>
+
+              {% if uni.website_url %}
+              <div class="uni-data__row">
+                <span class="uni-data__label">URL:</span>
+                <a href="{{ uni.website_url }}" target="_blank" class="uni-data__link js-truncate-link">
+                  {{ uni.website_url }}
+                </a>
+                <img class="icon-img" src="{% static 'project/img/icon1.svg' %}" />
+              </div>
+              {% endif %}
+
+              <a href="{{ uni.get_absolute_url }}" class="btn read-more-btn" data-en="Read more"
+                data-ua="Читати більше">Read more</a>
+            </div>
+          </div>
+          {% empty %}
+          <p style="text-align: center; width: 100%;" data-en="No universities found."
+            data-ua="Університетів не знайдено.">
+            No universities found.
+          </p>
+          {% endfor %}
+        </section>
+
+        <section class="mobile-slider">
+          <div class="slider">
+            <div class="slider__track">
+
+              {% for uni in universities %}
+              <div class="university-card-m" data-country="{{ uni.country_en }}">
+                <img class="university-card-m__img"
+                  src="{% if uni.logo %}{{ uni.logo.url }}{% else %}{% static 'project/img/uni1.svg' %}{% endif %}"
+                  alt="{{ uni.name_en|default:uni.name_uk }}" />
+                <div class="university-info-m">
+                  <h2 data-en="{{ uni.name_en }}" data-ua="{{ uni.name_uk }}">
+                    {{ uni.name_en|default:uni.name_uk }}
+                  </h2>
+
+                  <div class="uni-data__row">
+                    <span class="uni-data__label" data-en="CONTACT:" data-ua="КОНТАКТ:">CONTACT:</span>
+                    {% if uni.contact_email %}
+                    <span class="uni-data__text js-truncate-link" title="{{ uni.contact_email }}">
+                      {{ uni.contact_email }}
+                    </span>
+                    {% else %}
+                    -
+                    {% endif %}
+                    <img class="icon-img" src="{% static 'project/img/mail-icon.svg' %}" alt="Mail Icon" />
+                  </div>
+
+                  {% if uni.website_url %}
+                  <div class="uni-data__row">
+                    <span class="uni-data__label">URL:</span>
+                    <a href="{{ uni.website_url }}" target="_blank" class="uni-data__link js-truncate-link">
+                      {{ uni.website_url }}
+                    </a>
+                    <img class="icon-img" src="{% static 'project/img/icon1.svg' %}" alt="Link Icon" />
+                  </div>
+                  {% endif %}
+
+                  <a href="{{ uni.get_absolute_url }}" class="btn read-more-btn-m" data-en="Read more"
+                    data-ua="Читати більше">Read more</a>
+                </div>
+              </div>
+              {% endfor %}
+
+            </div>
           </div>
 
-          <nav class="header__nav">
-            <ul class="header__menu">
-              <li>
-                <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+          <button class="slider__arrow slider__arrow--left"></button>
+          <button class="slider__arrow slider__arrow--right"></button>
+          <div class="slider__indicators">
+            <span class="slider__indicator"></span>
+            <span class="slider__indicator"></span>
+          </div>
+        </section>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__logo">
+          <img class="footer__img" src="{% static 'project/img/name_no-background_01.svg' %}"
+            alt="StudentAbroad logo" />
+        </div>
+
+        <div class="footer__bottom-row">
+          <nav class="footer__nav">
+            <ul class="footer__menu">
+              <li><a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ПРО НАС</a></li>
+              <li><a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">СПИСОК ВНЗ</a>
               </li>
-              <li>
-                <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
-              </li>
-              <li>
-                <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-              </li>
-              <li>
-                <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-              </li>
+              <li><a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST"
+                  data-ua="ПРОГРАМИ">ПРОГРАМИ</a></li>
+              <li><a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a></li>
             </ul>
           </nav>
 
-          <div class="lang-search">
-            <span class="language-switch">
+          <div class="footer__lang-search">
+            <span class="footer__language-switch">
               <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
               <button data-lang="en" class="js-switch-button" type="button">EN</button>
             </span>
-            <div class="search-box">
-              <input
-                type="text"
-                class="search-box__input"
-                data-en="Search..."
-                data-ua="Пошук..."
-                placeholder="Search..."
-              />
+
+            <div class="footer__search-box">
+              <input type="text" class="search-box__input" data-en="Search..." data-ua="Шукати..."
+                placeholder="Search..." />
+            </div>
+            <div class="footer__scroll-indicator">
+              <a href="#header-footer-color">
+                <img class="footer__scroll-indicator-img" src="{% static 'project/img/icon_arrow.svg' %}"
+                  alt="Scroll Up Icon" />
+              </a>
             </div>
           </div>
-
-          <input type="checkbox" id="burger-toggle" />
-          <label for="burger-toggle" class="burger">
-            <span></span>
-          </label>
         </div>
+        <div class="footer__line"></div>
       </div>
-      
-      <ul class="mobile-menu">
-        <li class="abt_us">
-          <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
-        </li>
-        <li>
-          <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-        </li>
-        <li>
-          <span class="mobile-language-switch" aria-hidden="true">
-            <button type="button" class="js-switch-button active" data-lang="ua">UA</button>
-            <button type="button" class="js-switch-button" data-lang="en">EN</button>
-          </span>
-        </li>
-      </ul>
+    </div>
+  </footer>
 
-      <div class="overlay"></div>
-    </header>
+  <script src="{% static 'js/main.js' %}" type="module"></script>
 
-    <main>
-      <section class="country-section">
-        <div class="container">
-          <div class="country-section__heading">
-            <span class="text-outline-style" data-en="COUNTRY" data-ua="Країна">COUNTRY</span>
-            <h2 class="about-us__text-fill" data-en="COUNTRY" data-ua="Країна">COUNTRY</h2>
-          </div>
+  <script>
+    document.addEventListener('DOMContentLoaded', () => {
+      // --- Логіка урізання тексту (була раніше) ---
+      const charLimit = 22;
+      const itemsToTruncate = document.querySelectorAll('.js-truncate-link');
 
-          <div class="country-search-box">
-            <div class="search-input-wrapper">
-              <input
-                type="text"
-                class="country-search-box__input"
-                placeholder="Search..."
-                data-en="Search..."
-                data-ua="Шукати..."
-              />
-              <div class="country-search-box__line"></div>
-            </div>
-          </div>
+      itemsToTruncate.forEach(item => {
+        const originalText = item.textContent.trim();
+        if (originalText.length > charLimit) {
+          item.textContent = originalText.substring(0, charLimit) + '...';
+          // Зберігаємо повний текст у title для підказки
+          item.setAttribute('title', originalText);
+        }
+      });
 
-          <div class="checkbox-group">
-            {% for country in countries %}
-            <label class="container-checkbox">
-              <input class="container-checkbox__input" type="checkbox" value="{{ country.name_en }}" />
-              <span class="checkmark"></span>
-              <span class="country-label" 
-                    data-en="{{ country.name_en }}" 
-                    data-ua="{{ country.name_uk }}">
-                    {{ country.name_en }}
-              </span>
-            </label>
-            {% endfor %}
-          </div>
+      // --- Нова логіка фільтрації країн ---
+      const checkboxes = document.querySelectorAll('.container-checkbox__input');
+      // Охоплюємо картки з основного списку та мобільного слайдера
+      const cards = document.querySelectorAll('.university-card, .university-card-m');
+      const noResultsMsg = document.querySelector('.university-list p');
 
-          <div class="checkbox-group-mobile">
-             {% for country in countries %}
-             <label class="container-checkbox">
-              <input class="container-checkbox__input" type="checkbox" value="{{ country.name_en }}" />
-              <span class="checkmark"></span>
-              <span class="country-label" 
-                    data-en="{{ country.name_en }}" 
-                    data-ua="{{ country.name_uk }}">
-                    {{ country.name_en }}
-              </span>
-            </label>
-            {% endfor %}
-          </div>
+      function filterUniversities() {
+        // Отримуємо список значень вибраних чекбоксів (тільки тих, що checked)
+        const checkedValues = Array.from(checkboxes)
+          .filter(cb => cb.checked)
+          .map(cb => cb.value);
 
-          <section class="university-list">
-             {% for uni in universities %}
-             <div class="university-card" data-country="{{ uni.country_en }}">
-                  <img
-                      class="university-card__img"
-                      src="{% if uni.logo %}{{ uni.logo.url }}{% else %}{% static 'project/img/uni1.svg' %}{% endif %}"
-                      alt="{{ uni.name_en|default:uni.name_uk }}"
-                  />
-                  <div class="university-info">
-                      <h2 data-en="{{ uni.name_en }}" data-ua="{{ uni.name_uk }}">
-                          {{ uni.name_en|default:uni.name_uk }}
-                      </h2>
-                      
-                      <div class="uni-data__row">
-                          <span class="uni-data__label" data-en="CONTACT:" data-ua="КОНТАКТ:">CONTACT:</span>
-                          {% if uni.contact_email %}
-                              <span class="uni-data__text js-truncate-link" title="{{ uni.contact_email }}">
-                                  {{ uni.contact_email }}
-                              </span>
-                          {% else %}
-                              -
-                          {% endif %}
-                          <img class="icon-img" src="{% static 'project/img/mail-icon.svg' %}" />
-                      </div>
-                      
-                      {% if uni.website_url %}
-                      <div class="uni-data__row">
-                          <span class="uni-data__label">URL:</span>
-                          <a href="{{ uni.website_url }}" target="_blank" class="uni-data__link js-truncate-link">
-                              {{ uni.website_url }}
-                          </a>
-                          <img class="icon-img" src="{% static 'project/img/icon1.svg' %}" />
-                      </div>
-                      {% endif %}
-                      
-                      <a
-                          href="{% url 'uni-read-more' %}?id={{ uni.id }}"
-                          class="btn read-more-btn"
-                          data-en="Read more"
-                          data-ua="Читати більше"
-                      >Read more</a>
-                  </div>
-             </div>
-             {% empty %}
-                <p style="text-align: center; width: 100%;" data-en="No universities found." data-ua="Університетів не знайдено.">
-                    No universities found.
-                </p>
-             {% endfor %}
-          </section>
+        // Проходимось по всіх картках
+        cards.forEach(card => {
+          const cardCountry = card.getAttribute('data-country');
 
-          <section class="mobile-slider">
-            <div class="slider">
-              <div class="slider__track">
-                
-                {% for uni in universities %}
-                <div class="university-card-m" data-country="{{ uni.country_en }}">
-                      <img
-                          class="university-card-m__img"
-                          src="{% if uni.logo %}{{ uni.logo.url }}{% else %}{% static 'project/img/uni1.svg' %}{% endif %}"
-                          alt="{{ uni.name_en|default:uni.name_uk }}"
-                      />
-                      <div class="university-info-m">
-                          <h2 data-en="{{ uni.name_en }}" data-ua="{{ uni.name_uk }}">
-                              {{ uni.name_en|default:uni.name_uk }}
-                          </h2>
-                          
-                          <div class="uni-data__row">
-                              <span class="uni-data__label" data-en="CONTACT:" data-ua="КОНТАКТ:">CONTACT:</span> 
-                              {% if uni.contact_email %}
-                                  <span class="uni-data__text js-truncate-link" title="{{ uni.contact_email }}">
-                                      {{ uni.contact_email }}
-                                  </span>
-                              {% else %}
-                                  -
-                              {% endif %}
-                              <img class="icon-img" src="{% static 'project/img/mail-icon.svg' %}" alt="Mail Icon" />
-                          </div>
-                          
-                          {% if uni.website_url %}
-                          <div class="uni-data__row">
-                              <span class="uni-data__label">URL:</span>
-                              <a href="{{ uni.website_url }}" target="_blank" class="uni-data__link js-truncate-link">
-                                  {{ uni.website_url }}
-                              </a>
-                              <img class="icon-img" src="{% static 'project/img/icon1.svg' %}" alt="Link Icon" />
-                          </div>
-                          {% endif %}
-                          
-                          <a
-                              href="{% url 'uni-read-more' %}?id={{ uni.id }}"
-                              class="btn read-more-btn-m"
-                              data-en="Read more"
-                              data-ua="Читати більше"
-                          >Read more</a>
-                      </div>
-                </div>
-                {% endfor %}
-
-              </div>
-            </div>
-
-            <button class="slider__arrow slider__arrow--left"></button>
-            <button class="slider__arrow slider__arrow--right"></button>
-            <div class="slider__indicators">
-              <span class="slider__indicator"></span>
-              <span class="slider__indicator"></span>
-            </div>
-          </section>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__container">
-          <div class="footer__logo">
-            <img
-              class="footer__img"
-              src="{% static 'project/img/name_no-background_01.svg' %}"
-              alt="StudentAbroad logo"
-            />
-          </div>
-
-          <div class="footer__bottom-row">
-            <nav class="footer__nav">
-              <ul class="footer__menu">
-                <li><a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ПРО НАС</a></li>
-                <li><a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">СПИСОК ВНЗ</a></li>
-                <li><a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">ПРОГРАМИ</a></li>
-                <li><a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a></li>
-              </ul>
-            </nav>
-
-            <div class="footer__lang-search">
-              <span class="footer__language-switch">
-                <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
-                <button data-lang="en" class="js-switch-button" type="button">EN</button>
-              </span>
-
-              <div class="footer__search-box">
-                <input
-                  type="text"
-                  class="search-box__input"
-                  data-en="Search..."
-                  data-ua="Шукати..."
-                  placeholder="Search..."
-                />
-              </div>
-              <div class="footer__scroll-indicator">
-                <a href="#header-footer-color">
-                  <img
-                    class="footer__scroll-indicator-img"
-                    src="{% static 'project/img/icon_arrow.svg' %}"
-                    alt="Scroll Up Icon"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-          <div class="footer__line"></div>
-        </div>
-      </div>
-    </footer>
-
-    <script src="{% static 'js/main.js' %}" type="module"></script>
-    
-    <script>
-      document.addEventListener('DOMContentLoaded', () => {
-        // --- Логіка урізання тексту (була раніше) ---
-        const charLimit = 22;
-        const itemsToTruncate = document.querySelectorAll('.js-truncate-link');
-
-        itemsToTruncate.forEach(item => {
-          const originalText = item.textContent.trim();
-          if (originalText.length > charLimit) {
-            item.textContent = originalText.substring(0, charLimit) + '...';
-            // Зберігаємо повний текст у title для підказки
-            item.setAttribute('title', originalText);
+          // Якщо нічого не вибрано (checkedValues.length === 0) -> показуємо все
+          // Або якщо країна картки є у списку вибраних -> показуємо
+          if (checkedValues.length === 0 || checkedValues.includes(cardCountry)) {
+            card.style.display = ''; // Скидаємо display, щоб повернути стилі CSS
+          } else {
+            card.style.display = 'none';
           }
         });
 
-        // --- Нова логіка фільтрації країн ---
-        const checkboxes = document.querySelectorAll('.container-checkbox__input');
-        // Охоплюємо картки з основного списку та мобільного слайдера
-        const cards = document.querySelectorAll('.university-card, .university-card-m');
-        const noResultsMsg = document.querySelector('.university-list p'); 
+        // Обробка повідомлення "No universities found" (тільки для десктоп списку)
+        // Перевіряємо, чи є видимі картки саме в основному списку
+        const visibleDesktopCards = document.querySelectorAll('.university-card:not([style*="display: none"])');
 
-        function filterUniversities() {
-            // Отримуємо список значень вибраних чекбоксів (тільки тих, що checked)
-            const checkedValues = Array.from(checkboxes)
-                .filter(cb => cb.checked)
-                .map(cb => cb.value);
-
-            // Проходимось по всіх картках
-            cards.forEach(card => {
-                const cardCountry = card.getAttribute('data-country');
-
-                // Якщо нічого не вибрано (checkedValues.length === 0) -> показуємо все
-                // Або якщо країна картки є у списку вибраних -> показуємо
-                if (checkedValues.length === 0 || checkedValues.includes(cardCountry)) {
-                    card.style.display = ''; // Скидаємо display, щоб повернути стилі CSS
-                } else {
-                    card.style.display = 'none';
-                }
-            });
-
-            // Обробка повідомлення "No universities found" (тільки для десктоп списку)
-            // Перевіряємо, чи є видимі картки саме в основному списку
-            const visibleDesktopCards = document.querySelectorAll('.university-card:not([style*="display: none"])');
-            
-            if (noResultsMsg) {
-                // Якщо є університети взагалі, але жоден не відображається через фільтр
-                if (visibleDesktopCards.length === 0 && cards.length > 0) {
-                    noResultsMsg.style.display = 'block';
-                } else {
-                    noResultsMsg.style.display = 'none';
-                }
-            }
+        if (noResultsMsg) {
+          // Якщо є університети взагалі, але жоден не відображається через фільтр
+          if (visibleDesktopCards.length === 0 && cards.length > 0) {
+            noResultsMsg.style.display = 'block';
+          } else {
+            noResultsMsg.style.display = 'none';
+          }
         }
+      }
 
-        // Додаємо слухач подій на кожен чекбокс
-        checkboxes.forEach(cb => {
-            cb.addEventListener('change', (e) => {
-                const valueChanged = e.target.value;
-                const isChecked = e.target.checked;
+      // Додаємо слухач подій на кожен чекбокс
+      checkboxes.forEach(cb => {
+        cb.addEventListener('change', (e) => {
+          const valueChanged = e.target.value;
+          const isChecked = e.target.checked;
 
-                // СИНХРОНІЗАЦІЯ: 
-                // Якщо змінили стан країни в одному місці (наприклад, десктоп),
-                // оновлюємо такий самий чекбокс в іншому місці (мобайл)
-                checkboxes.forEach(otherCb => {
-                    if (otherCb.value === valueChanged) {
-                        otherCb.checked = isChecked;
-                    }
-                });
+          // СИНХРОНІЗАЦІЯ: 
+          // Якщо змінили стан країни в одному місці (наприклад, десктоп),
+          // оновлюємо такий самий чекбокс в іншому місці (мобайл)
+          checkboxes.forEach(otherCb => {
+            if (otherCb.value === valueChanged) {
+              otherCb.checked = isChecked;
+            }
+          });
 
-                // Запускаємо фільтрацію
-                filterUniversities();
-            });
+          // Запускаємо фільтрацію
+          filterUniversities();
         });
-
-        // Запустити один раз при завантаженні сторінки, щоб застосувати логіку
-        // (наприклад, якщо браузер запам'ятав стан чекбоксів при перезавантаженні)
-        filterUniversities();
       });
-    </script>
-  </body>
+
+      // Запустити один раз при завантаженні сторінки, щоб застосувати логіку
+      // (наприклад, якщо браузер запам'ятав стан чекбоксів при перезавантаженні)
+      filterUniversities();
+    });
+  </script>
+</body>
+
 </html>

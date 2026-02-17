@@ -1,347 +1,103 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ university.name_en|default:"StudentAbroad" }}</title>
-    <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
-    <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
-      rel="stylesheet" />
-  </head>
 
-  <body>
-    <header class="site-header" id="header-footer-color">
-      <div class="container">
-        <div class="header__container">
-          <div class="logo">
-            <a href="/">
-              <img
-                src="{% static 'project/img/name_no-background_01.svg' %}"
-                alt="StudentAbroad logo"
-                loading="lazy" />
-            </a>
-          </div>
+{% block meta_title %}{{ meta_title|default:"University Details | StudentAbroad" }}{% endblock %}
+{% block meta_description %}{{ meta_description|default:"Explore exchange programs at this university." }}{% endblock %}
+{% block og_type %}article{% endblock %}
 
-          <nav class="header__nav">
-            <ul class="header__menu">
-              <li>
-                <a
-                  class="link"
-                  href="/"
-                  data-en="ABOUT US"
-                  data-ua="ПРО НАС"
-                  >ABOUT US</a
-                >
-              </li>
-              <li>
-                <a
-                  class="link"
-                  href="/uni-list.html" 
-                  data-en="UNI LIST"
-                  data-ua="СПИСОК ВНЗ"
-                  >UNI LIST</a
-                >
-              </li>
-              <li>
-                <a
-                  class="link"
-                  href="/program-list.html"
-                  data-en="PROGRAM LIST"
-                  data-ua="ПРОГРАМИ"
-                  >PROGRAM LIST</a
-                >
-              </li>
-              <li>
-                <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ"
-                  >FAQ</a
-                >
-              </li>
-            </ul>
-          </nav>
+{% block schema_json_ld %}
+{% if university %}
+<!-- Schema.org EducationalOrganization JSON-LD -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "EducationalOrganization",
+    "name": "{{ university.name_en|default:university.name_uk|escapejs }}",
+    "description": "{{ university.description_en|default:university.description_uk|striptags|truncatewords:50|escapejs }}",
+    "address": {
+        "@type": "PostalAddress",
+        "addressLocality": "{{ university.location_en|default:university.location_uk|escapejs }}",
+        "addressCountry": "{{ university.country.code }}"
+    }{% if university.website_url %},
+    "url": "{{ university.website_url }}"{% endif %}{% if university.contact_email %},
+    "email": "{{ university.contact_email }}"{% endif %}
+}
+</script>
+{% endif %}
+{% endblock %}
 
-          <div class="lang-search">
-            <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
-                UA
-              </button>
-              <button
-                data-lang="en"
-                class="js-switch-button active"
-                type="button">
-                EN
-              </button>
+{% block main_attrs %} id="bg"{% endblock %}
+
+{% block content %}
+<div class="bg-overlay" {% if university.background_image %}
+  style="background-image: url('{{ university.background_image.url }}');" {% endif %}></div>
+
+<section class="back-button">
+  <a href="javascript:history.back()" class="go-back_conf">
+    <svg class="icon" width="16.68" height="8" viewBox="0 0 15 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+        fill="currentColor" />
+    </svg>
+    <span data-en="Go back" data-ua="Назад">Go back</span>
+  </a>
+</section>
+
+<div class="uni-name">
+  <h1 data-en="{{ university.name_en }}" data-ua="{{ university.name_uk }}" class="container">
+    {{ university.name_en|default:university.name_uk|linebreaksbr }}
+  </h1>
+</div>
+
+<section class="page-content">
+  <div class="info-box">
+    <div class="uni-info">
+      <div class="location-contact">
+        <div class="info-block">
+          <div class="info-line">
+            <span class="label" data-en="LOCATION:" data-ua="ЛОКАЦІЯ:">LOCATION:</span>
+            <span class="thin-text" data-en="{{ university.location_en }}&nbsp;&nbsp;"
+              data-ua="{{ university.location_uk }}&nbsp;&nbsp;">
+              {{ university.location_en }}&nbsp;&nbsp;
             </span>
-            <div class="search-box">
-              <input
-                type="text"
-                class="search-box__input"
-                data-en="Search..."
-                data-ua="Пошук..."
-                placeholder="Search..." />
-            </div>
+            <img src="{% static 'project/img/loc-blc.ico' %}" alt="Location icon" />
           </div>
-
-          <input type="checkbox" id="burger-toggle" />
-          <label for="burger-toggle" class="burger">
-            <span></span>
-          </label>
+          <div class="info-line">
+            <span class="label" data-en="CONTACTS:" data-ua="КОНТАКТИ:">CONTACTS:</span>
+            <span class="thin-text">{{ university.contact_email }}&nbsp;&nbsp;</span>
+            <img src="{% static 'project/img/mail-icon.svg' %}" alt="Mail icon" />
+          </div>
         </div>
       </div>
-      <ul class="mobile-menu">
-        <li class="abt_us">
-          <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС"
-            >ABOUT US</a
-          >
-        </li>
-        <li>
-          <a
-            class="link"
-            href="/uni-list.html"
-            data-en="UNI LIST"
-            data-ua="СПИСОК ВНЗ"
-            >UNI LIST</a
-          >
-        </li>
-        <li>
-          <a
-            class="link"
-            href="/program-list.html"
-            data-en="PROGRAM LIST"
-            data-ua="ПРОГРАМИ"
-            >PROGRAM LIST</a
-          >
-        </li>
-        <li>
-          <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-        </li>
-        <li>
-          <span class="mobile-language-switch" aria-hidden="true">
-            <button
-              type="button"
-              class="js-switch-button"
-              data-lang="ua"
-              aria-label="Українська">
-              UA
-            </button>
-            <button
-              type="button"
-              class="js-switch-button active"
-              data-lang="en"
-              aria-label="English">
-              EN
-            </button>
-          </span>
-        </li>
-      </ul>
-
-      <div class="overlay"></div>
-    </header>
-
-<main id="bg">
-      
-      <div class="bg-overlay" 
-           {% if university.background_image %}
-           style="background-image: url('{{ university.background_image.url }}');"
-           {% endif %}
-      ></div>
-
-      <section class="back-button">
-        <a href="javascript:history.back()" class="go-back_conf">
-            <svg
-            class="icon"
-            width="16.68"
-            height="8"
-            viewBox="0 0 15 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
-              fill="currentColor" />
-          </svg>
-          <span data-en="Go back" data-ua="Назад">Go back</span>
-        </a>
-      </section>
-
-      <div class="uni-name">
-          <h1
-          data-en="{{ university.name_en }}"
-          data-ua="{{ university.name_uk }}"
-          class="container">
-          {{ university.name_en|default:university.name_uk|linebreaksbr }}
-        </h1>
+      <div class="chill_line"></div>
+      <div class="description-mobile-box">
+        <p class="description" data-en="{{ university.description_en }}" data-ua="{{ university.description_uk }}">
+          {{ university.description_en|default:university.description_uk }}
+        </p>
       </div>
 
-      <section class="page-content">
-          <div class="info-box">
-          <div class="uni-info">
-            <div class="location-contact">
-              <div class="info-block">
-                <div class="info-line">
-                  <span class="label" data-en="LOCATION:" data-ua="ЛОКАЦІЯ:"
-                    >LOCATION:</span
-                  >
-                  <span
-                    class="thin-text"
-                    data-en="{{ university.location_en }}&nbsp;&nbsp;"
-                    data-ua="{{ university.location_uk }}&nbsp;&nbsp;"
-                    >
-                    {{ university.location_en }}&nbsp;&nbsp;
-                  </span>
-                  <img src="{% static 'project/img/loc-blc.ico' %}" alt="Location icon" />
-                </div>
-                <div class="info-line">
-                  <span class="label" data-en="CONTACTS:" data-ua="КОНТАКТИ:"
-                    >CONTACTS:</span
-                  >
-                  <span class="thin-text">{{ university.contact_email }}&nbsp;&nbsp;</span>
-                  <img src="{% static 'project/img/mail-icon.svg' %}" alt="Mail icon" />
-                </div>
-              </div>
-            </div>
-            <div class="chill_line"></div>
-            <div class="description-mobile-box">
-              <p
-                class="description"
-                data-en="{{ university.description_en }}"
-                data-ua="{{ university.description_uk }}">
-                {{ university.description_en|default:university.description_uk }}
-              </p>
-            </div>
+      {% if university.website_url %}
+      <a class="read-more-link" href="{{ university.website_url }}" target="_blank" data-en="read more(sources)"
+        data-ua="читати більше(джерела)">read more(sources)</a>
+      {% endif %}
 
-            {% if university.website_url %}
-            <a
-              class="read-more-link"
-              href="{{ university.website_url }}"
-              target="_blank"
-              data-en="read more(sources)"
-              data-ua="читати більше(джерела)"
-              >read more(sources)</a
-            >
-            {% endif %}
-
-            <section class="university-mobility">
-              <h3 data-en="University mobility:" data-ua="Програми обміну:">
-                University mobility:
-              </h3>
-              <div class="mobility-links">
-                {% for program in programs %}
-                    <a
-                      href="{% url 'programs-read-more' %}?id={{ program.id }}"
-                      data-en="{{ program.name_en }}"
-                      data-ua="{{ program.name_uk }}"
-                      >
-                      {{ program.name_en|default:program.name_uk }}
-                    </a>
-                {% empty %}
-                    <p data-en="No programs available at the moment." data-ua="Наразі доступних програм немає.">
-                        No programs available at the moment.
-                    </p>
-                {% endfor %}
-              </div>
-            </section>
-          </div>
+      <section class="university-mobility">
+        <h3 data-en="University mobility:" data-ua="Програми обміну:">
+          University mobility:
+        </h3>
+        <div class="mobility-links">
+          {% for program in programs %}
+          <a href="{{ program.get_absolute_url }}" data-en="{{ program.name_en }}" data-ua="{{ program.name_uk }}">
+            {{ program.name_en|default:program.name_uk }}
+          </a>
+          {% empty %}
+          <p data-en="No programs available at the moment." data-ua="Наразі доступних програм немає.">
+            No programs available at the moment.
+          </p>
+          {% endfor %}
         </div>
       </section>
-    </main>
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__container">
-          <div class="footer__logo">
-            <img
-              class="footer__img"
-              src="{% static 'project/img/name_no-background_01.svg' %}"
-              alt="StudentAbroad logo" />
-          </div>
-
-          <div class="footer__bottom-row">
-            <nav class="footer__nav">
-              <ul class="footer__menu">
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/"
-                    data-en="ABOUT US"
-                    data-ua="ПРО НАС"
-                    data-_lang-applied="ua"
-                    >ПРО НАС</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/uni-list.html"
-                    data-en="UNI LIST"
-                    data-ua="СПИСОК ВНЗ"
-                    data-_lang-applied="ua"
-                    >СПИСОК ВНЗ</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/program-list.html"
-                    data-en="PROGRAM LIST"
-                    data-ua="ПРОГРАМИ"
-                    data-_lang-applied="ua"
-                    >ПРОГРАМИ</a
-                  >
-                </li>
-
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/faq.html"
-                    data-en="FAQ"
-                    data-ua="FAQ"
-                    data-_lang-applied="ua"
-                    >FAQ</a
-                  >
-                </li>
-              </ul>
-            </nav>
-
-            <div class="footer__lang-search">
-              <span class="footer__language-switch">
-                <button
-                  data-lang="ua"
-                  class="js-switch-button active"
-                  type="button">
-                  UA
-                </button>
-
-                <button data-lang="en" class="js-switch-button" type="button">
-                  EN
-                </button>
-              </span>
-
-              <div class="footer__search-box">
-                <input
-                  type="text"
-                  class="search-box__input"
-                  data-en="Search..."
-                  data-ua="Пошук..."
-                  placeholder="Search..." />
-              </div>
-              <div class="footer__scroll-indicator">
-                <a href="#header-footer-color">
-                  <img
-                    class="footer__scroll-indicator-img"
-                    src="{% static 'project/img/icon_arrow.svg' %}"
-                    alt="Scroll Up Icon" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer__line"></div>
-        </div>
-      </div>
-    </footer>
-    <script type="module" src="{% static 'js/main.js' %}"></script>
-  </body>
-</html>
+    </div>
+  </div>
+</section>
+{% endblock %}

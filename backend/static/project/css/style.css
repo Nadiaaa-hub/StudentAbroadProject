@@ -4628,15 +4628,19 @@ select {
 }
 
 .faq__line {
-  border-top: 1px solid var(--color-grey);
   width: 100%;
-  border-top-width: 1.5px;
-  border-top-color: #888;
+  height: 1.7px;
+  background-color: var(--color-grey);
+  margin: 1px 0;
+  border: none;
 }
 
 @media (max-width: 459px) {
   .faq__line {
-    border-top: 1.5px solid var(--color-grey) !important;
+    height: 1.7px;
+    background-color: var(--color-grey) !important;
+    border: none !important;
+    margin: 15px 0;
   }
 }
 
@@ -5140,3 +5144,67 @@ select {
   border: 2px solid red;
   outline: none;
 }
+
+/* --- CUSTOM DROPDOWN HEIGHT LIMITS (User Requested) --- */
+/* Limits height to approx 4 items for Inviting Uni, Home Uni, and Faculty */
+/* Excludes #level-wrapper as requested */
+#inviting-uni-wrapper .custom-select-dropdown,
+#home-uni-wrapper .custom-select-dropdown,
+#faculty-wrapper .custom-select-dropdown {
+  max-height: 300px !important;
+  overflow-y: auto !important;
+  padding-right: 5px;
+  /* Prevent scrollbar overlapping content */
+}
+
+/* --- SEO Breadcrumb Navigation --- */
+.breadcrumb {
+  padding: 12px 20px;
+  background-color: #f8f9fa;
+  border-bottom: 1px solid #e9ecef;
+  font-size: 14px;
+}
+
+.breadcrumb__list {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  gap: 4px;
+}
+
+.breadcrumb__item {
+  display: inline-flex;
+  align-items: center;
+  gap: 4px;
+}
+
+.breadcrumb__item a {
+  color: var(--color-main-blue);
+  text-decoration: none;
+  transition: color 0.2s ease;
+}
+
+.breadcrumb__item a:hover {
+  text-decoration: underline;
+}
+
+.breadcrumb__item span[aria-current="page"] {
+  color: var(--color-grey);
+  font-weight: 500;
+}
+
+.breadcrumb__separator {
+  color: var(--color-grey);
+  margin: 0 4px;
+}
+
+@media (max-width: 768px) {
+  .breadcrumb {
+    padding: 10px 15px;
+    font-size: 13px;
+  }
+}
+

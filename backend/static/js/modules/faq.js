@@ -15,10 +15,10 @@ export function initFAQ() {
 
     const topMetaParagraphs = faqMetaTop
       ? Array.from(
-          faqMetaTop.querySelectorAll(".faq__meta-info > .faq__paragraph")
-        )
+        faqMetaTop.querySelectorAll(".faq__meta-info > .faq__paragraph")
+      )
       : [];
-    const topLine = faqMetaTop ? faqMetaTop.querySelector(".faq__line") : null;
+    const topLine = faqContent.querySelector(".faq__line");
     const topDate = faqMetaTop ? faqMetaTop.querySelector(".faq__date") : null;
 
     // --- Початкові налаштування ---

@@ -1,5 +1,6 @@
 from django.shortcuts import render, get_object_or_404
-from django.http import JsonResponse
+from django.http import JsonResponse, HttpResponsePermanentRedirect
+from urllib.parse import urlencode
 from rest_framework import generics
 from rest_framework.permissions import AllowAny
 from rest_framework.response import Response
@@ -62,17 +63,77 @@ class ProgramOptions(APIView):
 # --- VIEWS ДЛЯ САЙТУ ---
 
 def program_list_page(request):
-    programs = Program.objects.filter(is_approved=True).order_by('-created_at')
+    programs = Program.objects.filter(is_approved=True).select_related(
+        'university', 'home_university'
+    ).order_by('-created_at')
     home_universities = University.objects.filter(home_programs__is_approved=True).distinct().order_by('name_uk')
-    context = {'programs': programs, 'home_universities': home_universities}
+    
+    context = {
+        'programs': programs,
+        'home_universities': home_universities,
+        # SEO Meta
+        'meta_title': 'Study Abroad Programs | StudentAbroad',
+        'meta_title_uk': 'Програми навчання за кордоном | StudentAbroad',
+        'meta_description': 'Browse exchange programs for Ukrainian students. Find Bachelor, Master, and PhD opportunities at universities worldwide.',
+        'meta_description_uk': 'Переглядай програми обміну для українських студентів. Знайди можливості бакалаврату, магістратури та PhD в університетах світу.',
+    }
     return render(request, 'program-list.html', context)
 
-def program_detail_page(request):
-    program_id = request.GET.get('id')
-    context = {}
-    if program_id:
-        program = get_object_or_404(Program, pk=program_id)
-        context = {'program': program, 'useful_links': program.get_useful_links_combined()}
+def program_detail_page(request, slug=None):
+    """
+    View for program detail page.
+    - Slug-based URLs (/program/<slug>/) render the page directly
+    - Legacy URLs (?id=X) do 301 redirect to slug URL (preserving query params)
+    """
+    # Handle legacy ?id= parameter with 301 redirect
+    if not slug:
+        program_id = request.GET.get('id')
+        if program_id:
+            program = get_object_or_404(Program, pk=program_id)
+            
+            # Build redirect URL with preserved query params (except 'id')
+            redirect_url = program.get_absolute_url()
+            
+            # Preserve other query params for marketing tracking
+            query_params = request.GET.copy()
+            query_params.pop('id', None)  # Remove 'id' param
+            if query_params:
+                redirect_url = f"{redirect_url}?{urlencode(query_params)}"
+            
+            return HttpResponsePermanentRedirect(redirect_url)
+        else:
+            # No slug and no id - return empty context
+            return render(request, 'programs-read-more.html', {})
+    
+    # Slug-based URL - render the page
+    program = get_object_or_404(
+        Program.objects.select_related('university', 'home_university'),
+        slug=slug,
+        is_approved=True
+    )
+    
+    # SEO Meta - dynamic from program data
+    program_name = program.name_en or program.name_uk or 'Program'
+    description = (program.description_en or program.description_uk or '')[:160]
+    
+    # Fallback if description is empty
+    if not description:
+        description = f"Learn about {program_name} exchange program at StudentAbroad. Find details about requirements, deadlines, and application process."
+    
+    context = {
+        'program': program,
+        'useful_links': program.get_useful_links_combined(),
+        # SEO Meta
+        'meta_title': f'{program_name} | StudentAbroad',
+        'meta_description': description,
+        'og_type': 'article',
+        # Breadcrumbs for SEO
+        'breadcrumbs': [
+            {'name': 'Home', 'name_uk': 'Головна', 'url': '/'},
+            {'name': 'Programs', 'name_uk': 'Програми', 'url': '/program-list.html'},
+            {'name': program_name, 'name_uk': program.name_uk or program_name, 'url': program.get_absolute_url()},
+        ],
+    }
     return render(request, 'programs-read-more.html', context)
 
 def share_program_page(request):

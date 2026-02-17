@@ -1,5 +1,8 @@
 from django.db import models
+from django.urls import reverse
+from django.utils.text import slugify
 from universities.models import University
+import uuid
 
 class Program(models.Model):
     STUDY_LEVEL_CHOICES = [
@@ -16,6 +19,15 @@ class Program(models.Model):
 
     name_uk = models.CharField(max_length=200, verbose_name="Назва програми")
     name_en = models.CharField(max_length=200, verbose_name="Program name (eng)", blank=True)
+    
+    # SEO: Human-readable URL slug
+    slug = models.SlugField(
+        max_length=255,
+        unique=True,
+        blank=True,
+        verbose_name="URL Slug",
+        help_text="Автоматично генерується з назви"
+    )
     
     university = models.ForeignKey(
         University, 
@@ -82,6 +94,30 @@ class Program(models.Model):
 
     def __str__(self):
         return f"{self.name_uk} (Draft: {not self.is_approved})"
+
+    def save(self, *args, **kwargs):
+        """Auto-generate slug from name if not provided"""
+        if not self.slug:
+            # Use English name if available, otherwise Ukrainian
+            base_name = self.name_en if self.name_en else self.name_uk
+            base_slug = slugify(base_name, allow_unicode=True)
+            
+            # Ensure uniqueness by appending short UUID if needed
+            if not base_slug:
+                base_slug = 'program'
+            
+            unique_slug = base_slug
+            counter = 1
+            while Program.objects.filter(slug=unique_slug).exclude(pk=self.pk).exists():
+                unique_slug = f"{base_slug}-{counter}"
+                counter += 1
+            
+            self.slug = unique_slug
+        super().save(*args, **kwargs)
+
+    def get_absolute_url(self):
+        """Returns canonical URL for SEO sitemaps"""
+        return reverse('program-detail', kwargs={'slug': self.slug})
 
     def get_useful_links_combined(self):
         links = []

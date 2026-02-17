@@ -74,6 +74,11 @@ def faq_page_view(request):
     
     context = {
         'faqs': faqs,
+        # SEO Meta
+        'meta_title': 'FAQ - Frequently Asked Questions | StudentAbroad',
+        'meta_title_uk': 'FAQ - Часті питання | StudentAbroad',
+        'meta_description': 'Get answers to common questions about studying abroad, exchange programs, and application processes.',
+        'meta_description_uk': 'Отримай відповіді на поширені питання про навчання за кордоном, програми обміну та процес подачі документів.',
     }
     
     return render(request, 'faq.html', context)

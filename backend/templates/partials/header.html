@@ -1,0 +1,85 @@
+{% load static %}
+<!-- Header Partial - Included from base.html -->
+<header class="site-header" id="header-footer-color">
+    <div class="container">
+        <div class="header__container">
+            <!-- Logo -->
+            <div class="logo">
+                <a href="/" aria-label="StudentAbroad Home">
+                    <img src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" width="180"
+                        height="40" loading="eager">
+                </a>
+            </div>
+
+            <!-- Desktop Navigation -->
+            <nav class="header__nav" aria-label="Main navigation">
+                <ul class="header__menu">
+                    <li>
+                        <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+                    </li>
+                    <li>
+                        <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+                    </li>
+                    <li>
+                        <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM
+                            LIST</a>
+                    </li>
+                    <li>
+                        <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+                    </li>
+                </ul>
+            </nav>
+
+            <!-- Language Switch & Search -->
+            <div class="lang-search">
+                <span class="language-switch" role="group" aria-label="Language selection">
+                    <button data-lang="ua" class="js-switch-button" type="button" aria-label="Українська">
+                        UA
+                    </button>
+                    <button data-lang="en" class="js-switch-button active" type="button" aria-label="English">
+                        EN
+                    </button>
+                </span>
+                <div class="search-box">
+                    <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..."
+                        placeholder="Search..." aria-label="Search">
+                </div>
+            </div>
+
+            <!-- Mobile Burger Menu -->
+            <input type="checkbox" id="burger-toggle" aria-hidden="true">
+            <label for="burger-toggle" class="burger" aria-label="Toggle menu">
+                <span></span>
+            </label>
+        </div>
+    </div>
+
+    <!-- Mobile Menu -->
+    <ul class="mobile-menu" role="navigation" aria-label="Mobile navigation">
+        <li class="abt_us">
+            <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+        </li>
+        <li>
+            <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+        </li>
+        <li>
+            <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+        </li>
+        <li>
+            <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+        </li>
+        <li>
+            <span class="mobile-language-switch" role="group" aria-label="Language selection">
+                <button type="button" class="js-switch-button" data-lang="ua" aria-label="Українська">
+                    UA
+                </button>
+                <button type="button" class="js-switch-button active" data-lang="en" aria-label="English">
+                    EN
+                </button>
+            </span>
+        </li>
+    </ul>
+
+    <!-- Overlay -->
+    <div class="overlay" aria-hidden="true"></div>
+</header>

@@ -16,12 +16,17 @@ ALLOWED_HOSTS = ['*']
 
 # ДОДАТКИ
 INSTALLED_APPS = [
+    # Django Unfold - MUST be before django.contrib.admin
+    "unfold",
+    "unfold.contrib.filters",
+    
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'django.contrib.sitemaps',  # SEO: Sitemap generation
     
     # Сторонні бібліотеки
     'rest_framework',
@@ -34,6 +39,92 @@ INSTALLED_APPS = [
     'programs.apps.ProgramsConfig',
     'faq.apps.FaqConfig',  # Окремий додаток FAQ
 ]
+
+# ============================================================
+# DJANGO UNFOLD CONFIGURATION
+# ============================================================
+from django.templatetags.static import static
+from django.urls import reverse_lazy
+
+UNFOLD = {
+    "SITE_TITLE": "StudentAbroad Adminka",
+    "SITE_HEADER": "StudentAbroad Adminka",
+    "SITE_SYMBOL": "school",  # Material Symbol
+    
+    # Color theme - Academic Blue
+    "COLORS": {
+        "primary": {
+            "50": "239 246 255",
+            "100": "219 234 254",
+            "200": "191 219 254",
+            "300": "147 197 253",
+            "400": "96 165 250",
+            "500": "59 130 246",
+            "600": "37 99 235",
+            "700": "29 78 216",
+            "800": "30 64 175",  # Primary Academic Blue #1E40AF
+            "900": "30 58 138",
+            "950": "23 37 84",
+        },
+    },
+    
+    # Sidebar Navigation Groups
+    "SIDEBAR": {
+        "show_search": True,
+        "show_all_applications": False,
+        "navigation": [
+            {
+                "title": "Education Content",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Програми",
+                        "icon": "menu_book",
+                        "link": reverse_lazy("admin:programs_program_changelist"),
+                    },
+                    {
+                        "title": "Університети",
+                        "icon": "school",
+                        "link": reverse_lazy("admin:universities_university_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Site Content",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "FAQ",
+                        "icon": "help_center",
+                        "link": reverse_lazy("admin:faq_faqitem_changelist"),
+                    },
+                    {
+                        "title": "FAQ Категорії",
+                        "icon": "category",
+                        "link": reverse_lazy("admin:faq_faqcategory_changelist"),
+                    },
+                ],
+            },
+            {
+                "title": "Access Control",
+                "separator": True,
+                "items": [
+                    {
+                        "title": "Користувачі",
+                        "icon": "people",
+                        "link": reverse_lazy("admin:auth_user_changelist"),
+                    },
+                    {
+                        "title": "Групи",
+                        "icon": "groups",
+                        "link": reverse_lazy("admin:auth_group_changelist"),
+                    },
+                ],
+            },
+        ],
+    },
+}
+
 
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
@@ -64,6 +155,7 @@ TEMPLATES = [
                 'django.contrib.auth.context_processors.auth',
                 'django.contrib.messages.context_processors.messages',
                 'django.template.context_processors.i18n',
+                'config.context_processors.seo_defaults',  # SEO defaults
             ],
         },
     },

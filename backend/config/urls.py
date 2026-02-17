@@ -6,37 +6,53 @@ from django.conf.urls.static import static
 from django.views.generic.base import TemplateView
 from django.views.static import serve 
 from django.conf.urls.i18n import i18n_patterns
+from django.contrib.sitemaps.views import sitemap
 import os
 
+# SEO imports
+from .sitemaps import StaticViewSitemap, ProgramSitemap, UniversitySitemap, FAQSitemap
+from .seo_views import robots_txt_view
 
 # Імпортуємо views
 from universities.views import university_page_view, university_list_page
 from programs.views import program_list_page, program_detail_page, share_program_page
 from faq.views import faq_page_view  
 
+# Sitemap configuration
+sitemaps = {
+    'static': StaticViewSitemap,
+    'programs': ProgramSitemap,
+    'universities': UniversitySitemap,
+    'faq': FAQSitemap,
+}
+
 urlpatterns = [
     path('admin/', admin.site.urls),
     path('api/programs/', include('programs.urls')),
     path('api/universities/', include('universities.urls')),
     path('faq/', include('faq.urls')),
+    # SEO URLs
+    path('sitemap.xml', sitemap, {'sitemaps': sitemaps}, name='django.contrib.sitemaps.views.sitemap'),
+    path('robots.txt', robots_txt_view, name='robots'),
 ]
 
 urlpatterns += i18n_patterns(
-    # --- ВИПРАВЛЕННЯ ТУТ ---
-    # Змінили name='home' на name='index', щоб збігалося з шаблоном {% url 'index' %}
+    # --- Головні сторінки ---
     path('', TemplateView.as_view(template_name='index.html'), name='index'),
     path('index.html', TemplateView.as_view(template_name='index.html'), name='home-index'),
     
-    # Додали name='confirmation', щоб працював редірект після форми
     path('confirmation.html', TemplateView.as_view(template_name='confirmation.html'), name='confirmation'),
-    
-    # Додали name='faq'
     path('faq.html', faq_page_view, name='faq'),
-    # -----------------------
 
+    # --- Списки ---
     path('program-list.html', program_list_page, name='program-list'),
     path('uni-list.html', university_list_page, name='uni-list'),
     
+    # --- SEO: Slug-based URLs (нові, human-readable) ---
+    path('program/<slug:slug>/', program_detail_page, name='program-detail'),
+    path('university/<slug:slug>/', university_page_view, name='university-detail'),
+    
+    # --- Legacy: Query parameter URLs (для зворотної сумісності) ---
     path('uni-read-more.html', university_page_view, name='uni-read-more'),
     path('programs-read-more.html', program_detail_page, name='programs-read-more'),
 

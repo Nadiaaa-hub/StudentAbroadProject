@@ -1,0 +1,117 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="{% block html_lang %}en{% endblock %}">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <!-- Primary SEO Meta Tags -->
+    <title>{% block meta_title %}{{ default_meta_title }}{% endblock %}</title>
+    <meta name="description" content="{% block meta_description %}{{ default_meta_description }}{% endblock %}">
+    <link rel="canonical" href="{% block canonical_url %}{{ canonical_url }}{% endblock %}">
+
+    <!-- Hreflang: International SEO for multilingual content -->
+    <link rel="alternate" hreflang="uk"
+        href="{{ request.scheme }}://{{ request.get_host }}/uk{{ request.path }}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">
+    <link rel="alternate" hreflang="en"
+        href="{{ request.scheme }}://{{ request.get_host }}/en{{ request.path }}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">
+    <link rel="alternate" hreflang="x-default"
+        href="{{ request.scheme }}://{{ request.get_host }}{{ request.path }}{% if request.GET.urlencode %}?{{ request.GET.urlencode }}{% endif %}">
+
+    <!-- Open Graph / Facebook -->
+    <meta property="og:type" content="{% block og_type %}website{% endblock %}">
+    <meta property="og:url" content="{{ canonical_url }}">
+    <meta property="og:title" content="{% block og_title %}{{ default_meta_title }}{% endblock %}">
+    <meta property="og:description" content="{% block og_description %}{{ default_meta_description }}{% endblock %}">
+    <meta property="og:image" content="{% block og_image %}{{ default_og_image }}{% endblock %}">
+    <meta property="og:site_name" content="{{ site_name }}">
+    <meta property="og:locale" content="uk_UA">
+    <meta property="og:locale:alternate" content="en_US">
+
+    <!-- Twitter Cards -->
+    <meta name="twitter:card" content="summary_large_image">
+    <meta name="twitter:title" content="{% block twitter_title %}{{ default_meta_title }}{% endblock %}">
+    <meta name="twitter:description"
+        content="{% block twitter_description %}{{ default_meta_description }}{% endblock %}">
+    <meta name="twitter:image" content="{% block twitter_image %}{{ default_og_image }}{% endblock %}">
+
+    <!-- Favicon -->
+    <link rel="icon" type="image/svg+xml" href="{% static 'project/img/logo_part1.svg' %}">
+
+    <!-- Preconnect for external resources -->
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="{% static 'project/css/style.css' %}">
+    <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap" rel="stylesheet">
+
+    {% block extra_css %}{% endblock %}
+
+    <!-- Schema.org JSON-LD: Organization -->
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "Organization",
+        "name": "StudentAbroad",
+        "url": "{{ request.scheme }}://{{ request.get_host }}/",
+        "logo": "{{ request.scheme }}://{{ request.get_host }}{% static 'project/img/logo.svg' %}",
+        "sameAs": [
+            "https://www.instagram.com/studentabroad.ua",
+            "https://t.me/studentabroadua",
+            "https://www.tiktok.com/@studentabroad.ua"
+        ],
+        "contactPoint": {
+            "@type": "ContactPoint",
+            "email": "studentabroad.info@gmail.com",
+            "contactType": "customer service"
+        }
+    }
+    </script>
+
+    <!-- Schema.org JSON-LD: BreadcrumbList (if breadcrumbs present) -->
+    {% if breadcrumbs %}
+    <script type="application/ld+json">
+    {
+        "@context": "https://schema.org",
+        "@type": "BreadcrumbList",
+        "itemListElement": [
+            {% for crumb in breadcrumbs %}
+            {
+                "@type": "ListItem",
+                "position": {{ forloop.counter }},
+                "name": "{{ crumb.name }}",
+                "item": "{{ request.scheme }}://{{ request.get_host }}{{ crumb.url }}"
+            }{% if not forloop.last %},{% endif %}
+            {% endfor %}
+        ]
+    }
+    </script>
+    {% endif %}
+
+    {% block schema_json_ld %}{% endblock %}
+</head>
+
+<body{% block body_attrs %}{% endblock %}>
+    {% block header %}
+    {% include "partials/header.html" %}
+    {% endblock %}
+
+
+    <!-- Note: Breadcrumb JSON-LD schema is in <head> for SEO, but visible breadcrumbs removed per design -->
+
+    <main{% block main_attrs %}{% endblock %}>
+        {% block content %}{% endblock %}
+        </main>
+
+        {% block footer %}
+        {% include "partials/footer.html" %}
+        {% endblock %}
+
+        <!-- Scripts with defer for non-blocking load -->
+        <script type="module" src="{% static 'js/main.js' %}" defer></script>
+        {% block extra_js %}{% endblock %}
+        </body>
+
+</html>

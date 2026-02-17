@@ -1,352 +1,163 @@
+{% extends "base.html" %}
 {% load static %}
-<!DOCTYPE html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>{{ program.name_en|default:program.name_uk }}</title>
-    <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500&display=swap"
-      rel="stylesheet" />
-    <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
-  </head>
 
-  <body>
-    <header class="site-header" id="header-footer-color">
-      <div class="container">
-        <div class="header__container">
-          <div class="logo">
-            <a href="/">
-              <img
-                src="{% static 'project/img/name_no-background_01.svg' %}"
-                alt="StudentAbroad logo"
-                loading="lazy" />
-            </a>
-          </div>
+{% block meta_title %}{{ meta_title|default:"Program Details | StudentAbroad" }}{% endblock %}
+{% block meta_description %}{{ meta_description|default:"Learn about this exchange program opportunity." }}{% endblock %}
+{% block og_type %}article{% endblock %}
 
-          <nav class="header__nav">
-            <ul class="header__menu">
-              <li>
-                <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
-              </li>
-              <li>
-                <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
-              </li>
-              <li>
-                <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-              </li>
-              <li>
-                <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-              </li>
-            </ul>
-          </nav>
+{% block schema_json_ld %}
+{% if program %}
+<!-- Schema.org Course JSON-LD -->
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Course",
+    "name": "{{ program.name_en|default:program.name_uk|escapejs }}",
+    "description": "{{ program.description_en|default:program.description_uk|striptags|truncatewords:50|escapejs }}",
+    "provider": {
+        "@type": "EducationalOrganization",
+        "name": "{% if program.university %}{{ program.university.name_en|default:program.university.name_uk|escapejs }}{% else %}Various Universities{% endif %}"
+    },
+    "educationalLevel": "{{ program.study_level }}",
+    "inLanguage": ["uk", "en"]
+}
+</script>
+{% endif %}
+{% endblock %}
 
-          <div class="lang-search">
-            <span class="language-switch">
-              <button data-lang="ua" class="js-switch-button" type="button">
-                UA
-              </button>
-              <button
-                data-lang="en"
-                class="js-switch-button active"
-                type="button">
-                EN
-              </button>
-            </span>
-            <div class="search-box">
-              <input
-                type="text"
-                class="search-box__input"
-                data-en="Search..."
-                data-ua="Пошук..."
-                placeholder="Search..." />
-            </div>
-          </div>
+{% block main_attrs %} class="container-s"{% endblock %}
 
-          <input type="checkbox" id="burger-toggle" />
-          <label for="burger-toggle" class="burger">
-            <span></span>
-          </label>
-        </div>
-      </div>
-      <ul class="mobile-menu">
-        <li class="abt_us">
-          <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
-        </li>
-        <li>
-          <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-        </li>
-        <li>
-          <span class="mobile-language-switch" aria-hidden="true">
-            <button type="button" class="js-switch-button" data-lang="ua">UA</button>
-            <button type="button" class="js-switch-button active" data-lang="en">EN</button>
-          </span>
-        </li>
-      </ul>
+{% block content %}
+<section class="back-button-gray">
+  <a href="javascript:history.back()" class="go-back_conf">
+    <svg class="icon" width="16.68" height="8" viewBox="0 0 15 32" fill="none" xmlns="http://www.w3.org/2000/svg">
+      <path
+        d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
+        fill="currentColor" />
+    </svg>
+    <span data-en="Go back" data-ua="Назад">Go back</span>
+  </a>
+</section>
 
-      <div class="overlay"></div>
-    </header>
+<div class="program-name" id="program-section">
+  <h1 class="container"
+    data-en="{{ program.name_en|default:program.name_uk }} {% if not program.home_university and not program.university %}(Any University){% elif not program.home_university %}(Any University - {{ program.university.name_en|default:program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University){% else %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }}){% endif %}"
+    data-ua="{{ program.name_uk }} {% if not program.home_university and not program.university %}(Будь-який університет){% elif not program.home_university %}(Будь-який університет - {{ program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_uk }} - Будь-який університет){% else %}({{ program.home_university.name_uk }} - {{ program.university.name_uk }}){% endif %}">
 
-    <main class="container-s">
-      <section class="back-button-gray">
-        <a href="javascript:history.back()" class="go-back_conf">
-          <svg
-            class="icon"
-            width="16.68"
-            height="8"
-            viewBox="0 0 15 32"
-            fill="none"
-            xmlns="http://www.w3.org/2000/svg">
-            <path
-              d="M0.551 17.884c-0.735-0.876-0.735-2.298 0-3.174l11.292-13.452c0.735-0.876 1.929-0.876 2.664 0s0.735 2.298 0 3.174l-9.963 11.869 9.957 11.869c0.735 0.876 0.735 2.298 0 3.174s-1.929 0.876-2.664 0l-11.292-13.452 0.006-0.007z"
-              fill="currentColor" />
-          </svg>
-          <span data-en="Go back" data-ua="Назад">Go back</span>
-        </a>
-      </section>
+    {{ program.name_en|default:program.name_uk }}
 
-      <div class="program-name" id="program-section">
-        <h1
-          class="container"
-          data-en="{{ program.name_en|default:program.name_uk }} {% if not program.home_university and not program.university %}(Any University){% elif not program.home_university %}(Any University - {{ program.university.name_en|default:program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University){% else %}({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }}){% endif %}"
-          data-ua="{{ program.name_uk }} {% if not program.home_university and not program.university %}(Будь-який університет){% elif not program.home_university %}(Будь-який університет - {{ program.university.name_uk }}){% elif not program.university %}({{ program.home_university.name_uk }} - Будь-який університет){% else %}({{ program.home_university.name_uk }} - {{ program.university.name_uk }}){% endif %}">
-          
-          {{ program.name_en|default:program.name_uk }}
-          
-          {% if not program.home_university and not program.university %}
-              (Any University)
-          {% elif not program.home_university %}
-              (Any University - {{ program.university.name_en|default:program.university.name_uk }})
-          {% elif not program.university %}
-              ({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University)
-          {% else %}
-              ({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{ program.university.name_en|default:program.university.name_uk }})
-          {% endif %}
-        </h1>
-      </div>
+    {% if not program.home_university and not program.university %}
+    (Any University)
+    {% elif not program.home_university %}
+    (Any University - {{ program.university.name_en|default:program.university.name_uk }})
+    {% elif not program.university %}
+    ({{ program.home_university.name_en|default:program.home_university.name_uk }} - Any University)
+    {% else %}
+    ({{ program.home_university.name_en|default:program.home_university.name_uk }} - {{
+    program.university.name_en|default:program.university.name_uk }})
+    {% endif %}
+  </h1>
+</div>
 
-      <section>
-        <div class="program-info">
-          
-          <div class="info-row">
-            <h2 data-en="LEVEL:" data-ua="СТУПІНЬ:">LEVEL:</h2>
-            <span class="thin-text" 
-                  data-en="{{ program.study_level|title }}" 
-                  data-ua="{% if program.study_level == 'Bachelor' %}Бакалавр{% elif program.study_level == 'Master' %}Магістр{% elif program.study_level == 'PhD' %}PhD{% else %}Інше{% endif %}">
-                  {{ program.study_level|title }}
-            </span>
-          </div>
-          
-          <div class="info-row">
-            <h2 data-en="FACULTY:" data-ua="ФАКУЛЬТЕТ:">FACULTY:</h2>
-            <span class="thin-text" 
-                  data-en="{{ program.faculty_en }}" 
-                  data-ua="{{ program.faculty_uk }}">
-                  {{ program.faculty_en|default:program.faculty_uk }}
-            </span>
-          </div>
-          
-          <div class="info-row">
-            <h2 data-en="HOME UNI:" data-ua="БАЗОВИЙ УНІВЕРСИТЕТ:">
-              HOME UNI:
-            </h2>
-            {% if program.home_university %}
-                <a
-                  href="{% url 'uni-read-more' %}?id={{ program.home_university.id }}"
-                  class="blue-links"
-                  data-en="{{ program.home_university.name_en }}, {{ program.home_university.country_en }}"
-                  data-ua="{{ program.home_university.name_uk }}, {{ program.home_university.country_uk }}">
-                  {{ program.home_university.name_en|default:program.home_university.name_uk }}, {{ program.home_university.country_en }}
-                </a>
-            {% else %}
-                <span class="thin-text" data-en="Any University" data-ua="Будь-який університет">Any University</span>
-            {% endif %}
-          </div>
+<section>
+  <div class="program-info">
 
-          <div class="info-row">
-            <h2 data-en="INVITING UNI:" data-ua="УНІВЕРСИТЕТ-ПАРТНЕР:">
-              INVITING UNI:
-            </h2>
-            {% if program.university %}
-                <a
-                  href="{% url 'uni-read-more' %}?id={{ program.university.id }}"
-                  class="blue-links"
-                  data-en="{{ program.university.name_en }}, {{ program.university.country_en }}"
-                  data-ua="{{ program.university.name_uk }}, {{ program.university.country_uk }}">
-                  {{ program.university.name_en|default:program.university.name_uk }}, {{ program.university.country_en }}
-                </a>
-            {% else %}
-                <span class="thin-text" data-en="Any University" data-ua="Будь-який університет">Any University</span>
-            {% endif %}
-          </div>
-        </div>
-      </section>
+    <div class="info-row">
+      <h2 data-en="LEVEL:" data-ua="СТУПІНЬ:">LEVEL:</h2>
+      <span class="thin-text" data-en="{{ program.study_level|title }}"
+        data-ua="{% if program.study_level == 'Bachelor' %}Бакалавр{% elif program.study_level == 'Master' %}Магістр{% elif program.study_level == 'PhD' %}PhD{% else %}Інше{% endif %}">
+        {{ program.study_level|title }}
+      </span>
+    </div>
 
-      <section class="program-body">
-        <section class="left-section">
-          <img class="icon-img" src="{% static 'project/img/quotation.svg' %}" alt="Quote" />
-          
-          <p
-            class="description"
-            data-en="{{ program.testimonial_en }}"
-            data-ua="{{ program.testimonial_uk }}">
-            {{ program.testimonial_en|default:program.testimonial_uk }}
-          </p>
-          
-          {% if program.submitted_by_name %}
-          <p
-            class="user-greetings"
-            data-en="Thank you for sharing {{ program.submitted_by_name }}"
-            data-ua="Окрема подяка {{ program.submitted_by_name }}">
-            Thank you for sharing {{ program.submitted_by_name }}
-          </p>
-          {% endif %}
-        </section>
+    <div class="info-row">
+      <h2 data-en="FACULTY:" data-ua="ФАКУЛЬТЕТ:">FACULTY:</h2>
+      <span class="thin-text" data-en="{{ program.faculty_en }}" data-ua="{{ program.faculty_uk }}">
+        {{ program.faculty_en|default:program.faculty_uk }}
+      </span>
+    </div>
 
-        <section class="right-section">
-          <h3 data-en="Description" data-ua="Опис програми">Description</h3>
-          
-          <p
-            data-en="{{ program.description_en }}"
-            data-ua="{{ program.description_uk }}">
-            {{ program.description_en|default:program.description_uk }}
-          </p>
+    <div class="info-row">
+      <h2 data-en="HOME UNI:" data-ua="БАЗОВИЙ УНІВЕРСИТЕТ:">
+        HOME UNI:
+      </h2>
+      {% if program.home_university %}
+      <a href="{{ program.home_university.get_absolute_url }}" class="blue-links"
+        data-en="{{ program.home_university.name_en }}, {{ program.home_university.country_en }}"
+        data-ua="{{ program.home_university.name_uk }}, {{ program.home_university.country_uk }}">
+        {{ program.home_university.name_en|default:program.home_university.name_uk }}, {{
+        program.home_university.country_en }}
+      </a>
+      {% else %}
+      <span class="thin-text" data-en="Any University" data-ua="Будь-який університет">Any University</span>
+      {% endif %}
+    </div>
 
-          <h3
-            data-en="Useful links/contacts:"
-            data-ua="Корисні посилання/контакти">
-            Useful links/contacts:
-          </h3>
-          
-          <div class="links-group">
-            {% for link in useful_links %}
-                <a href="{{ link.url }}" class="blue-links" target="_blank"
-                   data-en="{{ link.title_en }}"
-                   data-ua="{{ link.title_uk }}">
-                   {{ link.title_en }}
-                </a><br>
-            {% empty %}
-                <p class="thin-text" data-en="No links available" data-ua="Посилання відсутні">
-                    No links available
-                </p>
-            {% endfor %}
-          </div>
+    <div class="info-row">
+      <h2 data-en="INVITING UNI:" data-ua="УНІВЕРСИТЕТ-ПАРТНЕР:">
+        INVITING UNI:
+      </h2>
+      {% if program.university %}
+      <a href="{{ program.university.get_absolute_url }}" class="blue-links"
+        data-en="{{ program.university.name_en }}, {{ program.university.country_en }}"
+        data-ua="{{ program.university.name_uk }}, {{ program.university.country_uk }}">
+        {{ program.university.name_en|default:program.university.name_uk }}, {{ program.university.country_en }}
+      </a>
+      {% else %}
+      <span class="thin-text" data-en="Any University" data-ua="Будь-який університет">Any University</span>
+      {% endif %}
+    </div>
+  </div>
+</section>
 
-          <div class="links-group" data-lang-content="ua" style="display: none;">
-            {% for link in useful_links_uk %}
-                <a href="{{ link.url }}" class="blue-links" target="_blank">{{ link.title }}</a><br>
-            {% empty %}
-                <p class="thin-text">Посилання відсутні</p>
-            {% endfor %}
-          </div>
+<section class="program-body">
+  <section class="left-section">
+    <img class="icon-img" src="{% static 'project/img/quotation.svg' %}" alt="Quote" />
 
-        </section>
-      </section>
-    </main>
+    <p class="description" data-en="{{ program.testimonial_en }}" data-ua="{{ program.testimonial_uk }}">
+      {{ program.testimonial_en|default:program.testimonial_uk }}
+    </p>
 
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__container">
-          <div class="footer__logo">
-            <img
-              class="footer__img"
-              src="{% static 'project/img/name_no-background_01.svg' %}"
-              alt="StudentAbroad logo" />
-          </div>
+    {% if program.submitted_by_name %}
+    <p class="user-greetings" data-en="Thank you for sharing {{ program.submitted_by_name }}"
+      data-ua="Окрема подяка {{ program.submitted_by_name }}">
+      Thank you for sharing {{ program.submitted_by_name }}
+    </p>
+    {% endif %}
+  </section>
 
-          <div class="footer__bottom-row">
-            <nav class="footer__nav">
-              <ul class="footer__menu">
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/"
-                    data-en="ABOUT US"
-                    data-ua="ПРО НАС"
-                    data-_lang-applied="ua"
-                    >ПРО НАС</a
-                  >
-                </li>
+  <section class="right-section">
+    <h3 data-en="Description" data-ua="Опис програми">Description</h3>
 
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/uni-list.html"
-                    data-en="UNI LIST"
-                    data-ua="СПИСОК ВНЗ"
-                    data-_lang-applied="ua"
-                    >СПИСОК ВНЗ</a
-                  >
-                </li>
+    <p data-en="{{ program.description_en }}" data-ua="{{ program.description_uk }}">
+      {{ program.description_en|default:program.description_uk }}
+    </p>
 
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/program-list.html"
-                    data-en="PROGRAM LIST"
-                    data-ua="ПРОГРАМИ"
-                    data-_lang-applied="ua"
-                    >ПРОГРАМИ</a
-                  >
-                </li>
+    <h3 data-en="Useful links/contacts:" data-ua="Корисні посилання/контакти">
+      Useful links/contacts:
+    </h3>
 
-                <li>
-                  <a
-                    class="footer__link"
-                    href="/faq.html"
-                    data-en="FAQ"
-                    data-ua="FAQ"
-                    data-_lang-applied="ua"
-                    >FAQ</a
-                  >
-                </li>
-              </ul>
-            </nav>
+    <div class="links-group">
+      {% for link in useful_links %}
+      <a href="{{ link.url }}" class="blue-links" target="_blank" data-en="{{ link.title_en }}"
+        data-ua="{{ link.title_uk }}">
+        {{ link.title_en }}
+      </a><br>
+      {% empty %}
+      <p class="thin-text" data-en="No links available" data-ua="Посилання відсутні">
+        No links available
+      </p>
+      {% endfor %}
+    </div>
 
-            <div class="footer__lang-search">
-              <span class="footer__language-switch">
-                <button
-                  data-lang="ua"
-                  class="js-switch-button active"
-                  type="button">
-                  UA
-                </button>
+    <div class="links-group" data-lang-content="ua" style="display: none;">
+      {% for link in useful_links_uk %}
+      <a href="{{ link.url }}" class="blue-links" target="_blank">{{ link.title }}</a><br>
+      {% empty %}
+      <p class="thin-text">Посилання відсутні</p>
+      {% endfor %}
+    </div>
 
-                <button data-lang="en" class="js-switch-button" type="button">
-                  EN
-                </button>
-              </span>
-
-              <div class="footer__search-box">
-                <input
-                  type="text"
-                  class="search-box__input"
-                  data-en="Search..."
-                  data-ua="Пошук..."
-                  placeholder="Search..." />
-              </div>
-              <div class="footer__scroll-indicator">
-                <a href="#header-footer-color">
-                  <img
-                    class="footer__scroll-indicator-img"
-                    src="{% static 'project/img/icon_arrow.svg' %}"
-                    alt="Scroll Up Icon" />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer__line"></div>
-        </div>
-      </div>
-    </footer>
-    <script type="module" src="{% static 'js/main.js' %}"></script>
-  </body>
-</html>
+  </section>
+</section>
+{% endblock %}

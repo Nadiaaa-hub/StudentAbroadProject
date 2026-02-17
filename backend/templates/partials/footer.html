@@ -1,0 +1,63 @@
+{% load static %}
+<!-- Footer Partial - Included from base.html -->
+<footer class="footer" role="contentinfo">
+    <div class="container">
+        <div class="footer__container">
+            <!-- Footer Logo -->
+            <div class="footer__logo">
+                <img class="footer__img" src="{% static 'project/img/name_no-background_01.svg' %}"
+                    alt="StudentAbroad logo" width="180" height="40" loading="lazy">
+            </div>
+
+            <div class="footer__bottom-row">
+                <!-- Footer Navigation -->
+                <nav class="footer__nav" aria-label="Footer navigation">
+                    <ul class="footer__menu">
+                        <li>
+                            <a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+                        </li>
+                        <li>
+                            <a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI
+                                LIST</a>
+                        </li>
+                        <li>
+                            <a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST"
+                                data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+                        </li>
+                        <li>
+                            <a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+                        </li>
+                    </ul>
+                </nav>
+
+                <div class="footer__lang-search">
+                    <!-- Language Switch -->
+                    <span class="footer__language-switch" role="group" aria-label="Language selection">
+                        <button data-lang="ua" class="js-switch-button" type="button" aria-label="Українська">
+                            UA
+                        </button>
+                        <button data-lang="en" class="js-switch-button active" type="button" aria-label="English">
+                            EN
+                        </button>
+                    </span>
+
+                    <!-- Search Box -->
+                    <div class="footer__search-box">
+                        <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..."
+                            placeholder="Search..." aria-label="Search">
+                    </div>
+
+                    <!-- Scroll to Top -->
+                    <div class="footer__scroll-indicator">
+                        <a href="#header-footer-color" aria-label="Scroll to top">
+                            <img class="footer__scroll-indicator-img" src="{% static 'project/img/icon_arrow.svg' %}"
+                                alt="" width="24" height="24" loading="lazy">
+                        </a>
+                    </div>
+                </div>
+            </div>
+
+            <div class="footer__line" aria-hidden="true"></div>
+        </div>
+    </div>
+</footer>

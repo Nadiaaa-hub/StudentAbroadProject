@@ -1,294 +1,304 @@
 {% load static %}
 <!DOCTYPE html>
 <html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>StudentAbroad - FAQ</title>
-    <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
-    <link rel="website icon" type="png" href="{% static 'project/img/logo_part1.svg' %}" />
-    <link
-      href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap"
-      rel="stylesheet"
-    />
-    
-    <style>
-      /* --- FIX: Тільки виправлення перенесення тексту --- */
-      /* Це не змінює ваш дизайн, лише дозволяє довгому тексту влазити в блок */
-      
-      .faq__content {
-        /* Дозволяє flex-елементу стискатися, щоб текст всередині міг переноситися */
-        min-width: 0; 
-        width: 100%;
-      }
 
-      .faq__answer, 
-      .faq__h2 {
-        /* Примусове перенесення довгих слів та посилань */
-        word-wrap: break-word;
-        overflow-wrap: break-word; 
-        word-break: break-word;
-        max-width: 100%;
-      }
-      
-      /* Додаткова страховка для картинок чи інших елементів всередині відповіді */
-      .faq__answer * {
-        max-width: 100%;
-      }
-    </style>
-  </head>
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
 
-  <body>
-    <header class="site-header" id="header-footer-color">
-      <div class="container">
-        <div class="header__container">
-          <div class="logo">
-            <a href="/">
-              <img
-                src="{% static 'project/img/name_no-background_01.svg' %}"
-                alt="StudentAbroad logo"
-                loading="lazy"
-              />
-            </a>
+  <!-- SEO Meta Tags -->
+  <title>{{ meta_title|default:"FAQ | StudentAbroad" }}</title>
+  <meta name="description" content="{{ meta_description|default:" Frequently asked questions about studying abroad and
+    exchange programs." }}">
+  <link rel="canonical" href="{{ canonical_url }}">
+
+  <!-- Open Graph / Facebook -->
+  <meta property="og:type" content="website">
+  <meta property="og:url" content="{{ canonical_url }}">
+  <meta property="og:title" content="{{ meta_title|default:" FAQ | StudentAbroad" }}">
+  <meta property="og:description" content="{{ meta_description }}">
+  <meta property="og:image" content="{{ default_og_image }}">
+  <meta property="og:site_name" content="{{ site_name }}">
+
+  <!-- Twitter Cards -->
+  <meta name="twitter:card" content="summary_large_image">
+  <meta name="twitter:title" content="{{ meta_title|default:" FAQ | StudentAbroad" }}">
+  <meta name="twitter:description" content="{{ meta_description }}">
+
+  <!-- Favicon -->
+  <link rel="icon" type="image/svg+xml" href="{% static 'project/img/logo_part1.svg' %}">
+
+  <!-- Preconnect for fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+
+  <!-- Stylesheets -->
+  <link rel="stylesheet" href="{% static 'project/css/style.css' %}" />
+  <link href="https://fonts.googleapis.com/css2?family=Rubik:wght@300;400;500;600;700&display=swap" rel="stylesheet" />
+
+  <!-- Schema.org FAQPage JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {% for faq in faqs %}
+      {
+        "@type": "Question",
+        "name": "{{ faq.question_en|escapejs }}",
+        "acceptedAnswer": {
+          "@type": "Answer",
+          "text": "{{ faq.answer_en|striptags|escapejs }}"
+        }
+      }{% if not forloop.last %},{% endif %}
+      {% endfor %}
+    ]
+  }
+  </script>
+
+  <style>
+    /* --- FIX: Тільки виправлення перенесення тексту --- */
+    /* Це не змінює ваш дизайн, лише дозволяє довгому тексту влазити в блок */
+
+    .faq__content {
+      /* Дозволяє flex-елементу стискатися, щоб текст всередині міг переноситися */
+      min-width: 0;
+      width: 100%;
+    }
+
+    .faq__answer,
+    .faq__h2 {
+      /* Примусове перенесення довгих слів та посилань */
+      word-wrap: break-word;
+      overflow-wrap: break-word;
+      word-break: break-word;
+      max-width: 100%;
+    }
+
+    /* Додаткова страховка для картинок чи інших елементів всередині відповіді */
+    .faq__answer * {
+      max-width: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <header class="site-header" id="header-footer-color">
+    <div class="container">
+      <div class="header__container">
+        <div class="logo">
+          <a href="/">
+            <img src="{% static 'project/img/name_no-background_01.svg' %}" alt="StudentAbroad logo" loading="lazy" />
+          </a>
+        </div>
+
+        <nav class="header__nav">
+          <ul class="header__menu">
+            <li>
+              <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+            </li>
+            <li>
+              <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+            </li>
+            <li>
+              <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+            </li>
+          </ul>
+        </nav>
+
+        <div class="lang-search">
+          <span class="language-switch">
+            <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
+            <button data-lang="en" class="js-switch-button" type="button">EN</button>
+          </span>
+          <div class="search-box">
+            <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..."
+              placeholder="Search..." />
+          </div>
+        </div>
+
+        <input type="checkbox" id="burger-toggle" />
+        <label for="burger-toggle" class="burger">
+          <span></span>
+          <span class="visually-hidden">Відкрити меню</span>
+        </label>
+      </div>
+    </div>
+    <ul class="mobile-menu">
+      <li class="abt_us">
+        <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+      </li>
+      <li>
+        <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+      </li>
+      <li>
+        <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+      </li>
+      <li>
+        <span class="mobile-language-switch" aria-hidden="true">
+          <button type="button" class="js-switch-button active" data-lang="ua">UA</button>
+          <button type="button" class="js-switch-button" data-lang="en">EN</button>
+        </span>
+      </li>
+    </ul>
+
+    <div class="overlay"></div>
+  </header>
+
+  <main>
+    <section class="faq-section">
+      <div class="container faq-section__container">
+        <div class="faq__heading" id="faq__heading">
+          <span class="faq__text-outline" data-en="FAQ" data-ua="FAQ">FAQ</span>
+          <h2 class="faq__text-fill" data-en="FAQ" data-ua="FAQ">FAQ</h2>
+        </div>
+
+        {% for faq in faqs %}
+        <div class="faq__card">
+          <div class="faq__programs">
+            {% for category in faq.categories.all|slice:":3" %}
+            <p class="faq__text" data-en="{{ category.name_en }}" data-ua="{{ category.name_ua }}">
+              {{ category.name_en }}
+            </p>
+            {% empty %}
+            <p class="faq__text" data-en="General" data-ua="Загальне">
+              General
+            </p>
+            {% endfor %}
           </div>
 
-          <nav class="header__nav">
-            <ul class="header__menu">
+          <div class="faq__content">
+            <h2 class="faq__h2 faq__toggle-question" tabindex="0" role="button" aria-expanded="false"
+              data-en="{{ faq.question_en }}" data-ua="{{ faq.question_ua }}">
+              {{ faq.question_en|default:faq.question_ua }}
+            </h2>
+
+            <div class="faq__meta faq__meta--top">
+              <div class="faq__meta-row">
+                <div class="faq__meta-info">
+                  <button type="button" class="faq_read-more">Read more</button>
+
+                  <p class="faq__paragraph" data-en="Author: {{ faq.author|default:'Unknown' }}"
+                    data-ua="Автор: {{ faq.author_ua|default:'Невідомий' }}">
+                    Author: {{ faq.author|default:'Unknown' }}
+                  </p>
+
+                  {% if faq.editor %}
+                  <p class="faq__paragraph" data-en="Editor and translator: {{ faq.editor }}"
+                    data-ua="Редактор та перекладач: {{ faq.editor_ua }}">
+                    Editor and translator: {{ faq.editor }}
+                  </p>
+                  {% endif %}
+                </div>
+
+                <div class="faq__date">
+                  <img src="{% static 'project/img/clock_img.svg' %}" alt="Clock icon" />
+                  <p class="faq__paragraph">{{ faq.created_at|date:"d/m/Y" }}</p>
+                </div>
+              </div>
+            </div>
+            <!-- Line moved outside to be always visible -->
+            <div class="faq__line"></div>
+
+            <div class="faq__answer">
+              <div data-en="{{ faq.answer_en|linebreaksbr }}" data-ua="{{ faq.answer_ua|linebreaksbr }}">
+                {{ faq.answer_en|default:faq.answer_ua|linebreaksbr }}
+              </div>
+            </div>
+
+            <div class="faq__meta faq__meta--bottom">
+              <div class="faq__meta-row">
+                <div class="faq__meta-info">
+                  <p class="faq__paragraph" data-en="Author: {{ faq.author|default:'Unknown' }}"
+                    data-ua="Автор: {{ faq.author_ua|default:'Невідомий' }}">
+                    Author: {{ faq.author|default:'Unknown' }}
+                  </p>
+
+                  {% if faq.editor %}
+                  <p class="faq__paragraph" data-en="Editor and translator: {{ faq.editor }}"
+                    data-ua="Редактор та перекладач: {{ faq.editor_ua }}">
+                    Editor and translator: {{ faq.editor }}
+                  </p>
+                  {% endif %}
+                </div>
+
+                <div class="faq__date">
+                  <img src="{% static 'project/img/clock_img.svg' %}" alt="Clock icon" />
+                  <p class="faq__paragraph">{{ faq.created_at|date:"d/m/Y" }}</p>
+                </div>
+              </div>
+              <div class="faq__line"></div>
+            </div>
+          </div>
+        </div>
+        {% empty %}
+        <p style="text-align: center; padding: 40px; font-size: 18px;" data-en="No FAQs available at the moment."
+          data-ua="Наразі питань немає.">
+          No FAQs available at the moment.
+        </p>
+        {% endfor %}
+
+      </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <div class="container">
+      <div class="footer__container">
+        <div class="footer__logo">
+          <img class="footer__img" src="{% static 'project/img/name_no-background_01.svg' %}"
+            alt="StudentAbroad logo" />
+        </div>
+
+        <div class="footer__bottom-row">
+          <nav class="footer__nav">
+            <ul class="footer__menu">
               <li>
-                <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
+                <a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ПРО НАС</a>
               </li>
               <li>
-                <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
+                <a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">СПИСОК ВНЗ</a>
               </li>
               <li>
-                <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
+                <a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">ПРОГРАМИ</a>
               </li>
               <li>
-                <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
+                <a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
               </li>
             </ul>
           </nav>
 
-          <div class="lang-search">
-            <span class="language-switch">
+          <div class="footer__lang-search">
+            <span class="footer__language-switch">
               <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
               <button data-lang="en" class="js-switch-button" type="button">EN</button>
             </span>
-            <div class="search-box">
-              <input
-                type="text"
-                class="search-box__input"
-                data-en="Search..."
-                data-ua="Пошук..."
-                placeholder="Search..."
-              />
+
+            <div class="footer__search-box">
+              <input type="text" class="search-box__input" data-en="Search..." data-ua="Пошук..."
+                placeholder="Search..." />
+            </div>
+            <div class="footer__scroll-indicator">
+              <a href="#header-footer-color">
+                <img class="footer__scroll-indicator-img" src="{% static 'project/img/icon_arrow.svg' %}"
+                  alt="Scroll Up Icon" />
+              </a>
             </div>
           </div>
-
-          <input type="checkbox" id="burger-toggle" />
-          <label for="burger-toggle" class="burger">
-            <span></span>
-            <span class="visually-hidden">Відкрити меню</span>
-          </label>
         </div>
+
+        <div class="footer__line"></div>
       </div>
-      <ul class="mobile-menu">
-        <li class="abt_us">
-          <a class="link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ABOUT US</a>
-        </li>
-        <li>
-          <a class="link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">UNI LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">PROGRAM LIST</a>
-        </li>
-        <li>
-          <a class="link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-        </li>
-        <li>
-          <span class="mobile-language-switch" aria-hidden="true">
-            <button type="button" class="js-switch-button active" data-lang="ua">UA</button>
-            <button type="button" class="js-switch-button" data-lang="en">EN</button>
-          </span>
-        </li>
-      </ul>
+    </div>
+  </footer>
+  <script src="{% static 'js/main.js' %}" type="module"></script>
+</body>
 
-      <div class="overlay"></div>
-    </header>
-
-    <main>
-      <section class="faq-section">
-        <div class="container faq-section__container">
-          <div class="faq__heading" id="faq__heading">
-            <span class="faq__text-outline" data-en="FAQ" data-ua="FAQ">FAQ</span>
-            <h2 class="faq__text-fill" data-en="FAQ" data-ua="FAQ">FAQ</h2>
-          </div>
-
-          {% for faq in faqs %}
-          <div class="faq__card">
-            <div class="faq__programs">
-                {% for category in faq.categories.all|slice:":3" %}
-                    <p class="faq__text" 
-                       data-en="{{ category.name_en }}" 
-                       data-ua="{{ category.name_ua }}">
-                       {{ category.name_en }}
-                    </p>
-                {% empty %}
-                    <p class="faq__text" 
-                       data-en="General" 
-                       data-ua="Загальне">
-                       General
-                    </p>
-                {% endfor %}
-            </div>
-              
-            <div class="faq__content">
-                <h2
-                  class="faq__h2 faq__toggle-question"
-                  tabindex="0"
-                  role="button"
-                  aria-expanded="false"
-                  data-en="{{ faq.question_en }}"
-                  data-ua="{{ faq.question_ua }}">
-                  {{ faq.question_en|default:faq.question_ua }}
-                </h2>
-
-                <div class="faq__meta faq__meta--top">
-                  <div class="faq__meta-row">
-                    <div class="faq__meta-info">
-                      <button type="button" class="faq_read-more">Read more</button>
-                      
-                      <p class="faq__paragraph"
-                         data-en="Author: {{ faq.author|default:'Unknown' }}"
-                         data-ua="Автор: {{ faq.author_ua|default:'Невідомий' }}">
-                         Author: {{ faq.author|default:'Unknown' }}
-                      </p>
-                      
-                      {% if faq.editor %}
-                      <p class="faq__paragraph"
-                         data-en="Editor and translator: {{ faq.editor }}"
-                         data-ua="Редактор та перекладач: {{ faq.editor_ua }}">
-                         Editor and translator: {{ faq.editor }}
-                      </p>
-                      {% endif %}
-                    </div>
-                    
-                    <div class="faq__date">
-                      <img src="{% static 'project/img/clock_img.svg' %}" alt="Clock icon" />
-                      <p class="faq__paragraph">{{ faq.created_at|date:"d/m/Y" }}</p>
-                    </div>
-                  </div>
-                  <div class="faq__line"></div>
-                </div>
-
-                <div class="faq__answer">
-                  <div 
-                       data-en="{{ faq.answer_en|linebreaksbr }}" 
-                       data-ua="{{ faq.answer_ua|linebreaksbr }}">
-                       {{ faq.answer_en|default:faq.answer_ua|linebreaksbr }}
-                  </div>
-                </div>
-
-                <div class="faq__meta faq__meta--bottom">
-                  <div class="faq__meta-row">
-                    <div class="faq__meta-info">
-                      <p class="faq__paragraph"
-                         data-en="Author: {{ faq.author|default:'Unknown' }}"
-                         data-ua="Автор: {{ faq.author_ua|default:'Невідомий' }}">
-                         Author: {{ faq.author|default:'Unknown' }}
-                      </p>
-                      
-                      {% if faq.editor %}
-                      <p class="faq__paragraph"
-                         data-en="Editor and translator: {{ faq.editor }}"
-                         data-ua="Редактор та перекладач: {{ faq.editor_ua }}">
-                         Editor and translator: {{ faq.editor }}
-                      </p>
-                      {% endif %}
-                    </div>
-                    
-                    <div class="faq__date">
-                      <img src="{% static 'project/img/clock_img.svg' %}" alt="Clock icon" />
-                      <p class="faq__paragraph">{{ faq.created_at|date:"d/m/Y" }}</p>
-                    </div>
-                  </div>
-                  <div class="faq__line"></div>
-                </div>
-              </div>
-            </div>
-          {% empty %}
-              <p style="text-align: center; padding: 40px; font-size: 18px;"
-                 data-en="No FAQs available at the moment."
-                 data-ua="Наразі питань немає.">
-                 No FAQs available at the moment.
-              </p>
-          {% endfor %}
-
-          </div>
-        </div>
-      </section>
-    </main>
-
-    <footer class="footer">
-      <div class="container">
-        <div class="footer__container">
-          <div class="footer__logo">
-            <img
-              class="footer__img"
-              src="{% static 'project/img/name_no-background_01.svg' %}"
-              alt="StudentAbroad logo"
-            />
-          </div>
-
-          <div class="footer__bottom-row">
-            <nav class="footer__nav">
-              <ul class="footer__menu">
-                <li>
-                  <a class="footer__link" href="/" data-en="ABOUT US" data-ua="ПРО НАС">ПРО НАС</a>
-                </li>
-                <li>
-                  <a class="footer__link" href="/uni-list.html" data-en="UNI LIST" data-ua="СПИСОК ВНЗ">СПИСОК ВНЗ</a>
-                </li>
-                <li>
-                  <a class="footer__link" href="/program-list.html" data-en="PROGRAM LIST" data-ua="ПРОГРАМИ">ПРОГРАМИ</a>
-                </li>
-                <li>
-                  <a class="footer__link" href="/faq.html" data-en="FAQ" data-ua="FAQ">FAQ</a>
-                </li>
-              </ul>
-            </nav>
-
-            <div class="footer__lang-search">
-              <span class="footer__language-switch">
-                <button data-lang="ua" class="js-switch-button active" type="button">UA</button>
-                <button data-lang="en" class="js-switch-button" type="button">EN</button>
-              </span>
-
-              <div class="footer__search-box">
-                <input
-                  type="text"
-                  class="search-box__input"
-                  data-en="Search..."
-                  data-ua="Пошук..."
-                  placeholder="Search..."
-                />
-              </div>
-              <div class="footer__scroll-indicator">
-                <a href="#header-footer-color">
-                  <img
-                    class="footer__scroll-indicator-img"
-                    src="{% static 'project/img/icon_arrow.svg' %}"
-                    alt="Scroll Up Icon"
-                  />
-                </a>
-              </div>
-            </div>
-          </div>
-
-          <div class="footer__line"></div>
-        </div>
-      </div>
-    </footer>
-    <script src="{% static 'js/main.js' %}" type="module"></script>
-  </body>
 </html>

@@ -1,14 +1,24 @@
 from django.contrib import admin
 from django import forms
+from django.utils.html import format_html
+from unfold.admin import ModelAdmin
+from unfold.decorators import display, action
 from .models import Program
 
-class ProgramAdmin(admin.ModelAdmin):
+
+@admin.register(Program)
+class ProgramAdmin(ModelAdmin):
+    """
+    Unfold-based admin for Program model.
+    Preserves all existing functionality with modern UI and custom actions.
+    """
     list_display = (
         'name_uk', 
         'university', 
         'home_university', 
-        'faculty_uk', 
+        'faculty_uk',
         'is_approved',
+        'display_approved_badge',
         'created_at'
     )
     
@@ -27,9 +37,12 @@ class ProgramAdmin(admin.ModelAdmin):
     list_editable = ('is_approved',)
     readonly_fields = ('created_at', 'updated_at')
     
+    # Performance optimization for large datasets
+    list_select_related = ('university', 'home_university')
+    
     fieldsets = (
         ('Основна інформація', {
-            'fields': ('name_uk', 'name_en', 'is_approved')
+            'fields': ('name_uk', 'name_en', 'slug', 'is_approved')
         }),
         
         ('Університет Прийому', {
@@ -48,7 +61,6 @@ class ProgramAdmin(admin.ModelAdmin):
         }),
 
         ('Факультет та Рівень', {
-            # user_university_text тепер буде виглядати як велике поле
             'fields': ('faculty_uk', 'faculty_en', 'study_level', 'program_type', 'user_university_text')
         }),
         
@@ -70,13 +82,47 @@ class ProgramAdmin(admin.ModelAdmin):
         }),
     )
 
-    # Цей метод робить поле user_university_text великим (Textarea)
+    # Custom display with Unfold badges
+    @display(
+        description="Статус",
+        label={
+            True: "success",
+            False: "warning",
+        }
+    )
+    def display_approved_badge(self, obj):
+        return obj.is_approved, "Опубліковано" if obj.is_approved else "Чернетка"
+
+    # Custom form styling
     def get_form(self, request, obj=None, **kwargs):
         form = super().get_form(request, obj, **kwargs)
-        # Встановлюємо ширину (cols) та висоту (rows) для зручності
         form.base_fields['user_university_text'].widget = forms.Textarea(attrs={'rows': 4, 'cols': 100})
-        # Робимо підказку більш помітною
         form.base_fields['user_university_text'].help_text = "Технічне поле: тут зберігаються додаткові деталі про ступінь (level) від користувача."
         return form
 
-admin.site.register(Program, ProgramAdmin)
+    # ============================================================
+    # CUSTOM ACTIONS - CRM Functionality
+    # ============================================================
+    
+    actions = ['make_approved', 'make_draft', 'duplicate_program']
+    
+    @action(description="✅ Опублікувати вибрані")
+    def make_approved(self, request, queryset):
+        count = queryset.update(is_approved=True)
+        self.message_user(request, f"✅ Опубліковано {count} програм(и)")
+
+    @action(description="📝 Перевести у чернетки")
+    def make_draft(self, request, queryset):
+        count = queryset.update(is_approved=False)
+        self.message_user(request, f"📝 Переведено у чернетки {count} програм(и)")
+
+    @action(description="📋 Дублювати програму")
+    def duplicate_program(self, request, queryset):
+        for program in queryset:
+            program.pk = None
+            program.slug = ''  # Will auto-generate
+            program.name_uk = f"[КОПІЯ] {program.name_uk}"
+            program.name_en = f"[COPY] {program.name_en}" if program.name_en else ''
+            program.is_approved = False
+            program.save()
+        self.message_user(request, f"📋 Продубльовано {queryset.count()} програм(и)")
